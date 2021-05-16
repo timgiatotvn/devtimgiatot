@@ -77,6 +77,18 @@ Route::prefix('admin')->group(function () {
             Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy');
         });
 
+        //Sản phẩm
+        Route::prefix('posts')->group(function () {
+            Route::get('/', 'PostsController@index')->name('admin.post.index');
+            Route::get('/create', 'PostsController@create')->name('admin.post.create');
+            Route::post('/create', 'PostsController@store');
+            Route::get('/edit/{id}', 'PostsController@edit')->name('admin.post.edit');
+            Route::post('/edit/{id}', 'PostsController@update');
+            Route::get('/status/{id}/{field}', 'PostsController@status')->name('admin.post.status');
+            Route::get('/show/{id}', 'PostsController@show')->name('admin.post.show');
+            Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy');
+        });
+
         // Cấu hình
         Route::get('/settings/{id}', 'SettingsController@edit')->name('admin.setting.update');
         Route::post('/settings/{id}', 'SettingsController@update');

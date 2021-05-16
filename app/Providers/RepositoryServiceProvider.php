@@ -8,6 +8,8 @@ use App\Repository\Admins\Advertisement\AdvertisementRepository;
 use App\Repository\Admins\Advertisement\AdvertisementRepositoryInterface;
 use App\Repository\Admins\Category\CategoryRepository;
 use App\Repository\Admins\Category\CategoryRepositoryInterface;
+use App\Repository\Admins\Product\ProductRepository;
+use App\Repository\Admins\Product\ProductRepositoryInterface;
 use App\Repository\IA\IA\IARepository;
 use App\Repository\IA\IA\IARepositoryInterface;
 use App\Repository\Admins\Post\PostRepository;
@@ -25,6 +27,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
         $this->app->bind(AccountRepositoryInterface::class, AccountRepository::class);
         $this->app->bind(AdvertisementRepositoryInterface::class, AdvertisementRepository::class);
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
 
         //IA
         $this->app->bind(IARepositoryInterface::class, IARepository::class);
