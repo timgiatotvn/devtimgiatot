@@ -1,0 +1,67 @@
+
+#paging_container1{
+
+}
+
+#paging_container2{
+
+}
+
+#paging_container3{
+
+}
+.page_navigation{
+float:right;
+margin-right:24px;
+}
+
+#paging_container4{
+	height: 307px;	
+	overflow: hidden;
+}
+
+#paging_container8 .no_more{
+    background-color: white;
+    color: gray;
+    cursor: default;
+}
+
+.ellipse{
+	float: left;
+}
+
+.container1{
+	width: 260px;
+	float: left;
+	margin: 50px 10px 10px;
+	padding: 20px;
+	background-color: white;
+}
+
+.page_navigation , .alt_page_navigation{
+	padding-bottom: 10px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+padding: 1px 4px;
+margin: 2px;
+color: #6d6b6e;
+text-decoration: none;
+float: left;
+font-family: Tahoma;
+font-size: 12px;
+background-color: #e5e5e5;
+}
+.active_page{
+background-color: #bbbbbb !important;
+color: white!important;
+}	
+
+.content, .alt_content{
+	color: black;
+}
+
+.content li, .alt_content li, .content > p{
+float: left;
+list-style: none;
+}

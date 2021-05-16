@@ -1,0 +1,130 @@
+
+#nav{
+
+}
+
+
+#nav .menu_hover:hover .divmenu{
+	display:block!important;
+}
+
+.divmenu{
+	position: absolute;
+    top: 31px;
+    padding-top: 11px;
+    left: 0px;
+}
+
+.menuxo{
+    width: 240px;
+    padding-top: 0px;
+    height: 470px;
+    background: #fb0000;
+    z-index: 99999;
+}
+.menuxo ul{
+    margin: 0px;
+    padding: 0px;	
+	position: relative;
+}
+.bg_menu{
+}
+
+.menuxo ul li{
+    list-style: none;	
+    border-bottom: 1px solid #ff3939;
+    background: url(../images/icon22.png) top 12px left 7px no-repeat;
+}
+
+.menuxo ul li a{
+	line-height: 36px;
+    color: white;
+    font-size: 12px;
+    text-transform: initial;
+    font-weight: 600;
+}
+
+.menuxo ul li a.iconmenu i{
+    width: 18px;
+    height: 18px;
+    background: white;
+    color: black;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 10px;
+    padding-top: 4px;	
+}
+
+.menuxo  ul li:hover ul.menu_sub{
+	display: block!important; /* Display the dropdown */
+}
+.menuxo  ul li ul.menu_sub{
+    position: absolute;
+    left: 240px;
+    top: 0px;
+    width: 720px;
+    min-height: 470px;
+    padding-bottom: 20px;
+    background: white;
+    border: 1px #fb0000 solid;
+    border-top: 0px;
+}
+.menuxo  ul li ul.menu_sub li{
+    overflow: hidden;
+    border: none;
+}
+
+.menu_child{
+	
+}
+.menu_child ul li{
+	position: relative;
+    width: 220px;
+    margin-left: 15px;
+    float: left;
+    border-bottom: 0px;
+}
+.menu_child ul li a{
+	color: black;
+}
+.menu_child ul li a:hover{
+	color: #ff3939;
+}
+
+
+.menu_child  ul li:hover ul.menu_sub2{
+	display: block!important; /* Display the dropdown */
+}
+.menu_child  ul li ul.menu_sub2{
+	background: white;
+}
+.menu_child  ul li ul.menu_sub2 li{
+	margin-left: 0px;
+	    background: none!important;
+    width: 100%;
+    padding-left: 5px;
+    list-style-type: square;
+    /* margin-left: 41px; */
+    color: #333;
+    height: 25px;
+    line-height: 25px;
+}
+.menu_child  ul li ul.menu_sub2 li a{
+    color: #333;
+	    line-height: 25px;
+    text-transform: inherit;	
+}
+
+.menu_sub2{
+	
+}
+.menu_sub2 ul li{
+    position: relative;
+    width: 300px;
+    margin-left: 20px;
+    float: left;
+    border-bottom: 0px;	
+}
+.menu_sub2 ul li a{
+	
+}

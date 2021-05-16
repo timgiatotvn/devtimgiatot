@@ -1,0 +1,201 @@
+/* Masonry grid */
+.masonry {
+  transition: all .5s ease-in-out;
+  column-gap: 0px;
+  column-fill: initial;
+  padding: 0px 5px;
+}
+
+/* Masonry item */
+.masonry .brick {
+  margin-bottom: 0px;
+  display: inline-block; /* Fix the misalignment of items */
+  vertical-align: top; /* Keep the item on the very top */
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  -webkit-transition: 5s ease all;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.masonry .brick:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 1;
+  -webkit-transition: 0.4s ease;
+  -moz-transition: 0.4s ease;
+  -ms-transition: 0.4s ease;
+  -o-transition: 0.4s ease;
+  transition: 0.4s ease;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.masonry .brick:hover:after{
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  background: #ffffff;
+}
+.masonry .brick .overlaycaption {
+  width: 100%;
+  width: calc(100% - 40px);
+  margin: 0 20px;
+  height: 99%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.masonry .brick > a {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999px;
+}
+
+.masonry .brick .overlaycaption .overlay-name {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+.masonry .brick:hover .overlaycaption .overlay-name {
+  -webkit-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+  margin-top: -25px !important;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+.title-minimal {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-family: "Open Sans";
+  font-size: 21px;
+}
+.separator-small {
+  display: block;
+  margin: 15px 0 16px 0;
+}
+.separator-small span {
+  width: 40px;
+  height: 1px;
+  line-height: 1px;
+  background: #0d0d0d;
+  display: block;
+}
+
+.masonry .brick:hover .overlaycaption .separator-small span {
+  width: 40px;
+  margin: 0 auto;
+}
+.masonry .brick .overlaycaption .separator-small span {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  width: 0px;
+}
+
+.masonry .brick .overlaycaption .overlay-name, .masonry .brick .overlaycaption .alttitle, .masonry .brick .overlaycaption .separator, .masonry .brick .overlaycaption .separator-small {
+  color: #0d0d0d;
+  margin: 0px !important;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -o-transition: all 400ms ease;
+  -ms-transition: all 400ms ease;
+  transition: all 400ms ease;
+  -webkit-transform: translate3d(0,-50%,0);
+  transform: translate3d(0,-50%,0);
+}
+.alttitle {
+  font-family: Open Sans;
+  font-weight: 300;
+}
+.masonry .brick .overlaycaption .alttitle {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transition: all 400ms 0.1s ease;
+  -moz-transition: all 400ms 0.1s ease;
+  -o-transition: all 400ms 0.1s ease;
+  -ms-transition: all 400ms 0.1s ease;
+  transition: all 400ms 0.1s ease;
+}
+.masonry .brick:hover .overlaycaption .alttitle {
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+  padding-top: 20px;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  font-size: 15px;
+}
+
+/* Masonry image effects */
+.masonry .brick img {
+  transition: all .5s ease-in-out;
+  backface-visibility: hidden; /* Remove Image flickering on hover */
+}
+
+.masonry .brick:hover img {
+  opacity: .75;
+}
+
+/* Bordered masonry */
+.masonry.bordered {
+  column-rule: 1px solid #eee;
+  column-gap: 50px;
+}
+
+.masonry.bordered .brick {
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Gutterless masonry */
+.masonry.gutterless {
+  column-gap: 0;
+}
+
+.masonry.gutterless .brick {
+  margin-bottom: 0;
+}
+
+/* Masonry on tablets */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+/* Masonry on big screens */
+@media only screen and (min-width: 1024px) {
+  .desc {
+    font-size: 1.25em;
+  }
+
+  .intro {
+    letter-spacing: 1px;
+  }
+
+  .masonry {
+    column-count: 4;
+  }
+}

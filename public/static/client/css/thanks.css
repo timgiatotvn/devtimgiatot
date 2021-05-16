@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(../css/font/glyphicons-halflings-regular.eot);
+  src: url(../css/font/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'), 
+  url(../css/font/glyphicons-halflings-regular.woff) format('woff'), 
+  url(../css/font/glyphicons-halflings-regular.ttf) format('truetype'), 
+  url(../css/font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg');
+}
+
+@font-face {
+	font-family: "robotobold";
+	src: url(../css/font/Roboto-BoldCondensed.ttf) format('truetype');
+}
+@font-face {
+	font-family: "utm";
+	src: url(../css/font/UTM_Swiss.ttf) format('truetype');
+}
+ @font-face {
+	font-family: "UTMWeddingKT";
+	src: url(../css/font/UTMWeddingK&T.ttf) format('truetype');
+ }
+ 
+ul{
+	padding:0px;
+	margin:0px;
+}
+a:hover{
+	text-decoration:none;
+}
+.clear{
+	clear:both;
+}
+body {
+	font-size: 12px;
+	font-family: roboto;
+	margin: 0px;
+	padding: 0px;
+	line-height: 1.42857143;
+	color: #333;
+	background-color: #fff;
+}
+
+
+.box_complete {
+    margin: 20px 0 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+    display: inline-block;
+    width: 100%;
+}

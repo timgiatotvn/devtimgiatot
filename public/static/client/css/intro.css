@@ -1,0 +1,102 @@
+#menu-left{
+width: 226px;
+position: absolute;
+height: 866px;
+background: url('../images/bg_left.jpg') repeat;
+z-index: 9;
+opacity: 0.8;
+left: 37px;
+text-align: center;
+}
+
+
+ @font-face {
+      font-family: "centurygothicbold";
+      src: url(../css/font/centurygothicbold.ttf) format('truetype');
+ }
+
+.logo-left{
+width: 182px;
+height: auto;
+margin-top: 24px;
+margin-bottom: 24px;
+}
+
+.menu_left ul li{
+height: 70px;
+background: url('../images/bottom-menu.png') bottom center no-repeat;
+}
+
+.menu_left ul li:first-child a{
+color: #df0024;
+}
+
+.menu_left ul li a:hover{
+color: #df0024;
+}
+
+.menu_left ul li a{
+font-weight: bold;
+line-height: 67px;
+font-family: centurygothicbold;
+font-size: 22px;
+color: #312d2e;
+}
+
+#info_head{
+position: absolute;
+top: 0px;
+right: 0px;
+width: 300px;
+height: 100px;
+z-index: 9999999;
+}
+
+.menu-head{
+width: 320px;
+margin-top: 35px;
+float: right;
+}
+
+.menu-head ul li{
+float: left;
+list-style: none;
+height: 12px;
+}
+
+.menu-head ul li a{
+color: #060606;
+padding-left: 12px;
+border-right: 1px black solid;
+padding-right: 12px;
+font-weight: bold;
+}
+.menu-head ul li:first-child a{
+color:red;
+}
+.menu-head ul li a:hover{
+color:red;
+}
+.menu-head ul li:last-child a{
+border-right: 0px black solid;
+}
+
+
+.formlogin{
+width: 500px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
