@@ -34,6 +34,7 @@
 <script>
     var CSRFToken = $('meta[name="csrf-token"]').attr('content');
     var options = {
+        'height' : '500px',
         filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
         //filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token='+CSRFToken,
         filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
@@ -41,7 +42,7 @@
     };
 
     $('.ckeditor-mini').each(function(){
-        CKEDITOR.replace($(this).attr('name'), {'toolbar': [
+        CKEDITOR.replace($(this).attr('name'), {'height' : '200px', 'toolbar': [
                 { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
                 { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
                 { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
