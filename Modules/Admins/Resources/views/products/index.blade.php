@@ -20,7 +20,7 @@
                     </div>
                     <div class="wrapper ml-md-auto d-flex flex-column flex-md-row kanban-toolbar ml-n2 ml-md-0 mt-4 mt-md-0">
                         <div class="d-flex mt-4 mt-md-0">
-                            <a href="{{ route('admin.post.create') }}">
+                            <a href="{{ route('admin.product.create') }}">
                                 <button type="button" class="btn btn-success">
                                     @lang('admins::layer.button.add')
                                 </button>
@@ -66,34 +66,34 @@
                                         <td>
                                             {{ $row->title }}
                                             <div class="clearfix mb-3"></div>
-                                            <a class="icon-form" title="edit" href="{{ route('admin.post.edit', ['id' => $row->id, 'page' => $data['list']->currentPage()]) }}">
+                                            <a class="icon-form" title="edit" href="{{ route('admin.product.edit', ['id' => $row->id, 'page' => $data['list']->currentPage()]) }}">
                                                 <i class="icon-note"></i>
                                             </a>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'status']) }}">
+                                            <a class="icon-form status active" href="{{ route('admin.product.status', ['id' => $row->id, 'field' => 'status']) }}">
                                                 {!! (($row->status == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
                                             </a>
-                                            <a class="icon-form" href="javascript:confirmDelete('{{ route('admin.post.destroy', ['id' => $row->id]) }}','@lang('admins::layer.notify.confirm.delete')')">
+                                            <a class="icon-form" href="javascript:confirmDelete('{{ route('admin.product.destroy', ['id' => $row->id]) }}','@lang('admins::layer.notify.confirm.delete')')">
                                                 <i class="icon-trash"></i>
                                             </a>
                                         </td>
                                         <td>{{ \Helpers::renderStatus($row->status) }}</td>
                                         <td>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_1']) }}">
+                                            <a class="icon-form status active" href="{{ route('admin.product.status', ['id' => $row->id, 'field' => 'choose_1']) }}">
                                                 {!! (($row->choose_1 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_2']) }}">
+                                            <a class="icon-form status active" href="{{ route('admin.product.status', ['id' => $row->id, 'field' => 'choose_2']) }}">
                                                 {!! (($row->choose_2 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_3']) }}">
+                                            <a class="icon-form status active" href="{{ route('admin.product.status', ['id' => $row->id, 'field' => 'choose_3']) }}">
                                                 {!! (($row->choose_3 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_4']) }}">
+                                            <a class="icon-form status active" href="{{ route('admin.product.status', ['id' => $row->id, 'field' => 'choose_4']) }}">
                                                 {!! (($row->choose_4 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
                                             </a>
                                         </td>

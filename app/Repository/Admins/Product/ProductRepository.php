@@ -4,6 +4,8 @@ namespace App\Repository\Admins\Product;
 
 use App\Helpers\Helpers;
 use Illuminate\Support\Facades\DB;
+use App\Model\Post;
+use App\Model\Category;
 
 class ProductRepository implements ProductRepositoryInterface
 {

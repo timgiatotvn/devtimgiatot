@@ -77,16 +77,16 @@ Route::prefix('admin')->group(function () {
             Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy');
         });
 
-        //Sản phẩm
-        Route::prefix('posts')->group(function () {
-            Route::get('/', 'PostsController@index')->name('admin.post.index');
-            Route::get('/create', 'PostsController@create')->name('admin.post.create');
-            Route::post('/create', 'PostsController@store');
-            Route::get('/edit/{id}', 'PostsController@edit')->name('admin.post.edit');
-            Route::post('/edit/{id}', 'PostsController@update');
-            Route::get('/status/{id}/{field}', 'PostsController@status')->name('admin.post.status');
-            Route::get('/show/{id}', 'PostsController@show')->name('admin.post.show');
-            Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy');
+        //Products
+        Route::prefix('products')->group(function () {
+            Route::get('/', 'ProductsController@index')->name('admin.product.index');
+            Route::get('/create', 'ProductsController@create')->name('admin.product.create');
+            Route::post('/create', 'ProductsController@store');
+            Route::get('/edit/{id}', 'ProductsController@edit')->name('admin.product.edit');
+            Route::post('/edit/{id}', 'ProductsController@update');
+            Route::get('/status/{id}/{field}', 'ProductsController@status')->name('admin.product.status');
+            Route::get('/show/{id}', 'ProductsController@show')->name('admin.product.show');
+            Route::get('/destroy/{id}', 'ProductsController@destroy')->name('admin.product.destroy');
         });
 
         // Cấu hình

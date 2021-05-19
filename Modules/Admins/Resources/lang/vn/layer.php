@@ -20,6 +20,7 @@ return [
     'menu.parent.post' => 'Quản lý bài viết',
     'menu.parent.post.category.title' => 'Danh mục',
     'menu.parent.post.post.title' => 'Bài viết',
+    'menu.parent.product.product.title' => 'Sản phẩm',
 
     //ext button
     'button.add' => 'Thêm mới',
@@ -63,11 +64,17 @@ return [
     'category.add.title' => 'Thêm mới',
     'category.edit.title' => 'Cập nhật',
 
-    //category
+    //post
     'post.index.title' => 'Danh sách bài viết',
     'post.index.title2' => 'Bài viết',
     'post.add.title' => 'Thêm mới',
     'post.edit.title' => 'Cập nhật',
+
+    //product
+    'product.index.title' => 'Danh sách bài viết',
+    'product.index.title2' => 'Bài viết',
+    'product.add.title' => 'Thêm mới',
+    'product.edit.title' => 'Cập nhật',
 
     //setting
     'setting.index.title' => 'Cấu hình',

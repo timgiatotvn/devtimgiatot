@@ -31,6 +31,22 @@
                                 <input type="text" name="title" value="{{ $data['detail']->title }}" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
+                                <label>Mã sản phẩm</label>
+                                <input type="text" name="code" value="{{ $data['detail']->code }}" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá bán</label>
+                                <input type="text" name="price" value="{{ $data['detail']->price }}" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá gốc</label>
+                                <input type="text" name="price_root" value="{{ $data['detail']->price_root }}" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng sản phẩm</label>
+                                <input type="text" name="quantity" value="{{ $data['detail']->quantity }}" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
                                 <label>Danh mục chính</label>
                                 <select name="category_id" class="form-control col-md-3">
                                     {!! $data['category']['select'] !!}
@@ -130,5 +146,5 @@
     </div>
 @endsection
 @section('validate')
-    {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Post\EditRequest','#form-edit'); !!}
+    {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Product\EditRequest','#form-edit'); !!}
 @endsection

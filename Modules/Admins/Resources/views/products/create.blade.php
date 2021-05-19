@@ -34,6 +34,22 @@
                                 <input type="text" name="title" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
+                                <label>Mã sản phẩm</label>
+                                <input type="text" name="code" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá bán</label>
+                                <input type="text" name="price" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Giá gốc</label>
+                                <input type="text" name="price_root" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng sản phẩm</label>
+                                <input type="text" name="quantity" value="0" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
                                 <label>Danh mục chính</label>
                                 <select name="category_id" class="form-control col-md-3">
                                     {!! $data['category']['select'] !!}
@@ -133,5 +149,5 @@
     </div>
 @endsection
 @section('validate')
-    {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Post\CreateRequest','#form-create'); !!}
+    {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Product\CreateRequest','#form-create'); !!}
 @endsection

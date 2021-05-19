@@ -23,7 +23,7 @@ class ProductsController extends Controller
     {
         $this->categoryService = $categoryService;
         $this->productService = $productService;
-        $this->type = [$categoryService::TYPE[0]];
+        $this->type = [$this->categoryService::TYPE[1]];
     }
 
     /**
@@ -33,10 +33,11 @@ class ProductsController extends Controller
     public function index()
     {
         try {
-            $data['common'] = Helpers::titleAction([__('admins::layer.post.index.title'), __('admins::layer.post.index.title2')]);
+            $data['common'] = Helpers::titleAction([__('admins::layer.product.index.title'), __('admins::layer.product.index.title2')]);
             $data['list'] = $this->productService->getList(['limit' => 10]);
+            Helpers::pre($data['list']);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [(request()->has('category_id') ? request()->get('category_id') : '')]]);
-            return view('admins::posts.index', ['data' => $data]);
+            return view('admins::products.index', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');
         }
@@ -49,9 +50,9 @@ class ProductsController extends Controller
     public function create()
     {
         try {
-            $data['common'] = Helpers::titleAction([__('admins::layer.post.add.title'), __('admins::layer.post.index.title2')]);
+            $data['common'] = Helpers::titleAction([__('admins::layer.product.add.title'), __('admins::layer.product.index.title2')]);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'multi' => true]);
-            return view('admins::posts.create', ['data' => $data]);
+            return view('admins::products.create', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');
         }
@@ -66,7 +67,7 @@ class ProductsController extends Controller
         try {
             $_params = $request->all();
             if ($this->productService->create($_params)) {
-                return redirect(route('admin.post.index'));
+                return redirect(route('admin.product.index'));
             } else {
                 $errors = new MessageBag(['error' => __('admins::layer.notify.fail')]);
                 return back()->withInput($_params)->withErrors($errors);
@@ -93,11 +94,11 @@ class ProductsController extends Controller
     public function edit($id)
     {
         try {
-            $data['common'] = Helpers::titleAction([__('admins::layer.post.edit.title'), __('admins::layer.post.index.title2')]);
+            $data['common'] = Helpers::titleAction([__('admins::layer.product.edit.title'), __('admins::layer.product.index.title2')]);
             $data['detail'] = $this->productService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [$data['detail']->category_id], 'multi' => true]);
-            return view('admins::posts.edit', ['data' => $data]);
+            return view('admins::products.edit', ['data' => $data]);
         } catch (\Exception $e) {
             return !empty($e->getMessage()) ? abort('500') : abort(404);
         }
@@ -115,7 +116,7 @@ class ProductsController extends Controller
             $_params = $request->all();
             if ($this->productService->update($_params, $id)) {
                 session()->flash('success', __('admins::layer.notify.success'));
-                return redirect(route('admin.post.index', ['page' => !empty($_GET['page']) ? $_GET['page'] : 1]));
+                return redirect(route('admin.product.index', ['page' => !empty($_GET['page']) ? $_GET['page'] : 1]));
             } else {
                 $errors = new MessageBag(['error' => __('admins::layer.notify.fail')]);
                 return back()->withInput($_params)->withErrors($errors);
