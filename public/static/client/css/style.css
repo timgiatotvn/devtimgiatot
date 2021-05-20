@@ -40,10 +40,11 @@ header#header .wrap-user a:hover{color: #ee3525;}
 .wrap-slide .carousel-item img{width: 100%;}
 
 /**category suggest**/
+section#box-category-suggest{margin-bottom: 35px;}
 section#box-category-suggest .cs-head{text-align: center; display: table; margin: 0 auto 25px auto;}
 section#box-category-suggest .cs-head label{font-size: 28px; font-family: "Roboto-Bold";}
 section#box-category-suggest .cs-head .line{background: #ff4d00; height: 1px; margin: 0 35px;}
-section#box-category-suggest .cs-list ul{overflow: hidden; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;}
+section#box-category-suggest .cs-list ul{overflow: hidden; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; margin-bottom: 0;}
 section#box-category-suggest .cs-list ul li{list-style: none; float: left; width: 25%;}
 section#box-category-suggest .cs-list ul li .cs-item{border: 1px solid #ddd; height: 138px; border-right: 0; border-bottom: 0; padding: 20px; overflow: hidden;}
 section#box-category-suggest .cs-list ul li .cs-item .cs-item-left{margin-right: 85px;}
@@ -52,3 +53,13 @@ section#box-category-suggest .cs-list ul li .cs-item .cs-item-left p{padding: 0 
 section#box-category-suggest .cs-list ul li .cs-item .cs-item-left a{color: #1e73be;}
 section#box-category-suggest .cs-list ul li .cs-item .cs-item-left a:hover{color: #ee3525;}
 section#box-category-suggest .cs-list ul li .cs-item .cs-item-right{float: right;}
+
+/**product**/
+section#box-product .pr-head{background: #efefef; margin-bottom: 35px;}
+section#box-product .pr-head label{display: table; background: #ee3525; color: #fff; padding: 10px 25px; font-size: 15px;}
+section#box-product .pr-content{}
+section#box-product .pr-content ul{overflow: hidden;}
+section#box-product .pr-content ul li{list-style: none; float: left; width: 15.416%; margin-left: 1.5%; margin-bottom: 18px;}
+section#box-product .pr-content ul li:first-child{margin-left: 0;}
+section#box-product .pr-content ul li:nth-child(6n+1){margin-left: 0;}
+section#box-product .pr-content ul li .pr-item{border: 1px solid #ddd;}

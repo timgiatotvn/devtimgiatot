@@ -30,4 +30,20 @@
             </ul>
         </div>
     </section>
+    <section id="box-product">
+        <div class="pr-head">
+            <label>TÌM KIẾM NHIỀU</label>
+        </div>
+        <div class="pr-content">
+            <ul>
+                @for($i = 0; $i < 20; $i ++)
+                    <li>
+                        <div class="pr-item">
+                            dsa
+                        </div>
+                    </li>
+                @endfor
+            </ul>
+        </div>
+    </section>
 @endsection
