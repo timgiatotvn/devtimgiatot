@@ -16,6 +16,7 @@ class AdvertisementRepository implements AdvertisementRepositoryInterface
             ->when($keyword, function ($query, $keyword) {
                 return $query->where('title', 'LIKE', '%' . $keyword . '%');
             })
+            ->where('type', $_data['type'])
             ->orderBy('id', 'ASC')
             ->paginate($_data['limit']);
     }

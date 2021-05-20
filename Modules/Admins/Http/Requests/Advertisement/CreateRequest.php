@@ -14,7 +14,9 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'    => 'required|min:5',
+            'title'    => 'required',
+            'thumbnail' => 'required',
+            //'thumbnail' => 'required|mimes:jpeg,png,jpg|max:' . env('MAX_UPLOAD') * 1024,
         ];
     }
 

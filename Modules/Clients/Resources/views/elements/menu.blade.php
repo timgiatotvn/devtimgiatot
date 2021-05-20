@@ -1,17 +1,24 @@
-<div class="nav-top">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="nav-top-left"></div>
-            </div>
-            <div class="col-md-8">
-                <ul class="nav-menu">
-                    <li><a href="/emagazine"><img src="https://static1.yan.vn/2019/theme/images/icon-magazine.png?v=1" alt="E-Magazine">E-Magazine</a></li>
-                    <li><a href="/infographic"><img src="https://static1.yan.vn/2019/theme/images/icon-infographic.png?v=1" alt="Infographic">Infographic</a></li>
-                    <li><a href="/tin-noi-bat.html"><img src="https://static1.yan.vn/2019/theme/images/star-icon.png" alt="Tin nổi bật - Hay mê mẩn">Hay mê mẩn</a></li>
-                    <li><a href="/tuyendung.html"><img src="https://static1.yan.vn/2019/theme/images/white-play-icon.png" alt="Tuyển dụng">Tuyển dụng</a></li>
-                </ul>
-            </div>
+<div class="wrap-menu">
+    <div class="main-width">
+        <div id="smoothmenu1" class="ddsmoothmenu">
+            {!! $data_common['category_list']['menu'] !!}
+            <br style="clear: left"/>
         </div>
+        <a class="animateddrawer" id="ddsmoothmenu-mobiletoggle" href="#">
+            <span></span>
+        </a>
     </div>
 </div>
+@section('scripts')
+    <script type="text/javascript">
+
+        ddsmoothmenu.init({
+            mainmenuid: "smoothmenu1", //menu DIV id
+            orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+            classname: 'ddsmoothmenu', //class added to menu's outer DIV
+            //customtheme: ["#1c5a80", "#18374a"],
+            contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+        })
+
+    </script>
+@endsection

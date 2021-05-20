@@ -9,5 +9,3 @@
 <meta property="og:title" content="{{ !empty($data['common']['title_seo']) ? $data['common']['title_seo'] : '' }}" />
 <meta property="og:description" content="{{ !empty($data['common']['meta_des']) ? $data['common']['meta_des'] : '' }}" />
 <meta name="keywords" content="{{ !empty($data['common']['meta_key']) ? $data['common']['meta_key'] : '' }}" />
-<meta property="og:image" content="<?php echo $_SERVER['SERVER_NAME']; ?><?php echo !empty($data['common']['thumbnail']) ? $data['common']['thumbnail'] : '' ?>" />
-

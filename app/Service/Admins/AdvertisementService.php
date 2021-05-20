@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class AdvertisementService
 {
     private $advertisementRepository;
-    const TYPE = ['admin'];
+    const TYPE = ['adv', 'logo', 'slideshow', 'link'];
 
     public function __construct(AdvertisementRepositoryInterface $advertisementRepository)
     {
@@ -46,11 +46,10 @@ class AdvertisementService
         unset($_data['proengsoft_jsvalidation']);
         $db = array_merge($_data, [
             'admin_id' => Auth::guard(Helpers::renderGuard())->user()->id,
-            'type' => $this::TYPE[0],
+            'type' => $_data['type'],
             'created_at' => date("Y/m/d H:i:s"),
             'updated_at' => date("Y/m/d H:i:s")
         ]);
-
         return $this->advertisementRepository->create($db);
     }
 
@@ -61,7 +60,7 @@ class AdvertisementService
         unset($_data['proengsoft_jsvalidation']);
         $db = array_merge($_data, [
             'updated_at' => date("Y/m/d H:i:s")
-        ]);Helpers::pre($db);
+        ]);
         return $this->advertisementRepository->update($db, $_id);
     }
 

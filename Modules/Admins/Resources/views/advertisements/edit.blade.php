@@ -12,7 +12,7 @@
                                 <button type="submit" class="btn btn-success">
                                     @lang('admins::layer.button.submit')
                                 </button>
-                                <a href="{{ route('admin.category.index') }}">
+                                <a href="{{ route('admin.advertisement.index') }}">
                                     <button type="button" class="btn btn-inverse-dark">
                                         @lang('admins::layer.button.cancel')
                                     </button>
@@ -28,7 +28,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Tiêu đề</label>
-                                <input type="text" name="name" value="{{ $data['detail']->title }}" class="form-control" placeholder=""/>
+                                <input type="text" name="title" value="{{ $data['detail']->title }}" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
                                 <label>Url</label>
@@ -84,7 +84,7 @@
                                 <button type="submit" class="btn btn-success">
                                     @lang('admins::layer.button.submit')
                                 </button>
-                                <a href="{{ route('admin.category.index') }}">
+                                <a href="{{ route('admin.advertisement.index') }}">
                                     <button type="button" class="btn btn-inverse-dark">
                                         @lang('admins::layer.button.cancel')
                                     </button>

@@ -53,6 +53,42 @@ Route::prefix('admin')->group(function () {
             Route::get('/destroy/{id}', 'AdvertisementsController@destroy')->name('admin.advertisement.destroy');
         });
 
+        //Logo
+        Route::prefix('logos')->group(function () {
+            Route::get('/', 'LogosController@index')->name('admin.logo.index');
+            Route::get('/create', 'LogosController@create')->name('admin.logo.create');
+            Route::post('/create', 'LogosController@store');
+            Route::get('/edit/{id}', 'LogosController@edit')->name('admin.logo.edit');
+            Route::post('/edit/{id}', 'LogosController@update');
+            Route::get('/status/{id}/{status}', 'LogosController@status')->name('admin.logo.status');
+            Route::get('/show/{id}', 'LogosController@show')->name('admin.logo.show');
+            Route::get('/destroy/{id}', 'LogosController@destroy')->name('admin.logo.destroy');
+        });
+
+        //Logo
+        Route::prefix('slideshows')->group(function () {
+            Route::get('/', 'SlideshowsController@index')->name('admin.slideshow.index');
+            Route::get('/create', 'SlideshowsController@create')->name('admin.slideshow.create');
+            Route::post('/create', 'SlideshowsController@store');
+            Route::get('/edit/{id}', 'SlideshowsController@edit')->name('admin.slideshow.edit');
+            Route::post('/edit/{id}', 'SlideshowsController@update');
+            Route::get('/status/{id}/{status}', 'SlideshowsController@status')->name('admin.slideshow.status');
+            Route::get('/show/{id}', 'SlideshowsController@show')->name('admin.slideshow.show');
+            Route::get('/destroy/{id}', 'SlideshowsController@destroy')->name('admin.slideshow.destroy');
+        });
+
+        //Logo
+        Route::prefix('links')->group(function () {
+            Route::get('/', 'LinksController@index')->name('admin.link.index');
+            Route::get('/create', 'LinksController@create')->name('admin.link.create');
+            Route::post('/create', 'LinksController@store');
+            Route::get('/edit/{id}', 'LinksController@edit')->name('admin.link.edit');
+            Route::post('/edit/{id}', 'LinksController@update');
+            Route::get('/status/{id}/{status}', 'LinksController@status')->name('admin.link.status');
+            Route::get('/show/{id}', 'LinksController@show')->name('admin.link.show');
+            Route::get('/destroy/{id}', 'LinksController@destroy')->name('admin.link.destroy');
+        });
+
         //Danh muc
         Route::prefix('categories')->group(function () {
             Route::get('/', 'CategoriesController@index')->name('admin.category.index');

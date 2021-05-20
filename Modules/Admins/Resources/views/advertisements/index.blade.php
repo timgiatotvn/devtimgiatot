@@ -40,6 +40,7 @@
                                 <thead>
                                 <tr>
                                     <th width="50">@lang('admins::layer.table.stt')</th>
+                                    <th>Ảnh</th>
                                     <th>@lang('admins::layer.table.title')</th>
                                     <th>@lang('admins::layer.table.status')</th>
                                     <th>@lang('admins::layer.table.created')</th>
@@ -52,6 +53,7 @@
                                 @foreach($data['list'] as $k=>$row)
                                     <tr>
                                         <td>{{ \Helpers::renderSTT($k + 1, $data['list']) }}</td>
+                                        <td><img src="{{ asset($row->thumbnail) }}" class="mw-100"></td>
                                         <td>{{ $row->title }}</td>
                                         <td>{{ \Helpers::renderStatus($row->status) }}</td>
                                         <td>{{ \Helpers::formatDate($row->created_at) }}</td>

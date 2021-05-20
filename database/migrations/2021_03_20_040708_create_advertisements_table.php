@@ -19,8 +19,10 @@ class CreateAdvertisementsTable extends Migration
         Schema::create('advertisements', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
             $table->string('title');
+            $table->string('description')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('url')->nullable();
+            $table->string('url_title')->nullable();
             $table->integer('admin_id')->nullable();
             $table->string('type', 20)->nullable()->comment("Type of data");
             $table->integer('status')->default(1)->comment("1: Active 0: Blocked");

@@ -15,10 +15,12 @@ use Modules\Admins\Http\Requests\Advertisement\EditRequest;
 class AdvertisementsController extends Controller
 {
     private $advertisementService;
+    private $type;
 
     public function __construct(AdvertisementService $advertisementService)
     {
         $this->advertisementService = $advertisementService;
+        $this->type = $this->advertisementService::TYPE[0];
     }
 
     /**
@@ -29,9 +31,9 @@ class AdvertisementsController extends Controller
     {
         try {
             $data['common'] = Helpers::titleAction([__('admins::layer.advertisement.index.title'), __('admins::layer.advertisement.index.title2')]);
-            $data['list'] = $this->advertisementService->getList(['limit' => 10]);
+            $data['list'] = $this->advertisementService->getList(['limit' => 10, 'type' => $this->type]);
             return view('admins::advertisements.index', ['data' => $data]);
-        } catch (\Exception $e) {
+        } catch (\Exception $e) {Helpers::pre($e->getMessage());
             abort('500');
         }
     }
@@ -58,6 +60,7 @@ class AdvertisementsController extends Controller
     {
         try {
             $_params = $request->all();
+            $_params['type'] = $this->type;
             if ($this->advertisementService->create($_params)) {
                 return redirect(route('admin.advertisement.index'));
             } else {

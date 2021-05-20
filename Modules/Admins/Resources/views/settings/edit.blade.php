@@ -37,8 +37,6 @@
                                 <input type="text" name="name" value="{{ $data['detail']->name }}" class="form-control"
                                        placeholder=""/>
                             </div>
-
-
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -50,11 +48,9 @@
                                         <label>Hotline</label>
                                         <input type="text" name="hotline" value="{{ $data['detail']->hotline }}"
                                                class="form-control" placeholder=""/>
-
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label>Địa chỉ</label>
                                 <input type="text" name="address" value="{{ $data['detail']->address }}"
@@ -71,13 +67,9 @@
                                         <label>Facbook</label>
                                         <input type="text" name="facebook" value="{{ $data['detail']->facebook }}"
                                                class="form-control" placeholder=""/>
-
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -90,45 +82,6 @@
                                         <input type="text" name="google" value="{{ $data['detail']->google }}"
                                                class="form-control" placeholder=""/>
 
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label>Logo top</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <img src="{{ asset($data['detail']->logo_top) }}" width="150" class="mb-2">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <a data-input="logo_top" class="lfm btn btn-primary">
-                                                    <i class="fa fa-picture-o"></i> CHOOSE
-                                                </a>
-                                            </span>
-                                            <input id="logo_top" class="form-control"
-                                                   value="{{ $data['detail']->logo_top }}" type="text" name="logo_top"
-                                                   readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Logo footer</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <img src="{{ asset($data['detail']->logo_footer) }}" width="150" class="mb-2">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <a data-input="logo_footer" class="lfm btn btn-primary">
-                                                    <i class="fa fa-picture-o"></i> CHOOSE
-                                                </a>
-                                            </span>
-                                            <input id="logo_footer" class="form-control"
-                                                   value="{{ $data['detail']->logo_footer }}" type="text"
-                                                   name="logo_footer"
-                                                   readonly>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -149,8 +102,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Code footer</label>
-                                <textarea class="ckeditor-mini" class="form-control"
-                                          name="code_footer">{{ $data['detail']->code_footer }}</textarea>
+                                <textarea name="code_footer" class="form-control"
+                                          rows="8">{{ $data['detail']->code_footer }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Content footer</label>

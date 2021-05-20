@@ -10,12 +10,18 @@ use App\Repository\Admins\Category\CategoryRepository;
 use App\Repository\Admins\Category\CategoryRepositoryInterface;
 use App\Repository\Admins\Product\ProductRepository;
 use App\Repository\Admins\Product\ProductRepositoryInterface;
+use App\Repository\Clients\Category\ClientCategoryRepository;
+use App\Repository\Clients\Category\ClientCategoryRepositoryInterface;
 use App\Repository\IA\IA\IARepository;
 use App\Repository\IA\IA\IARepositoryInterface;
 use App\Repository\Admins\Post\PostRepository;
 use App\Repository\Admins\Post\PostRepositoryInterface;
 use App\Repository\Admins\Setting\SettingRepository;
 use App\Repository\Admins\Setting\SettingRepositoryInterface;
+use App\Repository\Clients\Setting\SettingRepository as SettingRepositoryClient;
+use App\Repository\Clients\Setting\SettingRepositoryInterface as SettingRepositoryInterfaceClient;
+use App\Repository\Clients\Advertisement\AdvertisementRepository as AdvertisementRepositoryClient;
+use App\Repository\Clients\Advertisement\AdvertisementRepositoryInterface as AdvertisementRepositoryInterfaceClient;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -28,6 +34,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AccountRepositoryInterface::class, AccountRepository::class);
         $this->app->bind(AdvertisementRepositoryInterface::class, AdvertisementRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+
+        //Client
+        $this->app->bind(SettingRepositoryInterfaceClient::class, SettingRepositoryClient::class);
+        $this->app->bind(AdvertisementRepositoryInterfaceClient::class, AdvertisementRepositoryClient::class);
+        $this->app->bind(ClientCategoryRepositoryInterface::class, ClientCategoryRepository::class);
 
         //IA
         $this->app->bind(IARepositoryInterface::class, IARepository::class);

@@ -35,7 +35,6 @@ class ProductsController extends Controller
         try {
             $data['common'] = Helpers::titleAction([__('admins::layer.product.index.title'), __('admins::layer.product.index.title2')]);
             $data['list'] = $this->productService->getList(['limit' => 10]);
-            Helpers::pre($data['list']);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [(request()->has('category_id') ? request()->get('category_id') : '')]]);
             return view('admins::products.index', ['data' => $data]);
         } catch (\Exception $e) {

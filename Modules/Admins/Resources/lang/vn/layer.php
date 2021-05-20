@@ -58,6 +58,12 @@ return [
     'advertisement.add.title' => 'Thêm mới',
     'advertisement.edit.title' => 'Cập nhật',
 
+    //link
+    'link.index.title' => 'Liên kết',
+    'link.index.title2' => 'Liên kết',
+    'link.add.title' => 'Thêm mới',
+    'link.edit.title' => 'Cập nhật',
+
     //category
     'category.index.title' => 'Danh mục bài viết',
     'category.index.title2' => 'Danh mục',

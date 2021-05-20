@@ -20,40 +20,6 @@ class Helpers
         die;
     }
 
-    public static function getMenuTop($limit){
-        $list = Category::listCategory($limit);
-        return $list;
-    }
-
-    public static function getSubMenuTop($limit,$parent){
-        $list = Category::listSubCategory($limit,$parent);
-        return $list;
-    }
-
-    public static function getSetting($id){
-        $list = Setting::getbyID($id);
-        return $list;
-    }
-
-
-    public static function getPostByCate($limit,$cate,$sort){
-        $list = Post::getListPost($limit,$cate,$sort);
-        return $list;
-    }
-
-    public static function getCate($limit,$fields,$sort){
-        $list = Category::listCate($limit,$fields,$sort);
-        return $list;
-    }
-
-    public static function getPostHome($limit,$fields,$sort){
-        $list = Post::listPostHome($limit,$fields,$sort);
-        return $list;
-    }
-
-
-
-
     public static function formatDate($date = '')
     {
         $plusTime = 0;
@@ -65,31 +31,17 @@ class Helpers
         }
     }
 
-    // Manh Hiep
-    public static function formatTime($date = '')
+    public static function formatPrice($price)
     {
-        $plusTime = 0;
-        if (App::getLocale() == 'vi') {
-            $plusTime = (7 * 60 * 60);
-            return date('d/m/Y', (strtotime($date) + $plusTime));
+
+        $price = preg_replace("/[^0-9\s]/", "", $price);
+        $number = explode(".", (string)$price);
+
+        if (count($number) == 1) {
+            return ($price > 999) ? str_replace(',', '.', number_format($price)) : $price;
         } else {
-            return date('d/m/Y', (strtotime($date) + $plusTime));
+            return $price;
         }
-    }
-
-    public static function getUserID($guard)
-    {
-        return Auth::guard($guard)->id();
-    }
-
-    public static function getDataUser($guard)
-    {
-        return Auth::guard($guard)->user();
-    }
-
-    public static function getUserEmail($guard)
-    {
-        return Auth::guard($guard)->user()->email;
     }
 
     public static function titleAction($data)
@@ -103,9 +55,9 @@ class Helpers
     public static function metaHead($data)
     {
         return array(
-            'title_seo' => !empty($data['title_seo']) ? $data['title_seo'] : (!empty($data['title']) ? $data['title'] : ''),
-            'meta_key' => !empty($data['meta_key']) ? $data['meta_key'] : '',
-            'meta_des' => !empty($data['meta_des']) ? $data['meta_des'] : ''
+            'title_seo' => !empty($data->title_seo) ? $data->title_seo : (!empty($data->title) ? $data->title : ''),
+            'meta_key' => !empty($data->meta_key) ? $data->meta_key : '',
+            'meta_des' => !empty($data->meta_des) ? $data->meta_des : ''
         );
     }
 
@@ -130,13 +82,6 @@ class Helpers
     public static function renderLinkPost($post)
     {
         return route('post.show', ['slug' => $post['link'] . '-' . $post['id']]);
-    }
-
-    public static function getIdFromSlug($slug)
-    {
-        if (empty($slug)) return '';
-        $ex = explode('-', $slug);
-        return $ex[(count($ex) - 1)];
     }
 
     public static function getTimeToText($createTime, $date_get)
@@ -186,6 +131,25 @@ class Helpers
         $code = substr(md5($code), 0, 22);
         $code = substr(base64_encode($code), 0, -2);
         return $code;
+    }
+
+    public static function renderThumb($url = '', $type = '')
+    {
+        if (empty($url) || empty($type)) return '1';
+
+        $str = '';
+        switch ($type) {
+            case 'slide':
+                $str .= 'w1200/h438/fill!';
+                break;
+            case 'logo':
+                $str .= 'w235/h53/fill!';
+                break;
+            case '':
+                echo "";
+                break;
+        }
+        return asset(str_replace('storage/', 'img/' . $str, $url));
     }
 
 }

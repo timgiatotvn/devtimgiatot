@@ -2,15 +2,36 @@
 
 namespace Modules\Clients\Http\Controllers;
 
+use App\Helpers\Helpers;
+use App\Service\Clients\AdvertisementService;
+use App\Service\Clients\ClientCategoryService;
+use App\Service\Clients\SettingService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Model\Category;
 use App\Model\Post;
 use App\Model\Setting;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
+
+    private $clientSettingService;
+    private $clientAdvService;
+    private $clientCategoryService;
+    private $setting;
+
+    public function __construct(SettingService $clientSettingService, AdvertisementService $clientAdvService, ClientCategoryService $clientCategoryService)
+    {
+        $this->clientSettingService = $clientSettingService;
+        $this->clientAdvService = $clientAdvService;
+        $this->clientCategoryService = $clientCategoryService;
+
+        $this->setting = $this->clientSettingService->findFirst();
+        View::share('data_common', ['logo' => $this->clientAdvService->findByLogo(), 'setting' => $this->setting, 'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1])]);
+    }
+
     /**
      * Page Home
      * @method GET
@@ -18,15 +39,11 @@ class HomeController extends Controller
     public function index()
     {
         try {
-            $setting = Setting::getbyID(1);
-            $data['common']['title_seo'] = $setting->title_seo;
-            $data['common']['meta_des'] = $setting->meta_des;
-            $data['common']['meta_key'] = $setting->meta_key;
-            $data['common']['thumbnail'] = $setting->logo_top;
+            $data['setting'] = $this->setting;
+            $data['common'] = Helpers::metaHead($data['setting']);
+            $data['slide'] = $this->clientAdvService->getListSlideShow();
 
-            $cateHome = Category::listCate(3,'choose_1','desc');
-
-            return view('clients::home.index',['data'=>$data,'cateHome'=>$cateHome]);
+            return view('clients::home.index', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');
         }

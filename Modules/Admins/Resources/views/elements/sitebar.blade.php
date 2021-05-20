@@ -24,8 +24,8 @@
         <li class="nav-item nav-category">
             <span class="nav-link">@lang('admins::layer.dashboard.title')</span>
         </li>
-        <li class="nav-item {{ Request::routeIs('admin.index') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.index') }}">
+        <li class="nav-item {{ Request::routeIs('client.home') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('client.home') }}" target="_blank">
                 <span class="menu-title">@lang('admins::layer.menu.parent.home')</span>
                 <i class="icon-screen-desktop menu-icon"></i>
             </a>
@@ -53,15 +53,33 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item {{ Request::routeIs('admin.setting.*')? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.setting.update',["id" => 1]) }}">
-                <span class="menu-title">Cấu hình website</span>
-                <i class="mdi mdi-settings-box menu-icon"></i>
+        <li class="nav-item {{ Request::routeIs('admin.link.*')? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.link.index') }}">
+                <span class="menu-title">Liên kết</span>
+                <i class="icon-doc menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item {{ Request::routeIs('admin.logo.*')? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.logo.index') }}">
+                <span class="menu-title">Logo</span>
+                <i class="icon-doc menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item {{ Request::routeIs('admin.slideshow.*')? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.slideshow.index') }}">
+                <span class="menu-title">Slide</span>
+                <i class="icon-doc menu-icon"></i>
             </a>
         </li>
         <li class="nav-item {{ Request::routeIs('admin.advertisement.*')? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin.advertisement.index') }}">
                 <span class="menu-title">Quảng cáo</span>
+                <i class="icon-doc menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item {{ Request::routeIs('admin.setting.*')? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.setting.update',["id" => 1]) }}">
+                <span class="menu-title">Cấu hình website</span>
                 <i class="mdi mdi-settings-box menu-icon"></i>
             </a>
         </li>

@@ -16,8 +16,6 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->nullable();
-            $table->string('logo_top')->nullable();
-            $table->string('logo_footer')->nullable();
             $table->string('email')->nullable();
             $table->string('hotline')->nullable();
             $table->string('address')->nullable();

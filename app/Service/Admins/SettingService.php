@@ -11,6 +11,7 @@ class SettingService
 {
 
     private $settingRepository;
+
     public function __construct(SettingRepositoryInterface $settingRepository)
     {
         $this->settingRepository = $settingRepository;

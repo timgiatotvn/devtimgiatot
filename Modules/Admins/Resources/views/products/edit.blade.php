@@ -12,7 +12,7 @@
                                 <button type="submit" class="btn btn-success">
                                     @lang('admins::layer.button.submit')
                                 </button>
-                                <a href="{{ route('admin.category.index') }}">
+                                <a href="{{ route('admin.product.index') }}">
                                     <button type="button" class="btn btn-inverse-dark">
                                         @lang('admins::layer.button.cancel')
                                     </button>
@@ -132,7 +132,7 @@
                                 <button type="submit" class="btn btn-success">
                                     @lang('admins::layer.button.submit')
                                 </button>
-                                <a href="{{ route('admin.category.index') }}">
+                                <a href="{{ route('admin.product.index') }}">
                                     <button type="button" class="btn btn-inverse-dark">
                                         @lang('admins::layer.button.cancel')
                                     </button>

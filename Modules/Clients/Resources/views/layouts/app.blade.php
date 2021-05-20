@@ -6,9 +6,9 @@
     @include('clients::elements.extend.style')
 </head>
 <body>
-@include('clients::elements.menu')
 @include('clients::elements.header')
-@include('clients::elements.news.newtop')
+@include('clients::elements.menu')
+@include('clients::elements.slide')
 <div class="container">
     @yield('content')
 </div>
