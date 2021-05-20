@@ -10,4 +10,6 @@ interface AdvertisementRepositoryInterface
 
     public function getListSlideShow($_type);
 
+    public function getListLink($_type);
+
 }

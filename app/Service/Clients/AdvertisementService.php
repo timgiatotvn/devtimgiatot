@@ -11,7 +11,7 @@ class AdvertisementService
 {
 
     private $advRepository;
-    const TYPE = ['adv', 'logo', 'slideshow'];
+    const TYPE = ['adv', 'logo', 'slideshow', 'link'];
 
     public function __construct(AdvertisementRepositoryInterface $advRepository)
     {
@@ -31,6 +31,11 @@ class AdvertisementService
     public function getListSlideShow()
     {
         return $this->advRepository->getListSlideShow(self::TYPE[2]);
+    }
+
+    public function getListLink()
+    {
+        return $this->advRepository->getListLink(self::TYPE[3]);
     }
 
 }

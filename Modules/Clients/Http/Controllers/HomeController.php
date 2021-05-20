@@ -42,6 +42,7 @@ class HomeController extends Controller
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);
             $data['slide'] = $this->clientAdvService->getListSlideShow();
+            $data['link'] = $this->clientAdvService->getListLink();
 
             return view('clients::home.index', ['data' => $data]);
         } catch (\Exception $e) {

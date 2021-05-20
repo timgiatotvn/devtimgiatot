@@ -10,17 +10,22 @@ class AdvertisementRepository implements AdvertisementRepositoryInterface
 
     public function getListAds($_type)
     {
-        return DB::table(self::TABLE_NAME)->where('type', $_type)->where('status', 1)->get();
+        return DB::table(self::TABLE_NAME)->select('id', 'title', 'thumbnail', 'url', 'type')->where('type', $_type)->where('status', 1)->get();
     }
 
     public function findByLogo($_type)
     {
-        return DB::table(self::TABLE_NAME)->where('type', $_type)->where('status', 1)->first();
+        return DB::table(self::TABLE_NAME)->select('id', 'title', 'thumbnail', 'url', 'type')->where('type', $_type)->where('status', 1)->first();
     }
 
     public function getListSlideShow($_type)
     {
-        return DB::table(self::TABLE_NAME)->where('type', $_type)->where('status', 1)->get();
+        return DB::table(self::TABLE_NAME)->select('id', 'title', 'thumbnail', 'url', 'type')->where('type', $_type)->where('status', 1)->get();
+    }
+
+    public function getListLink($_type)
+    {
+        return DB::table(self::TABLE_NAME)->select('id', 'title', 'thumbnail', 'description', 'url', 'url_title', 'type')->where('type', $_type)->where('status', 1)->get();
     }
 
 }

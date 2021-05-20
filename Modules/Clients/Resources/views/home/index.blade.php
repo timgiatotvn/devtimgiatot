@@ -8,13 +8,13 @@
         </div>
         <div class="cs-list">
             <ul>
-                @for($i = 0; $i < 20; $i ++)
+                @foreach($data['link'] as $row)
                     <li>
                         <div class="cs-item">
                             dsa
                         </div>
                     </li>
-                @endfor
+                @endforeach
             </ul>
         </div>
     </section>
