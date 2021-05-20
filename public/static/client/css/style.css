@@ -2,10 +2,10 @@
 *{margin: 0; padding: 0;}
 *,*::before, *::after{box-sizing: border-box;}
 p{margin-bottom: 0;}
-a{color: black; font-size: 14px;}
-a:hover{text-decoration: none;}
+a{color: black; font-size: 13px;}
+a:hover{text-decoration: none; color: #1e73be;}
 ul{list-style: none;}
-body{font-family: "Roboto-Regular"; font-size: 14px;}
+body{font-family: "Roboto-Regular"; font-size: 13px;}
 @font-face{
     font-family: "Roboto-Regular";
     src: url("./fonts/Roboto-Regular.ttf") format("truetype");
@@ -45,4 +45,10 @@ section#box-category-suggest .cs-head label{font-size: 28px; font-family: "Robot
 section#box-category-suggest .cs-head .line{background: #ff4d00; height: 1px; margin: 0 35px;}
 section#box-category-suggest .cs-list ul{overflow: hidden; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;}
 section#box-category-suggest .cs-list ul li{list-style: none; float: left; width: 25%;}
-section#box-category-suggest .cs-list ul li .cs-item{border: 1px solid #ddd; border-right: 0; border-bottom: 0; padding: 25px;}
+section#box-category-suggest .cs-list ul li .cs-item{border: 1px solid #ddd; height: 138px; border-right: 0; border-bottom: 0; padding: 20px; overflow: hidden;}
+section#box-category-suggest .cs-list ul li .cs-item .cs-item-left{margin-right: 85px;}
+section#box-category-suggest .cs-list ul li .cs-item .cs-item-left label{font-family: "Roboto-Bold"; font-size: 14px; text-transform: uppercase;}
+section#box-category-suggest .cs-list ul li .cs-item .cs-item-left p{padding: 0 0 10px 0; font-size: 13px;}
+section#box-category-suggest .cs-list ul li .cs-item .cs-item-left a{color: #1e73be;}
+section#box-category-suggest .cs-list ul li .cs-item .cs-item-left a:hover{color: #ee3525;}
+section#box-category-suggest .cs-list ul li .cs-item .cs-item-right{float: right;}

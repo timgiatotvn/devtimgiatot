@@ -11,7 +11,19 @@
                 @foreach($data['link'] as $row)
                     <li>
                         <div class="cs-item">
-                            dsa
+                            <div class="cs-item-right">
+                                <a href="{{ $row->url }}" title="{{ $row->url_title }}" target="_blank">
+                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'link') }}"
+                                         title="{{ $row->title }}">
+                                </a>
+                            </div>
+                            <div class="cs-item-left">
+                                <label>{{ $row->title }}</label>
+                                <p>{{ \App\Helpers\Helpers::shortDesc($row->description, 42) }}</p>
+                                <a href="{{ $row->url }}" title="{{ $row->url_title }}" target="_blank">
+                                    {{ $row->url_title }}
+                                </a>
+                            </div>
                         </div>
                     </li>
                 @endforeach
