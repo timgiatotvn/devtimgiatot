@@ -13,7 +13,8 @@
 
 Route::prefix('')->group(function() {
     Route::get('/', 'HomeController@index')->name('client.home');
-    Route::get('/{slug}.html', 'PostsController@show')->name('client.post.show');
+    Route::get('/{slug}.html', 'ProductsController@show')->name('client.product.show');
+    Route::get('/{slug}.htm', 'PostsController@show')->name('client.post.show');
     Route::get('/{slug}', 'CategoriesController@index')->name('client.category.index');
 
 });

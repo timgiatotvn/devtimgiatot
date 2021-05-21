@@ -148,6 +148,15 @@ class Helpers
             case 'link':
                 $str .= 'w78/fill!';
                 break;
+            case 'list_product':
+                $str .= 'w300/h300/fill!';
+                break;
+            case 'list_new':
+                $str .= 'w381/h200/fill!';
+                break;
+            case 'ads_home':
+                $str .= 'w600/h210/fill!';
+                break;
             case '':
                 echo "";
                 break;
@@ -171,6 +180,12 @@ class Helpers
             return implode(' ', $arrRes) . "...";
         }
         return $str;
+    }
+
+    public static function renderID($slug = '')
+    {
+        $arr = explode('-', $slug);
+        return !empty($arr[count($arr) - 1]) ? $arr[count($arr) - 1] : '';
     }
 
 }

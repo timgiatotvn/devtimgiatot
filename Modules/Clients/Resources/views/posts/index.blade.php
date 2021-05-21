@@ -1,5 +1,5 @@
 @extends('clients::layouts.new')
 
 @section('content')
-    new
+    id new
 @endsection

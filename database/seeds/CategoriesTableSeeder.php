@@ -225,6 +225,19 @@ class CategoriesTableSeeder extends Seeder
                     'status' => 1,
                     'created_at' => date("Y/m/d H:i:s"),
                     'updated_at' => date("Y/m/d H:i:s"),
+                ],
+
+                //tin tuc
+                [
+                    'title' => 'Tin khuyến mãi',
+                    'slug' => 'tin-khuyen-mai',
+                    'sort' =>   0,
+                    'admin_id' => 1,
+                    'parent_id' => 4,
+                    'type' => 'new',
+                    'status' => 1,
+                    'created_at' => date("Y/m/d H:i:s"),
+                    'updated_at' => date("Y/m/d H:i:s"),
                 ]
             ];
         foreach ($data as $row){

@@ -13,8 +13,9 @@ use App\Model\Post;
 use App\Helpers\Helpers;
 use Illuminate\Support\Facades\View;
 
-class PostsController extends Controller
+class ProductsController extends Controller
 {
+
     private $clientSettingService;
     private $clientAdvService;
     private $clientCategoryService;
@@ -47,10 +48,9 @@ class PostsController extends Controller
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);
 
-            return view('clients::posts.show', ['data' => $data]);
+            return view('clients::products.show', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');
         }
     }
-
 }

@@ -6,10 +6,9 @@
     @include('clients::elements.extend.style')
 </head>
 <body>
-@include('clients::elements.menu')
 @include('clients::elements.header')
-@include('clients::elements.ads.detail_ads')
-<div class="container">
+@include('clients::elements.menu')
+<div class="main-width">
     @yield('content')
 </div>
 @include('clients::elements.footer')

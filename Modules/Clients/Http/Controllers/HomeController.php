@@ -5,6 +5,8 @@ namespace Modules\Clients\Http\Controllers;
 use App\Helpers\Helpers;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCategoryService;
+use App\Service\Clients\ClientPostService;
+use App\Service\Clients\ClientProductService;
 use App\Service\Clients\SettingService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -20,13 +22,22 @@ class HomeController extends Controller
     private $clientSettingService;
     private $clientAdvService;
     private $clientCategoryService;
+    private $clientProductService;
+    private $clientPostService;
     private $setting;
 
-    public function __construct(SettingService $clientSettingService, AdvertisementService $clientAdvService, ClientCategoryService $clientCategoryService)
+    public function __construct(SettingService $clientSettingService,
+                                AdvertisementService $clientAdvService,
+                                ClientCategoryService $clientCategoryService,
+                                ClientProductService $clientProductService,
+                                ClientPostService $clientPostService
+    )
     {
         $this->clientSettingService = $clientSettingService;
         $this->clientAdvService = $clientAdvService;
         $this->clientCategoryService = $clientCategoryService;
+        $this->clientProductService = $clientProductService;
+        $this->clientPostService = $clientPostService;
 
         $this->setting = $this->clientSettingService->findFirst();
         View::share('data_common', ['logo' => $this->clientAdvService->findByLogo(), 'setting' => $this->setting, 'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1])]);
@@ -43,6 +54,9 @@ class HomeController extends Controller
             $data['common'] = Helpers::metaHead($data['setting']);
             $data['slide'] = $this->clientAdvService->getListSlideShow();
             $data['link'] = $this->clientAdvService->getListLink();
+            $data['products'] = $this->clientProductService->getList(['limit' => 30]);
+            $data['kienthuc'] = $this->clientPostService->getListByCategory(['category_id' => 3]);
+            $data['news'] = $this->clientPostService->getListByCategory(['category_id' => 20]);
 
             return view('clients::home.index', ['data' => $data]);
         } catch (\Exception $e) {

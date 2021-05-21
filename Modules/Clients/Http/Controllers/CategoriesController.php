@@ -2,33 +2,49 @@
 
 namespace Modules\Clients\Http\Controllers;
 
+use App\Service\Clients\AdvertisementService;
+use App\Service\Clients\ClientCategoryService;
+use App\Service\Clients\ClientProductService;
+use App\Service\Clients\SettingService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Model\Category;
 use App\Model\Post;
 use App\Helpers\Helpers;
+use Illuminate\Support\Facades\View;
 
 class CategoriesController extends Controller
 {
 
+    private $clientSettingService;
+    private $clientAdvService;
+    private $clientCategoryService;
+    private $clientProductService;
+    private $setting;
+
+    public function __construct(SettingService $clientSettingService,
+                                AdvertisementService $clientAdvService,
+                                ClientCategoryService $clientCategoryService,
+                                ClientProductService $clientProductService
+    )
+    {
+        $this->clientSettingService = $clientSettingService;
+        $this->clientAdvService = $clientAdvService;
+        $this->clientCategoryService = $clientCategoryService;
+        $this->clientProductService = $clientProductService;
+
+        $this->setting = $this->clientSettingService->findFirst();
+        View::share('data_common', ['logo' => $this->clientAdvService->findByLogo(), 'setting' => $this->setting, 'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1])]);
+    }
+
     public function index($slug)
     {
         try {
-            $cate = Category::fildBySlug($slug);
-            $cate_id = $cate->id;
-            $cate_sub = Category::listSubCategory(4,$cate_id);
-            $data['common'] = Helpers::metaHead($cate);
-            $data['common']['thumbnail'] = $cate->thumb_url;
+            $data['setting'] = $this->setting;
+            $data['common'] = Helpers::metaHead($data['setting']);
 
-            $listNews = Post::getListPost(15,$cate_id,'DESC');
-
-            return view('clients::categories.index',[
-                'cate'=>$cate,
-                'cate_sub'=>$cate_sub,
-                'data' => $data,
-                'listNews' => $listNews,
-            ]);
+            return view('clients::posts.index', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');
         }

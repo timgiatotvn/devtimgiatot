@@ -8,7 +8,6 @@
 <body>
 @include('clients::elements.header')
 @include('clients::elements.menu')
-@include('clients::elements.slide')
 <div class="main-width">
     @yield('content')
 </div>

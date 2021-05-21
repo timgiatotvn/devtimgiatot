@@ -16,15 +16,16 @@ class PostRepository implements PostRepositoryInterface
         $keyword = !empty($_data['keyword']) ? $_data['keyword'] : '';
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
         return DB::table(self::TABLE_NAME)
-
+            ->select('posts.*', 'categories.title as category_title')
+            ->leftJoin('categories', 'posts.category_id', 'categories.id')
             ->when($keyword, function ($query, $keyword) {
-                return $query->where('title', 'LIKE', '%' . $keyword . '%');
+                return $query->where('posts.title', 'LIKE', '%' . $keyword . '%');
             })
             ->when($category_id, function ($query, $category_id) {
-                return $query->whereIn('category_id', $category_id);
+                return $query->whereIn('posts.category_id', $category_id);
             })
 
-            ->orderBy('id', 'DESC')
+            ->orderBy('posts.id', 'DESC')
 
             ->paginate($_data['limit']);
     }

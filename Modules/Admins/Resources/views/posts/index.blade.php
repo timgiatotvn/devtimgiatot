@@ -47,11 +47,12 @@
                                     <th width="50">@lang('admins::layer.table.stt')</th>
                                     <th>Ảnh</th>
                                     <th>@lang('admins::layer.table.title')</th>
+                                    <th>Danh mục</th>
                                     <th>@lang('admins::layer.table.status')</th>
                                     <th>Nổi bật</th>
-                                    <th>Slide</th>
-                                    <th>Choose 3</th>
-                                    <th>Choose 4</th>
+{{--                                    <th>Slide</th>--}}
+{{--                                    <th>Choose 3</th>--}}
+{{--                                    <th>Choose 4</th>--}}
                                     <th>@lang('admins::layer.table.created')</th>
                                     <th>@lang('admins::layer.table.modified')</th>
                                     <th width="50">@lang('admins::layer.table.id')</th>
@@ -76,27 +77,28 @@
                                                 <i class="icon-trash"></i>
                                             </a>
                                         </td>
+                                        <td>{{ $row->category_title }}</td>
                                         <td>{{ \Helpers::renderStatus($row->status) }}</td>
                                         <td>
                                             <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_1']) }}">
                                                 {!! (($row->choose_1 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
                                             </a>
                                         </td>
-                                        <td>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_2']) }}">
-                                                {!! (($row->choose_2 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_3']) }}">
-                                                {!! (($row->choose_3 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_4']) }}">
-                                                {!! (($row->choose_4 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
-                                            </a>
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_2']) }}">--}}
+{{--                                                {!! (($row->choose_2 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}--}}
+{{--                                            </a>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_3']) }}">--}}
+{{--                                                {!! (($row->choose_3 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}--}}
+{{--                                            </a>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_4']) }}">--}}
+{{--                                                {!! (($row->choose_4 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}--}}
+{{--                                            </a>--}}
+{{--                                        </td>--}}
                                         <td>{{ \Helpers::formatTime($row->created_at) }}</td>
                                         <td>{{ \Helpers::formatTime($row->updated_at) }}</td>
                                         <td>{{ $row->id }}</td>

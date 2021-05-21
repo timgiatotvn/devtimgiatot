@@ -12,6 +12,10 @@ use App\Repository\Admins\Product\ProductRepository;
 use App\Repository\Admins\Product\ProductRepositoryInterface;
 use App\Repository\Clients\Category\ClientCategoryRepository;
 use App\Repository\Clients\Category\ClientCategoryRepositoryInterface;
+use App\Repository\Clients\Post\ClientPostRepository;
+use App\Repository\Clients\Post\ClientPostRepositoryInterface;
+use App\Repository\Clients\Product\ClientProductRepository;
+use App\Repository\Clients\Product\ClientProductRepositoryInterface;
 use App\Repository\IA\IA\IARepository;
 use App\Repository\IA\IA\IARepositoryInterface;
 use App\Repository\Admins\Post\PostRepository;
@@ -39,6 +43,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SettingRepositoryInterfaceClient::class, SettingRepositoryClient::class);
         $this->app->bind(AdvertisementRepositoryInterfaceClient::class, AdvertisementRepositoryClient::class);
         $this->app->bind(ClientCategoryRepositoryInterface::class, ClientCategoryRepository::class);
+        $this->app->bind(ClientProductRepositoryInterface::class, ClientProductRepository::class);
+        $this->app->bind(ClientPostRepositoryInterface::class, ClientPostRepository::class);
 
         //IA
         $this->app->bind(IARepositoryInterface::class, IARepository::class);
