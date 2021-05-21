@@ -35,18 +35,47 @@ class CategoriesController extends Controller
         $this->clientProductService = $clientProductService;
 
         $this->setting = $this->clientSettingService->findFirst();
-        View::share('data_common', ['logo' => $this->clientAdvService->findByLogo(), 'setting' => $this->setting, 'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1])]);
+        View::share('data_common', [
+            'logo' => $this->clientAdvService->findByLogo(),
+            'setting' => $this->setting,
+            'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1]),
+            'top_products' => $this->clientProductService->getListHome(['limit' => 8])
+        ]);
     }
 
     public function index($slug)
     {
         try {
+            $data['category'] = $this->clientCategoryService->findBySlug($slug);
+            if (empty($data['category']->id)) abort(404);
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);
 
-            return view('clients::posts.index', ['data' => $data]);
+            if ($data['category']->type == 'product') {
+                $data['list'] = $this->clientProductService->getListByCate(['category_id' => $data['category'], 'limit' => 20]);
+
+                return view('clients::products.index', ['data' => $data]);
+            } else {
+                return redirect(route('client.home'));
+                //return view('clients::posts.index', ['data' => $data]);
+            }
         } catch (\Exception $e) {
-            abort('500');
+            if (empty($e->getMessage())) abort(404); else abort('500');
+        }
+    }
+
+    public function search()
+    {
+        try {
+            $data['setting'] = $this->setting;
+            $data['common'] = Helpers::metaHead($data['setting']);
+            $data['search_title'] = 'Tìm kiếm';
+            $keyword = !empty($_GET['keyword']) ? $_GET['keyword'] : '';
+            $data['list'] = $this->clientProductService->getListByCate(['keyword' => $keyword, 'limit' => 20]);
+
+            return view('clients::products.index', ['data' => $data]);
+        } catch (\Exception $e) {Helpers::pre($e->getMessage());
+            if (empty($e->getMessage())) abort(404); else abort('500');
         }
     }
 }

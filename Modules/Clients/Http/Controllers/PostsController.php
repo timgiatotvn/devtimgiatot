@@ -43,6 +43,7 @@ class PostsController extends Controller
     public function show($slug)
     {
         try {
+            return redirect(route('client.home'));
             $id = Helpers::renderID($slug);
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);

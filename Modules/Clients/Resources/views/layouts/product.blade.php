@@ -16,8 +16,8 @@
                 @yield('content')
             </div>
         </div>
-        <div class="col-12 col-md-3 col-lg-3 col-xl-3 bg2">
-            dsa
+        <div class="col-12 col-md-3 col-lg-3 col-xl-3">
+            @include('clients::elements.sitebar-product')
         </div>
     </div>
 </div>

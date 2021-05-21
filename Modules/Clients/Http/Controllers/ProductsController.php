@@ -34,7 +34,12 @@ class ProductsController extends Controller
         $this->clientProductService = $clientProductService;
 
         $this->setting = $this->clientSettingService->findFirst();
-        View::share('data_common', ['logo' => $this->clientAdvService->findByLogo(), 'setting' => $this->setting, 'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1])]);
+        View::share('data_common', [
+            'logo' => $this->clientAdvService->findByLogo(),
+            'setting' => $this->setting,
+            'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1]),
+            'top_products' => $this->clientProductService->getListHome(['limit' => 8])
+        ]);
     }
 
     /**
@@ -47,9 +52,10 @@ class ProductsController extends Controller
             $id = Helpers::renderID($slug);
             $data['detail'] = $this->clientProductService->findById($id);
             if (empty($data['detail']->id)) abort(404);
-            $data['cate_parent'] = !empty($data['detail']->category_parent_id) ? $this->clientCategoryService->findById($data['detail']->category_parent_id) : [];
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);
+            $data['cate_parent'] = !empty($data['detail']->category_parent_id) ? $this->clientCategoryService->findById($data['detail']->category_parent_id) : [];
+            $data['related'] = $this->clientProductService->getListRelated(['category_id' => $data['detail']->category_id]);
 
             return view('clients::products.show', ['data' => $data]);
         } catch (\Exception $e) {

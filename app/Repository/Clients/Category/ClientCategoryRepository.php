@@ -13,6 +13,11 @@ class ClientCategoryRepository implements ClientCategoryRepositoryInterface
         return DB::table(self::TABLE_NAME)->where('id', $_id)->first();
     }
 
+    public function findBySlug($_slug)
+    {
+        return DB::table(self::TABLE_NAME)->where('slug', $_slug)->first();
+    }
+
     public function getMenu()
     {
         return DB::table(self::TABLE_NAME)->orderBy('id', 'DESC')->first();

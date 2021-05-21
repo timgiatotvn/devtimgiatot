@@ -54,7 +54,7 @@ class HomeController extends Controller
             $data['common'] = Helpers::metaHead($data['setting']);
             $data['slide'] = $this->clientAdvService->getListSlideShow();
             $data['link'] = $this->clientAdvService->getListLink();
-            $data['products'] = $this->clientProductService->getList(['limit' => 30]);
+            $data['products'] = $this->clientProductService->getListHome(['limit' => 30]);
             $data['kienthuc'] = $this->clientPostService->getListByCategory(['category_id' => 3]);
             $data['news'] = $this->clientPostService->getListByCategory(['category_id' => 20]);
 

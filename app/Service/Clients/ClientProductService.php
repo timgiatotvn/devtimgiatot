@@ -24,9 +24,19 @@ class ClientProductService
         return $this->repository->findById($_id);
     }
 
-    public function getList($_data)
+    public function getListByCate($_data)
     {
-        return $this->repository->getList(array_merge($_data, ['type' => self::TYPE[0]]));
+        return $this->repository->getListByCate(array_merge($_data, ['type' => self::TYPE[0]]));
+    }
+
+    public function getListHome($_data)
+    {
+        return $this->repository->getListHome(array_merge($_data, ['type' => self::TYPE[0]]));
+    }
+
+    public function getListRelated($_data)
+    {
+        return $this->repository->getListRelated(array_merge($_data, ['type' => self::TYPE[0], 'limit' => 3]));
     }
 
 }

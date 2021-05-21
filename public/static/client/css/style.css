@@ -61,13 +61,61 @@ section#box-product .pr-head{background: #efefef; margin-bottom: 35px;}
 section#box-product .pr-head label{display: table; background: #ee3525; color: #fff; padding: 10px 25px; font-size: 15px;}
 section#box-product .pr-content{}
 section#box-product .pr-content ul{overflow: hidden; margin-bottom: 0;}
-section#box-product .pr-content ul li{list-style: none; height: 280px; float: left; width: 15.416%; margin-left: 1.5%; margin-bottom: 18px;}
+section#box-product .pr-content ul li{list-style: none; float: left; width: 15.416%; margin-left: 1.5%; margin-bottom: 18px;}
 section#box-product .pr-content ul li:first-child{margin-left: 0;}
 section#box-product .pr-content ul li:nth-child(6n+1){margin-left: 0;}
 section#box-product .pr-content ul li .pr-item{border: 1px solid #ddd; padding: 15px; height: 100%;}
 section#box-product .pr-content ul li .pr-item p.price{font-family: "Roboto-Bold"; font-size: 16px; color: #ee3525; padding: 15px 0 10px 0;}
 section#box-product .pr-content ul li .pr-item h3{height: 45px; overflow: hidden;}
 section#box-product .pr-content ul li .pr-item h3 a{font-size: 13px;}
+
+section#detail-product .wrap-info-product{}
+section#detail-product .wrap-info-product h1{}
+section#detail-product .wrap-info-product h1 a{font-family: "Roboto-Bold"; font-size: 22px;}
+section#detail-product .wrap-info-product .des{line-height: 25px; padding: 20px 0; font-size: 15px;}
+section#detail-product .wrap-info-product .price{font-family: "Roboto-Bold";}
+section#detail-product .wrap-info-product .price span:first-child{font-size: 22px; padding-right: 10px;}
+section#detail-product .wrap-info-product .price span:last-child{font-size: 18px; text-decoration: line-through; color: #ccc;}
+section#detail-product .wrap-info-product .btn-product{padding: 35px 0 0 0;}
+section#detail-product .wrap-info-product .btn-product button{background: #ee3525; color: #fff; padding: 10px 25px;}
+section#detail-product .wrap-info-product .btn-product button:hover{background: #1e73be;}
+
+section#detail-product .wrap-product-show{padding: 25px 0 0 0;}
+section#detail-product .wrap-product-show .box-tab{}
+section#detail-product .wrap-product-show .box-tab .tab-fix{border: 1px solid #ddd;}
+section#detail-product .wrap-product-show .box-tab .nav-pills .nav-link{border-radius: 0; font-size: 15px; text-transform: uppercase;}
+section#detail-product .wrap-product-show .box-tab .nav-pills .nav-link.active, section#detail-product .wrap-product-show .box-tab .nav-pills .show>.nav-link{background: #1e73be;}
+section#detail-product .wrap-product-show .box-tab .tab-content{padding: 20px 0 20px 0;}
+.ctct{line-height: 22px;}
+.ctct img{width: inherit !important; max-width: 100% !important;}
+
+section#detail-product .wrap-list-product{padding: 20px 0 0px 0;}
+section#detail-product .wrap-list-product label{font-size: 18px; font-family: "Roboto-Bold"; margin-bottom: 25px;}
+section#detail-product .wrap-list-product{margin-bottom: 25px;}
+section#detail-product .wrap-list-product .pr-head{background: #efefef; margin-bottom: 35px;}
+section#detail-product .wrap-list-product .pr-head label{display: table; background: #ee3525; color: #fff; padding: 10px 25px; font-size: 15px;}
+section#detail-product .wrap-list-product .pr-content{}
+section#detail-product .wrap-list-product .pr-content ul{overflow: hidden; margin-bottom: 0;}
+section#detail-product .wrap-list-product .pr-content ul li{list-style: none; float: left; width: 31.6%; margin-left: 2.5%; margin-bottom: 18px;}
+section#detail-product .wrap-list-product .pr-content ul li:first-child{margin-left: 0;}
+section#detail-product .wrap-list-product .pr-content ul li:nth-child(6n+1){margin-left: 0;}
+section#detail-product .wrap-list-product .pr-content ul li .pr-item{border: 1px solid #ddd; padding: 15px; height: 100%;}
+section#detail-product .wrap-list-product .pr-content ul li .pr-item p.price{font-family: "Roboto-Bold"; font-size: 16px; color: #ee3525; padding: 15px 0 10px 0;}
+section#detail-product .wrap-list-product .pr-content ul li .pr-item h3{height: 45px; overflow: hidden;}
+section#detail-product .wrap-list-product .pr-content ul li .pr-item h3 a{font-size: 13px;}
+
+section#wrap-product-category{margin-bottom: 25px;}
+section#wrap-product-category .pc-head{background: #efefef; margin-bottom: 35px;}
+section#wrap-product-category .pc-head label{display: table; background: #ee3525; color: #fff; padding: 10px 25px; font-size: 15px;}
+section#wrap-product-category .pc-content{}
+section#wrap-product-category .pc-content ul{overflow: hidden; margin-bottom: 0;}
+section#wrap-product-category .pc-content ul li{list-style: none; float: left; width: 23.85%; margin-left: 1.5%; margin-bottom: 18px;}
+section#wrap-product-category .pc-content ul li:first-child{margin-left: 0;}
+section#wrap-product-category .pc-content ul li:nth-child(4n+1){margin-left: 0;}
+section#wrap-product-category .pc-content ul li .pr-item{border: 1px solid #ddd; padding: 15px; height: 100%;}
+section#wrap-product-category .pc-content ul li .pr-item p.price{font-family: "Roboto-Bold"; font-size: 16px; color: #ee3525; padding: 15px 0 10px 0;}
+section#wrap-product-category .pc-content ul li .pr-item h3{height: 45px; overflow: hidden;}
+section#wrap-product-category .pc-content ul li .pr-item h3 a{font-size: 13px;}
 
 /**new**/
 section#box-new{margin-bottom: 25px;}
@@ -81,6 +129,15 @@ section#box-new .nr-content ul li:last-child{margin-right: 0;}
 section#box-new .nr-content ul li h3{padding: 15px 0 10px 0;}
 section#box-new .nr-content ul li h3 a{font-size: 15px; font-family: "Roboto-Bold";}
 
+/**site bar product**/
+nav#site-bar-product .wrap-site-bar-product{border: 1px solid #ddd; padding: 10px;}
+nav#site-bar-product .wrap-site-bar-product label{font-size: 15px; text-transform: uppercase; color: #fff; background: #1e73be; padding: 10px 15px; width: 100%; margin-bottom: 0;}
+nav#site-bar-product .wrap-site-bar-product ul{margin-bottom: 0;}
+nav#site-bar-product .wrap-site-bar-product ul li{list-style: none; border-bottom: 1px solid #ddd; padding: 10px 0;}
+nav#site-bar-product .wrap-site-bar-product ul li h3 a{font-size: 14px;}
+nav#site-bar-product .wrap-site-bar-product ul li p.price{font-size: 14px; font-family: "Roboto-Bold"; color: #ee3525;}
+nav#site-bar-product .wrap-site-bar-product ul li:last-child{margin-bottom: 0; border-bottom: 0;}
+
 /**ads**/
 section .wrap-ads{margin-bottom: 25px;}
 section .wrap-ads ul{overflow: hidden; margin-bottom: 0;}
@@ -88,7 +145,7 @@ section .wrap-ads ul li{list-style: none; float: left; margin-right: 3%; width: 
 section .wrap-ads ul li:last-child{margin-right: 0;}
 
 /**breadcrumb**/
-nav .breadcrumb{background: #fff; border-radius: 0; margin-bottom: 25px;}
+nav .breadcrumb{background: #fff; border-radius: 0; margin-bottom: 25px; padding-left: 0;}
 
 /**footer**/
 footer#footer{}

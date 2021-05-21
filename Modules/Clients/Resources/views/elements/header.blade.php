@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="col-12 col-md-7 col-lg-7 col-xl-7">
-                <form method="post" class="wrap-form-search">
+                <form method="get" action="{{ route('client.category.search') }}" class="wrap-form-search">
                     <input type="text" name="keyword" class="form-control" placeholder="Keyword" />
                     <button type="submit" class="btn btn-primary mb-2">
                         <i class="fa fa-search" aria-hidden="true"></i>

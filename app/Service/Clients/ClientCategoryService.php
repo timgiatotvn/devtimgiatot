@@ -22,6 +22,11 @@ class ClientCategoryService
         return $this->repository->findById($_id);
     }
 
+    public function findBySlug($_slug)
+    {
+        return $this->repository->findBySlug($_slug);
+    }
+
     public function getMenu()
     {
         return $this->repository->getMenu();

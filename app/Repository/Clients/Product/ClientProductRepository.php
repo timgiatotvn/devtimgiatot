@@ -20,13 +20,30 @@ class ClientProductRepository implements ClientProductRepositoryInterface
             ->first();
     }
 
-    public function getList($_data)
+    public function getListByCate($_data)
+    {
+        return DB::table(self::TABLE_NAME)
+            ->where('type', $_data['type'])
+            ->orderBy('id', 'DESC')
+            ->paginate($_data['limit']);
+    }
+
+    public function getListHome($_data)
     {
         return DB::table(self::TABLE_NAME)
             ->select('products.*', 'categories.title as category_title')
             ->leftJoin('categories', 'products.category_id', 'categories.id')
             ->where('products.type', $_data['type'])
             ->orderBy('products.id', 'DESC')
+            ->paginate($_data['limit']);
+    }
+
+    public function getListRelated($_data)
+    {
+        return DB::table(self::TABLE_NAME)
+            ->where('category_id', $_data['category_id'])
+            ->where('type', $_data['type'])
+            ->orderBy('sort', 'DESC')
             ->paginate($_data['limit']);
     }
 
