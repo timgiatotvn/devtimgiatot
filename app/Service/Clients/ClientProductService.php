@@ -19,6 +19,11 @@ class ClientProductService
         $this->repository = $repository;
     }
 
+    public function findById($_id)
+    {
+        return $this->repository->findById($_id);
+    }
+
     public function getList($_data)
     {
         return $this->repository->getList(array_merge($_data, ['type' => self::TYPE[0]]));

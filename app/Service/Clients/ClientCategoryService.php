@@ -10,21 +10,26 @@ use Illuminate\Support\Str;
 class ClientCategoryService
 {
 
-    private $categoryRepository;
+    private $repository;
 
-    public function __construct(ClientCategoryRepositoryInterface $categoryRepository)
+    public function __construct(ClientCategoryRepositoryInterface $repository)
     {
-        $this->categoryRepository = $categoryRepository;
+        $this->repository = $repository;
+    }
+
+    public function findById($_id)
+    {
+        return $this->repository->findById($_id);
     }
 
     public function getMenu()
     {
-        return $this->categoryRepository->getMenu();
+        return $this->repository->getMenu();
     }
 
     public function getListMenu($_data = [])
     {
-        return self::groupListMenu($this->categoryRepository->getListMenu($_data), $_data);
+        return self::groupListMenu($this->repository->getListMenu($_data), $_data);
     }
 
     public function groupListMenu($_data, $_params = [])

@@ -8,6 +8,11 @@ class ClientCategoryRepository implements ClientCategoryRepositoryInterface
 {
     const TABLE_NAME = 'categories';
 
+    public function findById($_id)
+    {
+        return DB::table(self::TABLE_NAME)->where('id', $_id)->first();
+    }
+
     public function getMenu()
     {
         return DB::table(self::TABLE_NAME)->orderBy('id', 'DESC')->first();

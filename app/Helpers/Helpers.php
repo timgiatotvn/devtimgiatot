@@ -148,12 +148,24 @@ class Helpers
             case 'link':
                 $str .= 'w78/fill!';
                 break;
+
+                //product
             case 'list_product':
                 $str .= 'w300/h300/fill!';
                 break;
+            case 'product_detail_zoom':
+                $str .= 'w800/fill!';
+                break;
+            case 'product_detail':
+                $str .= 'w500/fill!';
+                break;
+
+                //news
             case 'list_new':
                 $str .= 'w381/h200/fill!';
                 break;
+
+                //ads
             case 'ads_home':
                 $str .= 'w600/h210/fill!';
                 break;

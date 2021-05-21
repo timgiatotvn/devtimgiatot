@@ -11,6 +11,15 @@ class ClientProductRepository implements ClientProductRepositoryInterface
 {
     const TABLE_NAME = 'products';
 
+    public function findById($_id)
+    {
+        return DB::table(self::TABLE_NAME)
+            ->select('products.*', 'categories.title as category_title', 'categories.slug as category_slug', 'categories.parent_id as category_parent_id')
+            ->leftJoin('categories', 'products.category_id', 'categories.id')
+            ->where('products.id', $_id)
+            ->first();
+    }
+
     public function getList($_data)
     {
         return DB::table(self::TABLE_NAME)

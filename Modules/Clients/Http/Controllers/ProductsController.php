@@ -45,12 +45,15 @@ class ProductsController extends Controller
     {
         try {
             $id = Helpers::renderID($slug);
+            $data['detail'] = $this->clientProductService->findById($id);
+            if (empty($data['detail']->id)) abort(404);
+            $data['cate_parent'] = !empty($data['detail']->category_parent_id) ? $this->clientCategoryService->findById($data['detail']->category_parent_id) : [];
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);
 
             return view('clients::products.show', ['data' => $data]);
         } catch (\Exception $e) {
-            abort('500');
+            if (empty($e->getMessage())) abort(404); else abort('500');
         }
     }
 }

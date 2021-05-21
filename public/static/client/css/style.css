@@ -87,6 +87,9 @@ section .wrap-ads ul{overflow: hidden; margin-bottom: 0;}
 section .wrap-ads ul li{list-style: none; float: left; margin-right: 3%; width: 48.5%;}
 section .wrap-ads ul li:last-child{margin-right: 0;}
 
+/**breadcrumb**/
+nav .breadcrumb{background: #fff; border-radius: 0; margin-bottom: 25px;}
+
 /**footer**/
 footer#footer{}
 footer#footer .ft-one{background: #386384; padding: 35px 0; color: #fff;}

@@ -9,7 +9,17 @@
 @include('clients::elements.header')
 @include('clients::elements.menu')
 <div class="main-width">
-    @yield('content')
+    <div class="row no-gutters">
+        <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+            <div class="pr-4">
+                @include('clients::elements.extend.breadcrumb')
+                @yield('content')
+            </div>
+        </div>
+        <div class="col-12 col-md-3 col-lg-3 col-xl-3 bg2">
+            dsa
+        </div>
+    </div>
 </div>
 @include('clients::elements.footer')
 @include('clients::elements.extend.script')
