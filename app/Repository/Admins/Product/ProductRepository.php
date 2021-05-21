@@ -16,15 +16,16 @@ class ProductRepository implements ProductRepositoryInterface
         $keyword = !empty($_data['keyword']) ? $_data['keyword'] : '';
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
         return DB::table(self::TABLE_NAME)
-
+            ->select('products.*', 'categories.title as category_title')
+            ->leftJoin('categories', 'products.category_id', 'categories.id')
             ->when($keyword, function ($query, $keyword) {
-                return $query->where('title', 'LIKE', '%' . $keyword . '%');
+                return $query->where('products.title', 'LIKE', '%' . $keyword . '%');
             })
             ->when($category_id, function ($query, $category_id) {
-                return $query->whereIn('category_id', $category_id);
+                return $query->whereIn('products.category_id', $category_id);
             })
 
-            ->orderBy('id', 'DESC')
+            ->orderBy('products.id', 'DESC')
 
             ->paginate($_data['limit']);
     }

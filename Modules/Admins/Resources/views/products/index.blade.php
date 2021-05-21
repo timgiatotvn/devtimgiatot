@@ -47,6 +47,7 @@
                                     <th width="50">@lang('admins::layer.table.stt')</th>
                                     <th width="60">Ảnh</th>
                                     <th>@lang('admins::layer.table.title')</th>
+                                    <th>Danh mục</th>
                                     <th>Mã</th>
                                     <th>Giá bán</th>
                                     <th>Số lượng</th>
@@ -79,6 +80,7 @@
                                                 <i class="icon-trash"></i>
                                             </a>
                                         </td>
+                                        <td>{{ $row->category_title }}</td>
                                         <td>{{ $row->code }}</td>
                                         <td>{{ \App\Helpers\Helpers::formatPrice($row->price) }}</td>
                                         <td>{{ $row->quantity }}</td>

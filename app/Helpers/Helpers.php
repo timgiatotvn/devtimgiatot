@@ -20,14 +20,14 @@ class Helpers
         die;
     }
 
-    public static function formatDate($date = '')
+    public static function formatTime($date = '')
     {
         $plusTime = 0;
         if (App::getLocale() == 'vi') {
             $plusTime = (7 * 60 * 60);
-            return date('d/m/Y H:i', (strtotime($date) + $plusTime));
+            return date('d/m/Y', (strtotime($date) + $plusTime));
         } else {
-            return date('d/m/Y H:i', (strtotime($date) + $plusTime));
+            return date('d/m/Y', (strtotime($date) + $plusTime));
         }
     }
 

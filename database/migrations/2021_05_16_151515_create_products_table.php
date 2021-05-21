@@ -27,9 +27,10 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->longText('content')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->text('url_buy')->nullable();
             $table->integer('sort')->default(0)->nullable();
             $table->integer('view')->default(0)->nullable();
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->string('type', 20)->nullable();
             $table->integer('choose_1')->default(0)->nullable()->comment("1: Active 0: Blocked");
             $table->integer('choose_2')->default(0)->nullable()->comment("1: Active 0: Blocked");
