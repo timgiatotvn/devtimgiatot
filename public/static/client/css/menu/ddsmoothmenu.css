@@ -96,7 +96,7 @@
 
 .rightarrowclass {
     position: absolute;
-    top: 11px;
+    top: 16px;
     right: 5px;
 }
 
@@ -140,8 +140,10 @@ div.ddsmoothmobile { /* main mobile menu container */
     position: fixed;
     top: 0;
     left: 0;
-    width: 200px; /* width of mobile menu */
-    height: 300px;
+    /*width: 200px; !* width of mobile menu *!*/
+    right: 48px;
+    /*height: 300px;*/
+    bottom: 0;
     overflow: hidden;
     visibility: hidden;
     border-radius: 0 0 10px 0;
@@ -149,13 +151,13 @@ div.ddsmoothmobile { /* main mobile menu container */
 }
 
 div.ddsmoothmobile a {
-    color: white;
+    color: #000;
     text-decoration: none;
 }
 
 div.ddsmoothmobile div.topulsdiv { /* Single DIV that surrounds all top level ULs before being flattened, or the ULs on the "frontpage" of the menu */
     position: relative;
-    background: #1e73be;
+    background: #fff;
     overflow-y: auto;
     width: 100%;
     height: 100%;
@@ -167,7 +169,7 @@ div.ddsmoothmobile ul { /* style for all ULs in general inside mobile menu */
     width: 100%;
     top: 0;
     left: 0;
-    background: #1e73be;
+    background: #fff;
     margin: 0;
     padding: 0;
 }
@@ -183,7 +185,7 @@ div.ddsmoothmobile ul.submenu { /* sub level ULs style */
 }
 
 div.ddsmoothmobile ul li {
-    border-bottom: 1px solid #145a98;
+    border-bottom: 1px solid #ddd;
     position: relative;
     font-weight: bold;
 }
@@ -191,12 +193,16 @@ div.ddsmoothmobile ul li {
 div.ddsmoothmobile ul li.breadcrumb { /* breadcrumb LI that's added to the top of every sub level UL */
     cursor: pointer;
     padding: 10px;
-    background: #145a98;
+    background: #ee3525;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-bottom: 0;
 }
 
 div.ddsmoothmobile ul li a {
     display: block;
-    padding: 6px;
+    padding: 10px 15px;
+    font-size: 15px;
 }
 
 div.ddsmoothmobile ul li a:hover {
@@ -212,8 +218,8 @@ div.ddsmoothmobile ul li a:hover {
     outline: none;
     position: fixed; /* BY default, make toggler fixed on screen */
     display: none;
-    top: 10px; /* Position at upper right corner */
-    right: 10px;
+    top: 20px; /* Position at upper right corner */
+    left: 16px;
     background: none;
     z-index: 1000;
 }
@@ -269,6 +275,13 @@ div.ddsmoothmobile ul li a:hover {
 }
 
 .animateddrawer.open {
+    left: inherit !important;
+    right: 10px;
+}
+
+.scroll-mobile .animateddrawer {
+    left: inherit !important;
+    right: 10px;
 }
 
 .animateddrawer.open:before { /* style when .open class is added to button */

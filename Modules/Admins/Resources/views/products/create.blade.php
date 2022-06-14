@@ -34,6 +34,13 @@
                                 <input type="text" name="title" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
+                                <label>Slug</label>
+                                <input type="text" name="slug" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label id="urlfull" data-url="{{ asset("/") }}">Link: <a href=""></a></label>
+                            </div>
+                            <div class="form-group">
                                 <label>Mã sản phẩm</label>
                                 <input type="text" name="code" class="form-control" placeholder=""/>
                             </div>
@@ -50,12 +57,16 @@
                                 <input type="text" name="quantity" value="0" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
+                                <label>Url affilate</label>
+                                <input type="text" name="url_buy" value="" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
                                 <label>Danh mục chính</label>
                                 <select name="category_id" class="form-control col-md-3">
                                     {!! $data['category']['select'] !!}
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 <label>Danh mục liên quan</label>
                                 <div class="multi-category">
                                     <ul>
@@ -96,7 +107,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea class="ckeditor-mini" name="description"></textarea>
+                                <textarea class="ckeditor" name="description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
@@ -127,6 +138,26 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Title seo</label>
+                                <textarea type="text" name="title_seo" class="form-control" placeholder=""></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Meta des</label>
+                                <textarea type="text" name="meta_des" class="form-control" placeholder=""></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Meta key</label>
+                                <textarea type="text" name="meta_key" class="form-control" placeholder=""></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="d-flex flex-column flex-md-row align-items-center">
@@ -147,6 +178,22 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $("input[name='title']").keyup(function () {
+            var title = $(this).val();
+            if (typeof title != "undefined") {
+                $("input[name='slug']").val(get_alias(title));
+
+                var url = $("#urlfull").data("url");
+                $("#urlfull a").attr("href", url + get_alias(title) + ".htm");
+                $("#urlfull a").html(url + get_alias(title) + ".htm");
+            }
+        });
+
+    </script>
 @endsection
 @section('validate')
     {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Product\CreateRequest','#form-create'); !!}

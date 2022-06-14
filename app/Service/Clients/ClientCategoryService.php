@@ -40,9 +40,23 @@ class ClientCategoryService
     public function groupListMenu($_data, $_params = [])
     {
         $arr = [];
+        $arrFooter = [];
+        $arrSupport = [];
+        $arrService = [];
         foreach ($_data as $row) {
             if (empty($row->parent_id)) {
-                $arr['parent'][$row->id] = (array)$row;
+                if ($row->choose_1 == 1 || empty($row->type)) {
+                    $arr['parent'][$row->id] = (array)$row;
+                }
+                if ($row->choose_2 == 1) {
+                    $arrFooter[] = $row;
+                }
+                if ($row->choose_3 == 1) {
+                    $arrSupport[] = $row;
+                }
+                if ($row->choose_4 == 1) {
+                    $arrService[] = $row;
+                }
             } else {
                 $arr['list'][$row->parent_id][] = (array)$row;
             }
@@ -53,6 +67,9 @@ class ClientCategoryService
                 'select' => !empty($arr) ? self::mergeListMenu($arr, $_params) : '<option value="">' . (__('admins::layer.search.form.category')) . '</option>',
                 'list' => !empty($arr) ? self::mergeListMenuArray($arr, $_params) : [],
                 'menu' => !empty($arr) ? self::multiMenu($arr, null, null) : [],
+                'footer' => $arrFooter,
+                'support' => $arrSupport,
+                'service' => $arrService,
             ];
         } else {
             return !empty($arr) ? self::mergeListMenu($arr, $_params) : '<option value="">' . (__('admins::layer.search.form.category')) . '</option>';
@@ -115,7 +132,11 @@ class ClientCategoryService
             $trees .= '<ul>';
             foreach ($parmenu as $field) {
                 if ($parentid != null) {
-                    $trees .= '<li><a href="' . asset($field['slug']) . '" title="' . $field['title'] . '">' . $field['title'] . '</a>';
+                    if ($field['type'] == 'link'){
+                        $trees .= '<li><a href="' . $field['url'] . '" target="_blank" title="' . $field['title'] . '">' . $field['title'] . '</a>';
+                    }else {
+                        $trees .= '<li><a href="' . asset($field['slug']) . '" title="' . $field['title'] . '">' . $field['title'] . '</a>';
+                    }
                     $trees = $this->multiMenu($_data, $field['id'], $trees);
                     $trees .= '</li>';
                 } else {
@@ -133,6 +154,24 @@ class ClientCategoryService
             $trees .= '</ul>';
         }
         return $trees;
+    }
+
+    public function multiCate($_parentid = null, $_trees = NULL)
+    {
+        $parmenu = self::findListParentId($_parentid);
+        $_trees[$_parentid] = $_parentid;
+        if (count($parmenu) > 0) {
+            foreach ($parmenu as $field) {
+                $_trees[$field->id] = $field->id;
+                $_trees = $this->multiCate($field->id, $_trees);
+            }
+        }
+        return $_trees;
+    }
+
+    public function findListParentId($_id)
+    {
+        return $this->repository->findListParentId($_id);
     }
 
 }

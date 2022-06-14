@@ -65,6 +65,10 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'store' => [
+            'driver' => 'local',
+            'root' => public_path('json'),
+        ],
     ],
 
 ];

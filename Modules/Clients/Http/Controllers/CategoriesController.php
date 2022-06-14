@@ -4,6 +4,7 @@ namespace Modules\Clients\Http\Controllers;
 
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCategoryService;
+use App\Service\Clients\ClientPostService;
 use App\Service\Clients\ClientProductService;
 use App\Service\Clients\SettingService;
 use Illuminate\Contracts\Support\Renderable;
@@ -21,18 +22,21 @@ class CategoriesController extends Controller
     private $clientAdvService;
     private $clientCategoryService;
     private $clientProductService;
+    private $clientPostService;
     private $setting;
 
     public function __construct(SettingService $clientSettingService,
                                 AdvertisementService $clientAdvService,
                                 ClientCategoryService $clientCategoryService,
-                                ClientProductService $clientProductService
+                                ClientProductService $clientProductService,
+                                ClientPostService $clientPostService
     )
     {
         $this->clientSettingService = $clientSettingService;
         $this->clientAdvService = $clientAdvService;
         $this->clientCategoryService = $clientCategoryService;
         $this->clientProductService = $clientProductService;
+        $this->clientPostService = $clientPostService;
 
         $this->setting = $this->clientSettingService->findFirst();
         View::share('data_common', [
@@ -49,15 +53,33 @@ class CategoriesController extends Controller
             $data['category'] = $this->clientCategoryService->findBySlug($slug);
             if (empty($data['category']->id)) abort(404);
             $data['setting'] = $this->setting;
-            $data['common'] = Helpers::metaHead($data['setting']);
+            $cateMulti = $this->clientCategoryService->multiCate($data['category']->id);
 
             if ($data['category']->type == 'product') {
-                $data['list'] = $this->clientProductService->getListByCate(['category_id' => $data['category'], 'limit' => 20]);
+                $data['list'] = $this->clientProductService->getListByCate(['cate_multi' => $cateMulti, 'limit' => 20]);
+
+                if (empty($data['category']->title_seo)) $data['category']->title_seo = "Giá " . $data['category']->title . " tốt nhất tháng " . date("m/Y", time());
+                if (empty($data['category']->meta_des)) {
+                    $des = !empty($data['category']->description) ? $data['category']->description : "";
+                    $data['category']->meta_des = Helpers::shortDesc($des, 150);
+                }
+                $data['common'] = Helpers::metaHead($data['category']);
 
                 return view('clients::products.index', ['data' => $data]);
             } else {
-                return redirect(route('client.home'));
-                //return view('clients::posts.index', ['data' => $data]);
+                if (empty($data['category']->title_seo)) $data['category']->title_seo = "Thông tin hữu ích về " . $data['category']->title . " - " . @ucfirst($_SERVER["HTTP_HOST"]);
+                if (empty($data['category']->meta_des)) {
+                    $des = !empty($data['category']->description) ? $data['category']->description : "";
+                    $data['category']->meta_des = Helpers::shortDesc($des, 150);
+                }
+                $data['common'] = Helpers::metaHead($data['category']);
+
+                $data['list'] = $this->clientPostService->getListByCate(['cate_multi' => $cateMulti, 'limit' => 15]);
+                if (count($data['list']) == 1 && empty($_GET['page'])) {
+                    return redirect(route('client.post.show', ['slug' => $data['list'][0]->slug]));
+                }
+
+                return view('clients::posts.index', ['data' => $data]);
             }
         } catch (\Exception $e) {
             if (empty($e->getMessage())) abort(404); else abort('500');
@@ -69,12 +91,13 @@ class CategoriesController extends Controller
         try {
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);
-            $data['search_title'] = 'Tìm kiếm';
+            $data['search_title'] = !empty($_GET['key']) ? 'Tiếp tục mua hàng' : 'Tìm kiếm';
             $keyword = !empty($_GET['keyword']) ? $_GET['keyword'] : '';
-            $data['list'] = $this->clientProductService->getListByCate(['keyword' => $keyword, 'limit' => 20]);
+            $data['list'] = $this->clientProductService->getListByCateSearch(['keyword' => $keyword, 'limit' => 20]);
 
             return view('clients::products.index', ['data' => $data]);
-        } catch (\Exception $e) {Helpers::pre($e->getMessage());
+        } catch (\Exception $e) {
+            Helpers::pre($e->getMessage());
             if (empty($e->getMessage())) abort(404); else abort('500');
         }
     }

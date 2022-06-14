@@ -6,30 +6,49 @@
             <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="pr-4">
                     <a class="fancybox-thumbs" data-fancybox-group="thumb"
-                       href="{{ \App\Helpers\Helpers::renderThumb($data['detail']->thumbnail, 'product_detail_zoom') }}">
-                        <img src="{{ \App\Helpers\Helpers::renderThumb($data['detail']->thumbnail, 'product_detail') }}"
+                       href="{{ \App\Helpers\Helpers::renderThumb((!empty($data['detail']->thumbnail_cr) ? $data['detail']->thumbnail_cr : $data['detail']->thumbnail), 'product_detail_zoom') }}">
+                        <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($data['detail']->thumbnail_cr) ? $data['detail']->thumbnail_cr : $data['detail']->thumbnail), 'product_detail') }}"
                              title="{{ $data['detail']->title }}">
                     </a>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6 col-xl-6">
-                <div class="wrap-info-product">
+                <div class="wrap-info-product mb-4">
                     <h1>
                         <a href="{{ route('client.product.show', ['slug' => $data['detail']->slug.'-'.$data['detail']->id]) }}"
-                           title="{{ $data['detail']->title }}">
+                           title="{{ $data['detail']->title }}" rel="nofollow sponsored">
                             {{ $data['detail']->title }}
                         </a>
                     </h1>
-                    <div class="des">{{ $data['detail']->description }}</div>
+                    <div class="des">{!! $data['detail']->description !!}</div>
                     <div class="price">
                         <span>{{ \App\Helpers\Helpers::formatPrice($data['detail']->price) }}đ</span>
                         <span>{{ !empty($data['detail']->price_root) ? \App\Helpers\Helpers::formatPrice($data['detail']->price_root).'đ' : '' }}</span>
                     </div>
                     <div class="btn-product">
-                        <a href="{{ $data['detail']->url_buy }}" title="{{ $data['detail']->title }}" target="_blank">
-                            <button type="button" class="btn">MUA SẢN PHẨM</button>
-                        </a>
+                        @if(!empty($data['detail']->url_buy))
+                            <a href="{{ $data['detail']->url_buy }}" target="_blank"
+                               title="{{ $data['detail']->title }}"  rel="nofollow sponsored">
+                                <button type="button" class="btn">MUA SẢN PHẨM</button>
+                            </a>
+                        @else
+                            <a href="{{ route('client.card.create', ['id' => $data['detail']->id]) }}"
+                               title="{{ $data['detail']->title }}" rel="nofollow sponsored">
+                                <button type="button" class="btn">MUA SẢN PHẨM</button>
+                            </a>
+                        @endif
                     </div>
+                    @if($errors->has('accountNotFound'))
+                        <p class="alert alert-danger mt-3">{{$errors->first('accountNotFound')}}</p>
+                    @endif
+                </div>
+                <div class="fb-share-button"
+                     data-href="{{ route('client.product.show', ['slug' => $data['detail']->slug.'-'.$data['detail']->id]) }}"
+                     data-layout="button"
+                     data-size="small">
+                    <a target="_blank"
+                       href="{{ route('client.product.show', ['slug' => $data['detail']->slug.'-'.$data['detail']->id]) }}"
+                       class="fb-xfbml-parse-ignore">Chia sẻ</a>
                 </div>
             </div>
         </div>
@@ -47,7 +66,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab1">
                         <div class="ctct">
-                            {{ $data['detail']->content }}
+                            {!! $data['detail']->content !!}
                         </div>
                     </div>
                     {{--                <div class="tab-pane container fade" id="tab2"> <p>Thử thay đổi gì đó khi chuyển tab.</p></div>--}}
@@ -62,17 +81,17 @@
                         <li>
                             <div class="pr-item">
                                 <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                   title="{{ $row->title }}">
+                                   title="{{ $row->title }}" rel="nofollow sponsored">
                                     <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
                                          title="{{ $row->title }}">
                                 </a>
                                 <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                <h3>
+                                <div class="name-sp">
                                     <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                       title="{{ $row->title }}">
+                                       title="{{ $row->title }}" rel="nofollow sponsored">
                                         {{ $row->title }}
                                     </a>
-                                </h3>
+                                </div>
                             </div>
                         </li>
                     @endforeach
@@ -84,7 +103,8 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('/static/client/js/fancybox-2.1.7/source/jquery.fancybox.css?v=2.1.5') }}"/>
-    <link rel="stylesheet" href="{{ asset('/static/client/js/fancybox-2.1.7/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7') }}"/>
+    <link rel="stylesheet"
+          href="{{ asset('/static/client/js/fancybox-2.1.7/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7') }}"/>
 @endsection
 
 @section('scripts')

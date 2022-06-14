@@ -20,9 +20,27 @@ class ClientProductRepository implements ClientProductRepositoryInterface
             ->first();
     }
 
+    public function getListAll($_data)
+    {
+        return DB::table(self::TABLE_NAME)
+            ->where('type', $_data['type'])
+            ->orderBy('id', 'DESC')
+            ->paginate($_data['limit']);
+    }
+
     public function getListByCate($_data)
     {
         return DB::table(self::TABLE_NAME)
+            ->whereIn('category_id', $_data['cate_multi'])
+            ->whereIn('type', $_data['type'])
+            ->orderBy('id', 'DESC')
+            ->paginate($_data['limit']);
+    }
+
+    public function getListByCateSearch($_data)
+    {
+        return DB::table(self::TABLE_NAME)
+            ->where('title', 'LIKE', '%' . $_data['keyword'] . '%')
             ->where('type', $_data['type'])
             ->orderBy('id', 'DESC')
             ->paginate($_data['limit']);
@@ -33,7 +51,7 @@ class ClientProductRepository implements ClientProductRepositoryInterface
         return DB::table(self::TABLE_NAME)
             ->select('products.*', 'categories.title as category_title')
             ->leftJoin('categories', 'products.category_id', 'categories.id')
-            ->where('products.type', $_data['type'])
+            ->whereIn('products.type', $_data['type'])
             ->orderBy('products.id', 'DESC')
             ->paginate($_data['limit']);
     }

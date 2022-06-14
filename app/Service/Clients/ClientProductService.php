@@ -12,7 +12,7 @@ class ClientProductService
 {
 
     private $repository;
-    const TYPE = ['product'];
+    const TYPE = ['product', "crawler"];
 
     public function __construct(ClientProductRepositoryInterface $repository)
     {
@@ -24,14 +24,24 @@ class ClientProductService
         return $this->repository->findById($_id);
     }
 
+    public function getListAll($_data)
+    {
+        return $this->repository->getListAll(array_merge($_data, ['type' => self::TYPE[0]]));
+    }
+
     public function getListByCate($_data)
     {
-        return $this->repository->getListByCate(array_merge($_data, ['type' => self::TYPE[0]]));
+        return $this->repository->getListByCate(array_merge($_data, ['type' => self::TYPE]));
+    }
+
+    public function getListByCateSearch($_data)
+    {
+        return $this->repository->getListByCateSearch(array_merge($_data, ['type' => self::TYPE[0]]));
     }
 
     public function getListHome($_data)
     {
-        return $this->repository->getListHome(array_merge($_data, ['type' => self::TYPE[0]]));
+        return $this->repository->getListHome(array_merge($_data, ['type' => self::TYPE]));
     }
 
     public function getListRelated($_data)

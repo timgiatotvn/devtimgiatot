@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 class CategoryService
 {
     private $categoryRepository;
+    const TYPE2 = ['new', 'product', 'link', 'crawler'];
+    const TYPE_TEXT2 = ['new' => 'Tin tức', 'product' => 'Sản phẩm', 'link' => 'Link', 'crawler' => 'Sản phẩm so sánh'];
     const TYPE = ['new', 'product', 'link'];
     const TYPE_TEXT = ['new' => 'Tin tức', 'product' => 'Sản phẩm', 'link' => 'Link'];
 
@@ -58,7 +60,7 @@ class CategoryService
         $db = array_merge($_data, [
             'slug' => !empty($_data['title']) ? Str::slug($_data['title'], '-') : '',
             'admin_id' => Auth::guard(Helpers::renderGuard())->user()->id,
-            'type' => $this::TYPE[0],
+            //'type' => $this::TYPE[0],
             'created_at' => date("Y/m/d H:i:s"),
             'updated_at' => date("Y/m/d H:i:s")
         ]);

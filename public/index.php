@@ -1,5 +1,6 @@
-<?php
-
+<?php 
+session_name('LARAVEL_SESSION_V1');
+session_start();
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -20,7 +21,7 @@ define('LARAVEL_START', microtime(true));
 | loading any of our classes later on. It feels great to relax.
 |
 */
-
+require __DIR__.'/define.php';
 require __DIR__.'/../vendor/autoload.php';
 
 /*

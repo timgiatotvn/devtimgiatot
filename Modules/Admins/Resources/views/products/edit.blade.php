@@ -25,10 +25,20 @@
             <div class="row">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
+                        @if($errors->has('error'))
+                            <p class="alert alert-danger">{{$errors->first('error')}}</p>
+                        @endif
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Tiêu đề</label>
                                 <input type="text" name="title" value="{{ $data['detail']->title }}" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label>Slug</label>
+                                <input type="text" name="slug" value="{{ $data['detail']->slug }}" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
+                                <label id="urlfull" data-url="{{ asset("/") }}">Link: <a href="{{ asset("/").$data['detail']->slug.".htm" }}">{{ asset("/").$data['detail']->slug.".htm" }}</a></label>
                             </div>
                             <div class="form-group">
                                 <label>Mã sản phẩm</label>
@@ -47,12 +57,16 @@
                                 <input type="text" name="quantity" value="{{ $data['detail']->quantity }}" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
+                                <label>Url affilate</label>
+                                <input type="text" name="url_buy" value="" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
                                 <label>Danh mục chính</label>
                                 <select name="category_id" class="form-control col-md-3">
                                     {!! $data['category']['select'] !!}
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 <label>Danh mục liên quan</label>
                                 <div class="multi-category">
                                     <ul>
@@ -92,7 +106,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea class="ckeditor-mini" name="description">{{ $data['detail']->description }}</textarea>
+                                <textarea class="ckeditor" name="description">{{ $data['detail']->description }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
@@ -124,6 +138,26 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Title seo</label>
+                                <textarea type="text" name="title_seo" class="form-control" placeholder="">{{ $data['detail']->title_seo }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Meta des</label>
+                                <textarea type="text" name="meta_des" class="form-control" placeholder="">{{ $data['detail']->meta_des }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Meta key</label>
+                                <textarea type="text" name="meta_key" class="form-control" placeholder="">{{ $data['detail']->meta_key }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="d-flex flex-column flex-md-row align-items-center">
@@ -144,6 +178,16 @@
             </div>
         </form>
     </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+        $("input[name='slug']").keyup(function(){
+            var url = $("#urlfull").data("url");
+            $("#urlfull a").attr("href", url + $(this).val() + ".htm");
+            $("#urlfull a").html(url + $(this).val() + ".htm");
+        });
+
+    </script>
 @endsection
 @section('validate')
     {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Product\EditRequest','#form-edit'); !!}
