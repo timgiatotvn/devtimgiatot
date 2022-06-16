@@ -58,6 +58,23 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label>Thumbnail</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="{{ asset($data['detail']->thumbnail) }}" width="150" class="mb-2">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <a data-input="thumbnail" class="lfm btn btn-primary">
+                                                    <i class="fa fa-picture-o"></i> CHOOSE
+                                                </a>
+                                            </span>
+                                            <input id="thumbnail" class="form-control" value="{{ $data['detail']->thumbnail }}" type="text" name="thumbnail"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label>Url</label>
                                 <input type="text" name="url" value="{{ $data['detail']->url }}" class="form-control"
                                        placeholder=""/>
