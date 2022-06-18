@@ -128,10 +128,14 @@ Route::prefix('admin')->group(function () {
             Route::get('/show/{id}', 'ProductsController@show')->name('admin.product.show');
             Route::get('/destroy/{id}', 'ProductsController@destroy')->name('admin.product.destroy');
         });
+        //keywords
+        Route::prefix('keywords')->group(function () {
+            Route::get('/', 'ProductsController@getListKeyWord')->name('admin.statistical.keyword');
+        });
 
         //Products crawlers
         Route::prefix('product-crawlers')->group(function () {
-                Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
+            Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
             Route::post('/', 'ProductCrawlersController@actionIndex');
             Route::get('/create', 'ProductCrawlersController@create')->name('admin.productCrawler.create');
             Route::post('/create', 'ProductCrawlersController@store');
