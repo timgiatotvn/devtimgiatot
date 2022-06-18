@@ -36,13 +36,13 @@
         <li class="nav-item {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
                aria-controls="basic-ui">
-                <span class="menu-title">@lang('admins::layer.menu.parent.statistical')</span>
+                <span class="menu-title">Thống kê</span>
                 <i class="icon-layers menu-icon"></i>
             </a>
             <div class="collapse {{ Request::routeIs('admin.statistical.*')? 'show' : '' }} {{ Request::routeIs('admin.statistical.*')? 'show' : '' }} {{ Request::routeIs('admin.statistical.*')? 'show' : '' }}" id="basic-ui">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}" href="{{ route('admin.statistical.keyword') }}">@lang('admins::layer.menu.parent.statistical.keyword.title')</a>
+                        <a class="nav-link {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}" href="{{ route('admin.statistical.keyword') }}">Từ khoá</a>
                     </li>
                 </ul>
             </div>
