@@ -26,6 +26,7 @@ Route::middleware('authApiRequest')->prefix('v1')->group(function(){
 
 
 Route::middleware('authApiRequest')->group(function(){
+    Route::post('setup', 'HomeController@setup');
     Route::get('home', 'HomeController@index');
     Route::get('product-by-category/{id}', 'ProductController@getProductByCategory');
     Route::get('product/{id}', 'ProductController@show');
@@ -33,5 +34,8 @@ Route::middleware('authApiRequest')->group(function(){
     Route::get('search', 'ProductController@search');
     Route::get('get-post-category/{id}', 'PostController@index');
     Route::get('post/{id}', 'PostController@show');
+
+    Route::get('notification', 'NotificationController@index');
+    Route::get('notification/{id}', 'NotificationController@show');
 
 });

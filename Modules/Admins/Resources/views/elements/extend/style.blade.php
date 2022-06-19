@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}"/>
 <link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/chartist/chartist.min.css') }}"/>
 <link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/daterangepicker/daterangepicker.css') }}"/>
+<link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/boostrap-datetimepicker/build/css/bootstrap-datetimepicker.css') }}"/>
 <link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/jvectormap/jquery-jvectormap.css') }}"/>
 <link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/icheck/skins/all.css') }}"/>
 <link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/select2/css/select2.min.css') }}"/>

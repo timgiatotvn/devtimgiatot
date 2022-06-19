@@ -55,6 +55,7 @@ return [
     'table.user_create' => 'Người tạo',
     'table.view' => 'View',
     'table.status' => 'Trạng thái',
+    'table.publish_at' => 'Ngày đăng',
     'table.id' => 'ID',
 
     //account
@@ -110,6 +111,12 @@ return [
 
     'crawler.article.index.title' => 'Danh sách',
     'crawler.article.index.title2' => 'Danh sách',
+
+    //advertisement
+    'notification.index.title' => 'Thông báo',
+    'notification.index.title2' => 'Thông báo',
+    'notification.add.title' => 'Thêm mới',
+    'notification.edit.title' => 'Cập nhật',
 
     '' => '',
     '' => '',

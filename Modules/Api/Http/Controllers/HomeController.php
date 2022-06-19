@@ -5,6 +5,7 @@ namespace Modules\Api\Http\Controllers;
 use App\Helpers\Helpers;
 use App\Model\Advertisement;
 use App\Model\Category;
+use App\Model\Device;
 use App\Model\Post;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCategoryService;
@@ -22,6 +23,31 @@ class HomeController extends Controller
         $this->clientAdvService = $clientAdvService;
         $this->clientCategoryService = $clientCategoryService;
     }
+
+    public function setup(Request $request)
+    {
+        $token = $request->get('token');
+        if (empty($token)) {
+
+            return response()->json([
+                'status' => 500,
+                'message' => 'token không được để trống.',
+            ]);
+        }
+
+        $data = $request->all();
+        $device = new Device();
+        $device->fill($data);
+        $device->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => $device
+        ]);
+
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
