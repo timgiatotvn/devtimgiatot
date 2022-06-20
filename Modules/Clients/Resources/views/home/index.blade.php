@@ -3,7 +3,7 @@
 @section('content')
     <section id="box-category-suggest">
         <div class="cs-head">
-            <h2>TÌM GIÁ TỐT & KHUYẾN MÃI HOT</h2>
+            <h2>TÌM GIÁ TỐT & KHUYẾN MÃI HOT update</h2>
             <div class="line"></div>
         </div>
         <div class="cs-list">
