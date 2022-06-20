@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /users/dang-nhap/
+Disallow: /users/dang-ky/
+Disallow: /cart/
+Disallow: /search/
+Disallow: /quy-dinh-truy-cap-website.html
+Disallow: /chinh-sach-ban-hang.html
+Disallow: /chinh-sach-bao-hanh.html
+Disallow: /chinh-sach-doi-tra.html
+Disallow: /chinh-sach-bao-ve-thong-tin-ca-nhan-cua-nguoi-tieu-dung.html
+
+Allow: /
+Sitemap: https://timgiatot.vn/sitemap.xml
