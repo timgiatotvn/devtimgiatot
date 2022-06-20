@@ -29462,4 +29462,20 @@ a.icon-form i.icon-close{color: red;}
 .multi-category ul li div{overflow: hidden;}
 .multi-category ul li div input{float: left; margin-right: 6px;}
 
+.input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 2;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+}
+.input-group-addon i.icon-calendar{
+  line-height: 2 !important;
+}
+
+.hide {
+  display: none;
+}
 /*# sourceMappingURL=app.css.map*/

@@ -20,6 +20,7 @@ class ClientArticleRepository implements ClientArticleRepositoryInterface
     {
         return $this->model
             ->whereIn('id', $_data["list_id"])
+            ->select('id', 'crawler_category_id', 'name', 'price', 'href')
             ->orderBy('price', 'ASC')
             ->paginate($_data['limit']);
     }

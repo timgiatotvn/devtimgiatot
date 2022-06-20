@@ -7,9 +7,9 @@
 {{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/chartjs/chart.min.js') }}"></script>--}}
 {{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/jquery-sparkline/jquery.sparkline.min.js') }}"></script>--}}
 {{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>--}}
-{{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/moment/moment.js') }}"></script>--}}
+<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/moment/moment.js') }}"></script>
 {{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/chartist/chartist.min.js') }}"></script>--}}
-{{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/daterangepicker/daterangepicker.js') }}"></script>--}}
+<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/boostrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
 {{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/jvectormap/jquery-jvectormap.min.js') }}"></script>--}}
 {{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js') }}"></script>--}}
 {{--<script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/progressbarjs/progressbar.min.js') }}"></script>--}}
