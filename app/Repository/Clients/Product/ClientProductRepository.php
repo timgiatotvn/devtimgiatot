@@ -41,7 +41,7 @@ class ClientProductRepository implements ClientProductRepositoryInterface
     {
         return DB::table(self::TABLE_NAME)
             ->where('title', 'LIKE', '%' . $_data['keyword'] . '%')
-            ->whereIn('type', $_data['type'])
+            ->where('type', $_data['type'])
             ->orderBy('id', 'DESC')
             ->paginate($_data['limit']);
     }

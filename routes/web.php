@@ -10,11 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/123', function () {
-    return '123';
+
+Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/test', function (\App\Service\UserService $userService) {
+
     return response()->json($userService->getUserById(222),200) ;
 });
