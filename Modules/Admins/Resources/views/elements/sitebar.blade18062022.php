@@ -16,8 +16,8 @@
                     <p class="designation">{{ substr(\Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard())->user()->username, 0, 15) }}</p>
                 </div>
                 {{--<div class="icon-container">--}}
-                {{--<i class="icon-bubbles"></i>--}}
-                {{--<div class="dot-indicator bg-danger"></div>--}}
+                    {{--<i class="icon-bubbles"></i>--}}
+                    {{--<div class="dot-indicator bg-danger"></div>--}}
                 {{--</div>--}}
             </a>
         </li>
@@ -32,20 +32,6 @@
         </li>
         <li class="nav-item nav-category">
             <span class="nav-link">@lang('admins::layer.menu.parent.function')</span>
-        </li>
-        <li class="nav-item {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}">
-            <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-               aria-controls="basic-ui">
-                <span class="menu-title">Thống kê</span>
-                <i class="icon-layers menu-icon"></i>
-            </a>
-            <div class="collapse {{ Request::routeIs('admin.statistical.*')? 'show' : '' }} {{ Request::routeIs('admin.statistical.*')? 'show' : '' }} {{ Request::routeIs('admin.statistical.*')? 'show' : '' }}" id="basic-ui">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}" href="{{ route('admin.statistical.keyword') }}">Từ khoá</a>
-                    </li>
-                </ul>
-            </div>
         </li>
         <li class="nav-item {{ Request::routeIs('admin.category.*')? 'active' : '' }} {{ Request::routeIs('admin.post.*')? 'active' : '' }} {{ Request::routeIs('admin.product.*')? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
@@ -62,7 +48,7 @@
                         <a class="nav-link {{ Request::routeIs('admin.post.*')? 'active' : '' }}" href="{{ route('admin.post.index') }}">@lang('admins::layer.menu.parent.post.post.title')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('admin.product.*')? 'active' : '' }}" href="{{ route('admin.product.index') }}">@lang('admins::layer.menu.parent.product.product.title') </a>
+                        <a class="nav-link {{ Request::routeIs('admin.product.*')? 'active' : '' }}" href="{{ route('admin.product.index') }}">@lang('admins::layer.menu.parent.product.product.title')</a>
                     </li>
                 </ul>
             </div>
@@ -84,12 +70,12 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Request::routeIs('admin.productCrawler.*')? 'active' : '' }}" href="{{ route('admin.productCrawler.index') }}">@lang('admins::layer.menu.parent.product.product.title')</a>
                     </li>
-                    {{--                    <li class="nav-item">--}}
-                    {{--                        <a class="nav-link {{ Request::routeIs('admin.post.*')? 'active' : '' }}" href="{{ route('admin.post.index') }}">@lang('admins::layer.menu.parent.post.post.title')</a>--}}
-                    {{--                    </li>--}}
-                    {{--                    <li class="nav-item">--}}
-                    {{--                        <a class="nav-link {{ Request::routeIs('admin.product.*')? 'active' : '' }}" href="{{ route('admin.product.index') }}">@lang('admins::layer.menu.parent.product.product.title')</a>--}}
-                    {{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link {{ Request::routeIs('admin.post.*')? 'active' : '' }}" href="{{ route('admin.post.index') }}">@lang('admins::layer.menu.parent.post.post.title')</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item">--}}
+{{--                        <a class="nav-link {{ Request::routeIs('admin.product.*')? 'active' : '' }}" href="{{ route('admin.product.index') }}">@lang('admins::layer.menu.parent.product.product.title')</a>--}}
+{{--                    </li>--}}
                 </ul>
             </div>
         </li>
