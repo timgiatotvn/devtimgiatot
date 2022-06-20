@@ -69,8 +69,8 @@ class Helpers
     {
         return array(
             'title_seo' => !empty($data->title_seo) ? $data->title_seo : (!empty($data->title) ? $data->title : (!empty($data->name) ? $data->name : '')),
-            'meta_key' => !empty($data->meta_key) ? $data->meta_key : (!empty($data->title) ? $data->title : (!empty($data->name) ? $data->name : '')),
-            'meta_des' => !empty($data->meta_des) ? Helpers::shortDesc($data->meta_des, 150) : ""
+            'meta_key' => !empty($data->meta_key) ? $data->meta_key : '',
+            'meta_des' => !empty($data->meta_des) ? Helpers::shortDesc($data->meta_des, 150) : ''
         );
     }
 

@@ -49,8 +49,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-
         try {
             $data['setting'] = $this->setting;
             $data['common'] = Helpers::metaHead($data['setting']);
