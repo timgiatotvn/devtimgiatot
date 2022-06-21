@@ -322,4 +322,9 @@ regex;
         }
     }
 
+    public static function getUrlFile($link)
+    {
+        return !empty($link) ? asset($link) : asset('/img/w78/fill!photos/o1-100x100.jpeg');
+    }
+
 }
