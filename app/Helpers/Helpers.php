@@ -194,6 +194,8 @@ class Helpers
                 echo "";
                 break;
         }
+	
+        //return asset($url);
         return asset(str_replace('storage/', 'img/' . $str, $url));
     }
 
