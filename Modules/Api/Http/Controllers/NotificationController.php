@@ -61,6 +61,15 @@ class NotificationController extends Controller
             ]);
         }
         $notification = Notification::find($id);
+
+        if (empty($notification)) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'ok',
+                'data' => []
+            ]);
+        }
+
         $notification->thumbnail = Helpers::getUrlFile($notification->thumbnail);
         if ($deviceToken) {
             $device = Device::where('token', $deviceToken)->first();

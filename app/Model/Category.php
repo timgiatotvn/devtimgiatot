@@ -4,7 +4,6 @@ namespace App\Model;
 
 use App\Helpers\Helpers;
 use Illuminate\Database\Eloquent\Model;
-use phpDocumentor\Reflection\Types\Self_;
 
 class Category extends Model
 {
@@ -38,5 +37,4 @@ class Category extends Model
 
         return $data;
     }
-    
 }

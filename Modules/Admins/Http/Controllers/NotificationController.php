@@ -7,7 +7,7 @@ use App\Model\Notification;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Auth;
+use Auth, DB;
 
 class NotificationController extends Controller
 {
@@ -43,19 +43,35 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        $notification = new Notification();
-        $notification->title = $request->get('title');
-        $notification->thumbnail = $request->get('thumbnail');
-        $notification->description = $request->get('description');
-        $notification->content = $request->get('content');
-        $notification->status = $request->get('status');
-        if ($request->get('publish_at')) {
-            $notification->publish_at = \DateTime::createFromFormat('d/m/Y H:i:s', $request->get('publish_at'))->format('Y-m-d H:i:s');
-        }
-        $notification->admin_id = Auth::guard(\Helpers::renderGuard())->user()->id;
-        $notification->save();
+        try {
+            DB::beginTransaction();
 
-        return redirect(route('notification.index'));
+                $notification = new Notification();
+                $notification->title = $request->get('title');
+                $notification->thumbnail = $request->get('thumbnail');
+                $notification->description = $request->get('description');
+                $notification->content = $request->get('content');
+                $notification->status = $request->get('status');
+                if ($request->get('publish_at')) {
+                    $notification->publish_at = \DateTime::createFromFormat('d/m/Y H:i:s', $request->get('publish_at'))->format('Y-m-d H:i:s');
+                }
+                $notification->admin_id = Auth::guard(\Helpers::renderGuard())->user()->id;
+                $notification->save();
+
+                if ($notification->status == 1) {
+                    $result = Notification::sendNotification($notification);
+                }
+                DB::commit();
+                if (isset($result) && $result['failure'] == 1) {
+                    session()->flash('error', __('Không thể gửi thông báo tới app vui lòng kiểm tra lại'));
+                }
+
+            return redirect(route('notification.index'));
+        } catch (\Exception $e)
+        {
+            DB::rollback();
+            dd($e);
+        }
     }
 
     /**

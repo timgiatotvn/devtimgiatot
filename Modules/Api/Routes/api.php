@@ -36,6 +36,5 @@ Route::middleware('authApiRequest')->group(function(){
     Route::get('post/{id}', 'PostController@show');
 
     Route::get('notification', 'NotificationController@index');
-    Route::get('notification/{id}', 'NotificationController@show');
-
+    Route::get('notification/{id}', 'NotificationController@show')->name('api.notification.show');
 });
