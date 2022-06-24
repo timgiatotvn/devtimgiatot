@@ -36,7 +36,7 @@ class PostController extends Controller
             return $query->select('id', 'title');
         }])->where('id', $id)
             ->where('status', 1)
-            ->select('id', 'title', 'slug', 'description', 'content', 'thumbnail', 'category_id')
+            ->select('id', 'title', 'slug', 'description', 'content', 'thumbnail', 'link_detail', 'category_id')
             ->first();
 
         $post->thumbnail = Helpers::getUrlFile($post->thumbnail);
