@@ -41,7 +41,7 @@ class Post extends Model
             return $query->select('id', 'title');
         }])->where('category_id', $categoryId)
             ->where('status', 1)
-            ->select('id', 'title', 'slug', 'description', 'content', 'thumbnail', 'category_id')
+            ->select('id', 'title', 'slug', 'description', 'content', 'thumbnail', 'link_detail', 'category_id')
             ->orderBy('id', 'DESC');
 
         return $posts;
