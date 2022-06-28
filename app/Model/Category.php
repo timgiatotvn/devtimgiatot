@@ -20,8 +20,9 @@ class Category extends Model
                 ->orWhereIn('parent_id', $arrayId)
                 ->where('type', 'product')
                 ->where('status', 1)
-                ->select('id', 'title', 'thumbnail', 'url')
+                ->select('id', 'title','parent_id', 'thumbnail', 'url')
                 ->orderBy('sort', 'ASC')
+                ->orderBy('parent_id', 'ASC')
                 ->get();
         }
 
@@ -32,7 +33,7 @@ class Category extends Model
     {
         foreach ($data as $item)
         {
-            $item->thumnail = !empty($item->thumbnail) ? Helpers::getUrlFile($item->thumbnail) : null;
+            $item->thumnail = Helpers::getUrlFile($item->thumbnail);
         }
 
         return $data;

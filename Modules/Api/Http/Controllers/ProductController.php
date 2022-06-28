@@ -29,7 +29,7 @@ class ProductController extends Controller
                 return $query->select('id', 'title');
             }])->where('category_id', $id)
                 ->where('status', 1)
-                ->select('id', 'category_id', 'title', 'slug', 'price', 'count_suggest', 'thumbnail')
+                ->select('id', 'category_id', 'title', 'slug', 'price', 'count_suggest', 'thumbnail_cr', 'thumbnail')
                 ->orderBy('id', 'DESC')
                 ->paginate($perPage);
 
@@ -48,7 +48,7 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)
             ->select('id', 'category_id', 'title', 'slug', 'description', 'content',
-                'price', 'count_suggest', 'thumbnail', 'website_map')
+                'price', 'count_suggest', 'thumbnail_cr', 'thumbnail', 'website_map')
             ->first();
 
         $ws = json_decode($product->website_map, true);
@@ -56,7 +56,9 @@ class ProductController extends Controller
             $product->website_map = $ws[0]["crawler_website"]["title"];
             $product->link_website = $ws[0]["article"]["href"];
         }
-        $product->thumbnail = Helpers::getUrlFile($product->thumbnail);
+
+        $product->thumbnail = Helpers::renderThumbProduct((!empty($product->thumbnail_cr) ? $product->thumbnail_cr : $product->thumbnail), 'product_detail');
+
         $product->price = Helpers::formatPrice($product->price);
 
         return response()->json([
@@ -109,7 +111,8 @@ class ProductController extends Controller
     {
         foreach ($data as $item)
         {
-            $item->thumbnail = Helpers::getUrlFile($item->thumbnail);
+
+            $item->thumbnail = Helpers::renderThumbProduct((!empty($item->thumbnail_cr) ? $item->thumbnail_cr : $item->thumbnail), 'list_product');
             $item->price = Helpers::formatPrice($item->price);
         }
 
