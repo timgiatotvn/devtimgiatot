@@ -37,6 +37,10 @@
                             <div class="form-group">
                                 <label id="urlfull" data-url="{{ asset("/") }}">Link: <a href="{{ asset("/").$data['detail']->slug.".html" }}">{{ asset("/").$data['detail']->slug.".html" }}</a></label>
                             </div>
+							<div class="form-group">
+                                <label>link bài viết</label>
+                                <input type="text" name="link_detail" class="form-control" placeholder="https://shopee.vn/m/nap-the-va-dich-vu-online"/>
+                            </div>
                             <div class="form-group">
                                 <label>Danh mục chính</label>
                                 <select name="category_id" class="form-control col-md-3">

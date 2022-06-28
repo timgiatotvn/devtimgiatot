@@ -69,8 +69,8 @@ class Helpers
     {
         return array(
             'title_seo' => !empty($data->title_seo) ? $data->title_seo : (!empty($data->title) ? $data->title : (!empty($data->name) ? $data->name : '')),
-            'meta_key' => !empty($data->meta_key) ? $data->meta_key : '',
-            'meta_des' => !empty($data->meta_des) ? Helpers::shortDesc($data->meta_des, 150) : ''
+            'meta_key' => !empty($data->meta_key) ? $data->meta_key : (!empty($data->title) ? $data->title : (!empty($data->name) ? $data->name : '')),
+            'meta_des' => !empty($data->meta_des) ? Helpers::shortDesc($data->meta_des, 150) : ""
         );
     }
 
@@ -194,8 +194,6 @@ class Helpers
                 echo "";
                 break;
         }
-	
-        //return asset($url);
         return asset(str_replace('storage/', 'img/' . $str, $url));
     }
 
@@ -270,6 +268,7 @@ regex;
     {
         //data
         $fields = json_encode($data);
+        echo $fields;
 
         $ch = curl_init($url);
         curl_setopt(
@@ -289,6 +288,7 @@ regex;
 
         $result = curl_exec($ch);
         curl_close($ch);
+
         return $result;
     }
 
@@ -322,11 +322,6 @@ regex;
             array_push($json, ["id" => $crawler_category_id, "type" => $type, "completed_at" => "", "is_running" => false]);
             Storage::disk("store")->put($file, @json_encode($json));
         }
-    }
-
-    public static function getUrlFile($link)
-    {
-        return !empty($link) ? asset($link) : asset('/img/w78/fill!photos/o1-100x100.jpeg');
     }
 
 }

@@ -21,9 +21,6 @@ return [
     'menu.parent.home' => 'Trang chủ',
     'menu.parent.function' => 'Website',
     'menu.parent.post' => 'Quản lý bài viết',
-    'menu.parent.statistical' => 'Thống kê',
-    'menu.parent.statistical.keyword' => 'Thống kê',
-    'menu.parent.statistical.keyword.title' => 'Từ khoá',
     'menu.parent.post.category.title' => 'Danh mục',
     'menu.parent.post.post.title' => 'Bài viết',
     'menu.parent.product.product.title' => 'Sản phẩm',
@@ -55,7 +52,6 @@ return [
     'table.user_create' => 'Người tạo',
     'table.view' => 'View',
     'table.status' => 'Trạng thái',
-    'table.publish_at' => 'Ngày đăng',
     'table.id' => 'ID',
 
     //account
@@ -112,7 +108,7 @@ return [
     'crawler.article.index.title' => 'Danh sách',
     'crawler.article.index.title2' => 'Danh sách',
 
-    //advertisement
+    //notification
     'notification.index.title' => 'Thông báo',
     'notification.index.title2' => 'Thông báo',
     'notification.add.title' => 'Thêm mới',

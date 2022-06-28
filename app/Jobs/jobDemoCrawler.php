@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class jobDemoCrawler implements ShouldQueue
 {
@@ -31,6 +32,7 @@ class jobDemoCrawler implements ShouldQueue
      */
     public function handle()
     {
+        Log::info("--------");
         if($this->var->type_crawler == "ajax"){
             Helpers::curlData($this->var, env("NODE_JS_URL_AJAX") . "crawler-data-demo");
         }else{
