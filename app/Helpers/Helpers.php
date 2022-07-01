@@ -324,4 +324,63 @@ regex;
         }
     }
 
+    public static function getUrlFile($link)
+    {
+        return !empty($link) ? env('APP_URL_API').$link : env('APP_URL_API'). '/img/w78/fill!photos/o1-100x100.jpeg';
+    }
+
+
+    public static function renderThumbProduct($url = '', $type = '')
+    {
+//        if (empty($url) || empty($type)) return '';
+        if (empty($type)) return '';
+        if (empty($url)) $url = "/storage/photos/default.png";
+
+        $str = '';
+        switch ($type) {
+            case 'slide':
+                $str .= 'w1200/h438/fill!';
+                break;
+            case 'logo':
+                $str .= 'w235/h53/fill!';
+                break;
+            case 'link':
+                $str .= 'w78/fill!';
+                break;
+
+            //product
+            case 'list_product':
+                $str .= 'w300/h300/fill!';
+                break;
+            case 'product_detail_zoom':
+                $str .= 'w800/fill!';
+                break;
+            case 'product_detail':
+                $str .= 'w500/fill!';
+                break;
+
+            //news
+            case 'list_new':
+                $str .= 'w381/h200/fill!';
+                break;
+            case 'list_new_index':
+                $str .= 'w300/h180/fill!';
+                break;
+
+            //ads
+            case 'ads_home':
+                $str .= 'w600/h210/fill!';
+                break;
+            case 'share_fb':
+                $str .= 'w600/h600/fill!';
+                break;
+            case '':
+                echo "";
+                break;
+        }
+
+        //return asset($url);
+        return env('APP_URL_API').(str_replace('storage/', 'img/' . $str, $url));
+    }
+
 }

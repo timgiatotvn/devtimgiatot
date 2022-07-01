@@ -34,4 +34,28 @@ class Post extends Model
         return $this->belongsTo('App\Model\Category', 'category_id', 'id');
     }
 
+<<<<<<< HEAD
+    public static function getPostByCategoryId($categoryId)
+    {
+        $posts = Post::with(['category' => function($query) {
+            return $query->select('id', 'title');
+        }])->where('category_id', $categoryId)
+            ->where('status', 1)
+            ->select('id', 'title', 'slug', 'description', 'content', 'thumbnail', 'link_detail', 'category_id')
+            ->orderBy('id', 'DESC');
+
+        return $posts;
+    }
+
+    static public function formatData($data)
+    {
+        foreach ($data as $item) {
+            $item->thumbnail = Helpers::getUrlFile($item->thumbnail);
+        }
+
+        return $data;
+    }
+
+=======
+>>>>>>> 70dc6001e31333bbb582f47f8cca05075f855bdb
 }
