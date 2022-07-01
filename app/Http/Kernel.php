@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AuthApiRequest;
+use App\Http\Middleware\AuthenticateMobileApp;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -68,6 +69,7 @@ class Kernel extends HttpKernel
         'admin' => \Modules\Admins\Http\Middleware\AdminAuthMiddleware::class,
         'user' => \Modules\Clients\Http\Middleware\UserAuthMiddleware::class,
         'ckfinderAuth' => \Modules\Admins\Http\Middleware\CustomCKFinderAuth::class,
+        'authenticationMobileApp' => AuthenticateMobileApp::class
     ];
 
     /**
