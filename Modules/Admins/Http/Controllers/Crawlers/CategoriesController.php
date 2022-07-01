@@ -121,7 +121,7 @@ class CategoriesController extends Controller
                 $errors = new MessageBag(['error' => __('admins::layer.notify.fail')]);
                 return back()->withInput($_params)->withErrors($errors);
             }
-        } catch (\Exception $e) {
+        } catch (\Exception $e) {Helpers::pre($e->getMessage());
             return !empty($e->getMessage()) ? abort('500') : abort(404);
         }
     }

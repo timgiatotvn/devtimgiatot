@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Helpers\Helpers;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,19 +30,18 @@ class Post extends Model
         'choose_4',
     ];
 
-    public function getCategory()
+    public function category()
     {
         return $this->belongsTo('App\Model\Category', 'category_id', 'id');
     }
 
-<<<<<<< HEAD
     public static function getPostByCategoryId($categoryId)
     {
         $posts = Post::with(['category' => function($query) {
             return $query->select('id', 'title');
         }])->where('category_id', $categoryId)
             ->where('status', 1)
-            ->select('id', 'title', 'slug', 'description', 'content', 'thumbnail', 'link_detail', 'category_id')
+            ->select('id', 'title', 'slug', 'description', 'content', 'thumbnail', 'category_id')
             ->orderBy('id', 'DESC');
 
         return $posts;
@@ -56,6 +56,4 @@ class Post extends Model
         return $data;
     }
 
-=======
->>>>>>> 70dc6001e31333bbb582f47f8cca05075f855bdb
 }

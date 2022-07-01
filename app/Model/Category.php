@@ -2,12 +2,12 @@
 
 namespace App\Model;
 
-use App\Helpers\Helpers;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
     protected $table = 'categories';
+<<<<<<< HEAD
 
     public static function getCategoryByName($name)
     {
@@ -48,4 +48,7 @@ class Category extends Model
 
         return self::formatCategory($categories);
     }
+=======
+    
+>>>>>>> 70dc6001e31333bbb582f47f8cca05075f855bdb
 }

@@ -57,7 +57,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
+							<div class="form-group">
                                 <label>Thumbnail</label>
                                 <div class="row">
                                     <div class="col-md-6">

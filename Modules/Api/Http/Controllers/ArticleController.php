@@ -47,6 +47,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info("33333");
         try {
             if ($this->function->store($request)) {
                 ResponseHelpers::showResponse([], 'json');
@@ -54,6 +55,7 @@ class ArticleController extends Controller
                 ResponseHelpers::serverErrorResponse([], 'json');
             }
         } catch (Exception $ex) {
+            Log::info($ex->getMessage());
             ResponseHelpers::serverErrorResponse([], 'json', $ex->getMessage());
         }
     }
