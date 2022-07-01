@@ -36,7 +36,7 @@ class ClientProductService
 
     public function getListByCateSearch($_data)
     {
-        return $this->repository->getListByCateSearch(array_merge($_data, ['type' => self::TYPE[0]]));
+        return $this->repository->getListByCateSearch(array_merge($_data, ['type' => self::TYPE]));
     }
 
     public function getListHome($_data)

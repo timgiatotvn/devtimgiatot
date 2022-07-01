@@ -25,36 +25,50 @@
             <div class="row">
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
+                        @if($errors->has('error'))
+                            <p class="alert alert-danger">{{$errors->first('error')}}</p>
+                        @endif
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Tiêu đề</label>
                                 <input type="text" name="title" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
-                                <label>Mô tả</label>
-                                <textarea name="description" placeholder="Mô tả" rows="4" class="form-control"></textarea>
+                                <label>Slug</label>
+                                <input type="text" name="slug" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
-                                <label>Vị trí</label>
-                                <input type="text" name="sort" class="form-control" placeholder=""/>
+                                <label id="urlfull" data-url="{{ asset("/") }}">Link: <a href=""></a></label>
                             </div>
                             <div class="form-group">
-                                <label>Thuộc danh mục</label>
-                                <select name="parent_id" class="form-control col-md-3">
-                                    {!! $data['category'] !!}
+                                <label>Danh mục chính</label>
+                                <select name="category_id" class="form-control col-md-3">
+                                    {!! $data['category']['select'] !!}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Loại danh mục</label>
-                                <select name="type" class="form-control col-md-3">
-                                    <option value=""></option>
-                                    @foreach($type_cate as $row)
-                                        <option value="{{ $row }}">{{ $type_text[$row] }}</option>
-                                    @endforeach
-                                </select>
+                                <label>Danh mục liên quan</label>
+                                <div class="multi-category">
+                                    <ul>
+                                        <li>
+                                            @php $dem = 0; @endphp
+                                            @foreach($data['category']['list'] as $k => $row)
+                                                @php
+                                                    if($dem) if(!strpos('string'.$row, '--')) echo '</li><li>';
+                                                    $dem ++;
+                                                @endphp
+                                                <div>
+                                                    <label>
+                                                        <input type="checkbox" name="category_multi[]" value="{{ $k }}">
+                                                        {{ $row }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-							<div class="form-group">
-                                <label>Thumbnail</label>
+                            <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -72,8 +86,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Url</label>
-                                <input type="text" name="url" class="form-control" placeholder=""/>
+                                <label>Mô tả</label>
+                                <textarea class="ckeditor-mini" name="description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Nội dung</label>
+                                <textarea class="ckeditor" name="content"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>
@@ -95,9 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($errors->has('error'))
-                                <p class="alert alert-danger">{{$errors->first('error')}}</p>
-                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -143,6 +159,20 @@
         </form>
     </div>
 @endsection
+@section('scripts')
+    <script type="text/javascript">
+        $("input[name='title']").keyup(function(){
+            var title = $(this).val();
+            $("input[name='slug']").val(get_alias(title));
+
+            var url = $("#urlfull").data("url");
+            $("#urlfull a").attr("href", url + get_alias(title) + ".html");
+            $("#urlfull a").html(url + get_alias(title) + ".html");
+        });
+
+    </script>
+@endsection
+
 @section('validate')
-    {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Category\CreateRequest','#form-create'); !!}
+    {!! JsValidator::formRequest('Modules\Admins\Http\Requests\Post\CreateRequest','#form-create'); !!}
 @endsection

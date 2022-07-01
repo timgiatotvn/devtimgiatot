@@ -1,4 +1,4 @@
-<?php 
+<?php  
 session_name('LARAVEL_SESSION_V1');
 session_start();
 /**

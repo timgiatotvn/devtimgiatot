@@ -29,7 +29,7 @@ class Product extends Model
         'choose_4',
     ];
 
-    public function category()
+    public function getCategory()
     {
         return $this->belongsTo('App\Model\Category', 'category_id', 'id');
     }

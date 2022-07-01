@@ -53,24 +53,6 @@
                                     @endforeach
                                 </select>
                             </div>
-							<div class="form-group">
-                                <label>Thumbnail</label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <a data-input="thumbnail" data-preview="holder"
-                                                   class="lfm btn btn-primary">
-                                                    <i class="fa fa-picture-o"></i> CHOOSE
-                                                </a>
-                                            </span>
-                                            <input id="thumbnail" class="form-control" type="text" name="thumbnail"
-                                                   readonly>
-                                        </div>
-                                        <img id="holder" style="margin-top:15px;max-height:100px;">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label>Url</label>
                                 <input type="text" name="url" class="form-control" placeholder=""/>
