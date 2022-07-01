@@ -108,12 +108,6 @@ return [
     'crawler.article.index.title' => 'Danh sách',
     'crawler.article.index.title2' => 'Danh sách',
 
-    //notification
-    'notification.index.title' => 'Thông báo',
-    'notification.index.title2' => 'Thông báo',
-    'notification.add.title' => 'Thêm mới',
-    'notification.edit.title' => 'Cập nhật',
-
     '' => '',
     '' => '',
     '' => '',

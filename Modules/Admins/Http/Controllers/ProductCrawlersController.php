@@ -5,6 +5,7 @@ namespace Modules\Admins\Http\Controllers;
 use App\Helpers\Helpers;
 use App\Service\Admins\CategoryService;
 use App\Service\Admins\ProductService;
+use App\Service\Clients\ClientArticleService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -19,13 +20,15 @@ class ProductCrawlersController extends Controller
     private $productService;
     private $type;
     private $type_product;
+    private $clientArticleService;
 
-    public function __construct(CategoryService $categoryService, ProductService $productService)
+    public function __construct(CategoryService $categoryService, ProductService $productService, ClientArticleService $clientArticleService)
     {
         $this->categoryService = $categoryService;
         $this->productService = $productService;
         $this->type = [$this->categoryService::TYPE[1]];
         $this->type_product = $this->categoryService::TYPE2[3];
+        $this->clientArticleService = $clientArticleService;
     }
 
     /**
@@ -99,6 +102,8 @@ class ProductCrawlersController extends Controller
             $data['detail'] = $this->productService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [$data['detail']->category_id], 'multi' => true]);
+            $data['sosanh'] = $this->clientArticleService->getList(['list_id' => explode('|', $data['detail']->keyword_suggest_map_crawler), 'limit' => 15]);
+
             return view('admins::productCrawlers.edit', ['data' => $data]);
         } catch (\Exception $e) {
             return !empty($e->getMessage()) ? abort('500') : abort(404);

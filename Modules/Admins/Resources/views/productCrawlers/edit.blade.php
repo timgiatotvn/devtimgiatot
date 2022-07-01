@@ -67,7 +67,7 @@
                                     {!! $data['category']['select'] !!}
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 <label>Danh mục liên quan</label>
                                 <div class="multi-category">
                                     <ul>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea class="ckeditor" name="content">{{ $data['detail']->content }}</textarea>
+                                <textarea class="ckeditor" name="content">{!! !empty($data['sosanh'][0]->content) ? @preg_replace('/(<[^>]+) style=".*?"/i', '$1',$data['sosanh'][0]->content) : $data['detail']->content !!}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>

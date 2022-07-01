@@ -71,7 +71,7 @@
                                     {!! $data['category']['select'] !!}
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 <label>Danh mục liên quan</label>
                                 <div class="multi-category">
                                     <ul>
