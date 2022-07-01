@@ -89,4 +89,16 @@ class HomeController extends Controller
 
        return $data;
    }
+
+   public function category($id)
+   {
+       $categories = Category::getCategoryById($id);
+
+       return response()->json([
+           'status' => 200,
+           'message' => 'success',
+           'data' => $categories
+       ]);
+
+   }
 }

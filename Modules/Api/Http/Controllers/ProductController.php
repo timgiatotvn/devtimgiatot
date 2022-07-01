@@ -145,4 +145,20 @@ class ProductController extends Controller
             ]
         ]);
     }
+
+    public function store(Request $request)
+    {
+        $data = [
+          'category_id' => $request->get('category_id'),
+          'title' => $request->get('title'),
+          'price' => $request->get('price'),
+          'contact' => $request->get('contact'),
+          'description' => $request->get('description'),
+          'referral_code' => $request->get('referral_code'),
+        ];
+
+        $product = new Product();
+        $product->fill($data);
+        $product->save();
+    }
 }

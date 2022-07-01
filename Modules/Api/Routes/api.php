@@ -28,6 +28,7 @@ Route::middleware('authApiRequest')->prefix('v1')->group(function(){
 Route::middleware('authenticationMobileApp')->group(function(){
     Route::post('setup', 'HomeController@setup');
     Route::get('home', 'HomeController@index');
+    Route::get('category/{id}', 'HomeController@category');
     Route::get('product-by-category/{id}', 'ProductController@getProductByCategory');
     Route::get('product/{id}', 'ProductController@show');
     Route::get('product-compare-price/{id}', 'ProductController@comparePrice');
@@ -37,4 +38,7 @@ Route::middleware('authenticationMobileApp')->group(function(){
 
     Route::get('notification', 'NotificationController@index');
     Route::get('notification/{id}', 'NotificationController@show')->name('api.notification.show');
+
+    Route::get('category', 'CategoryController@index');
+    Route::post('store', 'ProductController@store');
 });

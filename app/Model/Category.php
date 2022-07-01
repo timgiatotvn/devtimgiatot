@@ -14,15 +14,13 @@ class Category extends Model
         $category = Category::where('title', $name)->where('status', 1)->select('id', 'title')->first();
         $listCategory = [];
         if ($category) {
-            $parentCate = Category::where('parent_id', $category->id)->where('status', 1)->select('id')->get();
-            $arrayId = $parentCate->pluck('id')->toArray();
-            $listCategory = Category::whereIn('id', $arrayId)
-                ->orWhereIn('parent_id', $arrayId)
+//            $parentCate = Category::where('parent_id', $category->id)->where('status', 1)->select('id')->get();
+//            $arrayId = $parentCate->pluck('id')->toArray();
+            $listCategory = Category::where('parent_id', $category->id)
                 ->where('type', 'product')
                 ->where('status', 1)
                 ->select('id', 'title','parent_id', 'thumbnail', 'url')
                 ->orderBy('sort', 'ASC')
-                ->orderBy('parent_id', 'ASC')
                 ->get();
         }
 
@@ -37,5 +35,17 @@ class Category extends Model
         }
 
         return $data;
+    }
+
+    public static function getCategoryById($id)
+    {
+        $categories = Category::where('parent_id', $id)
+            ->where('type', 'product')
+            ->where('status', 1)
+            ->select('id', 'title','parent_id', 'thumbnail', 'url')
+            ->orderBy('sort', 'ASC')
+            ->get();
+
+        return self::formatCategory($categories);
     }
 }
