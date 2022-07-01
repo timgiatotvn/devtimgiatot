@@ -181,6 +181,8 @@ Route::prefix('admin')->group(function () {
             });
         });
 
-
+	//notification
+        Route::resource('notification', 'NotificationController');
+        Route::get('notification/delete/{id}', 'NotificationController@destroy')->name('admin.notification.destroy');
     });
 });

@@ -115,11 +115,19 @@
                 <i class="mdi mdi-settings-box menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item {{ Request::routeIs('admin.account.*')? 'active' : '' }}">
+
+       <li class="nav-item {{ Request::routeIs('notification.*')? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('notification.index') }}">
+                <span class="menu-title">Thông báo App</span>
+                <i class="icon-bell menu-icon"></i>
+            </a>
+        </li>
+
+       <li class="nav-item {{ Request::routeIs('admin.account.*')? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin.account.index') }}">
                 <span class="menu-title">Tài khoản</span>
                 <i class="icon-bell menu-icon"></i>
             </a>
-        </li>
+       </li>
     </ul>
 </nav>
