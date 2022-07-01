@@ -74,6 +74,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label>Url</label>
                                 <input type="text" name="url" value="{{ $data['detail']->url }}" class="form-control"
