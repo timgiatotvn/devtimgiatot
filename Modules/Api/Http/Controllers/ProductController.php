@@ -127,7 +127,7 @@ class ProductController extends Controller
         $data = Product::with(['category' => function($query) {
             return $query->select('id', 'title');
             }])
-            ->where('title', 'LIKE', $keyword.'%')
+            ->where('title', 'LIKE', '%' . $keyword . '%')
             ->where('status', 1)
             ->select('id', 'category_id', 'title', 'slug', 'price', 'count_suggest', 'thumbnail')
             ->orderBy('id', 'DESC')
