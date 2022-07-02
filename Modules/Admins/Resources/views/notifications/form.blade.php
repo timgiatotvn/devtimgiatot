@@ -1,3 +1,7 @@
+@section('style')
+    <link rel="stylesheet" href="{{ asset('/static/admin/assets/plugins/boostrap-datetimepicker/build/css/bootstrap-datetimepicker.css') }}"/>
+@endsection
+
 <form method="post"
       action="{{ empty($notification) ? route('notification.store') : route('notification.update', $notification->id) }}"
       class="forms-sample" id="form-create">
@@ -115,6 +119,8 @@
 </form>
 
 @section('scripts')
+    <script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/moment/moment.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/static/admin/assets/plugins/boostrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker').datetimepicker({
