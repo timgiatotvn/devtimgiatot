@@ -326,7 +326,7 @@ regex;
 
     public static function getUrlFile($link)
     {
-        return !empty($link) ? env('APP_URL_API').$link : env('APP_URL_API'). '/img/w78/fill!photos/o1-100x100.jpeg';
+        return !empty($link) ? env('APP_URL_API').$link : env('APP_URL_API'). '/img/w300/h300/fill!photos/default.png';
     }
 
 
