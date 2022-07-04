@@ -27,6 +27,7 @@ Route::middleware('authApiRequest')->prefix('v1')->group(function(){
 
 Route::middleware('authenticationMobileApp')->group(function(){
     Route::post('setup', 'HomeController@setup');
+    Route::post('setup-app-version', 'HomeController@setupAppVersion');
     Route::get('home', 'HomeController@index');
     Route::get('category/{id}', 'HomeController@category');
     Route::get('product-by-category/{id}', 'ProductController@getProductByCategory');
