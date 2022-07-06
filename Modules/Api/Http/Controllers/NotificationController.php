@@ -30,6 +30,8 @@ class NotificationController extends Controller
             ->paginate($perPage);
 
         foreach ($notifications as $notification) {
+
+            $notification->created_at_format = date('d/m/Y H:i:s', strtotime($notification->created_at));
             $notification->is_readed = false;
             if (count($notification->deviceReadNotification) > 0) {
                 $notification->is_readed = true;

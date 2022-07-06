@@ -53,6 +53,7 @@ return [
     'table.view' => 'View',
     'table.status' => 'Trạng thái',
     'table.id' => 'ID',
+    'table.publish_at' => 'Ngày thông báo',
 
     //account
     'account.index.title' => 'Tài khoản',

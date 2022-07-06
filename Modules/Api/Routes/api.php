@@ -35,7 +35,7 @@ Route::middleware('authenticationMobileApp')->group(function(){
     Route::get('product-compare-price/{id}', 'ProductController@comparePrice');
     Route::get('search', 'ProductController@search');
     Route::get('get-post-category/{id}', 'PostController@index');
-    Route::get('post/{id}', 'PostController@show');
+    Route::get('post/{id}', 'PostController@show')->name('api.post.show');
 
     Route::get('notification', 'NotificationController@index');
     Route::get('notification/{id}', 'NotificationController@show')->name('api.notification.show');

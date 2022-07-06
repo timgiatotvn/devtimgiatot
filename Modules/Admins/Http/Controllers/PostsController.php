@@ -3,11 +3,15 @@
 namespace Modules\Admins\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\Category;
+use App\Model\Notification;
+use App\Model\Post;
 use App\Service\Admins\CategoryService;
 use App\Service\Admins\PostService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\MessageBag;
 use Modules\Admins\Http\Requests\Post\CreateRequest;
 use Modules\Admins\Http\Requests\Post\EditRequest;
@@ -65,7 +69,22 @@ class PostsController extends Controller
     {
         try {
             $_params = $request->all();
-            if ($this->postService->create($_params)) {
+            $_params['admin_id'] = Auth::guard(Helpers::renderGuard())->user()->id;
+            $_params['category_multi'] = !empty($request->get('category_multi')) ? '|' . implode('|', $request->get('category_multi')) . '|' : '';
+
+            if ($_params) {
+                $categoryPromotion  = Category::where('title', 'LIKE', "Tin khuyến mãi")
+                    ->where('type', 'new')
+                    ->where('status', 1)->select('id', 'title')->first();
+
+                $post = new Post();
+                $post->fill($_params);
+                $post->save();
+
+                if (!empty($categoryPromotion) && $categoryPromotion->id == $_params['category_id']) {
+                    Notification::sendNotification($post, $type = 'post');
+                }
+
                 return redirect(route('admin.post.index'));
             } else {
                 $errors = new MessageBag(['error' => __('admins::layer.notify.fail')]);
