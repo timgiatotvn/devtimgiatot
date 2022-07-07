@@ -20,13 +20,14 @@ class Notification extends Model
         $fcmServerKey = env('FCM_SERVER_KEY');
         if (!empty($fcmServerKey)) {
             $route = !empty($type) ? route('api.post.show', $notification->id) : route('api.notification.show', $notification->id);
+            $dateTime = (isset($notification->publish_at) && !empty($notification->publish_at)) ? date('d/m/Y H:i:s', strtotime($notification->publish_at)) : date('d/m/Y H:i:s', strtotime($notification->created_at));
             $data = [
                 'registration_ids' => $deviceToken,
                 'notification' => [
                     'title' => $notification->title,
                     'thumbnail' => Helpers::getUrlFile($notification->thumbnail),
                     'description' => $notification->description,
-                    'date_time' => date('d/m/Y H:i:s', strtotime($notification->created_at)),
+                    'date_time' => $dateTime,
                     'link_detail' => $route
                 ]
             ];
