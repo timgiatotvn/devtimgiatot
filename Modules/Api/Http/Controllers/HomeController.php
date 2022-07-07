@@ -37,7 +37,10 @@ class HomeController extends Controller
         }
 
         $data = $request->all();
-        $device = new Device();
+        $device = Device::where('token', $token)->first();
+        if (empty($device)) {
+            $device = new Device();
+        }
         $device->fill($data);
         $device->save();
 
