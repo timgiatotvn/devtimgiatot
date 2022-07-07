@@ -54,7 +54,7 @@
                                     <tbody>
                                     @foreach($data['list'] as $k=>$row)
                                         <tr>
-                                            <td>{{ \Helpers::renderSTT($k + 1, $data['list']) }}</td>
+                                            <td class="text-center">{{ \Helpers::renderSTT($k + 1, $data['list']) }}</td>
                                             <td>{{ $row->name }}</td>
                                             <td class="text-center">{{ $row->total }}</td>
                                             <td class="text-center">
