@@ -30,7 +30,7 @@
             </ul>
         </div>
     </section>
-    <section id="box-product">
+    <section class="box-product">
         <div class="pr-head">
             <label>TÌM KIẾM NHIỀU</label>
         </div>
@@ -76,7 +76,6 @@
             </ul>
         </div>
     </section>
-
     <?php
     $arr1 = [];
     $arr2 = [];
