@@ -96,10 +96,7 @@ class ProductController extends Controller
     public function formatCompareProduct($data)
     {
         foreach ($data as $item) {
-            $item->logo_website = null;
-            if (!empty($item->crawlerCategory->crawlerWebsite->id)) {
-                $item->logo_website = Helpers::getUrlFile($item->crawlerCategory->crawlerWebsite->thumbnail);
-            }
+            $item->logo_website = Helpers::getUrlFile(!empty($item->crawlerCategory) ? $item->crawlerCategory->crawlerWebsite->thumbnail : null);
             $item->price = Helpers::formatPrice($item->price);
             $item->crawler_category = "ok";
         }

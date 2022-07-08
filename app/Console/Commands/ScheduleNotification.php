@@ -12,14 +12,14 @@ class ScheduleNotification extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'command:pushNotification';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'schedule push notification';
 
     /**
      * Create a new command instance.
@@ -43,9 +43,9 @@ class ScheduleNotification extends Command
         if ($notifications) {
             foreach ($notifications as $notification)
             {
+                Notification::sendNotification($notification);
                 $notification->status = 1;
                 $notification->save();
-                Notification::sendNotification($notification);
             }
         }
     }

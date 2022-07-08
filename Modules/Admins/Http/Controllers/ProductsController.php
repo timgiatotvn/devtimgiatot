@@ -11,6 +11,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
 use Modules\Admins\Http\Requests\Product\CreateRequest;
 use Modules\Admins\Http\Requests\Product\EditRequest;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class ProductsController extends Controller
 {
@@ -57,6 +60,37 @@ class ProductsController extends Controller
         }
     }
 
+    /**
+     * showKeyWords
+     * @method GET
+     */
+
+    public function getListKeyWord(Request $request)
+    {
+        try {
+            $keyword = $request->input('keyword');
+            $start = '0000-00-00';
+            $end = date('Y-m-d');
+            if($request->input('start')){
+                $start = $request->input('start');
+            }
+            if($request->input('end')){
+                $end = $request->input('end');
+            }
+            $keywords['list'] = DB::table('key_words')
+                ->select('name', DB::raw('count(*) as total'))
+                ->where('name', 'like', '%' . $keyword . '%')
+                ->whereDate('created_at', '>=', $start)
+                ->whereDate('created_at', '<=', $end)
+                ->groupBy('name')
+                ->orderBy('total','desc')
+                ->paginate(15);
+
+            return view('admins::statistical.keyword', ['data' => $keywords]);
+        } catch (\Exception $e) {
+            abort('500');
+        }
+    }
     /**
      * Category store
      * @method POST

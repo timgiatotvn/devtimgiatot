@@ -14,19 +14,21 @@ class Notification extends Model
         return $this->belongsToMany(Device::class, 'device_read_notifications');
     }
 
-    public static function sendNotification($notification)
+    public static function sendNotification($notification, $type = null)
     {
         $deviceToken = Device::whereNotNull('token')->get()->pluck('token')->toArray();
         $fcmServerKey = env('FCM_SERVER_KEY');
         if (!empty($fcmServerKey)) {
+            $route = !empty($type) ? route('api.post.show', $notification->id) : route('api.notification.show', $notification->id);
+            $dateTime = (isset($notification->publish_at) && !empty($notification->publish_at)) ? date('d/m/Y H:i:s', strtotime($notification->publish_at)) : date('d/m/Y H:i:s', strtotime($notification->created_at));
             $data = [
                 'registration_ids' => $deviceToken,
                 'notification' => [
                     'title' => $notification->title,
                     'thumbnail' => Helpers::getUrlFile($notification->thumbnail),
                     'description' => $notification->description,
-                    'date_time' => date('d/m/Y H:i:s', strtotime($notification->created_at)),
-                    'link_detail' => route('api.notification.show', $notification->id)
+                    'date_time' => $dateTime,
+                    'link_detail' => $route
                 ]
             ];
 

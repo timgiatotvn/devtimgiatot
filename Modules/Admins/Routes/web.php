@@ -129,6 +129,11 @@ Route::prefix('admin')->group(function () {
             Route::get('/destroy/{id}', 'ProductsController@destroy')->name('admin.product.destroy');
         });
 
+        //keywords
+        Route::prefix('keywords')->group(function () {
+            Route::get('/', 'ProductsController@getListKeyWord')->name('admin.statistical.keyword');
+        });
+
         //Products crawlers
         Route::prefix('product-crawlers')->group(function () {
                 Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');

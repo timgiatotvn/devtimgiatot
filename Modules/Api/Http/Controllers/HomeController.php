@@ -4,6 +4,7 @@ namespace Modules\Api\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Model\Advertisement;
+use App\Model\AppVersion;
 use App\Model\Category;
 use App\Model\Device;
 use App\Model\Post;
@@ -36,7 +37,10 @@ class HomeController extends Controller
         }
 
         $data = $request->all();
-        $device = new Device();
+        $device = Device::where('token', $token)->first();
+        if (empty($device)) {
+            $device = new Device();
+        }
         $device->fill($data);
         $device->save();
 
@@ -46,6 +50,29 @@ class HomeController extends Controller
             'data' => $device
         ]);
 
+    }
+
+    public function setupAppVersion(Request $request)
+    {
+        $versionApp = $request->get('app_version');
+        if (empty($versionApp)) {
+
+            return response()->json([
+                'status' => 500,
+                'message' => 'app_version không được để trống.',
+            ]);
+        }
+
+        $data = $request->all();
+        $version = new AppVersion();
+        $version->fill($data);
+        $version->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'success',
+            'data' => $version
+        ]);
     }
 
     /**
@@ -67,7 +94,7 @@ class HomeController extends Controller
             $data = Post::getPostByCategoryId($categoryPromotion->id)->take(6)->get();
             $promotions = Post::formatData($data);
         }
-
+        $appVersion = AppVersion::query()->orderBy('created_at', 'DESC')->first();
 
         return response()->json([
             'status' => 200,
@@ -77,6 +104,7 @@ class HomeController extends Controller
                 'categories' => $categories,
                 'shopping' => $shopping,
                 'promotions' => $promotions,
+                'appVersion' => $appVersion
             ]
         ]);
     }
