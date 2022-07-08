@@ -24,9 +24,9 @@
     section#box-category-suggest .cs-list ul li .cs-item .cs-item-left{margin-right: 0;}
     section#box-category-suggest .cs-list ul li .cs-item{height: 210px;}
 
-    section#box-product .pr-content ul li{width: 48%; margin-bottom: 6px;}
-    section#box-product .pr-content ul li:nth-child(6n+1){margin-left: inherit;}
-    section#box-product .pr-content ul li:nth-child(2n+1){margin-left: 1.5%;}
+    section.box-product .pr-content ul li{width: 48%; margin-bottom: 6px;}
+    section.box-product .pr-content ul li:nth-child(6n+1){margin-left: inherit;}
+    section.box-product .pr-content ul li:nth-child(2n+1){margin-left: 1.5%;}
 
     section#box-new .nr-head label{font-size: 20px;}
     section#box-new .nr-content ul{width: 95%; margin: 0 auto;}

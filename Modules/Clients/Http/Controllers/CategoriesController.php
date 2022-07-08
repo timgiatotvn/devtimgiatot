@@ -14,6 +14,7 @@ use App\Model\Category;
 use App\Model\Post;
 use App\Helpers\Helpers;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class CategoriesController extends Controller
 {
@@ -93,6 +94,11 @@ class CategoriesController extends Controller
             $data['common'] = Helpers::metaHead($data['setting']);
             $data['search_title'] = !empty($_GET['key']) ? 'Tiếp tục mua hàng' : 'Tìm kiếm';
             $keyword = !empty($_GET['keyword']) ? $_GET['keyword'] : '';
+            if($keyword){
+                DB::table('key_words')->insert([
+                    'name' => $keyword,
+                ]);
+            }
             $data['list'] = $this->clientProductService->getListByCateSearch(['keyword' => $keyword, 'limit' => 20]);
 
             return view('clients::products.index', ['data' => $data]);

@@ -37,13 +37,20 @@
                             <div class="form-group">
                                 <label id="urlfull" data-url="{{ asset("/") }}">Link: <a href="{{ asset("/").$data['detail']->slug.".html" }}">{{ asset("/").$data['detail']->slug.".html" }}</a></label>
                             </div>
+                            @if(isset($data['detail']->link_detail))
+                                <div class="form-group">
+                                    <label>link bài viết</label>
+                                    <input type="text" name="link_detail" class="form-control" value="{{ $data['detail']->link_detail }}" placeholder="https://shopee.vn/m/nap-the-va-dich-vu-online"/>
+                                </div>
+                            @else
+                                <div class="form-group">
+                                    <label>link bài viết</label>
+                                    <input type="text" name="link_detail" class="form-control" value="" placeholder="Nhập link bài viết"/>
+                                </div>
+                            @endif
                             <div class="form-group">
-                                <label>link bài viết</label>
-                                <input type="text" name="link_detail" class="form-control" value="{{ $data['detail']->link_detail }}" placeholder="https://shopee.vn/m/nap-the-va-dich-vu-online"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Danh mục chính</label>
-                                <select name="category_id" class="form-control col-md-3">
+                                <label style="display: block">Danh mục chính</label>
+                                <select name="category_id" class="js-example-basic-single form-control col-md-4 ">
                                     {!! $data['category']['select'] !!}
                                 </select>
                             </div>
@@ -162,6 +169,12 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+
+        $(document).ready(function() {
+            console.error('Chuyển qua select 2')
+            $('.js-example-basic-single').select2();
+        });
+
         $("input[name='slug']").keyup(function(){
             var url = $("#urlfull").data("url");
             $("#urlfull a").attr("href", url + $(this).val() + ".html");
