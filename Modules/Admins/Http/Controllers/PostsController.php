@@ -113,6 +113,8 @@ class PostsController extends Controller
             $data['detail'] = $this->postService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $_params = $request->all();
+            $status = $_params['status'];
+            $_params['status'] = (int)$status;
             if ($this->postService->update($_params, $id)) {
                 session()->flash('success', __('admins::layer.notify.success'));
                 return redirect(route('admin.post.index', ['page' => !empty($_GET['page']) ? $_GET['page'] : 1]));

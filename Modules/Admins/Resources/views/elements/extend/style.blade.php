@@ -13,3 +13,4 @@
 @yield('style')
 <!-- common css -->
 <link rel="stylesheet" href="{{ asset('/static/admin/css/app.css') }}"/>
+<link rel="stylesheet" href="{{ asset('/static/admin/css/cssCustom.css') }}"/>

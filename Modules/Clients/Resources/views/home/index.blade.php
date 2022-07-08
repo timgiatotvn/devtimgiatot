@@ -80,13 +80,15 @@
     $arr1 = [];
     $arr2 = [];
     $dem = 0;
-    foreach ($data['ads_home'] as $k => $row) {
-        if ($dem < 2) {
-            $arr1[] = $row;
-        } else {
-            $arr2[] = $row;
+    if (isset($data)) {
+        foreach ($data['ads_home'] as $k => $row) {
+            if ($dem < 2) {
+                $arr1[] = $row;
+            } else {
+                $arr2[] = $row;
+            }
+            $dem++;
         }
-        $dem++;
     }
     ?>
 
