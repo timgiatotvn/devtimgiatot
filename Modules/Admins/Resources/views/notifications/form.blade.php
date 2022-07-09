@@ -62,12 +62,12 @@
                     </div>
                     <div class="form-group">
                         <label>Mô tả</label>
-                        <textarea class="ckeditor-mini"
+                        <textarea class="tinymce-mini"
                                   name="description">{!! isset($notification) ? $notification->description : null !!}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Nội dung</label>
-                        <textarea class="ckeditor"
+                        <textarea class="tinymce"
                                   name="content">{!! isset($notification) ? $notification->content : null !!}</textarea>
                     </div>
                     <div class="form-group">
