@@ -43,6 +43,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/logout', 'AccountsController@logout')->name('admin.account.logout');
         });
 
+        // Crawl
+        Route::prefix('crawls')->group(function () {
+            Route::get('/list', 'CrawlController@list')->name('admin.crawls.list');
+            Route::post('/store-link', 'CrawlController@storeLink')->name('admin.crawls.store-link');
+        });
+
         //Advertisement
         Route::prefix('advertisements')->group(function () {
             Route::get('/', 'AdvertisementsController@index')->name('admin.advertisement.index');

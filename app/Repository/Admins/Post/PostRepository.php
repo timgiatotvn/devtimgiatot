@@ -14,6 +14,7 @@ class PostRepository implements PostRepositoryInterface
     public function getList($_data)
     {
         $keyword = !empty($_data['keyword']) ? $_data['keyword'] : '';
+        $type = !empty($_data['type']) ? $_data['type'] : 'all';
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
         return DB::table(self::TABLE_NAME)
             ->select('posts.*', 'categories.title as category_title')
@@ -23,6 +24,13 @@ class PostRepository implements PostRepositoryInterface
             })
             ->when($category_id, function ($query, $category_id) {
                 return $query->whereIn('posts.category_id', $category_id);
+            })
+            ->when($type, function ($query, $type) {
+                if ($type != 'all' && $type == 'crawl') {
+                    return $query->whereNotNull('link_origin_encode');
+                } else if ($type != 'all' && $type == 'handle') {
+                    return $query->whereNull('link_origin_encode');
+                }
             })
 
             ->orderBy('posts.id', 'DESC')

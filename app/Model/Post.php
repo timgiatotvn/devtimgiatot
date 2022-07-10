@@ -24,10 +24,14 @@ class Post extends Model
         'view',
         'status',
         'type',
+        'link_origin',
+        'link_origin_encode',
         'choose_1',
         'choose_2',
         'choose_3',
         'choose_4',
+        'created_at',
+        'updated_at'
     ];
 
     public function getCategory()

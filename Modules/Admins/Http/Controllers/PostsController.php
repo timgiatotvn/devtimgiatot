@@ -40,6 +40,7 @@ class PostsController extends Controller
             $data['common'] = Helpers::titleAction([__('admins::layer.post.index.title'), __('admins::layer.post.index.title2')]);
             $data['list'] = $this->postService->getList(['limit' => 10]);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [(request()->has('category_id') ? request()->get('category_id') : '')]]);
+            
             return view('admins::posts.index', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');

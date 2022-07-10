@@ -23,6 +23,8 @@ class PostService
     {
         $_data['keyword'] = request()->has('keyword') ? request()->get('keyword') : '';
         $_data['category_id'] = request()->has('category_id') ? $this->categoryService->multiCate(request()->get('category_id')) : '';
+        $_data['type'] = request()->has('type') ? request()->get('type') : 'all';
+
         return $this->postRepository->getList($_data);
     }
 
