@@ -51,6 +51,7 @@ class CategoriesController extends Controller
     {
         try {
             $data['category'] = $this->clientCategoryService->findBySlug($slug);
+
             if (empty($data['category']->id)) abort(404);
             $data['setting'] = $this->setting;
             $cateMulti = $this->clientCategoryService->multiCate($data['category']->id);
@@ -78,6 +79,7 @@ class CategoriesController extends Controller
                 if (count($data['list']) == 1 && empty($_GET['page'])) {
                     return redirect(route('client.post.show', ['slug' => $data['list'][0]->slug]));
                 }
+                //dd($data);
 
                 return view('clients::posts.index', ['data' => $data]);
             }

@@ -19,7 +19,7 @@ class CrawlController extends Controller
 
     public function crawlData()
     {
-        $links = CrawlLink::where('website_name', CrawlLink::WEB_SO_SANH)->get();
+        $links = CrawlLink::all();
         foreach ($links as $linkItem) {
             if ($linkItem->website_name == CrawlLink::SO_SANH_GIA) {
                 $this->crawlService->crawlSoSanhGiaCom($linkItem);

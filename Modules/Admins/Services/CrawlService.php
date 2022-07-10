@@ -3,6 +3,7 @@
 namespace Modules\Admins\Services;
 
 use App\Model\Post;
+use Illuminate\Support\Facades\Storage;
 
 class CrawlService
 {
@@ -14,6 +15,11 @@ class CrawlService
             if (!empty($html->find('#news-list .posts'))) {
                 foreach ($html->find('#news-list .posts li') as $newsItem) {
                     try {
+                        if (!empty($newsItem->find('.img-wrapper', 0))) {
+                            $thumbnail = $newsItem->find('.img-wrapper img', 0)->attr['data-src'];
+                        } else {
+                            $thumbnail = NULL;
+                        }
                         if (!empty($newsItem->find('.content-wrapper a', 0))) {
                             $link = $newsItem->find('.content-wrapper a', 0)->href;
                             $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
@@ -23,6 +29,7 @@ class CrawlService
                                 $news[] = [
                                     'title' => $title,
                                     'slug' => str_slug($title),
+                                    'thumbnail' => '/storage/photos/' . str_slug($title) . '.jpg',
                                     'description' => !empty($newsItem->find('.content-wrapper .short-description', 0)) ? trim($newsItem->find('.content-wrapper .short-description', 0)->plaintext) : NULL,
                                     'category_id' => 4,
                                     'link_origin' => $link,
@@ -33,16 +40,24 @@ class CrawlService
                                     'created_at' => date('Y-m-d H:i:s'),
                                     'updated_at' => date('Y-m-d H:i:s')
                                 ];
+                                $this->storeThumbnail($thumbnail, $title);
                             }
                         }
                     } catch (\Throwable $th) {
-                        
                     }
                 }
             }
             if (count($news) > 0) {
                 Post::insert($news);
             }
+        }
+    }
+    
+    public function storeThumbnail($thumbnail, $title)
+    {
+        if (!empty($thumbnail)) {
+            $path = storage_path("app/public/photos/" . str_slug($title) . '.jpg');
+            file_put_contents($path, fopen($thumbnail, 'r'));
         }
     }
 
@@ -57,12 +72,19 @@ class CrawlService
                     if (!empty($newsItem->find('a', 0))) {
                         $link = $newsItem->find('a', 0)->href;
                         $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
+
+                        if (!empty($newsItem->find('a img', 0))) {
+                            $thumbnail = $newsItem->find('a img', 0)->attr['data-src'];
+                        } else {
+                            $thumbnail = NULL;
+                        }
     
                         if (empty($checkExistNews)) {
                             $title = trim(html_entity_decode($newsItem->find('a', 0)->plaintext));
                             $news[] = [
                                 'title' => $title,
                                 'slug' => str_slug($title),
+                                'thumbnail' => '/storage/photos/' . str_slug($title) . '.jpg',
                                 'description' => !empty($newsItem->find('.blog-sticky-desc', 0)) ? trim($newsItem->find('.blog-sticky-desc', 0)->plaintext) : NULL,
                                 'category_id' => 4,
                                 'link_origin' => $link,
@@ -73,6 +95,7 @@ class CrawlService
                                 'created_at' => date('Y-m-d H:i:s'),
                                 'updated_at' => date('Y-m-d H:i:s')
                             ];
+                            $this->storeThumbnail($thumbnail, $title);
                         }
                     }
                 } catch (\Throwable $th) {
@@ -86,12 +109,18 @@ class CrawlService
                     if (!empty($newsItem->find('a', 0))) {
                         $link = $newsItem->find('a', 0)->href;
                         $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
-    
+                        
+                        if (!empty($newsItem->find('a img', 0))) {
+                            $thumbnail = $newsItem->find('a img', 0)->attr['data-src'];
+                        } else {
+                            $thumbnail = NULL;
+                        }
                         if (empty($checkExistNews)) {
                             $title = trim(html_entity_decode($newsItem->find('a', 0)->plaintext));
                             $news[] = [
                                 'title' => $title,
                                 'slug' => str_slug($title),
+                                'thumbnail' => '/storage/photos/' . str_slug($title) . '.jpg',
                                 'description' => !empty($newsItem->find('.blog-category-desc', 0)) ? trim($newsItem->find('.blog-category-desc', 0)->plaintext) : NULL,
                                 'category_id' => 4,
                                 'link_origin' => $link,
@@ -102,6 +131,7 @@ class CrawlService
                                 'created_at' => date('Y-m-d H:i:s'),
                                 'updated_at' => date('Y-m-d H:i:s')
                             ];
+                            $this->storeThumbnail($thumbnail, $title);
                         }
                     }
                 } catch (\Throwable $th) {

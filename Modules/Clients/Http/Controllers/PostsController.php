@@ -68,7 +68,11 @@ class PostsController extends Controller
             $data['regex'] = Helpers::hyperlinkContentRegex($data['detail']->content);
 			$data['ftoc'] = true;
 			
-            return view('clients::posts.show', ['data' => $data]);
+            if ($data['detail']->status) {
+                return view('clients::posts.show', ['data' => $data]);
+            } else {
+                abort('404');
+            }
         } catch (\Exception $e) {
             abort('500');
         }
