@@ -112,11 +112,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea class="ckeditor" name="description"></textarea>
+                                <textarea class="tinymce" name="description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea class="ckeditor" name="content"></textarea>
+                                <textarea class="tinymce" name="content"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>

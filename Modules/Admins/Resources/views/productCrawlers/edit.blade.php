@@ -107,11 +107,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea class="ckeditor" name="description">{{ $data['detail']->description }}</textarea>
+                                <textarea class="tinymce" name="description">{{ $data['detail']->description }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea class="ckeditor" name="content">{{ $data['detail']->content }}</textarea>
+                                <textarea class="tinymce" name="content">{{ $data['detail']->content }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>
