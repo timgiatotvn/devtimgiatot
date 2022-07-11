@@ -181,6 +181,15 @@
             $("#urlfull a").html(url + $(this).val() + ".html");
         });
 
+        $("input[name='title']").keyup(function(){
+            var title = $(this).val();
+            $("input[name='slug']").val(get_alias(title));
+
+            var url = $("#urlfull").data("url");
+            $("#urlfull a").attr("href", url + get_alias(title) + ".html");
+            $("#urlfull a").html(url + get_alias(title) + ".html");
+        });
+
     </script>
 @endsection
 @section('validate')

@@ -70,7 +70,7 @@
         </li>
         <li class="nav-item {{ Request::routeIs('admin.crawls.*')? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin.crawls.list') }}">
-                <span class="menu-title">Web Crawl</span>
+                <span class="menu-title">Cào bài viết</span>
                 <i class="icon-layers menu-icon"></i>
             </a>
        </li>
