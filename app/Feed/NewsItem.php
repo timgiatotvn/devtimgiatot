@@ -27,6 +27,8 @@ class NewsItem extends Post implements Feedable
     public static function getFeedItems()
     {
         /** I am getting only the published details */
-        return NewsItem::orderBy('id', 'DESC')->get();
+        return NewsItem::orderBy('id', 'DESC')
+			->where('status', 1)
+			->get();
     }
 }

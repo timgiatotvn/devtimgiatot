@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea name="description" placeholder="Mô tả" rows="4" class="form-control"></textarea>
+                                <textarea name="description" placeholder="Mô tả" rows="4" class="form-control tinymce"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Vị trí</label>

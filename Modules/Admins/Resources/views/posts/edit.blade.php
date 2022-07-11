@@ -94,11 +94,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea class="ckeditor-mini" name="description">{{ $data['detail']->description }}</textarea>
+                                <textarea class="tinymce-mini" name="description">{{ $data['detail']->description }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea class="ckeditor" name="content">{{ $data['detail']->content }}</textarea>
+                                <textarea class="tinymce" name="content">{{ $data['detail']->content }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>
@@ -179,6 +179,15 @@
             var url = $("#urlfull").data("url");
             $("#urlfull a").attr("href", url + $(this).val() + ".html");
             $("#urlfull a").html(url + $(this).val() + ".html");
+        });
+
+        $("input[name='title']").keyup(function(){
+            var title = $(this).val();
+            $("input[name='slug']").val(get_alias(title));
+
+            var url = $("#urlfull").data("url");
+            $("#urlfull a").attr("href", url + get_alias(title) + ".html");
+            $("#urlfull a").html(url + get_alias(title) + ".html");
         });
 
     </script>

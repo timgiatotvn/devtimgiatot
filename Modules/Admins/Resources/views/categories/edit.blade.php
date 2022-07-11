@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label>Mô tả</label>
                                 <textarea name="description" placeholder="Mô tả" rows="4"
-                                          class="form-control">{{ $data['detail']->description }}</textarea>
+                                          class="form-control tinymce">{{ $data['detail']->description }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Vị trí</label>

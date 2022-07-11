@@ -107,12 +107,12 @@
                             </div>
                             <div class="form-group">
                                 <label>Content footer</label>
-                                <textarea class="ckeditor" class="form-control"
+                                <textarea class="tinymce" class="form-control"
                                           name="content_footer">{{ $data['detail']->content_footer }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Thông tin liên hệ</label>
-                                <textarea class="ckeditor" class="form-control"
+                                <textarea class="tinymce" class="form-control"
                                           name="content_contact">{{ $data['detail']->content_contact }}</textarea>
                             </div>
                             <div class="form-group">

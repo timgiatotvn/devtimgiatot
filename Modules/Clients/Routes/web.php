@@ -56,5 +56,5 @@ Route::prefix('')->group(function() {
     Route::get('/{slug}.html', 'PostsController@show')->name('client.post.show');
     Route::get('/search', 'CategoriesController@search')->name('client.category.search');
     Route::get('/{slug}', 'CategoriesController@index')->name('client.category.index');
-
+    Route::get('/crawl/data', 'CrawlController@crawlData');
 });
