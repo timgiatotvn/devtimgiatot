@@ -134,7 +134,6 @@ class PostsController extends Controller
             $data['detail'] = $this->postService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $_params = $request->all();
-            dd($_params);
             $categoryPromotion  = Category::where('status', 'LIKE', 1)
                 ->where('id', $_params['category_id'])
                 ->where('status', 1)->select('id', 'title','type')->first();
