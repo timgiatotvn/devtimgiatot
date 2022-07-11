@@ -80,7 +80,6 @@ class CategoriesController extends Controller
                 if (count($data['list']) == 1 && empty($_GET['page'])) {
                     return redirect(route('client.post.show', ['slug' => $data['list'][0]->slug]));
                 }
-                //dd($data);
 
                 return view('clients::posts.index', ['data' => $data]);
             }

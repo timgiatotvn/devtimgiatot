@@ -18,6 +18,7 @@ class ClientPostRepository implements ClientPostRepositoryInterface
             ->select('posts.*', 'categories.title as category_title', 'categories.slug as category_slug', 'categories.parent_id as category_parent_id')
             ->leftJoin('categories', 'posts.category_id', 'categories.id')
             ->where('posts.id', $_id)
+            ->where('posts.status', 1)
             ->first();
     }
 
@@ -27,6 +28,7 @@ class ClientPostRepository implements ClientPostRepositoryInterface
             ->select('posts.*', 'categories.title as category_title', 'categories.slug as category_slug', 'categories.parent_id as category_parent_id')
             ->leftJoin('categories', 'posts.category_id', 'categories.id')
             ->where('posts.slug', $_slug)
+            ->where('posts.status', 1)
             ->first();
     }
 
@@ -38,6 +40,7 @@ class ClientPostRepository implements ClientPostRepositoryInterface
             ->whereIn('category_id', $_data['category_id'])
             //->where('choose_1', 1)
             ->where('type', $_data['type'])
+            ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->paginate($_data['limit']);
     }
@@ -47,6 +50,7 @@ class ClientPostRepository implements ClientPostRepositoryInterface
         return DB::table(self::TABLE_NAME)
             ->whereIn('category_id', $_data['cate_multi'])
             ->where('type', $_data['type'])
+            ->where('status', 1)
             ->orderBy('id', 'DESC')
             ->paginate($_data['limit']);
     }
@@ -56,6 +60,7 @@ class ClientPostRepository implements ClientPostRepositoryInterface
         return DB::table(self::TABLE_NAME)
             ->where('category_id', $_data['category_id'])
             ->where('id', '!=', $_data['id'])
+            ->where('status', 1)
             ->where('type', $_data['type'])
             ->orderBy('sort', 'DESC')
             ->paginate($_data['limit']);
