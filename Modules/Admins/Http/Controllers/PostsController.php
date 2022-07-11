@@ -76,12 +76,13 @@ class PostsController extends Controller
             if ($_params) {
                 $categoryPromotion  = Category::where('title', 'LIKE', "Tin khuyến mãi")
                     ->where('type', 'new')
-                    ->where('status', 1)->select('id', 'title')->first();
-
+                    ->where('status', 1)->select('id', 'title','type')->first();
+                if($categoryPromotion){
+                    $_params['type']=$categoryPromotion->type;
+                }
                 $post = new Post();
                 $post->fill($_params);
                 $post->save();
-
                 if (!empty($categoryPromotion) && $categoryPromotion->id == $_params['category_id']) {
                     Notification::sendNotification($post, $type = 'post');
                 }
@@ -133,8 +134,14 @@ class PostsController extends Controller
             $data['detail'] = $this->postService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $_params = $request->all();
-            $status = $_params['status'];
-            $_params['status'] = (int)$status;
+            dd($_params);
+            $categoryPromotion  = Category::where('status', 'LIKE', 1)
+                ->where('id', $_params['category_id'])
+                ->where('status', 1)->select('id', 'title','type')->first();
+
+            if($categoryPromotion){
+                $_params['type']=$categoryPromotion->type;
+            }
             if ($this->postService->update($_params, $id)) {
                 session()->flash('success', __('admins::layer.notify.success'));
                 return redirect(route('admin.post.index', ['page' => !empty($_GET['page']) ? $_GET['page'] : 1]));
