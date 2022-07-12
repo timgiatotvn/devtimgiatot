@@ -39,7 +39,7 @@ class NotificationController extends Controller
         }
 
         $notifications = Notification::where(function ($query) use ($type, $arrId) {
-            if (!empty($type)) {
+            if (empty($type)) {
                 return $query->whereNotIn('id', $arrId);
             }
         })->where('status', 1)->orderBy('id', 'DESC')
