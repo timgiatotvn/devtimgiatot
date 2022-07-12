@@ -64,7 +64,7 @@ section#box-category-suggest .cs-list ul li .cs-item .cs-item-right{float: right
 /**product**/
 section.box-product{margin-bottom: 25px;}
 section.box-product .pr-head{background: #efefef; margin-bottom: 35px;}
-section.box-product .pr-head label{display: table; background: #ee3525; color: #fff; padding: 10px 25px; font-size: 15px;}
+section.box-product .pr-head label{display: table; background: #ee3525; color: #fff; padding: 10px 25px; font-size: 15px;margin: 0}
 section.box-product .pr-content{}
 section.box-product .pr-content ul{overflow: hidden; margin-bottom: 0;}
 section.box-product .pr-content ul li{list-style: none; float: left; width: 15.416%; margin-left: 1.5%; margin-bottom: 18px;}

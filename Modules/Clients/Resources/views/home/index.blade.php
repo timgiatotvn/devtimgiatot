@@ -76,6 +76,63 @@
             </ul>
         </div>
     </section>
+    @foreach($data['cate'] as $cate)
+        <section class="box-product">
+            <div class="pr-head">
+                <div class="row">
+                    <div class="col-8">
+                        <label>{{$cate['name']}}</label></div>
+                    <div class="col-4 text-right show_all_product">
+                        <a href="{{ route('client.category.index', ['slug' => $cate['slug']])}}"
+                           title="Xem tất cả">Xem tất cả &raquo;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="pr-content">
+                <ul>
+                    @foreach($cate['data'] as $row)
+                        <li>
+                            <div class="pr-item">
+                                @if($row->type == "crawler")
+                                    <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                       title="{{ $row->title }}" rel="nofollow sponsored">
+                                        <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                                             title="{{ $row->title }}">
+                                    </a>
+                                    <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                    <div class="name-sp">
+                                        <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                           title="{{ $row->title }}" rel="nofollow sponsored">
+                                            {{ $row->title }}
+                                        </a>
+                                    </div>
+                                    <div class="count-location-buy">
+                                        Có {{ $row->count_suggest }} nơi bán
+                                    </div>
+                                @else
+                                    <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                       title="{{ $row->title }}" rel="nofollow sponsored">
+                                        <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
+                                             title="{{ $row->title }}">
+                                    </a>
+                                    <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                    <div class="name-sp">
+                                        <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                           title="{{ $row->title }}" rel="nofollow sponsored">
+                                            {{ $row->title }}
+                                        </a>
+                                    </div>
+                                    <div class="count-location-buy"></div>
+                                @endif
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+    @endforeach
     <?php
     $arr1 = [];
     $arr2 = [];

@@ -54,28 +54,28 @@
                                     {!! $data['category']['select'] !!}
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Danh mục liên quan</label>
-                                <div class="multi-category">
-                                    <ul>
-                                        <li>
-                                            @php $dem = 0; @endphp
-                                            @foreach($data['category']['list'] as $k => $row)
-                                                @php
-                                                    if($dem) if(!strpos('string'.$row, '--')) echo '</li><li>';
-                                                    $dem ++;
-                                                @endphp
-                                                <div>
-                                                    <label>
-                                                        <input type="checkbox" {{ (in_array($k, explode('|', $data['detail']->category_multi))) ? 'checked' : '' }} name="category_multi[]" value="{{ $k }}">
-                                                        {{ $row }}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Danh mục liên quan</label>--}}
+{{--                                <div class="multi-category">--}}
+{{--                                    <ul>--}}
+{{--                                        <li>--}}
+{{--                                            @php $dem = 0; @endphp--}}
+{{--                                            @foreach($data['category']['list'] as $k => $row)--}}
+{{--                                                @php--}}
+{{--                                                    if($dem) if(!strpos('string'.$row, '--')) echo '</li><li>';--}}
+{{--                                                    $dem ++;--}}
+{{--                                                @endphp--}}
+{{--                                                <div>--}}
+{{--                                                    <label>--}}
+{{--                                                        <input type="checkbox" {{ (in_array($k, explode('|', $data['detail']->category_multi))) ? 'checked' : '' }} name="category_multi[]" value="{{ $k }}">--}}
+{{--                                                        {{ $row }}--}}
+{{--                                                    </label>--}}
+{{--                                                </div>--}}
+{{--                                            @endforeach--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -92,10 +92,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Mô tả</label>
-                                <textarea class="tinymce-mini" name="description">{{ $data['detail']->description }}</textarea>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Mô tả</label>--}}
+{{--                                <textarea class="tinymce-mini" name="description">{{ $data['detail']->description }}</textarea>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <label>Nội dung</label>
                                 <textarea class="tinymce" name="content">{{ $data['detail']->content }}</textarea>
@@ -169,12 +169,6 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-
-        $(document).ready(function() {
-            console.error('Chuyển qua select 2')
-            $('.js-example-basic-single').select2();
-        });
-
         $("input[name='slug']").keyup(function(){
             var url = $("#urlfull").data("url");
             $("#urlfull a").attr("href", url + $(this).val() + ".html");

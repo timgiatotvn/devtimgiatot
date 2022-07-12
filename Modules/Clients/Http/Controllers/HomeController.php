@@ -8,13 +8,9 @@ use App\Service\Clients\ClientCategoryService;
 use App\Service\Clients\ClientPostService;
 use App\Service\Clients\ClientProductService;
 use App\Service\Clients\SettingService;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Model\Category;
-use App\Model\Post;
-use App\Model\Setting;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -26,11 +22,11 @@ class HomeController extends Controller
     private $clientPostService;
     private $setting;
 
-    public function __construct(SettingService $clientSettingService,
-                                AdvertisementService $clientAdvService,
+    public function __construct(SettingService        $clientSettingService,
+                                AdvertisementService  $clientAdvService,
                                 ClientCategoryService $clientCategoryService,
-                                ClientProductService $clientProductService,
-                                ClientPostService $clientPostService
+                                ClientProductService  $clientProductService,
+                                ClientPostService     $clientPostService
     )
     {
         $this->clientSettingService = $clientSettingService;
@@ -54,14 +50,33 @@ class HomeController extends Controller
             $data['common'] = Helpers::metaHead($data['setting']);
             $data['slide'] = $this->clientAdvService->getListSlideShow();
             $data['link'] = $this->clientAdvService->getListLink();
-            $data['products'] = $this->clientProductService->getListHome(['limit' => 30]);
+            $data['products'] = $this->clientProductService->getListHome(['limit' => 6]);
             $data['kienthuc'] = $this->clientPostService->getListByCategory(['category_id' => $this->clientCategoryService->multiCate(3)]);
             $data['news'] = $this->clientPostService->getListByCategory(['category_id' => $this->clientCategoryService->multiCate(20)]);
             $data['cat_kienthuc'] = $this->clientCategoryService->findById(3);
             $data['cat_tintuc'] = $this->clientCategoryService->findById(20);
             $data['ads_home'] = $this->clientAdvService->getListAdsLimit(['limit' => 4]);
             $data['page_home'] = true;
-
+            $list_cate_show = DB::table('categories_show')
+                ->where('status', 1)
+                ->orderBy('id')
+                ->get();
+            $data_cate = [];
+            foreach ($list_cate_show as $cate_show) {
+                $cateId = $this->clientCategoryService->multiCate($cate_show->cate_id);
+                $cateName = DB::table('categories')
+                    ->select('title','slug')
+                    ->where('id', $cate_show->cate_id)
+                    ->first();
+                $list_product = $this->clientProductService->getListByCate(['cate_multi' => $cateId, 'limit' => 12]);
+                $dataSet = array(
+                    'name' => $cateName->title,
+                    'slug' => $cateName->slug,
+                    'data' => $list_product
+                );
+                array_push($data_cate, $dataSet);
+            }
+            $data['cate'] = $data_cate;
             return view('clients::home.index', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');

@@ -140,6 +140,16 @@ Route::prefix('admin')->group(function () {
             Route::get('/', 'ProductsController@getListKeyWord')->name('admin.statistical.keyword');
         });
 
+        //Cấu hình
+        Route::prefix('config')->group(function () {
+            Route::get('/home-cate', 'ConfigController@configCateHome')->name('admin.config.home-cate');
+            Route::post('/setvalue', 'ConfigController@setvalue')->name('admin.config.setvalue');
+
+            // Cấu hình
+            Route::get('/settings/{id}', 'SettingsController@edit')->name('admin.config.setting.update');
+            Route::post('/settings/{id}', 'SettingsController@update');
+        });
+
         //Products crawlers
         Route::prefix('product-crawlers')->group(function () {
                 Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
@@ -158,9 +168,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/', 'CartsController@index')->name('admin.cart.index');
         });
 
-        // Cấu hình
-        Route::get('/settings/{id}', 'SettingsController@edit')->name('admin.setting.update');
-        Route::post('/settings/{id}', 'SettingsController@update');
 
         //Crawler
         Route::prefix('crawlers')->group(function () {
