@@ -23,7 +23,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th class="text-center" width="50">STT</th>
+                                        <th class="text-center" width="50">Vị trí</th>
                                         <th class="text-center">Danh mục</th>
                                         <th class="text-center">Trạng thái</th>
 {{--                                        <th class="text-center">Thao tác</th>--}}

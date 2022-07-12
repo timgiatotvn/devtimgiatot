@@ -5,3 +5,4 @@
 <link rel="stylesheet" href="{{ asset('/static/client/css/style.css') }}"/>
 <link rel="stylesheet" href="{{ asset('/static/client/css/responsive.css') }}"/>
 <link rel="stylesheet" href="{{ asset('/static/client/css/ftoc.css') }}"/>
+<link rel="stylesheet" href="{{ asset('/static/admin/css/cssCustom.css') }}"/>

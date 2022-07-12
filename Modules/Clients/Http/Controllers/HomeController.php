@@ -55,7 +55,7 @@ class HomeController extends Controller
             $data['common'] = Helpers::metaHead($data['setting']);
             $data['slide'] = $this->clientAdvService->getListSlideShow();
             $data['link'] = $this->clientAdvService->getListLink();
-            $data['products'] = $this->clientProductService->getListHome(['limit' => 12]);
+            $data['products'] = $this->clientProductService->getListHome(['limit' => 6]);
             $data['kienthuc'] = $this->clientPostService->getListByCategory(['category_id' => $this->clientCategoryService->multiCate(3)]);
             $data['news'] = $this->clientPostService->getListByCategory(['category_id' => $this->clientCategoryService->multiCate(20)]);
             $data['cat_kienthuc'] = $this->clientCategoryService->findById(3);
@@ -70,12 +70,13 @@ class HomeController extends Controller
             foreach ($list_cate_show as $index => $cate_show) {
                 $cateId = $this->clientCategoryService->multiCate($cate_show->cate_id);
                 $cateName = DB::table('categories')
-                    ->select('title')
+                    ->select('title','slug')
                     ->where('id', $cate_show->cate_id)
                     ->first();
                 $list_product = $this->clientProductService->getListByCate(['cate_multi' => $cateId, 'limit' => 12]);
                 $dataSet = array(
                     'name' => $cateName->title,
+                    'slug' => $cateName->slug,
                     'data' => $list_product
                 );
                 array_push($data_cate, $dataSet);
