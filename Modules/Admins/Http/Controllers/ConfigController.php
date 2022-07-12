@@ -37,8 +37,8 @@ class ConfigController extends Controller
                 ->get();
             $data['list_cate_show'] = DB::table('categories_show')
                 ->where('status', 1)
+                ->orderBy('id')
                 ->get();
-//            dd($data['list_cate_show']);
             return view('admins::config.homeCate', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');

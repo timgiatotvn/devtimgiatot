@@ -8,10 +8,10 @@
             </div>
         </div>
         @if(Session::has('success'))
-            <p class="alert alert-success">{{Session::get('success')}}</p>
+            <p class="notifi-tm5 alert alert-success">{{Session::get('success')}}</p>
         @endif
         @if(Session::has('error'))
-            <p class="alert alert-danger">{{Session::get('error')}}</p>
+            <p class="notifi-tm5 alert alert-danger">{{Session::get('error')}}</p>
         @endif
         <form method="post" action="{{ route('admin.config.setvalue')}}">
             @csrf()
@@ -26,7 +26,7 @@
                                         <th class="text-center" width="50">Vị trí</th>
                                         <th class="text-center">Danh mục</th>
                                         <th class="text-center">Trạng thái</th>
-{{--                                        <th class="text-center">Thao tác</th>--}}
+                                        {{--                                        <th class="text-center">Thao tác</th>--}}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -49,18 +49,19 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($cate_show->status==1)
-                                                    <input type="button" value="Đang hiển thị" class="btn btn-sm btn-success">
+                                                    <input type="button" value="Đang hiển thị"
+                                                           class="btn btn-sm btn-success">
                                                 @else
                                                     <input type="button" value="Đã ẩn" class="btn btn-sm btn-danger">
                                                 @endif
                                             </td>
-{{--                                            <td class="text-center">--}}
-{{--                                                @if($cate_show->status==1)--}}
-{{--                                                    <input type="button" value="Ẩn" class="btn btn-sm btn-danger">--}}
-{{--                                                @else--}}
-{{--                                                    <input type="button" value="Hiển thị" class="btn btn-sm btn-success">--}}
-{{--                                                @endif--}}
-{{--                                            </td>--}}
+                                            {{--                                            <td class="text-center">--}}
+                                            {{--                                                @if($cate_show->status==1)--}}
+                                            {{--                                                    <input type="button" value="Ẩn" class="btn btn-sm btn-danger">--}}
+                                            {{--                                                @else--}}
+                                            {{--                                                    <input type="button" value="Hiển thị" class="btn btn-sm btn-success">--}}
+                                            {{--                                                @endif--}}
+                                            {{--                                            </td>--}}
                                         </tr>
                                         <input type="hidden" name="cate_id[]" value="{{$cate_show->id}}">
                                     @endforeach
@@ -80,6 +81,17 @@
         </form>
     </div>
 @endsection
+<script>
+    function hideNoti() {
+        var noti = document.getElementsByClassName("notifi-tm5");
+        if(noti){
+            for (let i = 0; i < noti.length; i++) {
+                noti[i].style='display:none'
+            }
+        }
+    }
+    setTimeout(hideNoti, 3000);
+</script>
 
 @section('style')
     <style type="text/css">

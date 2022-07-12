@@ -8,12 +8,7 @@ use App\Service\Clients\ClientCategoryService;
 use App\Service\Clients\ClientPostService;
 use App\Service\Clients\ClientProductService;
 use App\Service\Clients\SettingService;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Model\Category;
-use App\Model\Post;
-use App\Model\Setting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 
@@ -67,7 +62,7 @@ class HomeController extends Controller
                 ->orderBy('id')
                 ->get();
             $data_cate = [];
-            foreach ($list_cate_show as $index => $cate_show) {
+            foreach ($list_cate_show as $cate_show) {
                 $cateId = $this->clientCategoryService->multiCate($cate_show->cate_id);
                 $cateName = DB::table('categories')
                     ->select('title','slug')
