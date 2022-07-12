@@ -49,7 +49,7 @@ class NotificationController extends Controller
 
             $notification->created_at_format = !empty($notification->publish_at) ? date('d/m/Y H:i:s', strtotime($notification->publish_at)) : date('d/m/Y H:i:s', strtotime($notification->created_at));
             $notification->is_readed = false;
-            if (count($notification->deviceReadNotification) > 0) {
+            if (in_array($notification->id, $arrId)) {
                 $notification->is_readed = true;
             }
             $notification->thumbnail = Helpers::getUrlFile($notification->thumbnail);
