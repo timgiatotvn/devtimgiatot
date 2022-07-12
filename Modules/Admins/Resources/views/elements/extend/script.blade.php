@@ -35,6 +35,9 @@
 <link href="{{ asset('/tinymce/tinymce.css') }}" rel="stylesheet" type="text/css"/>
 <script src="{{ asset('/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
 <script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
     var str_folder = "<?php echo ACTIVE_FILE;?>";
     tinymce.init({
         selector: 'textarea.tinymce-mini',

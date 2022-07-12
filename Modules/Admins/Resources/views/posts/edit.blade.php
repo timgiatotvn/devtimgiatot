@@ -169,12 +169,6 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-
-        $(document).ready(function() {
-            console.error('Chuyển qua select 2')
-            $('.js-example-basic-single').select2();
-        });
-
         $("input[name='slug']").keyup(function(){
             var url = $("#urlfull").data("url");
             $("#urlfull a").attr("href", url + $(this).val() + ".html");

@@ -34,6 +34,20 @@
             <span class="nav-link">@lang('admins::layer.menu.parent.function')</span>
         </li>
 
+        <li class="nav-item {{ Request::routeIs('admin.config.*')? 'active' : '' }} {{ Request::routeIs('admin.config.*')? 'active' : '' }} {{ Request::routeIs('admin.config.*')? 'active' : '' }}">
+            <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
+               aria-controls="basic-ui">
+                <span class="menu-title">Cấu hình</span>
+                <i class="icon-layers menu-icon"></i>
+            </a>
+            <div class="collapse {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }}" id="basic-ui">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('admin.config.*')? 'active' : '' }}" href="{{ route('admin.config.home-cate') }}">Danh mục hiển thị</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
         <li class="nav-item {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
                aria-controls="basic-ui">

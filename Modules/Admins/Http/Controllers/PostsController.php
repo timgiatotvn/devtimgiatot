@@ -40,7 +40,7 @@ class PostsController extends Controller
             $data['common'] = Helpers::titleAction([__('admins::layer.post.index.title'), __('admins::layer.post.index.title2')]);
             $data['list'] = $this->postService->getList(['limit' => 10]);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [(request()->has('category_id') ? request()->get('category_id') : '')]]);
-            
+
             return view('admins::posts.index', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');
@@ -74,11 +74,11 @@ class PostsController extends Controller
             $_params['category_multi'] = !empty($request->get('category_multi')) ? '|' . implode('|', $request->get('category_multi')) . '|' : '';
 
             if ($_params) {
-                $categoryPromotion  = Category::where('title', 'LIKE', "Tin khuyến mãi")
+                $categoryPromotion = Category::where('title', 'LIKE', "Tin khuyến mãi")
                     ->where('type', 'new')
-                    ->where('status', 1)->select('id', 'title','type')->first();
-                if($categoryPromotion){
-                    $_params['type']=$categoryPromotion->type;
+                    ->where('status', 1)->select('id', 'title', 'type')->first();
+                if ($categoryPromotion) {
+                    $_params['type'] = $categoryPromotion->type;
                 }
                 $post = new Post();
                 $post->fill($_params);
@@ -134,12 +134,12 @@ class PostsController extends Controller
             $data['detail'] = $this->postService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $_params = $request->all();
-            $categoryPromotion  = Category::where('status', 'LIKE', 1)
+            $categoryPromotion = Category::where('status', 'LIKE', 1)
                 ->where('id', $_params['category_id'])
-                ->where('status', 1)->select('id', 'title','type')->first();
+                ->where('status', 1)->select('id', 'title', 'type')->first();
 
-            if($categoryPromotion){
-                $_params['type']=$categoryPromotion->type;
+            if ($categoryPromotion) {
+                $_params['type'] = $categoryPromotion->type;
             }
             if ($this->postService->update($_params, $id)) {
                 session()->flash('success', __('admins::layer.notify.success'));

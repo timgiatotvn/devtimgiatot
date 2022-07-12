@@ -140,6 +140,12 @@ Route::prefix('admin')->group(function () {
             Route::get('/', 'ProductsController@getListKeyWord')->name('admin.statistical.keyword');
         });
 
+        //Cấu hình
+        Route::prefix('config')->group(function () {
+            Route::get('/home-cate', 'ConfigController@configCateHome')->name('admin.config.home-cate');
+            Route::post('/setvalue', 'ConfigController@setvalue')->name('admin.config.setvalue');
+        });
+
         //Products crawlers
         Route::prefix('product-crawlers')->group(function () {
                 Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
