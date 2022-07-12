@@ -28,6 +28,9 @@ class HomeController extends Controller
     public function setup(Request $request)
     {
         $token = $request->get('token');
+        $lat = $request->get('lat');
+        $long = $request->get('long');
+
         if (empty($token)) {
 
             return response()->json([
@@ -36,11 +39,25 @@ class HomeController extends Controller
             ]);
         }
 
+        if (!empty($lat) && !empty($long) && env('GOOGLE_MAP_API_KEY')) {
+            $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$long.'&key='.env('GOOGLE_MAP_API_KEY');
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_URL,$url);
+            $result=curl_exec($ch);
+            curl_close($ch);
+
+            $dataResponse = json_decode($result,true);
+            $data['address'] = !empty($dataResponse['results'][0]['formatted_address']) ? $dataResponse['results'][0]['formatted_address'] : null;
+
+        }
+
         $data = $request->all();
         $device = Device::where('token', $token)->first();
         if (empty($device)) {
             $device = new Device();
         }
+
         $device->fill($data);
         $device->save();
 
