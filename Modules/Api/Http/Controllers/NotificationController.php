@@ -21,10 +21,26 @@ class NotificationController extends Controller
     {
         $perPage = $request->get('per_page', 10);
         $type = $request->get('type') ? $request->get('type') : null;
+        $deviceToken = $request->get('token');
 
-        $notifications = Notification::where(function ($query) use ($type) {
+        if (empty($deviceToken)) {
+
+            return response()->json([
+                'status' => 500,
+                'message' => 'token không được để trống.',
+            ]);
+        }
+
+        $device = Device::where('token', $deviceToken)->first();
+        $arrId = [];
+        if ($device) {
+            $deviceReadNotification = DeviceReadNotification::where('device_id', $device->id)->get();
+            $arrId = $deviceReadNotification->pluck('notification_id')->toArray();
+        }
+
+        $notifications = Notification::where(function ($query) use ($type, $arrId) {
             if (empty($type)) {
-                return $query->doesntHave('deviceReadNotification');
+                return $query->whereNotIn('id', $arrId);
             }
         })->where('status', 1)->orderBy('id', 'DESC')
             ->paginate($perPage);
