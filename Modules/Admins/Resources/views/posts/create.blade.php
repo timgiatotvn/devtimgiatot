@@ -47,33 +47,33 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Danh mục chính</label>
-                                <select name="category_id" class="form-control col-md-3">
+                                <label style="display: block">Danh mục chính</label>
+                                <select name="category_id" class="js-example-basic-single  form-control col-md-3">
                                     {!! $data['category']['select'] !!}
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Danh mục liên quan</label>
-                                <div class="multi-category">
-                                    <ul>
-                                        <li>
-                                            @php $dem = 0; @endphp
-                                            @foreach($data['category']['list'] as $k => $row)
-                                                @php
-                                                    if($dem) if(!strpos('string'.$row, '--')) echo '</li><li>';
-                                                    $dem ++;
-                                                @endphp
-                                                <div>
-                                                    <label>
-                                                        <input type="checkbox" name="category_multi[]" value="{{ $k }}">
-                                                        {{ $row }}
-                                                    </label>
-                                                </div>
-                                            @endforeach
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Danh mục liên quan</label>--}}
+{{--                                <div class="multi-category">--}}
+{{--                                    <ul>--}}
+{{--                                        <li>--}}
+{{--                                            @php $dem = 0; @endphp--}}
+{{--                                            @foreach($data['category']['list'] as $k => $row)--}}
+{{--                                                @php--}}
+{{--                                                    if($dem) if(!strpos('string'.$row, '--')) echo '</li><li>';--}}
+{{--                                                    $dem ++;--}}
+{{--                                                @endphp--}}
+{{--                                                <div>--}}
+{{--                                                    <label>--}}
+{{--                                                        <input type="checkbox" name="category_multi[]" value="{{ $k }}">--}}
+{{--                                                        {{ $row }}--}}
+{{--                                                    </label>--}}
+{{--                                                </div>--}}
+{{--                                            @endforeach--}}
+{{--                                        </li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -91,10 +91,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Mô tả</label>
-                                <textarea class="tinymce-mini" name="description"></textarea>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Mô tả</label>--}}
+{{--                                <textarea class="tinymce-mini" name="description"></textarea>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <label>Nội dung</label>
                                 <textarea class="tinymce" name="content"></textarea>

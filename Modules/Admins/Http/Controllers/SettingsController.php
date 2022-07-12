@@ -41,7 +41,7 @@ class SettingsController extends Controller
             $_params = $request->all();
             if ($this->settingService->update($_params, $id)) {
                 session()->flash('success', __('admins::layer.notify.success'));
-                return redirect(route('admin.setting.update', ['id' => $id]));
+                return redirect(route('admin.config.setting.update', ['id' => $id]));
             } else {
                 $errors = new MessageBag(['error' => __('admins::layer.notify.fail')]);
                 return back()->withInput($_params)->withErrors($errors);

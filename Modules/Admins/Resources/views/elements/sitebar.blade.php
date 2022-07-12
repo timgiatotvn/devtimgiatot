@@ -43,7 +43,10 @@
             <div class="collapse {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }}" id="basic-ui">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::routeIs('admin.config.*')? 'active' : '' }}" href="{{ route('admin.config.home-cate') }}">Danh mục hiển thị</a>
+                        <a class="nav-link {{ Request::routeIs('admin.config.home-cate')? 'active' : '' }}" href="{{ route('admin.config.home-cate') }}">Danh mục hiển thị</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('admin.config.setting.update')? 'active' : '' }}" href="{{ route('admin.config.setting.update',["id" => 1]) }}">Cấu hình website</a>
                     </li>
                 </ul>
             </div>
@@ -146,12 +149,12 @@
                 <i class="icon-doc menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item {{ Request::routeIs('admin.setting.*')? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.setting.update',["id" => 1]) }}">
-                <span class="menu-title">Cấu hình website</span>
-                <i class="mdi mdi-settings-box menu-icon"></i>
-            </a>
-        </li>
+{{--        <li class="nav-item {{ Request::routeIs('admin.config.setting.*')? 'active' : '' }}">--}}
+{{--            <a class="nav-link" href="{{ route('admin.config.setting.update',["id" => 1]) }}">--}}
+{{--                <span class="menu-title">Cấu hình website</span>--}}
+{{--                <i class="mdi mdi-settings-box menu-icon"></i>--}}
+{{--            </a>--}}
+{{--        </li>--}}
 
        <li class="nav-item {{ Request::routeIs('notification.*')? 'active' : '' }}">
             <a class="nav-link" href="{{ route('notification.index') }}">
