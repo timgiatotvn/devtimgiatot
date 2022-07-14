@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Model\Post;
+use Illuminate\Support\Facades\DB;
 use App\Helpers\Helpers;
 use Illuminate\Support\Facades\View;
 
@@ -67,7 +68,10 @@ class PostsController extends Controller
             $data['related'] = $this->clientPostService->getListRelated(['category_id' => $data['detail']->category_id, 'id' => $data['detail']->id]);
             $data['regex'] = Helpers::hyperlinkContentRegex($data['detail']->content);
 			$data['ftoc'] = true;
-			
+            $data['adv_img'] = DB::table('adv_post')
+                ->where('id', 1)
+                ->first();
+
             if ($data['detail']->status) {
                 return view('clients::posts.show', ['data' => $data]);
             } else {

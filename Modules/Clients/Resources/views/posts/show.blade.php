@@ -5,7 +5,6 @@
         <div class="nrd-head">
             <h1>{{ $data['detail']->title }}</h1>
         </div>
-
         <div class="wrap-info-new-detail">
             <div class="content-view">
 				<?php
@@ -140,7 +139,9 @@
                    class="fb-xfbml-parse-ignore">Chia sẻ</a>
             </div>
         </div>
-
+        <div class="wrap-new-related">
+            <img class="w-100" src="{{ asset($data['adv_img']->path)}}" alt="Hình ảnh quảng cáo">
+        </div>
         @if(count($data['related']) > 0)
         <div class="wrap-new-related">
             <label>Tin Liên Quan</label>

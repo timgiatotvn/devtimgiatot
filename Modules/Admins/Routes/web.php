@@ -142,12 +142,17 @@ Route::prefix('admin')->group(function () {
 
         //Cấu hình
         Route::prefix('config')->group(function () {
+            //Danh mục hiển thị ngoài trang chủ
             Route::get('/home-cate', 'ConfigController@configCateHome')->name('admin.config.home-cate');
             Route::post('/setvalue', 'ConfigController@setvalue')->name('admin.config.setvalue');
 
             // Cấu hình
             Route::get('/settings/{id}', 'SettingsController@edit')->name('admin.config.setting.update');
             Route::post('/settings/{id}', 'SettingsController@update');
+
+            //ảnh quảng cáo trong mỗi bài viết
+            Route::get('/post-adv', 'ConfigController@configPostAdv')->name('admin.config.post-adv');
+            Route::post('/post-adv', 'ConfigController@setValuePostAdv')->name('admin.config.set-value-post-adv');
         });
 
         //Products crawlers
