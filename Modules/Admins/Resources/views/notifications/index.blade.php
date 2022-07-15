@@ -43,6 +43,7 @@
                                     <th>Ảnh</th>
                                     <th>@lang('admins::layer.table.title')</th>
                                     <th>@lang('admins::layer.table.status')</th>
+                                    <th>Lượt xem</th>
                                     <th>@lang('admins::layer.table.publish_at')</th>
                                     <th>@lang('admins::layer.table.created')</th>
                                     <th>@lang('admins::layer.table.modified')</th>
@@ -64,6 +65,9 @@
                                                 @else
                                                     Huỷ thông báo
                                                 @endif
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $row->deviceReadNotification->count() }}
                                             </td>
                                             <td>{{ !empty($row->publish_at) ? date('d/m/Y H:i:s', strtotime($row->publish_at)) : null }}</td>
                                             <td>{{ \Helpers::formatDate($row->created_at) }}</td>
