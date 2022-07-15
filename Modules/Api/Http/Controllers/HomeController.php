@@ -39,19 +39,6 @@ class HomeController extends Controller
             ]);
         }
 
-        if (!empty($lat) && !empty($long) && env('GOOGLE_MAP_API_KEY')) {
-            $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$long.'&key='.env('GOOGLE_MAP_API_KEY');
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_URL,$url);
-            $result=curl_exec($ch);
-            curl_close($ch);
-
-            $dataResponse = json_decode($result,true);
-            $data['address'] = !empty($dataResponse['results'][0]['formatted_address']) ? $dataResponse['results'][0]['formatted_address'] : null;
-
-        }
-
         $data = $request->all();
         $device = Device::where('token', $token)->first();
         if (empty($device)) {
@@ -61,6 +48,28 @@ class HomeController extends Controller
         $device->fill($data);
         $device->save();
 
+        if (empty($device->address)) {
+            $address = null;
+            $city = null;
+            if (!empty($lat) && !empty($long) && env('GOOGLE_MAP_API_KEY')) {
+                $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.$lat.','.$long.'&key='.env('GOOGLE_MAP_API_KEY');
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_URL,$url);
+                $result=curl_exec($ch);
+                curl_close($ch);
+
+                $dataResponse = json_decode($result,true);
+                $address = !empty($dataResponse['results'][0]['formatted_address']) ? $dataResponse['results'][0]['formatted_address'] : null;
+            }
+            if(!empty($address)) {
+                $explodeAddress = explode(',', $address);
+                $city = $explodeAddress[3];
+            }
+            $device->address = $address;
+            $device->city = trim($city);
+            $device->save();
+        }
         return response()->json([
             'status' => 200,
             'message' => 'success',

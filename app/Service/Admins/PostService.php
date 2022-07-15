@@ -82,7 +82,8 @@ class PostService
             'description' => !empty($_data['description']) ? $_data['description'] : '',
             //'slug' => !empty($_data['title']) ? Str::slug($_data['title'], '-') : '',
             'category_multi' => !empty($_data['category_multi']) ? '|' . implode('|', $_data['category_multi']) . '|' : '',
-            'updated_at' => date("Y/m/d H:i:s")
+            'updated_at' => date("Y/m/d H:i:s"),
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         return $this->postRepository->update($db, $_id);
     }

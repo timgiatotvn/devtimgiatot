@@ -9,10 +9,12 @@ class Device extends Model
     protected $table = 'devices';
 
     protected $fillable = [
-      'token',
-      'lat',
-      'long',
-      'type',
-      'address'
+        'token',
+        'lat',
+        'long',
+        'type',
+        'address',
+        'city',
+        'note'
     ];
 }
