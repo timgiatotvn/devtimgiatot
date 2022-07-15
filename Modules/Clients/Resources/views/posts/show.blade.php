@@ -140,7 +140,9 @@
             </div>
         </div>
         <div class="wrap-new-related">
-            <img class="w-100" src="{{ asset($data['adv_img']->path)}}" alt="Hình ảnh quảng cáo">
+            <a href="{{$data['adv_img']->link}}">
+                <img class="w-100" src="{{ asset($data['adv_img']->path)}}" alt="Hình ảnh quảng cáo">
+            </a>
         </div>
         @if(count($data['related']) > 0)
         <div class="wrap-new-related">

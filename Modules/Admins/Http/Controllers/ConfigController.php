@@ -73,11 +73,12 @@ class ConfigController extends Controller
     {
         try {
             $path = $request->get('thumbnail');
+            $link = $request->get('link');
             if ($path==null){
                 session()->flash('error', __('Vui lòng chọn hình ảnh cần cập nhật'));
                 return redirect()->route('admin.config.post-adv');
             }
-            DB::table('adv_post')->where('id', 1)->update(['path' => $path]);
+            DB::table('adv_post')->where('id', 1)->update(['path' => $path,'link'=>$link]);
             session()->flash('success', __('Thao tác thành công'));
             return redirect()->route('admin.config.post-adv');
         } catch (\Exception $e) {

@@ -25,6 +25,10 @@
                                         <img class="w-50" src="{{ asset($data['img']->path) }}" alt="Hình ảnh quảng cáo">
                                     </div>
                                     <div class="col-md-4 offset-3">
+                                        <div class="form-group">
+                                            <label>Liên kết</label>
+                                            <input type="text" name="link" value="{{ $data['img']->link }}" class="form-control" placeholder=""/>
+                                        </div>
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail" data-preview="holder"
@@ -36,17 +40,16 @@
                                                    readonly>
                                         </div>
                                         <img id="holder" style="margin-top:15px;max-height:100px;">
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="text-center">
-                                            <div class="wrapper ml-md-auto d-flex flex-column flex-md-row kanban-toolbar ml-n2 ml-md-0 mt-4 mt-md-0">
-                                                <div class="d-flex mt-4 mt-md-0">
-                                                    <button type="submit" class="btn btn-success">
-                                                        Lưu lại
-                                                    </button>
-                                                </div>
+
+                                        <div class="form-group">
+                                            <div class="text-center">
+                                                        <button type="submit" class="btn btn-success">
+                                                            Lưu lại
+                                                        </button>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-md-5">
                                     </div>
                                 </div>
                             </div>
