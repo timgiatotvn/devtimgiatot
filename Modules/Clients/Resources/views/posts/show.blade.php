@@ -34,7 +34,7 @@
 
 						@array_walk($matches, "removelines");
 						// find the minimum heading to establish our baseline
-						
+
 						if(count($matches)>0){
 							foreach ($matches as $i => $match) {
 								if ($current_depth > $matches[$i][2]) {
@@ -49,18 +49,18 @@
 									$count = $i + 1;
 									$collapse = $button = '';
 									if(isParent($matches, $i)){
-										$collapseCSS = 'collapse';                    
+										$collapseCSS = 'collapse';
 										$collapseCSS = 'expand';
 										$collapse = 'ft-has-sub ft-'.$collapseCSS;
 										$button = '<button type="button" class="ft-icon-'.$collapseCSS.'"></button>';
 									}
-									if ($current_depth == (int) $matches[$i][2]) {                
+									if ($current_depth == (int) $matches[$i][2]) {
 										$list .= '<li class="ft-item '.$collapse.'">'.$button;
 									}
 									// start lists
 									if ($current_depth != (int) $matches[$i][2]) {
 										for ($current_depth; $current_depth < (int) $matches[$i][2]; $current_depth++) {
-											$numbered_items[$current_depth + 1] = 0;                    
+											$numbered_items[$current_depth + 1] = 0;
 											$list .= '<ol class="ft-sub"><li class="ft-item '.$collapse.'">'.$button;
 										}
 									}
@@ -79,7 +79,7 @@
 										}
 									}
 								}
-							}            
+							}
 						}
 						if(!empty($list)){
 							$level = $level - 2;
@@ -91,13 +91,13 @@
 						preg_match_all('/<h2(.*?)>(.+?)<\/h2>|<h3(.*?)>(.*?)<\/h3>|<h4(.*?)>(.*?)<\/h4>|<h5(.*?)>(.*?)<\/h5>|<h6(.*?)>(.*?)<\/h6>/is', $content, $tach_h);
 						$matches_old = $matches = $tach_h[0];
 						if(count($matches)>0){
-							$i=0;           
-							foreach($matches as $key=> &$match){                
+							$i=0;
+							foreach($matches as $key=> &$match){
 								$level = $matches[$key][2];
 								if($level==2){
 									$i++;
 									$matches[$key] = str_replace('class="ft-heading">', 'class="ft-heading"><span>'.$i.'</span>', $match);
-								} 
+								}
 							}
 						}
 						return str_replace($matches_old,$matches,$content);
