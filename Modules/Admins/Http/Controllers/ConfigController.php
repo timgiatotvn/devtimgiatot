@@ -44,6 +44,17 @@ class ConfigController extends Controller
             abort('500');
         }
     }
+    public function configPostAdv(Request $request)
+    {
+        try {
+            $data['img'] = DB::table('adv_post')
+                ->where('id', 1)
+                ->first();
+            return view('admins::config.postAdv', ['data' => $data]);
+        } catch (\Exception $e) {
+            abort('500');
+        }
+    }
 
     public function setValue(Request $request)
     {
@@ -54,6 +65,21 @@ class ConfigController extends Controller
             }
             session()->flash('success', __('Thao tác thành công'));
             return redirect()->route('admin.config.home-cate');
+        } catch (\Exception $e) {
+            abort('500');
+        }
+    }
+    public function setValuePostAdv(Request $request)
+    {
+        try {
+            $path = $request->get('thumbnail');
+            if ($path==null){
+                session()->flash('error', __('Vui lòng chọn hình ảnh cần cập nhật'));
+                return redirect()->route('admin.config.post-adv');
+            }
+            DB::table('adv_post')->where('id', 1)->update(['path' => $path]);
+            session()->flash('success', __('Thao tác thành công'));
+            return redirect()->route('admin.config.post-adv');
         } catch (\Exception $e) {
             abort('500');
         }

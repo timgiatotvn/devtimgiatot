@@ -41,7 +41,7 @@ class ClientPostRepository implements ClientPostRepositoryInterface
             //->where('choose_1', 1)
             ->where('type', $_data['type'])
             ->where('status', 1)
-            ->orderBy('id', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->paginate($_data['limit']);
     }
 
@@ -51,7 +51,7 @@ class ClientPostRepository implements ClientPostRepositoryInterface
             ->whereIn('category_id', $_data['cate_multi'])
             ->where('type', $_data['type'])
             ->where('status', 1)
-            ->orderBy('id', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->paginate($_data['limit']);
     }
 
