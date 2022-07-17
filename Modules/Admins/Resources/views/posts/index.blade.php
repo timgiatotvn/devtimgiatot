@@ -60,6 +60,7 @@
                                         <th>Ảnh</th>
                                         <th>@lang('admins::layer.table.title')</th>
                                         <th>Danh mục</th>
+                                        <th>Lượt xem</th>
                                         <th>@lang('admins::layer.table.status')</th>
                                         <th>Nổi bật</th>
                                         {{--                                    <th>Slide</th>--}}
@@ -94,6 +95,7 @@
                                                 </a>
                                             </td>
                                             <td>{{ $row->category_title }}</td>
+                                            <td class="text-center">{{ $row->total_views }}</td>
                                             <td>{{ \Helpers::renderStatus($row->status) }}</td>
                                             <td>
                                                 <a class="icon-form status active"

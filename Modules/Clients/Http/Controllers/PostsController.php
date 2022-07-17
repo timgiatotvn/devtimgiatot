@@ -52,10 +52,13 @@ class PostsController extends Controller
      */
     public function show($slug)
     {
-        try {
+//        try {
             $data['detail'] = $this->clientPostService->findBySlug($slug);
             if (empty($data['detail']->id)) abort(404);
-            $data['setting'] = $this->setting;
+
+            $product = DB::table('posts')
+                ->where('id', $data['detail']->id)
+                ->update(['total_views' => $data['detail']->total_views + 1]);
 
             if (empty($data['detail']->title_seo)) $data['detail']->title_seo = $data['detail']->title;
             if (empty($data['detail']->meta_des)) {
@@ -77,9 +80,9 @@ class PostsController extends Controller
             } else {
                 abort('404');
             }
-        } catch (\Exception $e) {
-            abort('500');
-        }
+//        } catch (\Exception $e) {
+//            abort('500');
+//        }
     }
 
 }
