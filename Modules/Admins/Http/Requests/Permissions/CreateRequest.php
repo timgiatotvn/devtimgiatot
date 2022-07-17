@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Admins\Http\Requests\Account;
+namespace Modules\Admins\Http\Requests\Permissions;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,8 +14,7 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'    => 'required|min:5',
-            'password'    => 'nullable|min:5',
+            'name'    => 'required|unique:permissions,name|regex:/^[ a-zA-Z0-9]+$/',
         ];
     }
 
@@ -27,5 +26,12 @@ class EditRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    public function messages()
+    {
+        return [
+            'name.regex' => 'Tên quyền truy cập không được chưa ký tự đặc biệt'
+        ];
     }
 }

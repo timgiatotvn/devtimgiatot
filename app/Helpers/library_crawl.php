@@ -23,6 +23,21 @@ defined('DEFAULT_BR_TEXT') || define('DEFAULT_BR_TEXT', "\r\n");
 defined('DEFAULT_SPAN_TEXT') || define('DEFAULT_SPAN_TEXT', ' ');
 defined('MAX_FILE_SIZE') || define('MAX_FILE_SIZE', 600000);
 define('HDOM_SMARTY_AS_TEXT', 1);
+const ROLE_ADMIN = 'Admin';
+
+function can($name_permission)
+{
+    $permission = \App\Model\Permission::where('name', $name_permission)->first();
+    $user = auth('admins')->user();
+    $role_ids = $user->roles->pluck('id');
+    $getPermissionByUser = \App\Model\PermissionRole::whereIn('role_id', $role_ids)->pluck('permission_id')->toArray();
+
+    if (in_array($permission->id, $getPermissionByUser)) {
+        return true;
+    }
+    
+    return false;
+}
 
 function file_get_html_custom($url,
 	$use_include_path = false,

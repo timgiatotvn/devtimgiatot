@@ -5,6 +5,7 @@
 
 namespace App\Helpers;
 
+use App\Model\Admin;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Category;
@@ -84,6 +85,17 @@ class Helpers
     {
         $start = ($data->currentPage() - 1) * $data->perPage();
         return $start + $key;
+    }
+
+    public static function renderRole($user_id)
+    {
+        $admin = Admin::whereId($user_id)->with('roles')->first();
+
+        if (!empty($admin) && (!empty($admin->roles) && count($admin->roles) > 0)) {
+            return implode(',', $admin->roles->pluck('name')->toArray());
+        }
+
+        return '';
     }
 
     public static function renderStatus($status = 1)

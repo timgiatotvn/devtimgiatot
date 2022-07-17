@@ -41,6 +41,7 @@
                                 <tr>
                                     <th width="50">@lang('admins::layer.table.stt')</th>
                                     <th>@lang('admins::layer.table.title')</th>
+                                    <th>Quyền</th>
                                     <th>@lang('admins::layer.table.status')</th>
                                     <th>@lang('admins::layer.table.created')</th>
                                     <th>@lang('admins::layer.table.modified')</th>
@@ -53,6 +54,9 @@
                                     <tr>
                                         <td>{{ \Helpers::renderSTT($k + 1, $data['list']) }}</td>
                                         <td>{{ $row->name }}</td>
+                                        <td>
+                                            {{ \Helpers::renderRole($row->id)}}
+                                        </td>
                                         <td>{{ \Helpers::renderStatus($row->status) }}</td>
                                         <td>{{ \Helpers::formatDate($row->created_at) }}</td>
                                         <td>{{ \Helpers::formatDate($row->updated_at) }}</td>

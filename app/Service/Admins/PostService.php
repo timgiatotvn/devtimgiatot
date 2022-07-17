@@ -24,6 +24,7 @@ class PostService
         $_data['keyword'] = request()->has('keyword') ? request()->get('keyword') : '';
         $_data['category_id'] = request()->has('category_id') ? $this->categoryService->multiCate(request()->get('category_id')) : '';
         $_data['type'] = request()->has('type') ? request()->get('type') : 'all';
+        $_data['admin_id'] = request()->has('admin_id') ? request()->get('admin_id') : 'all';
 
         return $this->postRepository->getList($_data);
     }
@@ -83,7 +84,7 @@ class PostService
             //'slug' => !empty($_data['title']) ? Str::slug($_data['title'], '-') : '',
             'category_multi' => !empty($_data['category_multi']) ? '|' . implode('|', $_data['category_multi']) . '|' : '',
             'updated_at' => date("Y/m/d H:i:s"),
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
         return $this->postRepository->update($db, $_id);
     }

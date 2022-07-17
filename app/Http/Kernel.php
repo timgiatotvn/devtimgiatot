@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \Modules\Admins\Http\Middleware\AdminAuthMiddleware::class,
+        'check-owner-post' => \Modules\Admins\Http\Middleware\CheckOwnerPostMiddleware::class,
         'user' => \Modules\Clients\Http\Middleware\UserAuthMiddleware::class,
         'ckfinderAuth' => \Modules\Admins\Http\Middleware\CustomCKFinderAuth::class,
         'authenticationMobileApp' => AuthenticateMobileApp::class

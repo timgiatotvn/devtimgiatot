@@ -23,10 +23,25 @@
                                     <option @if (request()->has('type') && request()->get('type') == 'handle'){{'selected'}}@endif value="handle">Bài viết tự viết</option>
                                 </select>
                             </div>
+                            @if(in_array(ROLE_ADMIN, auth('admins')->user()->roles->pluck('name')->toArray()))
+                            <div class="input-group mb-0 mr-sm-2">
+                                <select name="admin_id" class="form-control form-select-search">
+                                    <option value="all">Tất cả tài khoản</option>
+                                    @foreach ($data['admins'] as $adminItem)
+                                        <option @if (request()->has('admin_id') && request()->get('admin_id') == $adminItem->id){{'selected'}}@endif value="{{$adminItem->id}}">
+                                            {{$adminItem->username}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endif
                             <button type="submit"
                                     class="btn btn-primary mb-0">@lang('admins::layer.search.button.title')</button>
                         </form>
                     </div>
+                </div>
+                <br>
+                <div class="d-flex flex-column flex-md-row align-items-center">
                     <div class="wrapper ml-md-auto d-flex flex-column flex-md-row kanban-toolbar ml-n2 ml-md-0 mt-4 mt-md-0">
                         <div class="d-flex mt-4 mt-md-0">
                             <a href="{{ route('admin.post.create') }}">

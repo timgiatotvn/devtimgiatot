@@ -15,27 +15,38 @@ class PostRepository implements PostRepositoryInterface
     {
         $keyword = !empty($_data['keyword']) ? $_data['keyword'] : '';
         $type = !empty($_data['type']) ? $_data['type'] : 'all';
+        $admin_id = !empty($_data['admin_id']) ? $_data['admin_id'] : 'all';
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
+        $roles = auth('admins')->user()->roles->pluck('name')->toArray();
         return DB::table(self::TABLE_NAME)
-            ->select('posts.*', 'categories.title as category_title')
-            ->leftJoin('categories', 'posts.category_id', 'categories.id')
-            ->when($keyword, function ($query, $keyword) {
-                return $query->where('posts.title', 'LIKE', '%' . $keyword . '%');
-            })
-            ->when($category_id, function ($query, $category_id) {
-                return $query->whereIn('posts.category_id', $category_id);
-            })
-            ->when($type, function ($query, $type) {
-                if ($type != 'all' && $type == 'crawl') {
-                    return $query->whereNotNull('link_origin_encode');
-                } else if ($type != 'all' && $type == 'handle') {
-                    return $query->whereNull('link_origin_encode');
-                }
-            })
-
-            ->orderBy('posts.id', 'DESC')
-
-            ->paginate($_data['limit']);
+                ->select('posts.*', 'categories.title as category_title')
+                ->leftJoin('categories', 'posts.category_id', 'categories.id')
+                ->when($keyword, function ($query, $keyword) {
+                    return $query->where('posts.title', 'LIKE', '%' . $keyword . '%');
+                })
+                ->when($category_id, function ($query, $category_id) {
+                    return $query->whereIn('posts.category_id', $category_id);
+                })
+                ->when($type, function ($query, $type) {
+                    if ($type != 'all' && $type == 'crawl') {
+                        return $query->whereNotNull('link_origin_encode');
+                    } else if ($type != 'all' && $type == 'handle') {
+                        return $query->whereNull('link_origin_encode');
+                    }
+                })
+                ->when($roles, function ($query, $roles) {
+                    if (!in_array('Admin', $roles)) {
+                        return $query->where('posts.admin_id', auth('admins')->user()->id)
+                                     ->orWhere('posts.admin_id', -1);
+                    }
+                })
+                ->when($admin_id, function ($query, $admin_id) {
+                    if ($admin_id != 'all') {
+                        return $query->where('posts.admin_id', $admin_id);
+                    }
+                })
+                ->orderBy('posts.id', 'DESC')
+                ->paginate($_data['limit']);
     }
 
     public function create($_data)

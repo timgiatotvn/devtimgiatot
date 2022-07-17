@@ -57,11 +57,18 @@ class AccountService
     {
         if (isset($_data['_token'])) unset($_data['_token']);
         if (isset($_data['page'])) unset($_data['page']);
+        if (isset($_data['roles'])) unset($_data['roles']);
         unset($_data['proengsoft_jsvalidation']);
-        $_data['password'] = Hash::make($_data['password']);
+        
+        if (!empty($_data['password'])) {
+            $_data['password'] = Hash::make($_data['password']);
+        } else {
+            unset($_data['password']);
+        }
         $db = array_merge($_data, [
             'updated_at' => date("Y/m/d H:i:s")
         ]);
+
         return $this->accountRepository->update($db, $_id);
     }
 
