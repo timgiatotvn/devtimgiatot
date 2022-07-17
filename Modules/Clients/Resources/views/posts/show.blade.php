@@ -130,6 +130,17 @@
                 {!! !empty($data_common['setting']->ads2) ? $data_common['setting']->ads2 : '' !!}
             </div>
 
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5089299175895449"
+                    crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-layout="in-article"
+                 data-ad-format="fluid"
+                 data-ad-client="ca-pub-5089299175895449"
+                 data-ad-slot="8991757292"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
             <div class="fb-share-button"
                  data-href="{{ route('client.post.show', ['slug' => $data['detail']->slug]) }}"
                  data-layout="button"
@@ -139,17 +150,6 @@
                    class="fb-xfbml-parse-ignore">Chia sẻ</a>
             </div>
         </div>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5089299175895449"
-                crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-layout="in-article"
-             data-ad-format="fluid"
-             data-ad-client="ca-pub-5089299175895449"
-             data-ad-slot="8991757292"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
         <div class="wrap-new-related">
             <a href="{{$data['adv_img']->link}}">
                 <img class="w-100" src="{{ asset($data['adv_img']->path)}}" alt="Hình ảnh quảng cáo">
