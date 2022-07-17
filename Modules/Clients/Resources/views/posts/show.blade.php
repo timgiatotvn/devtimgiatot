@@ -141,7 +141,8 @@
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-            <div class="fb-share-button mt-2"
+            <div style="height: 15px"></div>
+            <div class="fb-share-button"
                  data-href="{{ route('client.post.show', ['slug' => $data['detail']->slug]) }}"
                  data-layout="button"
                  data-size="small">
