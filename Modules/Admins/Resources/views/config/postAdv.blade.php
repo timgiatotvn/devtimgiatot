@@ -25,6 +25,16 @@
                                         <img class="w-50" src="{{ asset($data['img']->path) }}" alt="Hình ảnh quảng cáo">
                                     </div>
                                     <div class="col-md-10 offset-1">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <a data-input="thumbnail" data-preview="holder"
+                                                   class="lfm btn btn-primary">
+                                                    <i class="fa fa-picture-o"></i> CHOOSE
+                                                </a>
+                                            </span>
+                                            <input id="thumbnail"  class="form-control" type="text" name="thumbnail"
+                                                   readonly>
+                                        </div>
                                         <div class="form-group">
                                             <label>Liên kết</label>
                                             <input type="text" name="link" value="{{ $data['img']->link }}" class="form-control" placeholder=""/>
@@ -42,16 +52,6 @@
                                             </select>
                                         </div>
 
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <a data-input="thumbnail" data-preview="holder"
-                                                   class="lfm btn btn-primary">
-                                                    <i class="fa fa-picture-o"></i> CHOOSE
-                                                </a>
-                                            </span>
-                                            <input id="thumbnail"  class="form-control" type="text" name="thumbnail"
-                                                   readonly>
-                                        </div>
                                         <img id="holder" style="margin-top:15px;max-height:100px;">
 
                                         <div class="form-group">
