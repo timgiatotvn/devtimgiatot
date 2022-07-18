@@ -57,6 +57,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Quyền</label>
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        @foreach ($data['roles'] as $roleItem)
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input @if(in_array($roleItem->id, $data['role_users'])){{'checked'}}@endif type="checkbox" class="form-check-input" name="roles[]" value="{{$roleItem->id}}">
+                                                    {{$roleItem->name}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                             @if($errors->has('error'))
                                 <p class="alert alert-danger">{{$errors->first('error')}}</p>
                             @endif

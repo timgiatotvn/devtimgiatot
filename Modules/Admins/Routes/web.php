@@ -115,11 +115,11 @@ Route::prefix('admin')->group(function () {
             Route::post('/', 'PostsController@actionIndex');
             Route::get('/create', 'PostsController@create')->name('admin.post.create');
             Route::post('/create', 'PostsController@store');
-            Route::get('/edit/{id}', 'PostsController@edit')->name('admin.post.edit');
-            Route::post('/edit/{id}', 'PostsController@update');
+            Route::get('/edit/{id}', 'PostsController@edit')->name('admin.post.edit')->middleware('check-owner-post');
+            Route::post('/edit/{id}', 'PostsController@update')->middleware('check-owner-post');
             Route::get('/status/{id}/{field}', 'PostsController@status')->name('admin.post.status');
-            Route::get('/show/{id}', 'PostsController@show')->name('admin.post.show');
-            Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy');
+            Route::get('/show/{id}', 'PostsController@show')->name('admin.post.show')->middleware('check-owner-post');
+            Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy')->middleware('check-owner-post');
         });
 
         //Products
@@ -201,6 +201,33 @@ Route::prefix('admin')->group(function () {
 
             Route::prefix('articles')->group(function () {
                 Route::get('/', 'Crawlers\ArticlesController@index')->name('admin.crawler.article.index');
+            });
+        });
+
+        Route::prefix('setting')->group(function () {
+            Route::prefix('role')->group(function () {
+                Route::get('/list', 'RoleController@list')->name('admin.setting.role.list');
+                Route::get('/add', 'RoleController@add')->name('admin.setting.role.add');
+                Route::post('/create', 'RoleController@create')->name('admin.setting.role.create');
+                Route::get('/{id}/delete', 'RoleController@delete')->name('admin.setting.role.delete');
+                Route::get('/{id}/edit', 'RoleController@editForm')->name('admin.setting.role.edit_form');
+                Route::post('/{id}/update', 'RoleController@update')->name('admin.setting.role.update');
+            });
+            Route::prefix('group-permission')->group(function () {
+                Route::get('/list', 'GroupPermissionController@list')->name('admin.setting.group_permission.list');
+                Route::get('/add', 'GroupPermissionController@add')->name('admin.setting.group_permission.add');
+                Route::post('/create', 'GroupPermissionController@create')->name('admin.setting.group_permission.create');
+                Route::get('/{id}/delete', 'GroupPermissionController@delete')->name('admin.setting.group_permission.delete');
+                Route::get('/{id}/edit', 'GroupPermissionController@editForm')->name('admin.setting.group_permission.edit_form');
+                Route::post('/{id}/update', 'GroupPermissionController@update')->name('admin.setting.group_permission.update');
+            });
+            Route::prefix('permission')->group(function () {
+                Route::get('/list', 'PermissionController@list')->name('admin.setting.permission.list');
+                Route::get('/add', 'PermissionController@add')->name('admin.setting.permission.add');
+                Route::post('/create', 'PermissionController@create')->name('admin.setting.permission.create');
+                Route::get('/{id}/delete', 'PermissionController@delete')->name('admin.setting.permission.delete');
+                Route::get('/{id}/edit', 'PermissionController@editForm')->name('admin.setting.permission.edit_form');
+                Route::post('/{id}/update', 'PermissionController@update')->name('admin.setting.permission.update');
             });
         });
 

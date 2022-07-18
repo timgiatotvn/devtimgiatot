@@ -172,5 +172,25 @@
                 <i class="icon-bell menu-icon"></i>
             </a>
        </li>
+       <li class="nav-item {{ Request::routeIs('admin.category.*')? 'active' : '' }} {{ Request::routeIs('admin.post.*')? 'active' : '' }} {{ Request::routeIs('admin.product.*')? 'active' : '' }}">
+            <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
+            aria-controls="basic-ui">
+                <span class="menu-title">Cài đặt</span>
+                <i class="icon-layers menu-icon"></i>
+            </a>
+            <div class="collapse {{ Request::routeIs('admin.setting.*')? 'show' : '' }}" id="basic-ui">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('admin.setting.role.*')? 'active' : '' }}" href="{{ route('admin.setting.role.list') }}">Quyền</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('admin.setting.group_permission.*')? 'active' : '' }}" href="{{ route('admin.setting.group_permission.list') }}">Nhóm quyền truy cập</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::routeIs('admin.setting.permission.*')? 'active' : '' }}" href="{{ route('admin.setting.permission.list') }}">Quyền truy cập</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
 </nav>

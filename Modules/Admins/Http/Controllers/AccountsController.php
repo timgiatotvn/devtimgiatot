@@ -3,11 +3,14 @@
 namespace Modules\Admins\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\Role;
+use App\Model\RoleAdmin;
 use App\Service\Admins\AccountService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\MessageBag;
 use Modules\Admins\Http\Requests\Account\CreateRequest;
 use Modules\Admins\Http\Requests\Account\EditRequest;
@@ -88,7 +91,10 @@ class AccountsController extends Controller
         try {
             $data['common'] = Helpers::titleAction([__('admins::layer.account.edit.title'), __('admins::layer.account.index.title2')]);
             $data['detail'] = $this->accountService->findById($id);
+            $data['roles'] = Role::all();
+            $data['role_users'] = RoleAdmin::where('admin_id', $id)->pluck('role_id')->toArray();
             if (empty($data['detail']->id)) return abort(404);
+
             return view('admins::accounts.edit', ['data' => $data]);
         } catch (\Exception $e) {
             return !empty($e->getMessage()) ? abort('500') : abort(404);
@@ -105,14 +111,29 @@ class AccountsController extends Controller
             $data['detail'] = $this->accountService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $_params = $request->all();
+            DB::beginTransaction();
             if ($this->accountService->update($_params, $id)) {
                 session()->flash('success', __('admins::layer.notify.success'));
+                foreach ($_params['roles'] as $role_id) {
+                    $role_users[] = [
+                        'role_id' => $role_id,
+                        'admin_id' => $id
+                    ];
+                }
+                if (!empty($role_users)) {
+                    RoleAdmin::where('admin_id', $id)->delete();
+                    RoleAdmin::insert($role_users);
+                }
+                DB::commit();
+
                 return redirect(route('admin.account.index', ['page' => (!empty($_GET['page']) ? $_GET['page'] : 1)]));
             } else {
+                DB::rollBack();
                 $errors = new MessageBag(['error' => __('admins::layer.notify.fail')]);
                 return back()->withInput($_params)->withErrors($errors);
             }
         } catch (\Exception $e) {
+            DB::rollBack();
             return !empty($e->getMessage()) ? abort('500') : abort(404);
         }
     }

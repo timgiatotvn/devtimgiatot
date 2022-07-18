@@ -3,6 +3,7 @@
 namespace Modules\Admins\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\Admin;
 use App\Model\Category;
 use App\Model\Notification;
 use App\Model\Post;
@@ -40,7 +41,7 @@ class PostsController extends Controller
             $data['common'] = Helpers::titleAction([__('admins::layer.post.index.title'), __('admins::layer.post.index.title2')]);
             $data['list'] = $this->postService->getList(['limit' => 10]);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [(request()->has('category_id') ? request()->get('category_id') : '')]]);
-
+            $data['admins'] = Admin::all();
             return view('admins::posts.index', ['data' => $data]);
         } catch (\Exception $e) {
             abort('500');
@@ -117,6 +118,14 @@ class PostsController extends Controller
             $data['common'] = Helpers::titleAction([__('admins::layer.post.edit.title'), __('admins::layer.post.index.title2')]);
             $data['detail'] = $this->postService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
+            /**
+             * admin_id = -1 thì là tin crawl, nếu vẫn là = -1 thì người đầu tiền click vào là tin của ng đó
+             */
+            if ($data['detail']->admin_id == -1) {
+                Post::whereId($id)->update([
+                    'admin_id' => auth('admins')->user()->id
+                ]);
+            }
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [$data['detail']->category_id], 'multi' => true]);
             return view('admins::posts.edit', ['data' => $data]);
         } catch (\Exception $e) {
