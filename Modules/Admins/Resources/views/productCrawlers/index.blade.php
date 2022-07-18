@@ -76,6 +76,7 @@
                                             <td>
                                                 <div class="fix-content">
                                                     {{ $row->title }}
+                                                    <p style="padding: 5px 0 0 0; font-size: 12px;">Type: {{ $row->type }}</p>
                                                 </div>
                                                 <div class="clearfix mb-3"></div>
                                                 <a class="icon-form" title="edit"
