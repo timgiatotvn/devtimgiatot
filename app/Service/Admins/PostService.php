@@ -22,9 +22,10 @@ class PostService
     public function getList($_data = [])
     {
         $_data['keyword'] = request()->has('keyword') ? request()->get('keyword') : '';
+        $_data['col_order'] = request()->has('col_order') ? request()->get('col_order') : 'id';
+        $_data['type_order'] = request()->has('type_order') ? request()->get('type_order') : 'DESC';
         $_data['category_id'] = request()->has('category_id') ? $this->categoryService->multiCate(request()->get('category_id')) : '';
         $_data['type'] = request()->has('type') ? request()->get('type') : 'all';
-
         return $this->postRepository->getList($_data);
     }
 

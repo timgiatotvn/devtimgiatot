@@ -16,11 +16,24 @@
                                     {!! $data['category'] !!}
                                 </select>
                             </div>
+{{--                            <div class="input-group mb-0 mr-sm-2">--}}
+{{--                                <select name="type" class="js-example-basic-single form-control form-select-search">--}}
+{{--                                    <option @if (request()->has('type') && request()->get('type') == 'all'){{'selected'}}@endif value="all">Tất cả bài viết</option>--}}
+{{--                                    <option @if (request()->has('type') && request()->get('type') == 'crawl'){{'selected'}}@endif value="crawl">Bài viết Crawl</option>--}}
+{{--                                    <option @if (request()->has('type') && request()->get('type') == 'handle'){{'selected'}}@endif value="handle">Bài viết tự viết</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                             <div class="input-group mb-0 mr-sm-2">
-                                <select name="type" class="js-example-basic-single form-control form-select-search">
-                                    <option @if (request()->has('type') && request()->get('type') == 'all'){{'selected'}}@endif value="all">Tất cả bài viết</option>
-                                    <option @if (request()->has('type') && request()->get('type') == 'crawl'){{'selected'}}@endif value="crawl">Bài viết Crawl</option>
-                                    <option @if (request()->has('type') && request()->get('type') == 'handle'){{'selected'}}@endif value="handle">Bài viết tự viết</option>
+                                <select name="col_order" class="js-example-basic-single form-control form-select-search">
+                                    <option @if (request()->has('col_order') && request()->get('col_order') == ''){{'selected'}}@endif value="id">Sắp xếp mặc định</option>
+                                    <option @if (request()->has('col_order') && request()->get('col_order') == 'total_views'){{'selected'}}@endif value="total_views">Sắp xếp theo số lượt xem</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-0 mr-sm-2">
+                                <select name="type_order" class="js-example-basic-single form-control form-select-search">
+                                    <option @if (request()->has('type_order') && request()->get('type_order') == ''){{'selected'}}@endif value="">Mặc định</option>
+                                    <option @if (request()->has('type_order') && request()->get('type_order') == 'ASC'){{'selected'}}@endif value="ASC">Tăng dần</option>
+                                    <option @if (request()->has('type_order') && request()->get('type_order') == 'DESC'){{'selected'}}@endif value="DESC">Giảm dần</option>
                                 </select>
                             </div>
                             <button type="submit"

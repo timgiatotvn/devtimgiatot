@@ -15,6 +15,9 @@ class PostRepository implements PostRepositoryInterface
     {
         $keyword = !empty($_data['keyword']) ? $_data['keyword'] : '';
         $type = !empty($_data['type']) ? $_data['type'] : 'all';
+        $col= !empty($_data['col_order']) ? $_data['col_order'] : 'all';
+        $type_order= !empty($_data['type_order']) ? $_data['type_order'] : 'DESC';
+        $col_order = 'posts.'.$col;
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
         return DB::table(self::TABLE_NAME)
             ->select('posts.*', 'categories.title as category_title')
@@ -33,7 +36,7 @@ class PostRepository implements PostRepositoryInterface
                 }
             })
 
-            ->orderBy('posts.id', 'DESC')
+            ->orderBy($col_order, $type_order)
 
             ->paginate($_data['limit']);
     }
