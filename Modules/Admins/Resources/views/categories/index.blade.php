@@ -10,7 +10,7 @@
                             <input type="text" name="keyword" value="{{ request()->has('keyword') ? request()->get('keyword') : '' }}" class="form-control mb-0 mr-sm-2"
                                    placeholder="@lang('admins::layer.search.form.keyword')">
                             <div class="input-group mb-0 mr-sm-2">
-                                <select name="parent_id" class="form-control form-select-search">
+                                <select name="parent_id" class="js-example-basic-single form-control form-select-search">
                                     {!! $data['category'] !!}
                                 </select>
                             </div>

@@ -74,11 +74,13 @@ class ConfigController extends Controller
         try {
             $path = $request->get('thumbnail');
             $link = $request->get('link');
+            $code = $request->get('google_code');
+            $location_code_google = $request->get('location_code_google');
             if ($path==null){
                 session()->flash('error', __('Vui lòng chọn hình ảnh cần cập nhật'));
                 return redirect()->route('admin.config.post-adv');
             }
-            DB::table('adv_post')->where('id', 1)->update(['path' => $path,'link'=>$link]);
+            DB::table('adv_post')->where('id', 1)->update(['path' => $path,'link'=>$link,'google_code'=>$code,'location_code_google'=>$location_code_google]);
             session()->flash('success', __('Thao tác thành công'));
             return redirect()->route('admin.config.post-adv');
         } catch (\Exception $e) {

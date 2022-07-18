@@ -12,7 +12,7 @@
                                    class="form-control mb-0 mr-sm-2"
                                    placeholder="@lang('admins::layer.search.form.keyword')">
                             <div class="input-group mb-0 mr-sm-2">
-                                <select name="category_id" class="form-control form-select-search">
+                                <select name="category_id" class="js-example-basic-single form-control form-select-search">
                                     {!! $data['category'] !!}
                                 </select>
                             </div>

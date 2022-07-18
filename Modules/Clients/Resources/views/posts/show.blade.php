@@ -2,6 +2,9 @@
 
 @section('content')
     <section id="box-new-detail">
+        @if($data['adv_img']->location_code_google=='top')
+            {!!$data['adv_img']->google_code!!}
+        @endif
         <div class="nrd-head">
             <h1>{{ $data['detail']->title }}</h1>
         </div>
@@ -129,18 +132,9 @@
 
                 {!! !empty($data_common['setting']->ads2) ? $data_common['setting']->ads2 : '' !!}
             </div>
-
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5089299175895449"
-                    crossorigin="anonymous"></script>
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-layout="in-article"
-                 data-ad-format="fluid"
-                 data-ad-client="ca-pub-5089299175895449"
-                 data-ad-slot="8991757292"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            @if($data['adv_img']->location_code_google=='bottom')
+                {!!$data['adv_img']->google_code!!}
+            @endif
             <div style="height: 15px"></div>
             <div class="fb-share-button"
                  data-href="{{ route('client.post.show', ['slug' => $data['detail']->slug]) }}"

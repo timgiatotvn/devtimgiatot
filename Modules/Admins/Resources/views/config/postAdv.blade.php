@@ -24,11 +24,24 @@
                                     <div class="col-md-12 mb-4 text-center">
                                         <img class="w-50" src="{{ asset($data['img']->path) }}" alt="Hình ảnh quảng cáo">
                                     </div>
-                                    <div class="col-md-4 offset-3">
+                                    <div class="col-md-10 offset-1">
                                         <div class="form-group">
                                             <label>Liên kết</label>
                                             <input type="text" name="link" value="{{ $data['img']->link }}" class="form-control" placeholder=""/>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Google code</label>
+                                            <textarea class="form-control" name="google_code" rows="5"> {{ $data['img']->google_code }}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Vị trí hiển thị code google</label>
+                                            <select class="js-example-basic-single  form-select form-control" name="location_code_google" aria-label="Default select example">
+                                                <option @if( $data['img']->location_code_google=='top') selected  @endif value="top">Đầu bài viết</option>
+                                                <option @if( $data['img']->location_code_google=='bottom') selected  @endif value="bottom">Cuối bài viết</option>
+                                                <option @if( $data['img']->location_code_google=='hide') selected  @endif value="hide">Ẩn</option>
+                                            </select>
+                                        </div>
+
                                         <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail" data-preview="holder"

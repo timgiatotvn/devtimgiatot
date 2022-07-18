@@ -12,12 +12,12 @@
                                    class="form-control mb-0 mr-sm-2"
                                    placeholder="@lang('admins::layer.search.form.keyword')">
                             <div class="input-group mb-0 mr-sm-2">
-                                <select name="category_id" class="form-control form-select-search">
+                                <select name="category_id" class="js-example-basic-single form-control form-select-search">
                                     {!! $data['category'] !!}
                                 </select>
                             </div>
                             <div class="input-group mb-0 mr-sm-2">
-                                <select name="type" class="form-control form-select-search">
+                                <select name="type" class="js-example-basic-single form-control form-select-search">
                                     <option @if (request()->has('type') && request()->get('type') == 'all'){{'selected'}}@endif value="all">Tất cả bài viết</option>
                                     <option @if (request()->has('type') && request()->get('type') == 'crawl'){{'selected'}}@endif value="crawl">Bài viết Crawl</option>
                                     <option @if (request()->has('type') && request()->get('type') == 'handle'){{'selected'}}@endif value="handle">Bài viết tự viết</option>
