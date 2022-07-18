@@ -18,6 +18,9 @@ class PostRepository implements PostRepositoryInterface
         $admin_id = !empty($_data['admin_id']) ? $_data['admin_id'] : 'all';
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
         $roles = auth('admins')->user()->roles->pluck('name')->toArray();
+        $col= !empty($_data['col_order']) ? $_data['col_order'] : 'all';
+        $type_order= !empty($_data['type_order']) ? $_data['type_order'] : 'DESC';
+        $col_order = 'posts.'.$col;
         return DB::table(self::TABLE_NAME)
                 ->select('posts.*', 'categories.title as category_title')
                 ->leftJoin('categories', 'posts.category_id', 'categories.id')
@@ -45,7 +48,7 @@ class PostRepository implements PostRepositoryInterface
                         return $query->where('posts.admin_id', $admin_id);
                     }
                 })
-                ->orderBy('posts.id', 'DESC')
+                ->orderBy($col_order, $type_order)
                 ->paginate($_data['limit']);
     }
 
