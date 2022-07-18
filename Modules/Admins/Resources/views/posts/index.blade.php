@@ -163,7 +163,7 @@
                                         Thực hiện
                                     </button>
                                 </div>
-                                {{ $data['list']->links('admins::elements.extend.pagination') }}
+                                {{ $data['list']->appends($_GET)->links('admins::elements.extend.pagination') }}
                             </div>
                         </div>
                     </div>
