@@ -36,18 +36,18 @@
                                     <option @if (request()->has('type_order') && request()->get('type_order') == 'DESC'){{'selected'}}@endif value="DESC">Giảm dần</option>
                                 </select>
                             </div>
-{{--                            @if(in_array(ROLE_ADMIN, auth('admins')->user()->roles->pluck('name')->toArray()))--}}
-{{--                            <div class="input-group mb-0 mr-sm-2">--}}
-{{--                                <select name="admin_id" class="form-control form-select-search">--}}
-{{--                                    <option value="all">Tất cả tài khoản</option>--}}
-{{--                                    @foreach ($data['admins'] as $adminItem)--}}
-{{--                                        <option @if (request()->has('admin_id') && request()->get('admin_id') == $adminItem->id){{'selected'}}@endif value="{{$adminItem->id}}">--}}
-{{--                                            {{$adminItem->username}}--}}
-{{--                                        </option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            @endif--}}
+                           @if(in_array(ROLE_ADMIN, auth('admins')->user()->roles->pluck('name')->toArray()))
+                           <div class="input-group mb-0 mr-sm-2">
+                               <select name="admin_id" class="form-control form-select-search">
+                                   <option value="all">Tất cả tài khoản</option>
+                                   @foreach ($data['admins'] as $adminItem)
+                                       <option @if (request()->has('admin_id') && request()->get('admin_id') == $adminItem->id){{'selected'}}@endif value="{{$adminItem->id}}">
+                                           {{$adminItem->username}}
+                                       </option>
+                                   @endforeach
+                               </select>
+                           </div>
+                           @endif
                             <button type="submit"
                                     class="btn btn-primary mb-0">@lang('admins::layer.search.button.title')</button>
                         </form>
