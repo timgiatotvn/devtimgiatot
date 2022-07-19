@@ -31,7 +31,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/render-slug', 'CommonController@renderSlug')->name('admin.renderSlug');
 
         //Account
-        Route::prefix('accounts')->group(function () {
+        Route::prefix('accounts')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'AccountsController@index')->name('admin.account.index');
             Route::get('/create', 'AccountsController@create')->name('admin.account.create');
             Route::post('/create', 'AccountsController@store');
@@ -44,13 +44,13 @@ Route::prefix('admin')->group(function () {
         });
 
         // Crawl
-        Route::prefix('crawls')->group(function () {
+        Route::prefix('crawls')->middleware('check-is-admin')->group(function () {
             Route::get('/list', 'CrawlController@list')->name('admin.crawls.list');
             Route::post('/store-link', 'CrawlController@storeLink')->name('admin.crawls.store-link');
         });
 
         //Advertisement
-        Route::prefix('advertisements')->group(function () {
+        Route::prefix('advertisements')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'AdvertisementsController@index')->name('admin.advertisement.index');
             Route::get('/create', 'AdvertisementsController@create')->name('admin.advertisement.create');
             Route::post('/create', 'AdvertisementsController@store');
@@ -62,7 +62,7 @@ Route::prefix('admin')->group(function () {
         });
 
         //Logo
-        Route::prefix('logos')->group(function () {
+        Route::prefix('logos')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'LogosController@index')->name('admin.logo.index');
             Route::get('/create', 'LogosController@create')->name('admin.logo.create');
             Route::post('/create', 'LogosController@store');
@@ -74,7 +74,7 @@ Route::prefix('admin')->group(function () {
         });
 
         //Logo
-        Route::prefix('slideshows')->group(function () {
+        Route::prefix('slideshows')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'SlideshowsController@index')->name('admin.slideshow.index');
             Route::get('/create', 'SlideshowsController@create')->name('admin.slideshow.create');
             Route::post('/create', 'SlideshowsController@store');
@@ -86,7 +86,7 @@ Route::prefix('admin')->group(function () {
         });
 
         //Logo
-        Route::prefix('links')->group(function () {
+        Route::prefix('links')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'LinksController@index')->name('admin.link.index');
             Route::get('/create', 'LinksController@create')->name('admin.link.create');
             Route::post('/create', 'LinksController@store');
@@ -98,7 +98,7 @@ Route::prefix('admin')->group(function () {
         });
 
         //Danh muc
-        Route::prefix('categories')->group(function () {
+        Route::prefix('categories')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'CategoriesController@index')->name('admin.category.index');
             Route::get('/create', 'CategoriesController@create')->name('admin.category.create');
             Route::post('/create', 'CategoriesController@store');
@@ -119,11 +119,11 @@ Route::prefix('admin')->group(function () {
             Route::post('/edit/{id}', 'PostsController@update')->middleware('check-owner-post');
             Route::get('/status/{id}/{field}', 'PostsController@status')->name('admin.post.status');
             Route::get('/show/{id}', 'PostsController@show')->name('admin.post.show')->middleware('check-owner-post');
-            Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy')->middleware('check-owner-post');
+            Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy')->middleware('check-is-admin');
         });
 
         //Products
-        Route::prefix('products')->group(function () {
+        Route::prefix('products')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'ProductsController@index')->name('admin.product.index');
             Route::post('/', 'ProductsController@actionIndex');
             Route::get('/create', 'ProductsController@create')->name('admin.product.create');
@@ -136,12 +136,12 @@ Route::prefix('admin')->group(function () {
         });
 
         //keywords
-        Route::prefix('keywords')->group(function () {
+        Route::prefix('keywords')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'ProductsController@getListKeyWord')->name('admin.statistical.keyword');
         });
 
         //Cấu hình
-        Route::prefix('config')->group(function () {
+        Route::prefix('config')->middleware('check-is-admin')->group(function () {
             //Danh mục hiển thị ngoài trang chủ
             Route::get('/home-cate', 'ConfigController@configCateHome')->name('admin.config.home-cate');
             Route::post('/setvalue', 'ConfigController@setvalue')->name('admin.config.setvalue');
@@ -156,7 +156,7 @@ Route::prefix('admin')->group(function () {
         });
 
         //Products crawlers
-        Route::prefix('product-crawlers')->group(function () {
+        Route::prefix('product-crawlers')->middleware('check-is-admin')->group(function () {
                 Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
             Route::post('/', 'ProductCrawlersController@actionIndex');
             Route::get('/create', 'ProductCrawlersController@create')->name('admin.productCrawler.create');
@@ -169,13 +169,13 @@ Route::prefix('admin')->group(function () {
         });
 
         //Products
-        Route::prefix('carts')->group(function () {
+        Route::prefix('carts')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'CartsController@index')->name('admin.cart.index');
         });
 
 
         //Crawler
-        Route::prefix('crawlers')->group(function () {
+        Route::prefix('crawlers')->middleware('check-is-admin')->group(function () {
             Route::prefix('websites')->group(function () {
                 Route::get('/', 'Crawlers\WebsitesController@index')->name('admin.crawler.website.index');
                 Route::get('/create', 'Crawlers\WebsitesController@create')->name('admin.crawler.website.create');
@@ -204,7 +204,7 @@ Route::prefix('admin')->group(function () {
             });
         });
 
-        Route::prefix('setting')->group(function () {
+        Route::prefix('setting')->middleware('check-is-admin')->group(function () {
             Route::prefix('role')->group(function () {
                 Route::get('/list', 'RoleController@list')->name('admin.setting.role.list');
                 Route::get('/add', 'RoleController@add')->name('admin.setting.role.add');
@@ -232,7 +232,7 @@ Route::prefix('admin')->group(function () {
         });
 
 	//notification
-        Route::resource('notification', 'NotificationController');
-        Route::get('notification/delete/{id}', 'NotificationController@destroy')->name('admin.notification.destroy');
+        Route::resource('notification', 'NotificationController')->middleware('check-is-admin');
+        Route::get('notification/delete/{id}', 'NotificationController@destroy')->name('admin.notification.destroy')->middleware('check-is-admin');
     });
 });

@@ -25,6 +25,11 @@ defined('MAX_FILE_SIZE') || define('MAX_FILE_SIZE', 600000);
 define('HDOM_SMARTY_AS_TEXT', 1);
 const ROLE_ADMIN = 'Admin';
 
+function get_role_name()
+{
+	return auth('admins')->user()->roles->pluck('name')->toArray();
+}
+
 function can($name_permission)
 {
     $permission = \App\Model\Permission::where('name', $name_permission)->first();
