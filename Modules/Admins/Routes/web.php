@@ -31,6 +31,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/render-slug', 'CommonController@renderSlug')->name('admin.renderSlug');
 
         //Account
+        Route::get('/accounts/logout', 'AccountsController@logout')->name('admin.account.logout');
         Route::prefix('accounts')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'AccountsController@index')->name('admin.account.index');
             Route::get('/create', 'AccountsController@create')->name('admin.account.create');
@@ -40,7 +41,6 @@ Route::prefix('admin')->group(function () {
             Route::get('/status/{id}/{status}', 'AccountsController@status')->name('admin.account.status');
             Route::get('/show/{id}', 'AccountsController@show')->name('admin.account.show');
             Route::get('/destroy/{id}', 'AccountsController@destroy')->name('admin.account.destroy');
-            Route::get('/logout', 'AccountsController@logout')->name('admin.account.logout');
         });
 
         // Crawl
