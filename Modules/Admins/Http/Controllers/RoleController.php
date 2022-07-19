@@ -37,12 +37,16 @@ class RoleController extends Controller
             DB::beginTransaction();
             $role = Role::create($request->except('_token', 'permissions'));
             $permission_roles = [];
-            foreach ($request->permissions as $permission_id) {
-                $permission_roles[] = [
-                    'role_id' => $role->id,
-                    'permission_id' => $permission_id
-                ];
+
+            if (!empty($request->permissions)) {
+                foreach ($request->permissions as $permission_id) {
+                    $permission_roles[] = [
+                        'role_id' => $role->id,
+                        'permission_id' => $permission_id
+                    ];
+                }
             }
+            
             if (count($permission_roles) > 0) {
                 PermissionRole::insert($permission_roles);
             }
@@ -52,7 +56,7 @@ class RoleController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
 
-            return back()->with('error', 'Sửa thành công');
+            return back()->with('error', 'Vui lòng thử lại');
         }
         
     }
