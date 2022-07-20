@@ -38,11 +38,13 @@
                                 <tbody>
                                 @if (count($devices) > 0)
                                     @foreach($devices as $k => $device)
-                                        <tr>
-                                            <td>{{ $k+1 }}</td>
-                                            <td>{{ $device->city }}</td>
-                                            <td>{{ $device->total }}</td>
-                                        </tr>
+                                        @if (!empty($device->city))
+                                            <tr>
+                                                <td>{{ $k+1 }}</td>
+                                                <td>{{ $device->city }}</td>
+                                                <td>{{ $device->total }}</td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 @else
                                     <tr>
