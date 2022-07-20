@@ -16,8 +16,8 @@
                     <p class="designation">{{ substr(\Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard())->user()->username, 0, 15) }}</p>
                 </div>
                 {{--<div class="icon-container">--}}
-                    {{--<i class="icon-bubbles"></i>--}}
-                    {{--<div class="dot-indicator bg-danger"></div>--}}
+                {{--<i class="icon-bubbles"></i>--}}
+                {{--<div class="dot-indicator bg-danger"></div>--}}
                 {{--</div>--}}
             </a>
         </li>
@@ -36,7 +36,7 @@
         @if (in_array(ROLE_ADMIN, get_role_name()))
             <li class="nav-item {{ Request::routeIs('admin.config.*')? 'active' : '' }} {{ Request::routeIs('admin.config.*')? 'active' : '' }} {{ Request::routeIs('admin.config.*')? 'active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-                aria-controls="basic-ui">
+                   aria-controls="basic-ui">
                     <span class="menu-title">Cấu hình</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
@@ -56,7 +56,7 @@
             </li>
             <li class="nav-item {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-                aria-controls="basic-ui">
+                   aria-controls="basic-ui">
                     <span class="menu-title">Thống kê</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
@@ -69,7 +69,7 @@
                 </div>
             </li>
         @endif
-        
+
         <li class="nav-item {{ Request::routeIs('admin.category.*')? 'active' : '' }} {{ Request::routeIs('admin.post.*')? 'active' : '' }} {{ Request::routeIs('admin.product.*')? 'active' : '' }}">
             <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
                aria-controls="basic-ui">
@@ -96,12 +96,12 @@
                     <span class="menu-title">Cào bài viết</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
-        </li>
+            </li>
 
-        
+
             <li class="nav-item {{ Request::routeIs('admin.crawler.*')? 'active' : '' }} {{ Request::routeIs('admin.productCrawler.*')? 'active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-                aria-controls="basic-ui">
+                   aria-controls="basic-ui">
                     <span class="menu-title">@lang('admins::layer.menu.parent.crawler')</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
@@ -116,12 +116,12 @@
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.productCrawler.*')? 'active' : '' }}" href="{{ route('admin.productCrawler.index') }}">@lang('admins::layer.menu.parent.product.product.title')</a>
                         </li>
-    {{--                    <li class="nav-item">--}}
-    {{--                        <a class="nav-link {{ Request::routeIs('admin.post.*')? 'active' : '' }}" href="{{ route('admin.post.index') }}">@lang('admins::layer.menu.parent.post.post.title')</a>--}}
-    {{--                    </li>--}}
-    {{--                    <li class="nav-item">--}}
-    {{--                        <a class="nav-link {{ Request::routeIs('admin.product.*')? 'active' : '' }}" href="{{ route('admin.product.index') }}">@lang('admins::layer.menu.parent.product.product.title')</a>--}}
-    {{--                    </li>--}}
+                        {{--                    <li class="nav-item">--}}
+                        {{--                        <a class="nav-link {{ Request::routeIs('admin.post.*')? 'active' : '' }}" href="{{ route('admin.post.index') }}">@lang('admins::layer.menu.parent.post.post.title')</a>--}}
+                        {{--                    </li>--}}
+                        {{--                    <li class="nav-item">--}}
+                        {{--                        <a class="nav-link {{ Request::routeIs('admin.product.*')? 'active' : '' }}" href="{{ route('admin.product.index') }}">@lang('admins::layer.menu.parent.product.product.title')</a>--}}
+                        {{--                    </li>--}}
                     </ul>
                 </div>
             </li>
@@ -155,29 +155,34 @@
                     <i class="icon-doc menu-icon"></i>
                 </a>
             </li>
-    {{--        <li class="nav-item {{ Request::routeIs('admin.config.setting.*')? 'active' : '' }}">--}}
-    {{--            <a class="nav-link" href="{{ route('admin.config.setting.update',["id" => 1]) }}">--}}
-    {{--                <span class="menu-title">Cấu hình website</span>--}}
-    {{--                <i class="mdi mdi-settings-box menu-icon"></i>--}}
-    {{--            </a>--}}
-    {{--        </li>--}}
+            {{--        <li class="nav-item {{ Request::routeIs('admin.config.setting.*')? 'active' : '' }}">--}}
+            {{--            <a class="nav-link" href="{{ route('admin.config.setting.update',["id" => 1]) }}">--}}
+            {{--                <span class="menu-title">Cấu hình website</span>--}}
+            {{--                <i class="mdi mdi-settings-box menu-icon"></i>--}}
+            {{--            </a>--}}
+            {{--        </li>--}}
 
-        <li class="nav-item {{ Request::routeIs('notification.*')? 'active' : '' }}">
+            <li class="nav-item {{ Request::routeIs('notification.*')? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('notification.index') }}">
                     <span class="menu-title">Thông báo App</span>
                     <i class="icon-bell menu-icon"></i>
                 </a>
             </li>
-
-        <li class="nav-item {{ Request::routeIs('admin.account.*')? 'active' : '' }}">
+            <li class="nav-item {{ Request::routeIs('report_install_app.*')? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('report_install_app') }}">
+                    <span class="menu-title">Thống kê cài đặt app</span>
+                    <i class="icon-layers menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item {{ Request::routeIs('admin.account.*')? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.account.index') }}">
                     <span class="menu-title">Tài khoản</span>
                     <i class="icon-bell menu-icon"></i>
                 </a>
-        </li>
-        <li class="nav-item {{ Request::routeIs('admin.category.*')? 'active' : '' }} {{ Request::routeIs('admin.post.*')? 'active' : '' }} {{ Request::routeIs('admin.product.*')? 'active' : '' }}">
+            </li>
+            <li class="nav-item {{ Request::routeIs('admin.category.*')? 'active' : '' }} {{ Request::routeIs('admin.post.*')? 'active' : '' }} {{ Request::routeIs('admin.product.*')? 'active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-                aria-controls="basic-ui">
+                   aria-controls="basic-ui">
                     <span class="menu-title">Cài đặt</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>

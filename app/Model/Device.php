@@ -15,6 +15,7 @@ class Device extends Model
         'type',
         'address',
         'city',
+        'district',
         'note'
     ];
 }
