@@ -234,5 +234,6 @@ Route::prefix('admin')->group(function () {
 	//notification
         Route::resource('notification', 'NotificationController')->middleware('check-is-admin');
         Route::get('notification/delete/{id}', 'NotificationController@destroy')->name('admin.notification.destroy')->middleware('check-is-admin');
+        Route::get('report-install-app', 'ReportInstallAppController@index')->name('report_install_app')->middleware('check-is-admin');
     });
 });

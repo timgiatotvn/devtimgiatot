@@ -15,6 +15,7 @@ class AddColumnCityToDevicesTable extends Migration
     {
         Schema::table('devices', function (Blueprint $table) {
             $table->string('city')->nullable();
+            $table->string('district')->nullable();
             $table->string('note')->nullable();
         });
     }
@@ -28,6 +29,7 @@ class AddColumnCityToDevicesTable extends Migration
     {
         Schema::table('devices', function (Blueprint $table) {
             $table->dropColumn('city');
+            $table->dropColumn('district');
             $table->dropColumn('note');
         });
     }
