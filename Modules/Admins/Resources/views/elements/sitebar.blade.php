@@ -54,16 +54,21 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }} {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}">
+            <li class="nav-item {{ Request::routeIs('admin.statistical.*') || Request::routeIs('admin.report_install_app') ? 'active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
                    aria-controls="basic-ui">
                     <span class="menu-title">Thống kê</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
-                <div class="collapse {{ Request::routeIs('admin.statistical.*')? 'show' : '' }} {{ Request::routeIs('admin.statistical.*')? 'show' : '' }} {{ Request::routeIs('admin.statistical.*')? 'show' : '' }}" id="basic-ui">
+                <div class="collapse {{ Request::routeIs('admin.statistical.*') || Request::routeIs('admin.report_install_app') ? 'show' : '' }}" id="basic-ui">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}" href="{{ route('admin.statistical.keyword') }}">Từ khoá</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('report_install_app')? 'active' : '' }}" href="{{ route('report_install_app') }}">
+                                Thống kê cài đặt app
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -166,12 +171,6 @@
                 <a class="nav-link" href="{{ route('notification.index') }}">
                     <span class="menu-title">Thông báo App</span>
                     <i class="icon-bell menu-icon"></i>
-                </a>
-            </li>
-            <li class="nav-item {{ Request::routeIs('report_install_app.*')? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('report_install_app') }}">
-                    <span class="menu-title">Thống kê cài đặt app</span>
-                    <i class="icon-layers menu-icon"></i>
                 </a>
             </li>
             <li class="nav-item {{ Request::routeIs('admin.account.*')? 'active' : '' }}">
