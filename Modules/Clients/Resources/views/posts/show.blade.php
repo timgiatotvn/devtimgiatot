@@ -8,8 +8,12 @@
         <div class="nrd-head">
             <h1>{{ $data['detail']->title }}</h1>
         </div>
-		<p>
-			Đăng tải {{date('d/m/Y H:i', strtotime($data['detail']->created_at))}} - {{$data['detail']->author_name}}
+		<p style="text-align: center; font-size: 17px; margin-bottom: 20px;">
+			<span style="font-style: italic">Đăng tải {{date('d/m/Y', strtotime($data['detail']->created_at))}}</span>
+			<span style="margin: 0px 5px">|</span>
+			<span style="font-style: italic">Bởi: <b>{{$data['detail']->author_name}}</b></span>
+			<span style="margin: 0px 5px">|</span>
+			<span style="font-style: italic">Lượt xem: {{number_format($data['detail']->total_views)}}</span>
 		</p>
         <div class="wrap-info-new-detail">
             <div class="content-view">

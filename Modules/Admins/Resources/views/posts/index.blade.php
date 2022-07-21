@@ -24,6 +24,13 @@
                                 </select>
                             </div>
                             <div class="input-group mb-0 mr-sm-2">
+                                <select name="status" class="js-example-basic-single form-control form-select-search">
+                                    <option @if (request()->has('status') && request()->get('status') == 'all'){{'selected'}}@endif value="all">Trạng thái</option>
+                                    <option @if (request()->has('status') && request()->get('status') == 1){{'selected'}}@endif value="1">Đã Active</option>
+                                    <option @if (request()->has('status') && request()->get('status') == -1){{'selected'}}@endif value="-1">Chưa Active</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-0 mr-sm-2">
                                 <select name="col_order" class="js-example-basic-single form-control form-select-search">
                                     <option @if (request()->has('col_order') && request()->get('col_order') == ''){{'selected'}}@endif value="id">Sắp xếp mặc định</option>
                                     <option @if (request()->has('col_order') && request()->get('col_order') == 'total_views'){{'selected'}}@endif value="total_views">Sắp xếp theo số lượt xem</option>
@@ -36,27 +43,19 @@
                                     <option @if (request()->has('type_order') && request()->get('type_order') == 'DESC'){{'selected'}}@endif value="DESC">Giảm dần</option>
                                 </select>
                             </div>
-                            <div class="input-group mb-0 mr-sm-2">
-                                <select name="status" class="js-example-basic-single form-control form-select-search">
-                                    <option @if (request()->has('status') && request()->get('status') == 'all'){{'selected'}}@endif value="all">Trạng thái</option>
-                                    <option @if (request()->has('status') && request()->get('status') == 1){{'selected'}}@endif value="1">Đã Active</option>
-                                    <option @if (request()->has('status') && request()->get('status') == -1){{'selected'}}@endif value="-1">Chưa Active</option>
-                                </select>
-                            </div>
-                           @if(in_array(ROLE_ADMIN, auth('admins')->user()->roles->pluck('name')->toArray()))
-                           <div class="input-group mb-0 mr-sm-2">
-                               <select name="admin_id" class="js-example-basic-single form-control form-select-search">
-                                   <option value="all">Tất cả tài khoản</option>
-                                   @foreach ($data['admins'] as $adminItem)
-                                       <option @if (request()->has('admin_id') && request()->get('admin_id') == $adminItem->id){{'selected'}}@endif value="{{$adminItem->id}}">
-                                           {{$adminItem->username}}
-                                       </option>
-                                   @endforeach
-                               </select>
-                           </div>
-                           @endif
-                            <button type="submit"
-                                    class="btn btn-primary mb-0">@lang('admins::layer.search.button.title')</button>
+                            @if(in_array(ROLE_ADMIN, auth('admins')->user()->roles->pluck('name')->toArray()))
+                                <div class="input-group mb-0 mr-sm-2">
+                                    <select name="admin_id" class="js-example-basic-single form-control form-select-search">
+                                        <option value="all">Tất cả tài khoản</option>
+                                        @foreach ($data['admins'] as $adminItem)
+                                            <option @if (request()->has('admin_id') && request()->get('admin_id') == $adminItem->id){{'selected'}}@endif value="{{$adminItem->id}}">
+                                                {{$adminItem->username}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                            <button type="submit" class="btn btn-primary mb-0">@lang('admins::layer.search.button.title')</button>
                         </form>
                     </div>
                 </div>
