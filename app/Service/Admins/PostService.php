@@ -26,6 +26,8 @@ class PostService
         $_data['type_order'] = request()->has('type_order') ? request()->get('type_order') : 'DESC';
         $_data['category_id'] = request()->has('category_id') ? $this->categoryService->multiCate(request()->get('category_id')) : '';
         $_data['type'] = request()->has('type') ? request()->get('type') : 'all';
+        $_data['admin_id'] = request()->has('admin_id') ? request()->get('admin_id') : 'all';
+        $_data['status'] = request()->has('status') ? request()->get('status') : 'all';
         return $this->postRepository->getList($_data);
     }
 

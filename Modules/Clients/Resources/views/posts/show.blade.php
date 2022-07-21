@@ -8,6 +8,9 @@
         <div class="nrd-head">
             <h1>{{ $data['detail']->title }}</h1>
         </div>
+		<p>
+			Đăng tải {{date('d/m/Y H:i', strtotime($data['detail']->created_at))}} - {{$data['detail']->author_name}}
+		</p>
         <div class="wrap-info-new-detail">
             <div class="content-view">
 				<?php

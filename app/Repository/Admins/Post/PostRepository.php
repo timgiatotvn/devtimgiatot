@@ -16,6 +16,7 @@ class PostRepository implements PostRepositoryInterface
         $keyword = !empty($_data['keyword']) ? $_data['keyword'] : '';
         $type = !empty($_data['type']) ? $_data['type'] : 'all';
         $admin_id = !empty($_data['admin_id']) ? $_data['admin_id'] : 'all';
+        $status = !empty($_data['status']) ? $_data['status'] : 'all';
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
         $roles = auth('admins')->user()->roles->pluck('name')->toArray();
         $col= !empty($_data['col_order']) ? $_data['col_order'] : 'all';
@@ -46,6 +47,11 @@ class PostRepository implements PostRepositoryInterface
                 ->when($admin_id, function ($query, $admin_id) {
                     if ($admin_id != 'all') {
                         return $query->where('posts.admin_id', $admin_id);
+                    }
+                })
+                ->when($status, function ($query, $status) {
+                    if ($status != 'all') {
+                        return $query->where('posts.status', $status == -1 ? 0 : $status);
                     }
                 })
                 ->orderBy($col_order, $type_order)

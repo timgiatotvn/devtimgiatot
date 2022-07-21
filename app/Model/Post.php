@@ -64,4 +64,9 @@ class Post extends Model
 
         return $data;
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 }

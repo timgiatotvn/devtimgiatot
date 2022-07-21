@@ -63,7 +63,6 @@ class PostsController extends Controller
                 $des = !empty($data['detail']->description) ? strip_tags($data['detail']->description) : "";
                 $data['detail']->meta_des = Helpers::shortDesc($des, 150);
             }
-
             $data['common'] = Helpers::metaHead($data['detail']);
             $data['cate_parent'] = !empty($data['detail']->category_parent_id) ? $this->clientCategoryService->findById($data['detail']->category_parent_id) : [];
             $data['related'] = $this->clientPostService->getListRelated(['category_id' => $data['detail']->category_id, 'id' => $data['detail']->id]);
@@ -72,7 +71,6 @@ class PostsController extends Controller
             $data['adv_img'] = DB::table('adv_post')
                 ->where('id', 1)
                 ->first();
-
             if ($data['detail']->status) {
                 return view('clients::posts.show', ['data' => $data]);
             } else {

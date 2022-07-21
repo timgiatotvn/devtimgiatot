@@ -25,8 +25,9 @@ class ClientPostRepository implements ClientPostRepositoryInterface
     public function findBySlug($_slug)
     {
         return DB::table(self::TABLE_NAME)
-            ->select('posts.*', 'categories.title as category_title', 'categories.slug as category_slug', 'categories.parent_id as category_parent_id')
+            ->select('posts.*', 'admins.name as author_name', 'categories.title as category_title', 'categories.slug as category_slug', 'categories.parent_id as category_parent_id')
             ->leftJoin('categories', 'posts.category_id', 'categories.id')
+            ->leftJoin('admins', 'posts.admin_id', 'admins.id')
             ->where('posts.slug', $_slug)
             ->where('posts.status', 1)
             ->first();
