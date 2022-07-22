@@ -61,7 +61,7 @@ class ProductService
             'slug' => !empty($_data['slug']) ? $_data['slug'] : (!empty($_data['title']) ? Str::slug($_data['title'], '-') : ''),
             'admin_id' => Auth::guard(Helpers::renderGuard())->user()->id,
             'category_multi' => !empty($_data['category_multi']) ? '|' . implode('|', $_data['category_multi']) . '|' : '',
-            'type' => $this::TYPE[1],
+            'type' => $this::TYPE[0],
             'choose_1' => 0,
             'choose_2' => 0,
             'choose_3' => 0,
