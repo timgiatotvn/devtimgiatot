@@ -97,13 +97,13 @@
                                         <th>Lượt xem</th>
                                         <th>@lang('admins::layer.table.status')</th>
                                         <th>Nổi bật</th>
+                                        <th>Share FB</th>
                                         {{--                                    <th>Slide</th>--}}
                                         {{--                                    <th>Choose 3</th>--}}
                                         {{--                                    <th>Choose 4</th>--}}
                                         <th>@lang('admins::layer.table.created')</th>
                                         <th>@lang('admins::layer.table.modified')</th>
                                         <th width="50">@lang('admins::layer.table.id')</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -137,6 +137,14 @@
                                                     {!! (($row->choose_1 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}
                                                 </a>
                                             </td>
+                                            @php
+                                                $route = route('client.post.show', ['slug' => $row->slug])   
+                                            @endphp
+                                            <td>
+                                                <a href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u={{$route}}', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,left=400,width=700,height=400,top=200')">
+                                                    Share FB
+                                                </a>
+                                            </td>
                                             {{--                                        <td>--}}
                                             {{--                                            <a class="icon-form status active" href="{{ route('admin.post.status', ['id' => $row->id, 'field' => 'choose_2']) }}">--}}
                                             {{--                                                {!! (($row->choose_2 == 1) ? '<i class="icon-check"></i>' : '<i class="icon-close"></i>') !!}--}}
@@ -155,7 +163,6 @@
                                             <td>{{ \Helpers::formatTime($row->created_at) }}</td>
                                             <td>{{ \Helpers::formatTime($row->updated_at) }}</td>
                                             <td>{{ $row->id }}</td>
-
                                         </tr>
                                     @endforeach
                                     </tbody>
