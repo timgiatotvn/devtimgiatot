@@ -34,3 +34,5 @@
         {{ $data['list']->links('admins::elements.extend.pagination') }}
     </section>
 @endsection
+
+@include('clients::elements.extend.replaceLinkJs')
