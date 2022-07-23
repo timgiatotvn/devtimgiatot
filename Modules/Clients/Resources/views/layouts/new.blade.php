@@ -33,5 +33,6 @@
 </div>
 @include('clients::elements.footer')
 @include('clients::elements.extend.script')
+@include('clients::elements.extend.replaceLinkJs')
 </body>
 </html>

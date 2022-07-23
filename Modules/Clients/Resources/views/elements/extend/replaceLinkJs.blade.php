@@ -1,4 +1,5 @@
 <script>
+    console.error('Check link:')
     function replaceUrlTagLink() {
         var list_link = document.getElementsByTagName('a');
         for (let i = 0; i < list_link.length; i++) {
