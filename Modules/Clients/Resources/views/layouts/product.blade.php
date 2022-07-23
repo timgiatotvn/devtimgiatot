@@ -34,4 +34,6 @@
 @include('clients::elements.footer')
 @include('clients::elements.extend.script')
 </body>
+@include('clients::elements.extend.script')
+@include('clients::elements.extend.replaceLinkJs')
 </html>

@@ -1,5 +1,4 @@
 @extends('clients::layouts.product')
-
 @section('content')
     <section id="detail-product">
         <div class="row no-gutters">
