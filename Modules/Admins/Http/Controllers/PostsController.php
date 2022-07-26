@@ -123,8 +123,7 @@ class PostsController extends Controller
              */
             if ($data['detail']->admin_id == -1) {
                 Post::whereId($id)->update([
-                    'admin_id' => auth('admins')->user()->id,
-                    'date_edit' => date('Y-m-d')
+                    'admin_id' => auth('admins')->user()->id
                 ]);
             }
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [$data['detail']->category_id], 'multi' => true]);
@@ -144,6 +143,10 @@ class PostsController extends Controller
             $data['detail'] = $this->postService->findById($id);
             if (empty($data['detail']->id)) return abort(404);
             $_params = $request->all();
+
+            if ($data['detail']->date_edit == '') {
+                $_params['date_edit'] = date('Y-m-d');
+            }            
             $categoryPromotion = Category::where('status', 'LIKE', 1)
                 ->where('id', $_params['category_id'])
                 ->where('status', 1)->select('id', 'title', 'type')->first();
