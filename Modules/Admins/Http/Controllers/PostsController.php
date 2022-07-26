@@ -123,7 +123,8 @@ class PostsController extends Controller
              */
             if ($data['detail']->admin_id == -1) {
                 Post::whereId($id)->update([
-                    'admin_id' => auth('admins')->user()->id
+                    'admin_id' => auth('admins')->user()->id,
+                    'date_edit' => date('Y-m-d')
                 ]);
             }
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [$data['detail']->category_id], 'multi' => true]);

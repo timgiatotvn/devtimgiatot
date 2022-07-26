@@ -28,6 +28,8 @@ class PostService
         $_data['type'] = request()->has('type') ? request()->get('type') : 'all';
         $_data['admin_id'] = request()->has('admin_id') ? request()->get('admin_id') : 'all';
         $_data['status'] = request()->has('status') ? request()->get('status') : 'all';
+        $_data['month'] = request()->has('month') ? request()->get('month') : 'all';
+        $_data['year'] = request()->has('year') ? request()->get('year') : 'all';
         return $this->postRepository->getList($_data);
     }
 

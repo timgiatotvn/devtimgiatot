@@ -14,6 +14,8 @@ class PostRepository implements PostRepositoryInterface
     public function getList($_data)
     {
         $keyword = !empty($_data['keyword']) ? $_data['keyword'] : '';
+        $month = !empty($_data['month']) ? $_data['month'] : 'all';
+        $year = !empty($_data['year']) ? $_data['year'] : 'all';
         $type = !empty($_data['type']) ? $_data['type'] : 'all';
         $admin_id = !empty($_data['admin_id']) ? $_data['admin_id'] : 'all';
         $status = !empty($_data['status']) ? $_data['status'] : 'all';
@@ -52,6 +54,16 @@ class PostRepository implements PostRepositoryInterface
                 ->when($status, function ($query, $status) {
                     if ($status != 'all') {
                         return $query->where('posts.status', $status == -1 ? 0 : $status);
+                    }
+                })
+                ->when($month, function ($query, $month) {
+                    if ($month != 'all') {
+                        return $query->whereMonth('date_edit', $month);
+                    }
+                })
+                ->when($year, function ($query, $year) {
+                    if ($year != 'all') {
+                        return $query->whereYear('date_edit', $year);
                     }
                 })
                 ->orderBy($col_order, $type_order)

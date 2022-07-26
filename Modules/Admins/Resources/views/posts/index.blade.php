@@ -11,6 +11,22 @@
                                    value="{{ request()->has('keyword') ? request()->get('keyword') : '' }}"
                                    class="form-control mb-0 mr-sm-2"
                                    placeholder="@lang('admins::layer.search.form.keyword')">
+                            <select name="month" class="js-example-basic-single form-control form-select-search">
+                                <option value="all">Chọn tháng</option>
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option @if(request()->has('month') && request()->get('month') == $i){{'selected'}}@endif value="{{$i}}">
+                                            Tháng {{$i}}
+                                        </option>
+                                    @endfor
+                            </select>
+                            <select name="year" class="js-example-basic-single form-control form-select-search">
+                                <option value="all">Chọn năm</option>
+                                    @for ($i = date('Y') - 1; $i <= date('Y'); $i++)
+                                        <option @if(request()->has('year') && request()->get('year') == $i){{'selected'}}@endif value="{{$i}}">
+                                            Năm {{$i}}
+                                        </option>
+                                    @endfor
+                            </select>
                             <div class="input-group mb-0 mr-sm-2">
                                 <select name="category_id" class="js-example-basic-single form-control form-select-search">
                                     {!! $data['category'] !!}
@@ -83,9 +99,18 @@
             @csrf()
             <div class="row">
                 <div class="col-12 grid-margin stretch-card">
+                    <p style="margin-bottom: 0px">
+                        Tổng bài viết: <b>{{$data['list']->total()}}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
                     <div class="card">
+                        
                         <div class="card-body">
                             <div class="table-responsive">
+                                
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
@@ -161,7 +186,12 @@
                                             {{--                                            </a>--}}
                                             {{--                                        </td>--}}
                                             <td>{{ \Helpers::formatTime($row->created_at) }}</td>
-                                            <td>{{ \Helpers::formatTime($row->updated_at) }}</td>
+                                            {{-- <td>{{ \Helpers::formatTime($row->date_edit) }}</td> --}}
+                                            <td>
+                                                @if ($row->date_edit != '')
+                                                    {{ date('d/m/Y', strtotime($row->date_edit)) }}
+                                                @endif
+                                            </td>
                                             <td>{{ $row->id }}</td>
                                         </tr>
                                     @endforeach

@@ -30,6 +30,7 @@ class Post extends Model
         'choose_2',
         'choose_3',
         'choose_4',
+        'date_edit',
         'created_at',
         'updated_at'
     ];
