@@ -100,7 +100,11 @@
             <div class="row">
                 <div class="col-12 grid-margin stretch-card">
                     <p style="margin-bottom: 0px">
-                        Tổng bài viết: <b>{{$data['list']->total()}}</b>
+                        @if (in_array(ROLE_ADMIN, get_role_name()))
+                            Tổng bài viết: <b>{{$data['list']->total()}}</b>
+                        @else
+                            Tổng bài viết đã duyệt: <b>{{$data['total_post_active']}}</b>
+                        @endif
                     </p>
                 </div>
             </div>

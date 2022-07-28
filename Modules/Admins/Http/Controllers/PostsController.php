@@ -42,6 +42,9 @@ class PostsController extends Controller
             $data['list'] = $this->postService->getList(['limit' => 10]);
             $data['category'] = $this->categoryService->getListMenu(['type' => $this->type, 'parent_id' => [(request()->has('category_id') ? request()->get('category_id') : '')]]);
             $data['admins'] = Admin::all();
+            $data['total_post_active'] = Post::where('admin_id', auth('admins')->user()->id)
+                                     ->where('status', 1)
+                                     ->count();
             return view('admins::posts.index', ['data' => $data]);
 //        } catch (\Exception $e) {
 //            abort('500');

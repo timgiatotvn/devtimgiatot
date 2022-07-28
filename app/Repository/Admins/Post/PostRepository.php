@@ -58,7 +58,7 @@ class PostRepository implements PostRepositoryInterface
                 })
                 ->when($month, function ($query, $month) {
                     if ($month != 'all') {
-                        return $query->whereMonth('date_edit', $month);
+                        return $query->whereMonth('date_edit', $month < 10 ? '0' . $month : $month);
                     }
                 })
                 ->when($year, function ($query, $year) {
