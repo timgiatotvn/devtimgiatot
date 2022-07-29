@@ -12,7 +12,7 @@
 */
 Route::get('/test1', function () {
     $client = new \GuzzleHttp\Client();
-    $request = $client->request('GET', 'https://api.accesstrade.vn/v1/datafeeds?domain=shopee.vn&limit=1', [
+    $request = $client->request('GET', 'https://api.accesstrade.vn/v1/datafeeds?domain=tiki.vn&limit=3', [
         'headers' => [
             'Authorization' => 'Token zOKcSb-ZE9pHuwPgiNw8MrclrBXW9qhY',
             'Content-Type'     => 'application/json',
@@ -21,21 +21,22 @@ Route::get('/test1', function () {
     $data = json_decode($request->getBody()->getContents(), true);
     foreach ($data['data'] as $dataItem) {
         $data_insert[] = [
+            'crawler_category_id' => 1,
             'admin_id' => 1,
-            'title' => $dataItem['name'],
+            'name' => $dataItem['name'],
             'slug' => str_slug(($dataItem['name'])),
             'price' => $dataItem['price'],
             'price_root' => $dataItem['price'],
             'description' => str_replace("\n", "<br>", $dataItem['desc']),
             //'image' => $dataItem['image'],
-            'category_id' => 62,
-            'status' => 0,
+            //'category_id' => 62,
+            'status' => 1,
             'type' => 'crawler',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ];
     }
-    \App\Model\Product::insert($data_insert);
+    \App\Model\Article::insert($data_insert);
     dd(1);
 });
 Route::get('/', function () {
