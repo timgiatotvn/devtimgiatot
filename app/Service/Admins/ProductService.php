@@ -70,6 +70,7 @@ class ProductService
                 'price' => $result['price_min'],
                 'price_root' => $result['price_min'],
                 'count_suggest' => $result['total'],
+                'thumbnail_cr' => $result['thumbnail'],
                 'choose_1' => 0,
                 'choose_2' => 0,
                 'choose_3' => 0,
@@ -101,11 +102,13 @@ class ProductService
         }
         $result = array_unique($list_ids);
         $get_product_min = $this->get_product_min($result);
+        
         return [
             'total' => count($result),
             'data' => count($result) > 0 ? "|" . implode("|", $result) . "|" : "",
             'website_map' => json_encode($get_product_min['website_map']),
-            'price_min' => $get_product_min['price']
+            'price_min' => $get_product_min['price'],
+            'thumbnail' => $get_product_min['website_map']['article']['thumbnail']
         ];
     }
 
