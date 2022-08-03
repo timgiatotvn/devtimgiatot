@@ -112,26 +112,31 @@ class ProductService
     public function get_product_min($article_ids)
     {
         if (count($article_ids) > 0) {
-            $article = Article::select("id", "name", "price", "crawler_category_id", "href", "thumbnail")
+            try {
+                $article = Article::select("id", "name", "price", "crawler_category_id", "href", "thumbnail")
                                 ->whereIn('id', $article_ids)->oldest('price')
                                 ->first();
 
-            return [
-                'price' => $article->price,
-                'website_map' => [
-                    [
-                        'crawler_website' => $article->crawlerCategory->crawlerWebsite->toArray(),
-                        'article' => [
-                            'id' => $article->id,
-                            'name' => $article->name,
-                            'price' => $article->price,
-                            'crawler_category_id' => $article->crawler_category_id,
-                            'href' => $article->href,
-                            'thumbnail' => $article->thumbnail
+                return [
+                    'price' => $article->price,
+                    'website_map' => [
+                        [
+                            'crawler_website' => $article->crawlerCategory->crawlerWebsite->toArray(),
+                            'article' => [
+                                'id' => $article->id,
+                                'name' => $article->name,
+                                'price' => $article->price,
+                                'crawler_category_id' => $article->crawler_category_id,
+                                'href' => $article->href,
+                                'thumbnail' => $article->thumbnail
+                            ]
                         ]
                     ]
-                ]
-            ];
+                ];
+            } catch (\Throwable $th) {
+                dd($article->id, $th->getMessage());
+            }
+            
         }
         
         return [
