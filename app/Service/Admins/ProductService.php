@@ -3,6 +3,7 @@
 namespace App\Service\Admins;
 
 use App\Helpers\Helpers;
+use App\Model\Article;
 use App\Repository\Admins\Product\ProductRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -53,24 +54,90 @@ class ProductService
 
     public function create($_data)
     {
-        if (isset($_data['_token'])) unset($_data['_token']);
-        unset($_data['proengsoft_jsvalidation']);
-        $db = array_merge($_data, [
-            'description' => !empty($_data['description']) ? $_data['description'] : '',
-            //'slug' => !empty($_data['title']) ? Str::slug($_data['title'], '-') : '',
-            'slug' => !empty($_data['slug']) ? $_data['slug'] : (!empty($_data['title']) ? Str::slug($_data['title'], '-') : ''),
-            'admin_id' => Auth::guard(Helpers::renderGuard())->user()->id,
-            'category_multi' => !empty($_data['category_multi']) ? '|' . implode('|', $_data['category_multi']) . '|' : '',
-            'type' => $this::TYPE[0],
-            'choose_1' => 0,
-            'choose_2' => 0,
-            'choose_3' => 0,
-            'choose_4' => 0,
-            'created_at' => date("Y/m/d H:i:s"),
-            'updated_at' => date("Y/m/d H:i:s")
-        ]);
+        try {
+            if (isset($_data['_token'])) unset($_data['_token']);
+            unset($_data['proengsoft_jsvalidation']);
+            $result = $this->mapProductsToArticle($_data['keyword_suggest']);
+            $db = array_merge($_data, [
+                'description' => !empty($_data['description']) ? $_data['description'] : '',
+                //'slug' => !empty($_data['title']) ? Str::slug($_data['title'], '-') : '',
+                'slug' => !empty($_data['slug']) ? $_data['slug'] : (!empty($_data['title']) ? Str::slug($_data['title'], '-') : ''),
+                'admin_id' => Auth::guard(Helpers::renderGuard())->user()->id,
+                'category_multi' => !empty($_data['category_multi']) ? '|' . implode('|', $_data['category_multi']) . '|' : '',
+                'type' => $this::TYPE[1],
+                'keyword_suggest_map_crawler' => $result['data'],
+                'website_map' => $result['website_map'],
+                'price' => $result['price_min'],
+                'price_root' => $result['price_min'],
+                'count_suggest' => $result['total'],
+                'choose_1' => 0,
+                'choose_2' => 0,
+                'choose_3' => 0,
+                'choose_4' => 0,
+                'created_at' => date("Y/m/d H:i:s"),
+                'updated_at' => date("Y/m/d H:i:s")
+            ]);
 
-        return $this->productRepository->create($db);
+            return $this->productRepository->create($db);
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+        
+    }
+
+    public function mapProductsToArticle($keyword_suggest)
+    {
+        $list_ids = [];
+        if ($keyword_suggest != '') {
+            foreach (explode(',', $keyword_suggest) as $keywordItem) {
+                $articles = Article::where('name', 'like', '%' . trim($keywordItem) . '%')
+                                   ->pluck('id')
+                                   ->toArray();
+                
+                if (count($articles) > 0) {
+                    $list_ids = array_merge($articles, $list_ids);
+                }
+            }
+        }
+        $result = array_unique($list_ids);
+        $get_product_min = $this->get_product_min($result);
+        return [
+            'total' => count($result),
+            'data' => count($result) > 0 ? "|" . implode("|", $result) . "|" : "",
+            'website_map' => json_encode($get_product_min['website_map']),
+            'price_min' => $get_product_min['price']
+        ];
+    }
+
+    public function get_product_min($article_ids)
+    {
+        if (count($article_ids) > 0) {
+            $article = Article::select("id", "name", "price", "crawler_category_id", "href", "thumbnail")
+                                ->whereIn('id', $article_ids)->oldest('price')
+                                ->first();
+
+            return [
+                'price' => $article->price,
+                'website_map' => [
+                    [
+                        'crawler_website' => $article->crawlerCategory->crawlerWebsite->toArray(),
+                        'article' => [
+                            'id' => $article->id,
+                            'name' => $article->name,
+                            'price' => $article->price,
+                            'crawler_category_id' => $article->crawler_category_id,
+                            'href' => $article->href,
+                            'thumbnail' => $article->thumbnail
+                        ]
+                    ]
+                ]
+            ];
+        }
+        
+        return [
+            'price' => '',
+            'website_map' => ''
+        ];
     }
 
     public function update($_data, $_id)
