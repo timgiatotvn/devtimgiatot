@@ -102,13 +102,13 @@ class ProductService
         }
         $result = array_unique($list_ids);
         $get_product_min = $this->get_product_min($result);
-        
+
         return [
             'total' => count($result),
             'data' => count($result) > 0 ? "|" . implode("|", $result) . "|" : "",
             'website_map' => json_encode($get_product_min['website_map']),
             'price_min' => $get_product_min['price'],
-            'thumbnail' => $get_product_min['website_map']['article']['thumbnail']
+            'thumbnail' => $get_product_min['website_map'][0]['article']['thumbnail']
         ];
     }
 
