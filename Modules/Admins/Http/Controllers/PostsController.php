@@ -87,9 +87,9 @@ class PostsController extends Controller
                 $post = new Post();
                 $post->fill($_params);
                 $post->save();
-                if (!empty($categoryPromotion) && $categoryPromotion->id == $_params['category_id']) {
-                    Notification::sendNotification($post, $type = 'post');
-                }
+//                if (!empty($categoryPromotion) && $categoryPromotion->id == $_params['category_id']) {
+//                    Notification::sendNotification($post, $type = 'post');
+//                }
 
                 return redirect(route('admin.post.index'));
             } else {
