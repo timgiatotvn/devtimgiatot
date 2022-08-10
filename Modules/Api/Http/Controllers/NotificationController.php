@@ -38,9 +38,10 @@ class NotificationController extends Controller
             $arrId = $deviceReadNotification->pluck('notification_id')->toArray();
         }
 
-        $notifications = Notification::where(function ($query) use ($type, $arrId) {
+        $notifications = Notification::where(function ($query) use ($type, $arrId, $device) {
             if (empty($type)) {
-                return $query->whereNotIn('id', $arrId);
+                return $query->whereNotIn('id', $arrId)
+                            ->where('created_at', '>', $device->created_at);
             }
         })->where('status', 1)->orderBy('id', 'DESC')
             ->paginate($perPage);
