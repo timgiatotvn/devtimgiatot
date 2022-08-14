@@ -117,7 +117,7 @@ Route::prefix('admin')->group(function () {
             Route::post('/create', 'PostsController@store');
             Route::get('/edit/{id}', 'PostsController@edit')->name('admin.post.edit')->middleware('check-owner-post');
             Route::post('/edit/{id}', 'PostsController@update')->middleware('check-owner-post');
-            Route::get('/status/{id}/{field}', 'PostsController@status')->name('admin.post.status');
+            Route::get('/status/{id}/{field}', 'PostsController@status')->name('admin.post.status')->middleware('check-owner-post');
             Route::get('/show/{id}', 'PostsController@show')->name('admin.post.show')->middleware('check-owner-post');
             Route::get('/destroy/{id}', 'PostsController@destroy')->name('admin.post.destroy')->middleware('check-is-admin');
         });
@@ -173,7 +173,9 @@ Route::prefix('admin')->group(function () {
             Route::get('/', 'CartsController@index')->name('admin.cart.index');
         });
 
-
+        Route::prefix('customers')->middleware('check-is-admin')->group(function () {
+            Route::get('/list', 'CustomerController@index')->name('admin.customer.index');
+        });
         //Crawler
         Route::prefix('crawlers')->middleware('check-is-admin')->group(function () {
             Route::prefix('websites')->group(function () {

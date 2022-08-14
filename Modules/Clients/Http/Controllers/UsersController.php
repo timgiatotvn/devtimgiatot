@@ -3,6 +3,7 @@
 namespace Modules\Clients\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\Notification;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCartService;
 use App\Service\Clients\ClientCategoryService;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
 use Modules\Clients\Http\Requests\User\UpdateRequest;
+use DB;
 
 class UsersController extends Controller
 {
@@ -125,5 +127,94 @@ class UsersController extends Controller
         } catch (\Exception $e) {
             abort('500');
         }
+    }
+
+    public function viewNotification()
+    {
+        $data['list'] = Notification::with('deviceReadNotification')
+                                    // ->where('status', '!=', 3)
+                                    ->where('user_id', auth('users')->user()->id)
+                                    ->orderBy('id', 'DESC')
+                                    ->paginate(10);
+        return view('clients::notifications.index', ['data' => $data]);
+    }
+
+    public function createNotification()
+    {
+        return view('clients::notifications.create');
+    }
+
+    public function editNoti($id)
+    {
+        $noti = Notification::whereId($id)->where('user_id', auth('users')->user()->id)->first();
+
+        if (empty($noti)) {
+            return redirect()->route('client.user.notification')->with('error', 'Không tồn tại');
+        }
+
+        return view('clients::notifications.edit', ['noti' => $noti]); 
+    }
+
+    public function deleteNoti($id)
+    {
+        $noti = Notification::whereId($id)->where('user_id', auth('users')->user()->id)->first();
+
+        if (empty($noti)) {
+            return redirect()->route('client.user.notification')->with('error', 'Không tồn tại');
+        }
+        $noti->delete();
+
+        return redirect()->route('client.user.notification')->with('success', 'Xóa thành công');
+    }
+
+    public function updateNoti(Request $request, $id)
+    {
+        $notification = Notification::find($id);
+        $notification->title = $request->get('title');
+        // $notification->thumbnail = $request->get('thumbnail');
+        $notification->description = $request->get('description');
+        $notification->content = $request->get('content');
+        if ($notification->status == 2 && $request->get('status') != 2) {
+            $notification->publish_at = NULL;
+        } else {
+            $notification->publish_at = $request->get('publish_at') . ' ' . $request->get('hour');
+        }
+        $notification->status = $request->get('status');
+        $notification->save();
+
+        return redirect()->route('client.user.notification')->with('success', 'Sửa thành công');
+    }
+
+    public function storeNotification(Request $request)
+    {
+        $checkLimitPushNoti = Notification::where('user_id', auth('users')->user()->id)
+                                          ->whereDate('created_at', date('Y-m-d'))
+                                          ->count();
+        
+        if ($checkLimitPushNoti >= 3) {
+            return back()->with('error', 'Mỗi ngày chỉ được phép tạo 3 push notification');
+        }
+        DB::beginTransaction();
+        $notification = new Notification();
+        $notification->title = $request->get('title');
+        // $notification->thumbnail = $request->get('thumbnail');
+        $notification->description = $request->get('description');
+        $notification->content = $request->get('content');
+        $notification->status = $request->get('status');
+        if ($request->get('publish_at')) {
+            $notification->publish_at = $request->get('publish_at') . ' ' . $request->get('hour');
+        }
+        $notification->user_id = Auth::guard(Helpers::renderGuard(1))->user()->id;
+        $notification->save();
+
+        if ($notification->status == 1) {
+            $result = Notification::sendNotification($notification);
+        }
+        DB::commit();
+        if (isset($result) && $result['failure'] == 1) {
+            session()->flash('error', __('Không thể gửi thông báo tới app vui lòng kiểm tra lại'));
+        }
+
+        return redirect()->route('client.user.notification')->with('success', 'Thêm thành công');
     }
 }

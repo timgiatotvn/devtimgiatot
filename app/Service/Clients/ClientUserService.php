@@ -30,6 +30,7 @@ class ClientUserService
             'username' => !empty($_data['username']) ? $_data['username'] : '',
             'password' => !empty($_data['password']) ? Hash::make($_data['password']) : '',
             'email' => !empty($_data['email']) ? $_data['email'] : '',
+            'phone' => $_data['phone'],
             'name' => !empty($_data['name']) ? $_data['name'] : '',
             'type' => self::TYPE_USER[0],
         ];

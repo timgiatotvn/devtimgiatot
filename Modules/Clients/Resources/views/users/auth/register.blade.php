@@ -15,6 +15,10 @@
                     <input type="text" name="username" value="{{ old('username') }}" class="form-control" id="username" />
                 </div>
                 <div class="form-group">
+                    <label for="username">Số điện thoại</label>
+                    <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" id="phone" />
+                </div>
+                <div class="form-group">
                     <label for="password">Mật khẩu</label>
                     <input type="password" name="password" class="form-control" id="password" />
                 </div>

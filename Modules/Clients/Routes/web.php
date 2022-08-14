@@ -25,7 +25,12 @@ Route::prefix('')->group(function() {
             Route::get('/show', 'UsersController@show')->name('client.user.show');
             Route::post('/update', 'UsersController@update')->name('client.user.update');
             Route::get('/logout', 'UsersController@logout')->name('client.user.logout');
-
+            Route::get('/notification', 'UsersController@viewNotification')->name('client.user.notification');
+            Route::get('/notification/create', 'UsersController@createNotification')->name('client.user.notification.create');
+            Route::get('/notification/{id}/delete', 'UsersController@deleteNoti')->name('client.user.notification.delete');
+            Route::get('/notification/{id}/edit', 'UsersController@editNoti')->name('client.user.notification.edit');
+            Route::post('/notification/{id}/update', 'UsersController@updateNoti')->name('client.user.notification.update');
+            Route::post('/notification/store', 'UsersController@storeNotification')->name('client.user.notification.store');
             //cart
             Route::prefix('cart')->group(function () {
                 //Route::post('/store', 'CartController@store')->name('client.card.store');

@@ -11,6 +11,9 @@
 |
 */
 Route::get('/test1', function () {
+    $html = file_get_html_custom('https://nhathuoclongchau.com/thuc-pham-chuc-nang/ho-tro-mien-dich-tang-suc-de-khang?page=3&loadMore=true&sort=mua-nhieu-nhat&currentLink=thuc-pham-chuc-nang%2Fho-tro-mien-dich-tang-suc-de-khang');
+    echo $html;
+    dd(1);
     $client = new \GuzzleHttp\Client();
     $request = $client->request('GET', 'https://api.accesstrade.vn/v1/datafeeds?domain=tiki.vn&limit=3', [
         'headers' => [

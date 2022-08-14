@@ -15,6 +15,7 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "lukesnowden/google-shopping-feed": "^2.2",
+        "maatwebsite/excel": "^3.1",
         "nwidart/laravel-modules": "^7.1",
         "proengsoft/laravel-jsvalidation": "^4.0",
         "spatie/laravel-feed": "^2.7",

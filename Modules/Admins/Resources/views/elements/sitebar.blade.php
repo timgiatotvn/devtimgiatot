@@ -173,6 +173,12 @@
                     <i class="icon-bell menu-icon"></i>
                 </a>
             </li>
+            <li class="nav-item {{ Request::routeIs('admin.customer.*')? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.customer.index') }}">
+                    <span class="menu-title">Khách hàng</span>
+                    <i class="icon-bell menu-icon"></i>
+                </a>
+            </li>
             <li class="nav-item {{ Request::routeIs('admin.account.*')? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.account.index') }}">
                     <span class="menu-title">Tài khoản</span>
