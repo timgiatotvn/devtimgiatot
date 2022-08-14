@@ -24,7 +24,9 @@ class Notification extends Model
             $data = [
                 'registration_ids' => $deviceToken,
                 'notification' => [
+                    'id' => $notification->id,
                     'title' => $notification->title,
+                    'body' => $notification->description,
                     'thumbnail' => Helpers::getUrlFile($notification->thumbnail),
                     'description' => $notification->description,
                     'date_time' => $dateTime,

@@ -62,8 +62,7 @@
                     </div>
                     <div class="form-group">
                         <label>Mô tả</label>
-                        <textarea class="tinymce-mini"
-                                  name="description">{!! isset($notification) ? $notification->description : null !!}</textarea>
+                        <textarea name="description" class="form-control" rows="6">{!! isset($notification) ? $notification->description : null !!}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Nội dung</label>
