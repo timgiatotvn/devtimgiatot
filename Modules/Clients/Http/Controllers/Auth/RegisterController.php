@@ -3,6 +3,8 @@
 namespace Modules\Clients\Http\Controllers\Auth;
 
 use App\Helpers\Helpers;
+use App\Model\TokenEmail;
+use App\Model\User;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCategoryService;
 use App\Service\Clients\ClientPostService;
@@ -12,6 +14,7 @@ use App\Service\Clients\SettingService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
 use Modules\Clients\Http\Requests\User\RegisterRequest;
@@ -81,5 +84,35 @@ class RegisterController extends Controller
         }
     }
 
+    public function verify($token)
+    {
+        try {
+            $checkToken = TokenEmail::where('token', $token)->first();
 
+            if (empty($checkToken)) {
+                return redirect()->route('client.user.login')->with('error', 'Token không tồn tại');
+            }
+            $time_expire = time() - strtotime($checkToken->created_at);
+
+            if ($time_expire/60 <= 20) {
+                DB::beginTransaction();
+                User::whereId($checkToken->user_id)
+                    ->update([
+                        'email_verify' => date('Y-m-d H:i:s')
+                    ]);
+                $checkToken->delete();
+                DB::commit();
+                session()->flash('success', 'Xác thực thành công, vui lòng đăng nhập');
+
+                return redirect()->route('client.user.login');
+            } else {
+                $checkToken->delete();
+
+                return redirect()->route('client.user.login')->with('error', 'Token hết hạn');
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
+        
+    }
 }

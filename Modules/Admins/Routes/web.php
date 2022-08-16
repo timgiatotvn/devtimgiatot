@@ -153,6 +153,15 @@ Route::prefix('admin')->group(function () {
             //ảnh quảng cáo trong mỗi bài viết
             Route::get('/post-adv', 'ConfigController@configPostAdv')->name('admin.config.post-adv');
             Route::post('/post-adv', 'ConfigController@setValuePostAdv')->name('admin.config.set-value-post-adv');
+
+            Route::get('/smtp', 'SmtpController@config')->name('admin.config.smtp');
+            Route::post('/smtp-update', 'SmtpController@update')->name('admin.config.update-smtp');
+            Route::get('/template-email', 'ConfigController@listTemplateEmail')->name('admin.config.list-template-email');
+            Route::get('/add-template-email', 'ConfigController@viewAddTemplateEmail')->name('admin.config.add-template-email');
+            Route::post('/store-template-email', 'ConfigController@storeTemplateEmail')->name('admin.config.store-template-email');
+            Route::get('/{id}/edit-template-email', 'ConfigController@viewEditTemplateEmail')->name('admin.config.edit-template-email');
+            Route::post('/{id}/update-template-email', 'ConfigController@updateTemplateEmail')->name('admin.config.update-template-email');
+            Route::get('/{id}/delete-template-email', 'ConfigController@deleteTemplateEmail')->name('admin.config.delete-template-email');
         });
 
         //Products crawlers
@@ -173,8 +182,14 @@ Route::prefix('admin')->group(function () {
             Route::get('/', 'CartsController@index')->name('admin.cart.index');
         });
 
+        // Route::prefix('smtp')->middleware('check-is-admin')->group(function () {
+        //     Route::get('/config', 'SmtpController@config')->name('admin.smtp.config');
+        //     Route::post('/update', 'SmtpController@update')->name('admin.smtp.update');
+        // });
+
         Route::prefix('customers')->middleware('check-is-admin')->group(function () {
             Route::get('/list', 'CustomerController@index')->name('admin.customer.index');
+            Route::post('/{id}/update-push-number', 'CustomerController@updatePushNumber')->name('admin.customer.update-push-number');
         });
         //Crawler
         Route::prefix('crawlers')->middleware('check-is-admin')->group(function () {

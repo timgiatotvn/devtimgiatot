@@ -5,9 +5,9 @@
             <div class="col-12">
                 <div class="d-flex flex-column flex-md-row align-items-center">
                     <h4 class="mb-md-0 mb-4 mr-4">
-                        Khách hàng
+                        Danh sách mẫu Email
                     </h4>
-                    <div class="wrapper d-flex align-items-center">
+                    {{-- <div class="wrapper d-flex align-items-center">
                         <form class="form-inline">
                             <input type="text" name="search" value="{{ request()->has('search') ? request()->get('search   ') : '' }}" class="form-control mb-0 mr-sm-2"
                                    placeholder="@lang('admins::layer.search.form.keyword')">
@@ -17,11 +17,16 @@
                                     class="btn btn-danger mb-0">
                                 Reload
                             </a>
-                            {{-- <button type="submit" style="margin-left: 10px"
-                                    class="btn btn-success mb-0">
-                                Xuất Excel
-                            </button> --}}
                         </form>
+                    </div> --}}
+                    <div class="wrapper ml-md-auto d-flex flex-column flex-md-row kanban-toolbar ml-n2 ml-md-0 mt-4 mt-md-0">
+                        <div class="d-flex mt-4 mt-md-0">
+                            <a href="{{ route('admin.config.add-template-email') }}">
+                                <button type="button" class="btn btn-success">
+                                    Thêm mới
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,35 +46,35 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Username</th>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>SĐT</th>
-                                        <th>Giới hạn push</th>
-                                        <th>Tổng Push Notification</th>
+                                        <th>Mã</th>
+                                        <th>Tên mẫu Email</th>
+                                        <th>Chủ đề</th>
+                                        <th>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($customers as $key => $item)
+                                    @foreach ($emails as $key => $item)
                                         <tr>
-                                            <td>{{$key + 1}}</td>
-                                            <td>{{$item->username}}</td>
-                                            <td>{{$item->name}}</td>
-                                            <td>{{$item->email}}</td>
-                                            <td>{{$item->phone}}</td>
                                             <td>
-                                                <form method="POST" action="{{route('admin.customer.update-push-number', ['id' => $item->id])}}">
-                                                    @csrf
-                                                    <input name="push_number" value="{{$item->push_number}}" type="text" class="form-control"><br>
-                                                    <button class="btn btn-primary">Cập nhật</button>
-                                                </form>
+                                                {{$key + 1}}
                                             </td>
-                                            <td align="center">{{$item->notifications->count()}}</td>
+                                            <td>
+                                                {{$item->code}}
+                                            </td>
+                                            <td>
+                                                {{$item->name}}
+                                            </td>
+                                            <td>
+                                                {{$item->subject}}
+                                            </td>
+                                            <td>
+                                                <a href="{{route('admin.config.edit-template-email', ['id' => $item->id])}}">Sửa</a>
+                                                <a onclick="return confirm('Bạn có chắc chắn muốn xóa?')" href="{{route('admin.config.delete-template-email', ['id' => $item->id])}}">Xóa</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $customers->appends($inputs)->links() }}
                         </div>
                     </div>
                 </div>

@@ -54,7 +54,7 @@ class LoginController extends Controller
     public function login()
     {
         try {
-            if(Auth::guard(Helpers::renderGuard(1))->check()) return redirect()->route('client.user.show');
+            if (Auth::guard(Helpers::renderGuard(1))->check()) return redirect()->route('client.user.show');
             $data['common'] = Helpers::metaHead((object)["title_seo" => "Đăng nhập"]);
 
             return view('clients::users.auth.login', ['data' => $data]);
@@ -74,6 +74,12 @@ class LoginController extends Controller
             $userAfterLogin = $this->clientLoginService->login($data);
             if (!$userAfterLogin) {
                 $errors = new MessageBag(['accountNotFound' => __('clients::layer.user.login.error')]);
+                return back()->withInput($data)->withErrors($errors);
+            }
+            if (auth('users')->user()->email_verify == '') {
+                $errors = new MessageBag(['accountNotFound' => 'Chưa xác thực Email']);
+                auth('users')->logout();
+                
                 return back()->withInput($data)->withErrors($errors);
             }
             return redirect()->route('client.user.show');

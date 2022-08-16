@@ -187,11 +187,12 @@ class UsersController extends Controller
 
     public function storeNotification(Request $request)
     {
-        $checkLimitPushNoti = Notification::where('user_id', auth('users')->user()->id)
+        $user = auth('users')->user();
+        $checkLimitPushNoti = Notification::where('user_id', $user->id)
                                           ->whereDate('created_at', date('Y-m-d'))
                                           ->count();
         
-        if ($checkLimitPushNoti >= 3) {
+        if ($checkLimitPushNoti >= $user->push_number) {
             return back()->with('error', 'Mỗi ngày chỉ được phép tạo 3 push notification');
         }
         DB::beginTransaction();

@@ -21,6 +21,9 @@
                 @if($errors->has('accountNotFound'))
                     <p class="alert alert-danger mt-3">{{$errors->first('accountNotFound')}}</p>
                 @endif
+                @if(session('error'))
+                    <p class="alert alert-danger mt-3">{{session('error')}}</p>
+                @endif
             </form>
         </div>
     </section>

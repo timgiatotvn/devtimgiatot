@@ -51,6 +51,12 @@
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.config.post-adv')? 'active' : '' }}" href="{{ route('admin.config.post-adv') }}">Quảng cáo trong bài viết</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('admin.config.smtp')? 'active' : '' }}" href="{{ route('admin.config.smtp') }}">SMTP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('admin.config.list-template-email')? 'active' : '' }}" href="{{ route('admin.config.list-template-email') }}">Email</a>
+                        </li>
                     </ul>
                 </div>
             </li>

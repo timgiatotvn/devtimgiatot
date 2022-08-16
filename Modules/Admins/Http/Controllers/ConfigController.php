@@ -3,6 +3,7 @@
 namespace Modules\Admins\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\EmailTemplate;
 use App\Service\Admins\CategoryService;
 use App\Service\Admins\ProductService;
 use Illuminate\Contracts\Support\Renderable;
@@ -88,4 +89,60 @@ class ConfigController extends Controller
         }
     }
 
+    public function listTemplateEmail()
+    {
+        $emails = EmailTemplate::latest()->get();
+
+        return view('admins::email_templates.list', [
+            'emails' => $emails
+        ]);
+    }
+
+    public function viewAddTemplateEmail()
+    {
+        return view('admins::email_templates.add');
+    }
+
+    public function viewEditTemplateEmail($id)
+    {
+        $email = EmailTemplate::find($id);
+
+        return view('admins::email_templates.edit', [
+            'email' => $email
+        ]);
+    }
+
+    public function storeTemplateEmail(Request $request)
+    {
+        EmailTemplate::updateOrCreate(
+            [
+                'code' => $request->code
+            ],[
+                'subject' => $request->subject,
+                'content' => $request->content,
+                'name' => TYPE_EMAIL_TEMPLATES[$request->code]
+            ]
+        );
+
+        return redirect()->route('admin.config.list-template-email')->with('success', 'Thêm thành công');
+    }
+
+    public function updateTemplateEmail(Request $request, $id)
+    {
+        EmailTemplate::whereId($id)->update([
+                'code' => $request->code,
+                'subject' => $request->subject,
+                'content' => $request->content,
+                'name' => TYPE_EMAIL_TEMPLATES[$request->code]
+        ]);
+
+        return redirect()->route('admin.config.list-template-email')->with('success', 'Sửa thành công');
+    }
+
+    public function deleteTemplateEmail($id)
+    {
+        EmailTemplate::whereId($id)->delete();
+
+        return redirect()->route('admin.config.list-template-email')->with('success', 'Xóa thành công');
+    }
 }

@@ -29,8 +29,10 @@
                             <a href="{{ route('client.user.login') }}" title="Đăng nhập">Đăng nhập</a> / <a
                                     href="{{ route('client.user.register') }}" title="Đăng ký">Đăng ký</a>
                         @endif
-                            / <a
-                                    href="{{ route('client.card.index') }}" title="Đăng ký">Giỏ hàng({{ !empty($_SESSION['shopping_cart']) ? count($_SESSION['shopping_cart']) : 0 }})</a>
+                            {{-- / <a
+                                    href="{{ route('client.card.index') }}" title="Đăng ký">Giỏ hàng({{ !empty($_SESSION['shopping_cart']) ? count($_SESSION['shopping_cart']) : 0 }})</a> --}}
+                            /
+                            <a href="{{ route('client.user.logout') }}">Đăng xuất</a>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,9 @@ defined('DEFAULT_SPAN_TEXT') || define('DEFAULT_SPAN_TEXT', ' ');
 defined('MAX_FILE_SIZE') || define('MAX_FILE_SIZE', 600000);
 define('HDOM_SMARTY_AS_TEXT', 1);
 const ROLE_ADMIN = 'Admin';
-
+const TYPE_EMAIL_TEMPLATES = [
+	'register' => 'Gửi email xác thực tài khoản sau khi đăng ký'
+];
 function get_role_name()
 {
 	return auth('admins')->user()->roles->pluck('name')->toArray();

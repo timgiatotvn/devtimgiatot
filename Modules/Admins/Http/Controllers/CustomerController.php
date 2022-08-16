@@ -27,4 +27,11 @@ class CustomerController extends Controller
 
         return view('admins::customers.index', $data);
     }
+
+    public function updatePushNumber(Request $request, $userId)
+    {
+        User::whereId($userId)->update(['push_number' => $request->push_number]);
+
+        return back()->with('success', 'Cập nhật thành công');
+    }
 }

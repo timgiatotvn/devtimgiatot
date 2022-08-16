@@ -20,6 +20,7 @@ Route::prefix('')->group(function() {
         Route::post('/dang-nhap', 'Auth\LoginController@postLogin');
         Route::get('/dang-ky', 'Auth\RegisterController@register')->name('client.user.register');
         Route::post('/dang-ky', 'Auth\RegisterController@store');
+        Route::get('/{token}/verify', 'Auth\RegisterController@verify')->name('client.user.verify');
 
         Route::group(['middleware' => 'user'], function () {
             Route::get('/show', 'UsersController@show')->name('client.user.show');
