@@ -19,7 +19,10 @@ class NotificationController extends Controller
     {
         try {
             $data['common'] = Helpers::titleAction([__('admins::layer.notification.index.title'), __('admins::layer.notification.index.title2')]);
-            $data['list'] = Notification::with('deviceReadNotification')->where('status', '!=', 3)->orderBy('id', 'DESC')->paginate(10);
+            $data['list'] = Notification::with(['deviceReadNotification', 'user'])
+                                        ->where('status', '!=', 3)
+                                        ->orderBy('id', 'DESC')
+                                        ->paginate(10);
             return view('admins::notifications.index', ['data' => $data]);
         } catch (\Exception $e) {Helpers::pre($e->getMessage());
             abort('500');
@@ -67,10 +70,8 @@ class NotificationController extends Controller
                 }
 
             return redirect(route('notification.index'));
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollback();
-            dd($e);
         }
     }
 

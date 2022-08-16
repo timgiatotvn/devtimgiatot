@@ -43,6 +43,7 @@
                                     <th>Ảnh</th>
                                     <th>@lang('admins::layer.table.title')</th>
                                     <th>@lang('admins::layer.table.status')</th>
+                                    <th>User</th>
                                     <th>Lượt xem</th>
                                     <th>@lang('admins::layer.table.publish_at')</th>
                                     <th>@lang('admins::layer.table.created')</th>
@@ -65,6 +66,9 @@
                                                 @else
                                                     Huỷ thông báo
                                                 @endif
+                                            </td>
+                                            <td>
+                                                {{!empty($row->user) ? $row->user->username : ''}}
                                             </td>
                                             <td class="text-center">
                                                 {{ $row->deviceReadNotification->count() }}
