@@ -14,11 +14,6 @@ class Notification extends Model
         return $this->belongsToMany(Device::class, 'device_read_notifications');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
     public static function sendNotification($notification, $type = null)
     {
         $deviceToken = Device::whereNotNull('token')->get()->pluck('token')->toArray();
@@ -28,6 +23,14 @@ class Notification extends Model
             $dateTime = (isset($notification->publish_at) && !empty($notification->publish_at)) ? date('d/m/Y H:i:s', strtotime($notification->publish_at)) : date('d/m/Y H:i:s', strtotime($notification->created_at));
             $data = [
                 'registration_ids' => $deviceToken,
+                'data' => [
+                    'id' => $notification->id,
+                    'title' => $notification->title,
+                    'body' => $notification->description,
+                    'thumbnail' => Helpers::getUrlFile($notification->thumbnail),
+                    'description' => $notification->description,
+                    'date_time' => $dateTime,
+                ],
                 'notification' => [
                     'id' => $notification->id,
                     'title' => $notification->title,
@@ -35,7 +38,8 @@ class Notification extends Model
                     'thumbnail' => Helpers::getUrlFile($notification->thumbnail),
                     'description' => $notification->description,
                     'date_time' => $dateTime,
-                    'link_detail' => $route
+                    'link_detail' => $route,
+                    'sound' => 'default'
                 ]
             ];
 
