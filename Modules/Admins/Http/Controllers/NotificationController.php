@@ -72,6 +72,7 @@ class NotificationController extends Controller
             return redirect(route('notification.index'));
         } catch (\Exception $e) {
             DB::rollback();
+            echo $e;
         }
     }
 

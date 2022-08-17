@@ -14,6 +14,11 @@ class Notification extends Model
         return $this->belongsToMany(Device::class, 'device_read_notifications');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public static function sendNotification($notification, $type = null)
     {
         $deviceToken = Device::whereNotNull('token')->get()->pluck('token')->toArray();
