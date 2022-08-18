@@ -38,6 +38,7 @@ class ClientUserService
             'phone' => $_data['phone'],
             'name' => !empty($_data['name']) ? $_data['name'] : '',
             'type' => self::TYPE_USER[0],
+            'push_number' => 2
         ];
         DB::beginTransaction();
         $result = $this->repository->store($data);
