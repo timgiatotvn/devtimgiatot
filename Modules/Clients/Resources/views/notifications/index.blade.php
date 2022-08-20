@@ -17,7 +17,10 @@
                 </div>
             @endif
             <div class="main-user-page">
-                <p style="text-align: right">
+                <p>
+                    Hướng dẫn gửi Push Notication: Xem <a target="_blank" href=" https://timgiatot.vn/trai-nghiem-quang-cao-ung-dung-push-notification-mien-phi.html">tại đây</a>. Liên hệ CSKH để được hỗ trợ trong quá trình sử dụng: 0912.399.322 hoặc OA của chúng tôi!
+                </p><br>
+                <p>
                     <a href="{{route('client.user.notification.create')}}" class="btn btn-primary">Thêm mới</a>
                 </p>
                 <br>
@@ -25,7 +28,6 @@
                     <thead>
                         <tr>
                             <td>STT</td>
-                            <td>Ảnh</td>
                             <td>Tiêu đề</td>
                             <td>Trạng thái</td>
                             <td>Lượt xem</td>
@@ -40,7 +42,7 @@
                             @foreach($data['list'] as $k=>$row)
                                 <tr>
                                     <td>{{ \Helpers::renderSTT($k + 1, $data['list']) }}</td>
-                                    <td><img src="{{ asset($row->thumbnail) }}" class="mw-100"></td>
+                                    {{-- <td><img src="{{ asset($row->thumbnail) }}" class="mw-100"></td> --}}
                                     <td>{{ $row->title }}</td>
                                     <td>
                                         @if ($row->status == 1)

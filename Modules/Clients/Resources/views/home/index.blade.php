@@ -1,7 +1,7 @@
 @extends('clients::layouts.app')
 
 @section('content')
-    <section id="box-category-suggest">
+    {{-- <section id="box-category-suggest">
         <div class="cs-head">
             <h2>TÌM GIÁ TỐT & KHUYẾN MÃI HOT</h2>
             <div class="line"></div>
@@ -29,7 +29,7 @@
                 @endforeach
             </ul>
         </div>
-    </section>
+    </section> --}}
     <section class="box-product">
         <div class="pr-head">
             <label>TÌM KIẾM NHIỀU</label>

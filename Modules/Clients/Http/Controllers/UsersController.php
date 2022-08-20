@@ -132,7 +132,7 @@ class UsersController extends Controller
     public function viewNotification()
     {
         $data['list'] = Notification::with('deviceReadNotification')
-                                    // ->where('status', '!=', 3)
+                                    ->where('is_delete', 0)
                                     ->where('user_id', auth('users')->user()->id)
                                     ->orderBy('id', 'DESC')
                                     ->paginate(10);
@@ -162,7 +162,7 @@ class UsersController extends Controller
         if (empty($noti)) {
             return redirect()->route('client.user.notification')->with('error', 'Không tồn tại');
         }
-        $noti->delete();
+        $noti->update(['is_delete' => 0]);
 
         return redirect()->route('client.user.notification')->with('success', 'Xóa thành công');
     }
