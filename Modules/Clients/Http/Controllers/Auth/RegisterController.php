@@ -71,10 +71,16 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request)
     {
         try {
-            if($this->clientUserService->store($request->all())){
+            $checkCode = DB::table('verify_codes')->where('code', $request->verify_code)
+                                                  ->first();
+            
+            if (empty($checkCode)) {
+                return back()->withInput($request->all())->withErrors(['accountNotFound' => 'Mã xác thực không hợp lệ']);
+            }
+            if ($this->clientUserService->store($request->all())){
                 session()->flash('success', __('clients::layer.user.register.success'));
                 return redirect(route('client.user.login'));
-            }else{
+            } else {
                 $errors = new MessageBag(['accountNotFound' => __('clients::layer.user.register.error')]);
                 return back()->withInput($request->all())->withErrors($errors);
             }

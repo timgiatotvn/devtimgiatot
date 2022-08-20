@@ -193,7 +193,7 @@ class UsersController extends Controller
                                           ->count();
         
         if ($checkLimitPushNoti >= $user->push_number) {
-            return back()->with('error', 'Mỗi ngày chỉ được phép tạo 3 push notification');
+            return back()->with('error', 'Bạn đã đạt giới hạn gửi thông báo hôm nay. Vui lòng liên hệ bộ phận CSKH theo Hotline: 0912.399.322 để được tăng giới hạn đăng thông báo! Xin cảm ơn!');
         }
         DB::beginTransaction();
         $notification = new Notification();

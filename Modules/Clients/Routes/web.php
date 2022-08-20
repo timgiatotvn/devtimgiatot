@@ -13,6 +13,22 @@
 
 Route::feeds();
 
+Route::get('/ma-xac-thuc', function () {
+    $rand = rand() + time() - rand(0, 99);
+    $code = substr($rand, rand(0, 4), 5);
+    $checkExistCode = \DB::table('verify_codes')->where('code', $code)->first();
+
+    if (empty($checkExistCode)) {
+        \DB::table('verify_codes')->insert([
+            'code' => $code,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        return $code;
+    }
+});
+
 Route::prefix('')->group(function() {
     //user
     Route::prefix('users')->group(function () {

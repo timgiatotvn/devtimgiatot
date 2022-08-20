@@ -6,7 +6,7 @@ return [
 
     //user
     'user.register.error' => 'Đăng ký không thành công',
-    'user.register.success' => 'Đăng ký thành công',
+    'user.register.success' => 'Đăng ký tài khoản thành công. Vui lòng kiểm tra email để kích hoạt tài khoản. Xin cảm ơn!',
     'user.login.error' => 'Tài khoản không tồn tại',
 
     //card

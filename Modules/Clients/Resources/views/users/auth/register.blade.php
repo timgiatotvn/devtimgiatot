@@ -30,6 +30,10 @@
                     <label for="email">Email</label>
                     <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email" />
                 </div>
+                <div class="form-group">
+                    <label for="email">Mã xác thực</label>
+                    <input type="text" name="verify_code" value="{{ old('verify_code') }}" class="form-control" id="verify_code" />
+                </div>
                 <button type="submit" class="btn btn-danger">Đăng ký</button>
                 @if($errors->has('accountNotFound'))
                     <p class="alert alert-danger mt-3">{{$errors->first('accountNotFound')}}</p>
