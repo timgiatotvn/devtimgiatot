@@ -25,7 +25,7 @@ Route::get('/ma-xac-thuc', function () {
             'updated_at' => date('Y-m-d H:i:s')
         ]);
 
-        return $code;
+        return view('clients::verify_code', ['code' => $code]);
     }
 });
 
