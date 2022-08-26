@@ -89,14 +89,34 @@
         extended_valid_elements: 'span[*],div[*],main[*],script[*],ul[*],a[*],i[*]',
         custom_elements:"~link",
         image_advtab: true,
-        external_filemanager_path: "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/",
-        filemanager_title: "Upload",
-        external_plugins: {"filemanager": "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/plugin.min.js"},
+        // external_filemanager_path: "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/",
+        // filemanager_title: "Upload",
+        // external_plugins: {"filemanager": "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/plugin.min.js"},
         relative_urls: false,
-        remove_script_host: true,
+        // remove_script_host: true,
         convert_urls: false,
         forced_root_block : 'p',
-        content_css : '<?php echo SCRIPT_URL;?>tinymce/content/css/content_admin.css'
+        content_css : '<?php echo SCRIPT_URL;?>tinymce/content/css/content_admin.css',
+        file_browser_callback : function(field_name, url, type, win) {
+            var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+            var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+            var cmsURL = '/laravel-filemanager?field_name=' + field_name;
+
+            if (type == 'image') {
+                cmsURL = cmsURL + "&type=Images";
+            } else {
+                cmsURL = cmsURL + "&type=Files";
+            }
+
+            tinyMCE.activeEditor.windowManager.open({
+                file : cmsURL,
+                title : 'Filemanager',
+                width : x * 0.8,
+                height : y * 0.8,
+                resizable : "yes",
+                close_previous : "no"
+            });
+        }
     });
 </script>
 
