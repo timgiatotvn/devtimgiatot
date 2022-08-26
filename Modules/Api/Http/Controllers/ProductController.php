@@ -126,7 +126,7 @@ class ProductController extends Controller
             }])
             ->where('title', 'LIKE', '%' . $keyword . '%')
             ->where('status', 1)
-            ->select('id', 'category_id', 'title', 'slug', 'price', 'count_suggest', 'thumbnail')
+            ->select('id', 'category_id', 'title', 'slug', 'price', 'count_suggest', 'thumbnail', 'thumbmail_cr', 'type')
             ->orderBy('id', 'DESC')
             ->paginate($perPage);
 
