@@ -29,7 +29,7 @@ class CrawlService
                                 $news[] = [
                                     'title' => $title,
                                     'slug' => str_slug($title),
-                                    'thumbnail' => '/storage/photos/' . str_slug($title) . '.jpg',
+                                    'thumbnail' => $this->storeThumbnail($thumbnail, $title),
                                     //'description' => !empty($newsItem->find('.content-wrapper .short-description', 0)) ? trim($newsItem->find('.content-wrapper .short-description', 0)->plaintext) : NULL,
                                     'category_id' => 4,
                                     'link_origin' => $link,
@@ -56,8 +56,14 @@ class CrawlService
     public function storeThumbnail($thumbnail, $title)
     {
         if (!empty($thumbnail)) {
-            $path = storage_path("app/public/photos/" . str_slug($title) . '.jpg');
-            file_put_contents($path, fopen($thumbnail, 'r'));
+            \Storage::disk('s3')->put('photos/' . str_slug($title) . '.jpg', fopen($thumbnail, 'r'));
+            $s3 = \Storage::disk('s3')->getAdapter()->getClient();
+            
+            return $s3->getObjectUrl(env('AWS_BUCKET'), 'photos/' . str_slug($title) . '.jpg');
+            // $path = storage_path("app/public/photos/" . str_slug($title) . '.jpg');
+            // file_put_contents($path, fopen($thumbnail, 'r'));
+        } else {
+            return NULL;
         }
     }
 

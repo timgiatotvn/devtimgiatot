@@ -11,6 +11,13 @@
 |
 */
 Route::get('/test1', function () {
+    // $s3 = \Storage::disk('s3')->getAdapter()->getClient();
+    // dd($s3->getObjectUrl( env('AWS_BUCKET'), 'photos/chinh123.jpg' ));
+    // if (\Storage::disk('s3')->exists('photos/chinh123.jpg')) {
+    //     dd(Storage::disk('s3')->get('photos/chinh123.jpg'));
+    // }
+    // \Storage::disk('s3')->put('photos/chinh123.jpg', fopen('https://timgiatot.vn/img/w1200/h438/fill!photos/00-khuyenmai/sam-sung.jpg', 'r'));
+    dd(1);
     $html = file_get_html_custom('https://nhathuoclongchau.com/thuc-pham-chuc-nang/ho-tro-mien-dich-tang-suc-de-khang?page=3&loadMore=true&sort=mua-nhieu-nhat&currentLink=thuc-pham-chuc-nang%2Fho-tro-mien-dich-tang-suc-de-khang');
     echo $html;
     dd(1);
