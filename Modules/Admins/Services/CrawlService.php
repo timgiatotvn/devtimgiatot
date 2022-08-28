@@ -40,7 +40,7 @@ class CrawlService
                                     'created_at' => date('Y-m-d H:i:s'),
                                     'updated_at' => date('Y-m-d H:i:s')
                                 ];
-                                $this->storeThumbnail($thumbnail, $title);
+                                //$this->storeThumbnail($thumbnail, $title);
                             }
                         }
                     } catch (\Throwable $th) {
@@ -90,7 +90,7 @@ class CrawlService
                             $news[] = [
                                 'title' => $title,
                                 'slug' => str_slug($title),
-                                'thumbnail' => '/storage/photos/' . str_slug($title) . '.jpg',
+                                'thumbnail' => $this->storeThumbnail($thumbnail, $title),
                                 //'description' => !empty($newsItem->find('.blog-sticky-desc', 0)) ? trim($newsItem->find('.blog-sticky-desc', 0)->plaintext) : NULL,
                                 'category_id' => 4,
                                 'link_origin' => $link,
@@ -101,7 +101,7 @@ class CrawlService
                                 'created_at' => date('Y-m-d H:i:s'),
                                 'updated_at' => date('Y-m-d H:i:s')
                             ];
-                            $this->storeThumbnail($thumbnail, $title);
+                            //$this->storeThumbnail($thumbnail, $title);
                         }
                     }
                 } catch (\Throwable $th) {
@@ -126,7 +126,7 @@ class CrawlService
                             $news[] = [
                                 'title' => $title,
                                 'slug' => str_slug($title),
-                                'thumbnail' => '/storage/photos/' . str_slug($title) . '.jpg',
+                                'thumbnail' => $this->storeThumbnail($thumbnail, $title),
                                 //'description' => !empty($newsItem->find('.blog-category-desc', 0)) ? trim($newsItem->find('.blog-category-desc', 0)->plaintext) : NULL,
                                 'category_id' => 4,
                                 'link_origin' => $link,
@@ -137,7 +137,7 @@ class CrawlService
                                 'created_at' => date('Y-m-d H:i:s'),
                                 'updated_at' => date('Y-m-d H:i:s')
                             ];
-                            $this->storeThumbnail($thumbnail, $title);
+                            //$this->storeThumbnail($thumbnail, $title);
                         }
                     }
                 } catch (\Throwable $th) {
