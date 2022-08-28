@@ -9,6 +9,7 @@ use App\Service\Clients\ClientArticleService;
 use App\Service\Clients\ClientProductService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -120,6 +121,12 @@ class ProductController extends Controller
     {
         $keyword = $request->get('keyword');
         $perPage = $request->get('per_page') ? $request->get('per_page') : 10;
+
+        if($keyword){
+            DB::table('key_words')->insert([
+                'name' => $keyword,
+            ]);
+        }
 
         $data = Product::with(['category' => function($query) {
             return $query->select('id', 'title');
