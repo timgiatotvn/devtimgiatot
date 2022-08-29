@@ -60,7 +60,11 @@ class Post extends Model
     static public function formatData($data)
     {
         foreach ($data as $item) {
-            $item->thumbnail = Helpers::getUrlFile($item->thumbnail);
+            if (strpos($item->thumbnail, 'https://') !== false) {
+                $item->thumbnail = $item->thumbnail;
+            } else {
+                $item->thumbnail = Helpers::getUrlFile($item->thumbnail);
+            }
         }
 
         return $data;
