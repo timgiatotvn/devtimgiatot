@@ -17,7 +17,7 @@ class StorePostRequest extends FormRequest
             'code' => 'required',
             'thumbnail' => 'required|mimes:png,jpeg,jpg',
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'required|string|min:700'
         ];
     }
 

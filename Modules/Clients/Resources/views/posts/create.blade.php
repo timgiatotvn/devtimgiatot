@@ -70,9 +70,24 @@
                             </p>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label>Tiêu đề SEO</label>
+                        <textarea class="form-control"
+                                  name="title_seo"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Meta des</label>
+                        <textarea class="form-control"
+                                  name="meta_des"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Meta key</label>
+                        <textarea class="form-control"
+                                  name="meta_key"></textarea>
+                    </div>
                     
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        <button type="submit" class="btn btn-primary">Đăng bài</button>
                     </div>
                 </form>
             </div>

@@ -17,7 +17,7 @@ class UpdatePostRequest extends FormRequest
             'code' => 'required',
             'thumbnail' => 'nullable|mimes:png,jpeg,jpg',
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'required|string|min:700'
         ];
     }
 

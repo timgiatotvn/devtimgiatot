@@ -235,7 +235,10 @@ class UsersController extends Controller
 
     public function createPost()
     {
-        $categories = Category::where('type', 'new')->get();
+        $categories = Category::where('type', 'new')
+                              ->whereIn('parent_id', [3])
+                              ->orWhere('id', 5)
+                              ->get();
 
         return view('clients::posts.create', [
             'categories' => $categories
@@ -244,7 +247,10 @@ class UsersController extends Controller
 
     public function viewFormEdit($id)
     {
-        $categories = Category::where('type', 'new')->get();
+        $categories = Category::where('type', 'new')
+                              ->whereIn('parent_id', [3])
+                              ->orWhere('id', 5)
+                              ->get();
         $post = Post::whereId($id)
                     ->where('user_id', auth('users')->user()->id)
                     ->first();
@@ -288,6 +294,9 @@ class UsersController extends Controller
             'content' => $request->content,
             'thumbnail' => !empty($request->thumbnail) ? $this->save_thumbnail($request) : $post->thumbnail,
             'category_id' => $request->category_id,
+            'title_seo' => $request->title_seo,
+            'meta_des' => $request->meta_des,
+            'meta_key' => $request->meta_key,
         ]);
         $checkExistCode->delete();
 
@@ -314,6 +323,9 @@ class UsersController extends Controller
             'thumbnail' => $this->save_thumbnail($request),
             'user_id' => auth('users')->user()->id,
             'category_id' => $request->category_id,
+            'title_seo' => $request->title_seo,
+            'meta_des' => $request->meta_des,
+            'meta_key' => $request->meta_key,
             'status' => 0
         ]);
         $checkExistCode->delete();
