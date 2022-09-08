@@ -48,6 +48,12 @@ Route::prefix('')->group(function() {
             Route::get('/notification/{id}/edit', 'UsersController@editNoti')->name('client.user.notification.edit');
             Route::post('/notification/{id}/update', 'UsersController@updateNoti')->name('client.user.notification.update');
             Route::post('/notification/store', 'UsersController@storeNotification')->name('client.user.notification.store');
+            Route::get('/post', 'UsersController@viewPost')->name('client.user.post');
+            Route::get('/post/{id}/edit', 'UsersController@viewFormEdit')->name('client.user.edit');
+            Route::post('/post/{id}/update', 'UsersController@updatePost')->name('client.user.update-post');
+            Route::get('/post/create', 'UsersController@createPost')->name('client.user.create-post');
+            Route::post('/post/store', 'UsersController@storePost')->name('client.user.store-post');
+            Route::get('/post/{id}/delete', 'UsersController@deletePost')->name('client.user.delete-post');
             //cart
             Route::prefix('cart')->group(function () {
                 //Route::post('/store', 'CartController@store')->name('client.card.store');

@@ -11,6 +11,7 @@
 |
 */
 Route::get('/test1', function () {
+    echo file_get_html_custom('https://fptshop.com.vn/tin-tuc');
     // $s3 = \Storage::disk('s3')->getAdapter()->getClient();
     // dd($s3->getObjectUrl( env('AWS_BUCKET'), 'photos/chinh123.jpg' ));
     // if (\Storage::disk('s3')->exists('photos/chinh123.jpg')) {

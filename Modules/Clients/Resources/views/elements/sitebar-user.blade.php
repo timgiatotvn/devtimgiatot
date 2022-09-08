@@ -12,6 +12,9 @@
                 <a href="{{ route('client.user.notification') }}" class="{{ Request::routeIs('client.user.notification') ? 'active' : '' }}" title="Giỏ hàng">Push Notification</a>
             </li>
             <li>
+                <a href="{{ route('client.user.post') }}" class="{{ Request::routeIs('client.user.post') ? 'active' : '' }}" title="Giỏ hàng">Đăng bài</a>
+            </li>
+            <li>
                 <a href="{{ route('client.user.logout') }}" title="Đăng xuất">Đăng xuất</a>
             </li>
         </ul>

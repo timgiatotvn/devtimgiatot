@@ -3,7 +3,10 @@
 namespace Modules\Clients\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\Category;
 use App\Model\Notification;
+use App\Model\Post;
+use App\Model\VerifyCode;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCartService;
 use App\Service\Clients\ClientCategoryService;
@@ -19,6 +22,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
 use Modules\Clients\Http\Requests\User\UpdateRequest;
 use DB;
+use Modules\Clients\Http\Requests\User\StorePostRequest;
+use Modules\Clients\Http\Requests\User\UpdatePostRequest;
 
 class UsersController extends Controller
 {
@@ -217,5 +222,113 @@ class UsersController extends Controller
         }
 
         return redirect()->route('client.user.notification')->with('success', 'Thêm thành công');
+    }
+
+    public function viewPost()
+    {
+        $posts = Post::where('user_id', auth('users')->user()->id)->where('is_delete', 0)->latest()->get();
+
+        return view('clients::posts.list', [
+            'posts' => $posts
+        ]); 
+    }
+
+    public function createPost()
+    {
+        $categories = Category::where('type', 'new')->get();
+
+        return view('clients::posts.create', [
+            'categories' => $categories
+        ]); 
+    }
+
+    public function viewFormEdit($id)
+    {
+        $categories = Category::where('type', 'new')->get();
+        $post = Post::whereId($id)
+                    ->where('user_id', auth('users')->user()->id)
+                    ->first();
+
+        if (empty($post)) {
+            return back()->with('error', 'Bài viết này không tồn tại');
+        }
+
+        return view('clients::posts.edit', [
+            'categories' => $categories,
+            'post' => $post
+        ]); 
+    }
+
+    public function deletePost($id)
+    {
+        $post = Post::whereId($id)
+                    ->where('user_id', auth('users')->user()->id)
+                    ->first();
+        
+        if (empty($post)) {
+            return back()->with('error', 'Không tồn tại bài viết này');
+        }
+        $post->update(['is_delete' => 1]);
+
+        return back()->with('success', 'Xóa thành công');
+    }
+
+    public function updatePost(UpdatePostRequest $request, $id)
+    {
+        $checkExistCode = VerifyCode::where('code', $request->code)->first();
+
+        if (empty($checkExistCode)) {
+            return back()->with('error', 'Mã xác thực không tồn tại');
+        }
+        $post = Post::whereId($id)
+                    ->where('user_id', auth('users')->user()->id)
+                    ->first();
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'thumbnail' => !empty($request->thumbnail) ? $this->save_thumbnail($request) : $post->thumbnail,
+            'category_id' => $request->category_id,
+        ]);
+        $checkExistCode->delete();
+
+        return redirect()->route('client.user.post')->with('success', 'Sửa thành công');
+    }
+
+    public function storePost(StorePostRequest $request)
+    {
+        $checkExistCode = VerifyCode::where('code', $request->code)->first();
+
+        if (empty($checkExistCode)) {
+            return back()->with('error', 'Mã xác thực không tồn tại');
+        }
+        $checkTotalPost = Post::where('user_id', auth('users')->user()->id)->count();
+
+        if ($checkTotalPost >= 3) {
+            return back()->with('error', 'Mỗi tài khoản chỉ được phép đăng tối đa 3 bài');
+        }
+        $post = Post::create([
+            'title' => $request->title,
+            'slug' => str_slug($request->title),
+            'admin_id' => -1,
+            'content' => $request->content,
+            'thumbnail' => $this->save_thumbnail($request),
+            'user_id' => auth('users')->user()->id,
+            'category_id' => $request->category_id,
+            'status' => 0
+        ]);
+        $checkExistCode->delete();
+
+        return redirect()->route('client.user.post')->with('success', 'Thêm thành công');
+    }
+
+    public function save_thumbnail($request)
+    {
+        \Storage::disk('public')->putFileAs(
+            'photos',
+            $request->thumbnail,
+            str_slug($request->title) . '.jpg'
+        );
+
+        return '/storage/photos/'. str_slug($request->title) . '.jpg';
     }
 }

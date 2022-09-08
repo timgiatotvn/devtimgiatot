@@ -13,6 +13,7 @@ class Post extends Model
     use Notifiable;
     protected $fillable = [
         'title',
+        'user_id',
         'slug',
         'category_id',
         'category_multi',
@@ -32,7 +33,8 @@ class Post extends Model
         'choose_4',
         'date_edit',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'is_delete'
     ];
 
     public function getCategory()
