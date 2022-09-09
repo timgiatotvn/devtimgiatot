@@ -328,6 +328,7 @@ class UsersController extends Controller
             'title_seo' => $request->title_seo,
             'meta_des' => $request->meta_des,
             'meta_key' => $request->meta_key,
+            'type' => 'new',
             'status' => 0
         ]);
         $checkExistCode->delete();
