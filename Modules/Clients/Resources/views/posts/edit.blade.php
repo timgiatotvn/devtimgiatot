@@ -34,17 +34,17 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Ảnh cũ</label>
-                        <img src="{{$post->thumbnail}}" width="100px" alt="">
+                        <img src="{{$post->thumbnail}}" style="width: 100px !important" alt="">
                     </div>
                     <div class="form-group">
-                        <label for="name">Chọn ảnh</label>
-                        <input type="file" name="thumbnail" class="form-control">
-                        @error('thumbnail')
+                        {{-- <label for="name">Chọn ảnh</label>
+                        <input type="file" name="thumbnail" class="form-control"> --}}
+                        {{-- @error('thumbnail')
                             <p class="text-danger">
                                 {{$message}}
                             </p>
-                        @enderror
-                        {{-- <div class="input-group">
+                        @enderror --}}
+                        <div class="input-group">
                             <span class="input-group-btn">
                                 <a data-input="thumbnail" data-preview="holder"
                                    class="lfm btn btn-primary">
@@ -53,7 +53,7 @@
                             </span>
                             <input id="thumbnail" class="form-control" type="text" name="thumbnail"
                                 readonly>
-                        </div> --}}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="name">Danh mục</label>
@@ -103,35 +103,6 @@
 <script src="{{ asset('/tinymce/tinymce.min.js') }}" type="text/javascript"></script>
 <script>
     tinymce.init({
-        selector: 'textarea.tinymce-mini',
-        height: 200,
-        link_class_list:[
-            {title: 'Chọn Class', value: ''},
-            {title: 'Lightbox', value: 'lightbox'},
-            {title: 'Mua hàng', value: 'smbuy-button'}
-        ],
-        plugins: [
-            "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-            "searchreplace wordcount visualblocks visualchars insertdatetime nonbreaking",
-            "table contextmenu directionality emoticons paste textcolor code"
-        ],
-        toolbar: "codesample | undo redo | bold italic underline sizeselect fontselect fontsizeselect | hr alignleft aligncenter alignright alignjustify | forecolor backcolor  | bullist numlist outdent indent | styleselect | responsivefilemanager | link unlink anchor | image media youtube",
-        fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
-        noneditable_noneditable_class: 'fa',
-        extended_valid_elements: 'span[*],div[*],main[*],script[*],ul[*],a[*],i[*]',
-        custom_elements:"~link",
-        image_advtab: true,
-        external_filemanager_path: "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/",
-        filemanager_title: "Upload",
-        external_plugins: {"filemanager": "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/plugin.min.js"},
-        relative_urls: false,
-        remove_script_host: true,
-        convert_urls: false,
-        forced_root_block : 'p',
-        content_css : '<?php echo SCRIPT_URL;?>tinymce/content/css/content_admin.css',
-        image_caption: true
-    });
-    tinymce.init({
         selector: 'textarea.tinymce',
         image_caption: true,
         height: 500,
@@ -152,14 +123,34 @@
         extended_valid_elements: 'span[*],div[*],main[*],script[*],ul[*],a[*],i[*]',
         custom_elements:"~link",
         image_advtab: true,
-        external_filemanager_path: "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/",
-        filemanager_title: "Upload",
-        external_plugins: {"filemanager": "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/plugin.min.js"},
+        // external_filemanager_path: "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/",
+        // filemanager_title: "Upload",
+        // external_plugins: {"filemanager": "<?php echo SCRIPT_URL;?>tinymce/plugins/filemanager/plugin.min.js"},
         relative_urls: false,
-        remove_script_host: true,
+        // remove_script_host: true,
         convert_urls: false,
         forced_root_block : 'p',
-        content_css : '<?php echo SCRIPT_URL;?>tinymce/content/css/content_admin.css'
+        content_css : '<?php echo SCRIPT_URL;?>tinymce/content/css/content_admin.css',
+        file_browser_callback : function(field_name, url, type, win) {
+            var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+            var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+            var cmsURL = '/laravel-filemanager?field_name=' + field_name;
+
+            if (type == 'image') {
+                cmsURL = cmsURL + "&type=Images";
+            } else {
+                cmsURL = cmsURL + "&type=Files";
+            }
+
+            tinyMCE.activeEditor.windowManager.open({
+                file : cmsURL,
+                title : 'Filemanager',
+                width : x * 0.8,
+                height : y * 0.8,
+                resizable : "yes",
+                close_previous : "no"
+            });
+        }
     });
 </script>
 <script>

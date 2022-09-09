@@ -15,7 +15,6 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'code' => 'required',
-            'thumbnail' => 'nullable|mimes:png,jpeg,jpg',
             'title' => 'required',
             'content' => 'required|string|min:700'
         ];
@@ -35,7 +34,6 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'code.required' => 'Mã xác thực là bắt buộc',
-            'thumbnail.mimes' => 'Ảnh chỉ được phép định dạng png, jpg',
             'title.required' => 'Tiêu đề là bắt buộc',
             'content.required' => 'Nội dung là bắt buộc'
         ];

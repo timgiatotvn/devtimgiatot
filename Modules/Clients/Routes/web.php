@@ -12,7 +12,14 @@
 */
 
 Route::feeds();
-
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'check-auth'], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+    Route::get('/delete', [
+        'uses' => '\UniSharp\LaravelFilemanager\Controllers\DeleteController@getDelete',
+        'as' => 'getDelete',
+    ])->middleware('check-auth-admin');
+    
+});
 Route::get('/ma-xac-thuc', function () {
     $rand = rand() + time() - rand(0, 99);
     $code = substr($rand, rand(0, 4), 5);

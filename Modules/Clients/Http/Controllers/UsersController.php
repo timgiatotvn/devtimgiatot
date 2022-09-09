@@ -292,7 +292,7 @@ class UsersController extends Controller
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
-            'thumbnail' => !empty($request->thumbnail) ? $this->save_thumbnail($request) : $post->thumbnail,
+            'thumbnail' => !empty($request->thumbnail) ? $request->thumbnail : $post->thumbnail,
             'category_id' => $request->category_id,
             'title_seo' => $request->title_seo,
             'meta_des' => $request->meta_des,
@@ -320,7 +320,7 @@ class UsersController extends Controller
             'slug' => str_slug($request->title),
             'admin_id' => -1,
             'content' => $request->content,
-            'thumbnail' => $this->save_thumbnail($request),
+            'thumbnail' => $request->thumbnail,
             'user_id' => auth('users')->user()->id,
             'category_id' => $request->category_id,
             'title_seo' => $request->title_seo,

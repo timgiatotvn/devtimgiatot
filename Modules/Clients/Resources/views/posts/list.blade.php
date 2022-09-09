@@ -48,7 +48,7 @@
                         @foreach ($posts as $key => $item)
                             <tr>
                                 <td>{{$key + 1}}</td>
-                                <td><img src="{{ asset($item->thumbnail) }}" class="mw-100"></td>
+                                <td><img src="{{ $item->thumbnail }}" style="width: 200px !important"></td>
                                 <td>{{$item->title}}</td>
                                 <td>{{$item->status ? 'Đã duyệt' : 'Chưa duyệt'}}</td>
                                 <td align="center">
