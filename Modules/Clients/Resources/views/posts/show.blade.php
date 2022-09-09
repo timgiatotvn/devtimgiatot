@@ -12,7 +12,6 @@
 			<span>Đăng tải {{date('d/m/Y', strtotime($data['detail']->created_at))}}</span>
 			<span style="margin: 0px 5px">|</span>
 			<span>Bởi: <b>{{!empty($data['detail']->customer_name) ? $data['detail']->customer_name : $data['detail']->author_name}}</b></span>
-			{{dd(1)}}
 			<span style="margin: 0px 5px">|</span>
 			<span>Lượt xem: {{number_format($data['detail']->total_views)}}</span>
 		</p>
