@@ -15,7 +15,7 @@ class StorePostRequest extends FormRequest
     {
         return [
             'code' => 'required',
-            'thumbnail' => 'required',
+            'thumbnail' => 'required|mimes:jpg,png,jpeg',
             'title' => 'required',
             'content' => 'required|string|min:700'
         ];
@@ -36,6 +36,7 @@ class StorePostRequest extends FormRequest
         return [
             'code.required' => 'Mã xác thực là bắt buộc',
             'thumbnail.required' => 'Ảnh là bắt buộc',
+            'thumbnail.mimes' => 'Ảnh chỉ được phép định dạng: jpg, png, jpeg',
             'title.required' => 'Tiêu đề là bắt buộc',
             'content.required' => 'Nội dung là bắt buộc'
         ];

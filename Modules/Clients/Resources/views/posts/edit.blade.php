@@ -37,14 +37,14 @@
                         <img src="{{$post->thumbnail}}" style="width: 100px !important" alt="">
                     </div>
                     <div class="form-group">
-                        {{-- <label for="name">Chọn ảnh</label>
-                        <input type="file" name="thumbnail" class="form-control"> --}}
-                        {{-- @error('thumbnail')
+                        <label for="name">Chọn ảnh</label>
+                        <input type="file" name="thumbnail" class="form-control">
+                        @error('thumbnail')
                             <p class="text-danger">
                                 {{$message}}
                             </p>
-                        @enderror --}}
-                        <div class="input-group">
+                        @enderror
+                        {{-- <div class="input-group">
                             <span class="input-group-btn">
                                 <a data-input="thumbnail" data-preview="holder"
                                    class="lfm btn btn-primary">
@@ -53,7 +53,7 @@
                             </span>
                             <input id="thumbnail" class="form-control" type="text" name="thumbnail"
                                 readonly>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="form-group">
                         <label for="name">Danh mục</label>

@@ -292,7 +292,8 @@ class UsersController extends Controller
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
-            'thumbnail' => !empty($request->thumbnail) ? $request->thumbnail : $post->thumbnail,
+            //'thumbnail' => !empty($request->thumbnail) ? $request->thumbnail : $post->thumbnail,
+            'thumbnail' => !empty($request->thumbnail) ? $this->save_thumbnail($request) : $post->thumbnail,
             'category_id' => $request->category_id,
             'title_seo' => $request->title_seo,
             'meta_des' => $request->meta_des,
@@ -320,7 +321,8 @@ class UsersController extends Controller
             'slug' => str_slug($request->title),
             'admin_id' => -1,
             'content' => $request->content,
-            'thumbnail' => $request->thumbnail,
+            //'thumbnail' => $this->$request->thumbnail,
+            'thumbnail' => $this->save_thumbnail($request),
             'user_id' => auth('users')->user()->id,
             'category_id' => $request->category_id,
             'title_seo' => $request->title_seo,
@@ -335,12 +337,17 @@ class UsersController extends Controller
 
     public function save_thumbnail($request)
     {
-        \Storage::disk('public')->putFileAs(
-            'photos',
-            $request->thumbnail,
-            str_slug($request->title) . '.jpg'
-        );
+        // \Storage::disk('public')->putFileAs(
+        //     'photos',
+        //     $request->thumbnail,
+        //     str_slug($request->title) . '.jpg'
+        // );
 
-        return '/storage/photos/'. str_slug($request->title) . '.jpg';
+        // return '/storage/photos/'. str_slug($request->title) . '.jpg';
+        $time = time();
+        \Storage::disk('s3')->put('photos/' . str_slug($request->title) . '-' . $time . '.jpg', file_get_contents($request->thumbnail));
+        $s3 = \Storage::disk('s3')->getAdapter()->getClient();
+        
+        return $s3->getObjectUrl(env('AWS_BUCKET'), 'photos/' . str_slug($request->title) . '-' . $time . '.jpg');
     }
 }
