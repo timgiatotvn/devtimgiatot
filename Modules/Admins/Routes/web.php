@@ -166,7 +166,7 @@ Route::prefix('admin')->group(function () {
 
         //Products crawlers
         Route::prefix('product-crawlers')->middleware('check-is-admin')->group(function () {
-                Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
+            Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
             Route::post('/', 'ProductCrawlersController@actionIndex');
             Route::get('/create', 'ProductCrawlersController@create')->name('admin.productCrawler.create');
             Route::post('/create', 'ProductCrawlersController@store');

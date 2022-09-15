@@ -17,19 +17,19 @@ class ProductRepository implements ProductRepositoryInterface
         $category_id = !empty($_data['category_id']) ? $_data['category_id'] : [];
         $type = !empty($_data['type']) ? $_data['type'] : [];
         return DB::table(self::TABLE_NAME)
-            ->select('products.*', 'categories.title as category_title')
-            ->leftJoin('categories', 'products.category_id', 'categories.id')
-            ->when($keyword, function ($query, $keyword) {
-                return $query->where('products.title', 'LIKE', '%' . $keyword . '%');
-            })
-            ->when($category_id, function ($query, $category_id) {
-                return $query->whereIn('products.category_id', $category_id);
-            })
-            ->when($type, function ($query, $type) {
-                return $query->where('products.type', $type);
-            })
-            ->orderBy('products.id', 'DESC')
-            ->paginate($_data['limit']);
+                ->select('products.*', 'categories.title as category_title')
+                ->leftJoin('categories', 'products.category_id', 'categories.id')
+                ->when($keyword, function ($query, $keyword) {
+                    return $query->where('products.title', 'LIKE', '%' . $keyword . '%');
+                })
+                ->when($category_id, function ($query, $category_id) {
+                    return $query->whereIn('products.category_id', $category_id);
+                })
+                ->when($type, function ($query, $type) {
+                    return $query->where('products.type', $type);
+                })
+                ->orderBy('products.id', 'DESC')
+                ->paginate($_data['limit']);
     }
 
     public function listAllCrawler(){
