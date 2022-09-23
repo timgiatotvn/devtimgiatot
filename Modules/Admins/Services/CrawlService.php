@@ -67,6 +67,101 @@ class CrawlService
         }
     }
 
+    public function crawlDienMayXanh($data)
+    {
+        $news = [];
+        $html = file_get_html_custom($data->link);
+        
+        if (!empty($html->find('ul.box-featured'))) {
+            foreach ($html->find('ul.box-featured li.featured') as $newsItem) {
+                try {
+                    $title = html_entity_decode($newsItem->find('a div.title h3', 0)->plaintext);
+                    $thumbnail = !empty($newsItem->find('div.img img', 0)) ? $newsItem->find('div.img img', 0)->src : NULL;
+                    $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+                    $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
+                    
+                    if (empty($checkExistNews)) {
+                        $news[] = $this->detail_news($title, $thumbnail, $link);
+                    }
+                } catch (\Throwable $th) {
+                    dd($th->getMessage());
+                }
+            }
+        }
+        if (!empty($html->find('ul.listpost'))) {
+            foreach ($html->find('ul.listpost li') as $key => $newsItem) {
+                try {
+                    if ($key > 0) {
+                        $title = html_entity_decode($newsItem->find('a span', 0)->plaintext);
+                        $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+                        $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
+                    
+                        if (empty($checkExistNews)) {
+                            $news[] = $this->detail_news($title, $thumbnail = NULL, $link);
+                        }
+                    }
+                } catch (\Throwable $th) {
+                }
+            }
+        }
+        if (!empty($html->find('div#lstMainNews'))) {
+            foreach ($html->find('div#lstMainNews ul li') as $key => $newsItem) {
+                try {
+                    $title = html_entity_decode($newsItem->find('a div.title h3', 0)->plaintext);
+                    $thumbnail = !empty($newsItem->find('div.img img', 0)) ? $newsItem->find('div.img img', 0)->src : NULL;
+                    $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+                    $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
+                    
+                    if (empty($checkExistNews)) {
+                        $news[] = $this->detail_news($title, $thumbnail, $link);
+                    }
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+            }
+        }
+        //dd($news);
+        if (count($news) > 0) {
+            Post::insert($news);
+        }
+    }
+
+    public function detail_news($title, $thumbnail, $link)
+    {
+        return [
+            'title' => $title,
+            'slug' => str_slug($title),
+            'thumbnail' => $this->storeThumbnail($thumbnail, $title),
+            'category_id' => 4,
+            'link_origin' => $link,
+            'link_origin_encode' => md5($link),
+            'admin_id' => -1,
+            'status' => 0,
+            'content' => $this->get_content_dien_may_xanh($link),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+    }
+
+    public function get_content_dien_may_xanh($link)
+    {
+        $html = file_get_html_custom($link);
+
+        if (!empty($html->find('#bxcontentnewsindx'))) {
+            $content = $html->find('#bxcontentnewsindx', 0)->innertext;
+            
+            if (!empty($html->find('.infobox'))) {
+                foreach ($html->find('.infobox') as $read_more_item) {
+                    $content = str_replace($read_more_item->outertext, "", $content);
+                }
+            }
+            
+            return $content;
+        }
+
+        return NULL;
+    }
+
     public function crawlWebSoSanhVn($data)
     {
         $news = [];

@@ -23,7 +23,8 @@ class CrawlController extends Controller
         $data_pass = [
             'links' => $links,
             'so_sanh_gia' => CrawlLink::SO_SANH_GIA,
-            'web_so_sanh' => CrawlLink::WEB_SO_SANH
+            'web_so_sanh' => CrawlLink::WEB_SO_SANH,
+            'dien_may_xanh' => CrawlLink::WEB_DIEN_MAY_XANH
         ];
 
         return view('admins::crawls.list', $data_pass);
@@ -31,7 +32,7 @@ class CrawlController extends Controller
 
     public function storeLink(Request $request)
     {
-        $link = CrawlLink::updateOrCreate(
+        $data = CrawlLink::updateOrCreate(
             [
                 'link' => $request->link,
                 'website_name' => $request->website_name
@@ -40,9 +41,11 @@ class CrawlController extends Controller
             ]
         );
         if ($request->website_name == CrawlLink::SO_SANH_GIA) {
-            $this->crawlService->crawlSoSanhGiaCom($link);
+            $this->crawlService->crawlSoSanhGiaCom($data);
         } else if ($request->website_name == CrawlLink::WEB_SO_SANH) {
-            $this->crawlService->crawlWebSoSanhVn($link);
+            $this->crawlService->crawlWebSoSanhVn($data);
+        } else if ($request->website_name == CrawlLink::WEB_DIEN_MAY_XANH) {
+            $this->crawlService->crawlDienMayXanh($data);
         }
 
         return back()->with('success', 'Thêm link và crawl thành công');

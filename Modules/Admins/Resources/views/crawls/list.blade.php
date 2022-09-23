@@ -15,6 +15,7 @@
                             <select name="website_name" class="form-control mb-0 mr-sm-2" id="">
                                 <option value="{{$so_sanh_gia}}">Trang sosanhgia.com</option>
                                 <option value="{{$web_so_sanh}}">Trang websosanh.vn</option>
+                                <option value="{{$dien_may_xanh}}">Trang dienmayxanh.com</option>
                             </select>
                             <select name="page_number" class="form-control mb-0 mr-sm-2" id="">
                                 @for ($page = 1; $page <= 20; $page++)
