@@ -84,7 +84,7 @@ class CrawlService
                         $news[] = $this->detail_news($title, $thumbnail, $link);
                     }
                 } catch (\Throwable $th) {
-                    dd($th->getMessage());
+                    
                 }
             }
         }
@@ -108,7 +108,15 @@ class CrawlService
             foreach ($html->find('div#lstMainNews ul li') as $key => $newsItem) {
                 try {
                     $title = html_entity_decode($newsItem->find('a div.title h3', 0)->plaintext);
-                    $thumbnail = !empty($newsItem->find('div.img img', 0)) ? $newsItem->find('div.img img', 0)->src : NULL;
+                    if (!empty($newsItem->find('div.img img', 0))) {
+                        $thumbnail = $newsItem->find('div.img img', 0)->src;
+
+                        if (empty($thumbnail)) {
+                            $thumbnail = $newsItem->find('div.img img', 0)->attr['data-src'];
+                        }
+                    } else {
+                        $thumbnail = NULL;
+                    }
                     $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
                     $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
                     
@@ -116,11 +124,10 @@ class CrawlService
                         $news[] = $this->detail_news($title, $thumbnail, $link);
                     }
                 } catch (\Throwable $th) {
-                    //throw $th;
+                    dd($th->getMessage());
                 }
             }
         }
-        //dd($news);
         if (count($news) > 0) {
             Post::insert($news);
         }
