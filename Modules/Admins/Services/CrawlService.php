@@ -36,7 +36,7 @@ class CrawlService
                                     'link_origin_encode' => md5($link),
                                     'admin_id' => -1,
                                     'status' => 0,
-                                    'content' => $this->get_content_so_sanh_gia($link),
+                                    'content' => $this->get_content_so_sanh_gia($link) . "<p>Nguồn: $link</p>",
                                     'created_at' => date('Y-m-d H:i:s'),
                                     'updated_at' => date('Y-m-d H:i:s')
                                 ];
@@ -144,7 +144,7 @@ class CrawlService
             'link_origin_encode' => md5($link),
             'admin_id' => -1,
             'status' => 0,
-            'content' => $this->get_content_dien_may_xanh($link),
+            'content' => $this->get_content_dien_may_xanh($link) . "<p>Nguồn: $link</p>",
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
         ];
@@ -199,7 +199,7 @@ class CrawlService
                                 'link_origin_encode' => md5($link),
                                 'admin_id' => -1,
                                 'status' => 0,
-                                'content' => $this->get_content_web_so_sanh_gia($link),
+                                'content' => $this->get_content_web_so_sanh_gia($link) . "<p>Nguồn: $link</p>",
                                 'created_at' => date('Y-m-d H:i:s'),
                                 'updated_at' => date('Y-m-d H:i:s')
                             ];
@@ -235,7 +235,7 @@ class CrawlService
                                 'link_origin_encode' => md5($link),
                                 'admin_id' => -1,
                                 'status' => 0,
-                                'content' => $this->get_content_web_so_sanh_gia($link),
+                                'content' => $this->get_content_web_so_sanh_gia($link) . "<p>Nguồn: $link</p>",
                                 'created_at' => date('Y-m-d H:i:s'),
                                 'updated_at' => date('Y-m-d H:i:s')
                             ];
