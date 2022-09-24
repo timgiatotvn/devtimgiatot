@@ -124,7 +124,7 @@ class CrawlService
                         $news[] = $this->detail_news($title, $thumbnail, $link);
                     }
                 } catch (\Throwable $th) {
-                    dd($th->getMessage());
+                    
                 }
             }
         }
@@ -163,7 +163,7 @@ class CrawlService
                 }
             }
             
-            return $content;
+            return str_replace("data-src", "src", $content);
         }
 
         return NULL;
