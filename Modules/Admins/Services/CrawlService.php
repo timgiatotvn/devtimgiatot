@@ -71,63 +71,107 @@ class CrawlService
     {
         $news = [];
         $html = file_get_html_custom($data->link);
-        
-        if (!empty($html->find('ul.box-featured'))) {
-            foreach ($html->find('ul.box-featured li.featured') as $newsItem) {
+
+        if (!empty($html->find('#moinhat .box-featured ul li'))) {
+            foreach ($html->find('#moinhat .box-featured ul li') as $newsItem) {
                 try {
-                    $title = html_entity_decode($newsItem->find('a div.title h3', 0)->plaintext);
-                    $thumbnail = !empty($newsItem->find('div.img img', 0)) ? $newsItem->find('div.img img', 0)->src : NULL;
+                    $title = html_entity_decode($newsItem->find('h3', 0)->plaintext);
                     $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+                    $thumbnail = NULL;
+
+                    if (!empty($newsItem->find('img'))) {
+                        $thumbnail = $newsItem->find('img', 0)->src;
+                    }
                     $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
-                    
+
                     if (empty($checkExistNews)) {
                         $news[] = $this->detail_news($title, $thumbnail, $link);
                     }
                 } catch (\Throwable $th) {
-                    
+                    //throw $th;
                 }
             }
         }
-        if (!empty($html->find('ul.listpost'))) {
-            foreach ($html->find('ul.listpost li') as $key => $newsItem) {
+        if (!empty($html->find('#moinhat .listnews'))) {
+            foreach ($html->find('#moinhat .listnews li') as $newsItem) {
                 try {
-                    if ($key > 0) {
-                        $title = html_entity_decode($newsItem->find('a span', 0)->plaintext);
-                        $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
-                        $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
-                    
-                        if (empty($checkExistNews)) {
-                            $news[] = $this->detail_news($title, $thumbnail = NULL, $link);
-                        }
-                    }
-                } catch (\Throwable $th) {
-                }
-            }
-        }
-        if (!empty($html->find('div#lstMainNews'))) {
-            foreach ($html->find('div#lstMainNews ul li') as $key => $newsItem) {
-                try {
-                    $title = html_entity_decode($newsItem->find('a div.title h3', 0)->plaintext);
-                    if (!empty($newsItem->find('div.img img', 0))) {
-                        $thumbnail = $newsItem->find('div.img img', 0)->src;
+                    $title = html_entity_decode($newsItem->find('h3', 0)->plaintext);
+                    $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+                    $thumbnail = NULL;
+
+                    if (!empty($newsItem->find('img'))) {
+                        $thumbnail = $newsItem->find('img', 0)->src;
 
                         if (empty($thumbnail)) {
-                            $thumbnail = $newsItem->find('div.img img', 0)->attr['data-src'];
+                            $thumbnail = $newsItem->find('img', 0)->attr['data-original'];
                         }
-                    } else {
-                        $thumbnail = NULL;
                     }
-                    $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
                     $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
-                    
+
                     if (empty($checkExistNews)) {
                         $news[] = $this->detail_news($title, $thumbnail, $link);
                     }
                 } catch (\Throwable $th) {
-                    
+                    //throw $th;
                 }
             }
-        }
+        }        
+        // if (!empty($html->find('ul.box-featured'))) {
+        //     foreach ($html->find('ul.box-featured li.featured') as $newsItem) {
+        //         try {
+        //             $title = html_entity_decode($newsItem->find('a div.title h3', 0)->plaintext);
+        //             $thumbnail = !empty($newsItem->find('div.img img', 0)) ? $newsItem->find('div.img img', 0)->src : NULL;
+        //             $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+        //             $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
+                    
+        //             if (empty($checkExistNews)) {
+        //                 $news[] = $this->detail_news($title, $thumbnail, $link);
+        //             }
+        //         } catch (\Throwable $th) {
+                    
+        //         }
+        //     }
+        // }
+        // if (!empty($html->find('ul.listpost'))) {
+        //     foreach ($html->find('ul.listpost li') as $key => $newsItem) {
+        //         try {
+        //             if ($key > 0) {
+        //                 $title = html_entity_decode($newsItem->find('a span', 0)->plaintext);
+        //                 $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+        //                 $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
+                    
+        //                 if (empty($checkExistNews)) {
+        //                     $news[] = $this->detail_news($title, $thumbnail = NULL, $link);
+        //                 }
+        //             }
+        //         } catch (\Throwable $th) {
+        //         }
+        //     }
+        // }
+        // if (!empty($html->find('div#lstMainNews'))) {
+        //     foreach ($html->find('div#lstMainNews ul li') as $key => $newsItem) {
+        //         try {
+        //             $title = html_entity_decode($newsItem->find('a div.title h3', 0)->plaintext);
+        //             if (!empty($newsItem->find('div.img img', 0))) {
+        //                 $thumbnail = $newsItem->find('div.img img', 0)->src;
+
+        //                 if (empty($thumbnail)) {
+        //                     $thumbnail = $newsItem->find('div.img img', 0)->attr['data-src'];
+        //                 }
+        //             } else {
+        //                 $thumbnail = NULL;
+        //             }
+        //             $link = "https://www.dienmayxanh.com" . $newsItem->find('a', 0)->href;
+        //             $checkExistNews = Post::where('link_origin_encode', md5($link))->first();
+                    
+        //             if (empty($checkExistNews)) {
+        //                 $news[] = $this->detail_news($title, $thumbnail, $link);
+        //             }
+        //         } catch (\Throwable $th) {
+                    
+        //         }
+        //     }
+        // }
         if (count($news) > 0) {
             Post::insert($news);
         }

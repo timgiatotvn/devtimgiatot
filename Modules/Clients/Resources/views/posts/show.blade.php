@@ -136,9 +136,6 @@
 				<div id="ft-postcontent" class="contentck">
 					<?php echo split_content($data['detail']->content); ?>
 				</div>
-				<div>
-					<b>Nguồn: </b> <i>{{$data['detail']->link_origin}}</i>
-				</div>
                 {!! !empty($data_common['setting']->ads2) ? $data_common['setting']->ads2 : '' !!}
             </div>
             @if($data['adv_img']->location_code_google=='bottom')
