@@ -85,4 +85,9 @@ class ContactController extends Controller
         }
     }
 
+    // public function index()
+    // {
+    //     return view('clients::contacts.index');
+    // }
+
 }

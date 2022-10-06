@@ -1,0 +1,37 @@
+.contact .left ul {
+    padding-left: 0px;
+}
+.contact .left ul li {
+    align-items: center;
+    margin-bottom: 10px;
+}
+.contact .left img.banner {
+    max-width: 100%;
+}
+.contact .left .icon  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    justify-content: center;
+    gap: 10px;
+
+    width: 40px;
+    height: 40px;
+
+    background: rgba(13, 84, 190, 0.1);
+    border-radius: 36px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.contact .right .title{
+    font-family: Roboto Condensed,sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+}

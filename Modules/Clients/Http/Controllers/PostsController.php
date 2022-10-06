@@ -53,6 +53,7 @@ class PostsController extends Controller
     public function show($slug)
     {
         try {
+            $data['news_coupon'] = Post::where('category_id', 20)->inRandomOrder()->take(6)->get();
             $data['detail'] = $this->clientPostService->findBySlug($slug);
             if (empty($data['detail']->id)) abort(404);
             DB::table('posts')

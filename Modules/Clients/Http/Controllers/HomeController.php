@@ -3,6 +3,7 @@
 namespace Modules\Clients\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\Category;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCategoryService;
 use App\Service\Clients\ClientPostService;
@@ -55,8 +56,23 @@ class HomeController extends Controller
             $data['news'] = $this->clientPostService->getListByCategory(['category_id' => $this->clientCategoryService->multiCate(20)]);
             $data['cat_kienthuc'] = $this->clientCategoryService->findById(3);
             $data['cat_tintuc'] = $this->clientCategoryService->findById(20);
+            
+            $data['ads_home'] = \DB::table('advertisements')
+                                   ->select('id', 'title', 'thumbnail', 'url', 'type')
+                                   ->where('type', 'slideshow')
+                                   ->where('status', 1)
+                                   ->inRandomOrder()
+                                   ->first();
             $data['ads_home'] = $this->clientAdvService->getListAdsLimit(['limit' => 4]);
             $data['page_home'] = true;
+            $cate_tim_gia_tot = Category::where('slug', 'tim-gia-tot')->first();
+            $data['category_products'] = Category::where('parent_id', $cate_tim_gia_tot->id)
+                                                 ->where('type', 'product')
+                                                 ->with(['category' => function ($query) {
+                                                    $query->with('category');
+                                                 }])
+                                                 ->get();
+                                                 //dd($data['category_products']);
             $list_cate_show = DB::table('categories_show')
                 ->where('status', 1)
                 ->orderBy('id')

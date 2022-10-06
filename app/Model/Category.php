@@ -48,4 +48,9 @@ class Category extends Model
 
         return self::formatCategory($categories);
     }
+
+    public function category()
+    {
+        return $this->hasMany(Category::class, 'parent_id', 'id');
+    }
 }

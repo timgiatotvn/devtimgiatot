@@ -56,8 +56,15 @@ class CategoriesController extends Controller
             if (empty($data['category']->id)) abort(404);
             $data['setting'] = $this->setting;
             $cateMulti = $this->clientCategoryService->multiCate($data['category']->id);
+            $data['news_coupon'] = Post::where('category_id', 20)->inRandomOrder()->take(6)->get();
 
             if ($data['category']->type == 'product') {
+                $data['category_products'] = Category::where('parent_id', $data['category']->id)
+                                                 ->where('type', 'product')
+                                                 ->with(['category' => function ($query) {
+                                                    $query->with('category');
+                                                 }])
+                                                 ->get();
                 $data['list'] = $this->clientProductService->getListByCate(['cate_multi' => $cateMulti, 'limit' => 20]);
 
                 if (empty($data['category']->title_seo)) $data['category']->title_seo = "Giá " . $data['category']->title . " tốt nhất tháng " . date("m/Y", time());
@@ -69,6 +76,12 @@ class CategoriesController extends Controller
 
                 return view('clients::products.index', ['data' => $data]);
             } else {
+                $data['category_products'] = Category::where('parent_id', $data['category']->id)
+                                                 ->where('type', 'new')
+                                                 ->with(['category' => function ($query) {
+                                                    $query->with('category');
+                                                 }])
+                                                 ->get();
                 if (empty($data['category']->title_seo)) $data['category']->title_seo = "Thông tin hữu ích về " . $data['category']->title . " - " . @ucfirst($_SERVER["HTTP_HOST"]);
                 if (empty($data['category']->meta_des)) {
                     $des = !empty($data['category']->description) ? $data['category']->description : "";
@@ -95,14 +108,16 @@ class CategoriesController extends Controller
             $data['common'] = Helpers::metaHead($data['setting']);
             $data['search_title'] = !empty($_GET['key']) ? 'Tiếp tục mua hàng' : 'Tìm kiếm';
             $keyword = !empty($_GET['keyword']) ? $_GET['keyword'] : '';
+            $data['keyword'] = $keyword;
             if($keyword){
                 DB::table('key_words')->insert([
                     'name' => $keyword,
                 ]);
             }
-            $data['list'] = $this->clientProductService->getListByCateSearch(['keyword' => $keyword, 'limit' => 20]);
+            $data['list'] = $this->clientProductService->getListByCateSearch(['keyword' => $keyword, 'limit' => 24]);
 
-            return view('clients::products.index', ['data' => $data]);
+            //return view('clients::products.index', ['data' => $data]);
+            return view('clients::searchs.index', ['data' => $data]);
         } catch (\Exception $e) {
             Helpers::pre($e->getMessage());
             if (empty($e->getMessage())) abort(404); else abort('500');

@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
         try {
+            \Carbon\Carbon::setLocale(config('app.locale'));
             $setting = EmailSetting::first();
 
             if ($setting) {
