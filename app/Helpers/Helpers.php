@@ -281,6 +281,7 @@ regex;
         //data
         $fields = json_encode($data);
         echo $fields;
+        echo $url;
 
         $ch = curl_init($url);
         curl_setopt(
@@ -321,7 +322,7 @@ regex;
         $flag = false;
         foreach ($json as $k => $row) {
             if (!empty($row["completed_at"])) {
-                unset($json[$k]);
+                //unset($json[$k]);
             } else {
                 if ($crawler_category_id == $row["id"] && $type == $row["type"]) {
                     $flag = true;

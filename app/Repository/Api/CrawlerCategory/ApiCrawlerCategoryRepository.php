@@ -14,6 +14,7 @@ class ApiCrawlerCategoryRepository implements ApiCrawlerCategoryRepositoryInterf
         return DB::table(self::TABLE_NAME)
             ->where("status", 1)
             ->where("checked", 1)
+            ->where("type_crawler", "ajax")
             ->orderBy('id', 'ASC')
             ->get();
     }

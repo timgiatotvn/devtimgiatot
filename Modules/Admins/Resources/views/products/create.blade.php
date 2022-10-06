@@ -62,9 +62,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Danh mục chính</label>
-                                <select name="category_id" class="form-control col-md-3">
-                                    {!! $data['category']['select'] !!}
-                                </select>
+                                <div>
+                                    <select name="category_id" class="js-example-basic-single form-control col-md-3">
+                                        {!! $data['category']['select'] !!}
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group" style="display: none;">
                                 <label>Danh mục liên quan</label>

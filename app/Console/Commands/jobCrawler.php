@@ -51,17 +51,31 @@ class jobCrawler extends Command
             $json = !empty($json) ? @json_decode($json, true) : [];
 
             foreach ($json as $k => $row) {
-                if ($row["is_running"] == true) break;
+                if ($row["is_running"] == true) {
+                    if (empty($row["completed_at"])) {
+                        $json[$k]["completed_at"] = time();
+                        $row["completed_at"] = $json[$k]["completed_at"];
+                    }
+                    if (($row["completed_at"] + (5 * 60 * 60)) < time()) {
+                        unset($json[$k]);
+                        Storage::disk("store")->put($file, @json_encode($json));
+                    } else {
+                        break;
+                    }
+                }
+
                 if (!empty($row["completed_at"])) {
-                    unset($json[$k]);
+                    if (($row["completed_at"] + (5 * 60 * 60)) < time()) unset($json[$k]);
                 } else {
                     $detail = $this->service->findById($row["id"]);
                     if (!empty($detail->id)) {
                         if (!empty($row["type"] == "first")) {
                             $json[$k]["is_running"] = true;
+                            $json[$k]["completed_at"] = time();
                             jobDemoCrawler::dispatch($detail)->delay(now()->addSeconds(2));
                         } else {
                             $json[$k]["is_running"] = true;
+                            $json[$k]["completed_at"] = time();
                             jobCrawlerCategories::dispatch($detail)->delay(now()->addSeconds(2));
                         }
                         break;
