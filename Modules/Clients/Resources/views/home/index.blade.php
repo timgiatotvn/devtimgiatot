@@ -1,322 +1,288 @@
-@extends('clients::layouts.app')
+@extends('clients::layouts.index')
 
 @section('content')
-    {{-- <section id="box-category-suggest">
-        <div class="cs-head">
-            <h2>TÌM GIÁ TỐT & KHUYẾN MÃI HOT</h2>
-            <div class="line"></div>
-        </div>
-        <div class="cs-list">
-            <ul>
-                @foreach($data['link'] as $row)
-                    <li>
-                        <div class="cs-item">
-                            <div class="cs-item-right">
-                                <a href="{{ $row->url_title }}" title="{{ $row->title }}" target="_blank">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'link') }}"
-                                         title="{{ $row->title }}">
-                                </a>
-                            </div>
-                            <div class="cs-item-left">
-                                <label>{{ $row->title }}</label>
-                                <p>{{ \App\Helpers\Helpers::shortDesc($row->description, 42) }}</p>
-                                <a href="{{ $row->url }}" title="{{ $row->url_title }}" target="_blank">
-                                    {{ $row->url_title }}
-                                </a>
-                            </div>
+<main class="main">
+    <div class="container">
+        <section class="category-banner">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card sidebar-category">
+                        <div class="card-header">
+                            <img src="./assets/images/icons/menu.svg" alt=""><span>Danh mục sản phẩm</span>
                         </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </section> --}}
-    <section class="box-product">
-        <div class="pr-head">
-            <label>TÌM KIẾM NHIỀU</label>
-        </div>
-        <div class="pr-content">
-            <ul>
-                @foreach($data['products'] as $row)
-                    <li>
-                        <div class="pr-item">
-                            @if($row->type == "crawler")
-                                <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                   title="{{ $row->title }}" rel="nofollow sponsored">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
-                                         title="{{ $row->title }}">
-                                </a>
-                                <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                <div class="name-sp">
-                                    <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                       title="{{ $row->title }}" rel="nofollow sponsored">
-                                        {{ $row->title }}
-                                    </a>
-                                </div>
-                                <div class="count-location-buy">
-                                    Có {{ $row->count_suggest }} nơi bán
-                                </div>
-                            @else
-                                <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                   title="{{ $row->title }}" rel="nofollow sponsored">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
-                                         title="{{ $row->title }}">
-                                </a>
-                                <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                <div class="name-sp">
-                                    <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                       title="{{ $row->title }}" rel="nofollow sponsored">
-                                        {{ $row->title }}
-                                    </a>
-                                </div>
-                                <div class="count-location-buy"></div>
-                            @endif
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </section>
-    @foreach($data['cate'] as $cate)
-        <section class="box-product">
-            <div class="pr-head">
-                <div class="row">
-                    <div class="col-8">
-                        <label>{{$cate['name']}}</label></div>
-                    <div class="col-4 text-right show_all_product">
-                        <a href="{{ route('client.category.index', ['slug' => $cate['slug']])}}"
-                           title="Xem tất cả">Xem tất cả &raquo;
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-            <div class="pr-content">
-                <ul>
-                    @foreach($cate['data'] as $row)
-                        <li>
-                            <div class="pr-item">
-                                @if($row->type == "crawler")
-                                    <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                       title="{{ $row->title }}" rel="nofollow sponsored">
-                                        <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
-                                             title="{{ $row->title }}">
-                                    </a>
-                                    <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                    <div class="name-sp">
-                                        <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                           title="{{ $row->title }}" rel="nofollow sponsored">
-                                            {{ $row->title }}
-                                        </a>
-                                    </div>
-                                    <div class="count-location-buy">
-                                        Có {{ $row->count_suggest }} nơi bán
-                                    </div>
+                        <ul class="list-group list-group-flush list-category">
+                            {{-- <li class="list-group-item">
+                                <div class="item-category"><a href="">list danh mục sản phẩm</a><div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div></div>
+                                <ul class="sub-menu">
+                                    <li><a href="#" class="sub-item">Sub Item 01</a></li>
+                                    <li><a href="#" class="sub-item">Sub Item 02</a></li>
+                                </ul>
+                            </li> --}}
+                            @foreach ($data['category_products'] as $cate_item)
+                                @if ($cate_item->category->count() > 0)
+                                    <li class="list-group-item">
+                                        <div class="item-category">
+                                            <a href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a>
+                                            <div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
+                                        </div>
+                                        <ul class="sub-menu">
+                                            @foreach ($cate_item->category as $item)
+                                                @if($item->category->count() > 0)
+                                                    <li>
+                                                        <div class="item-sub-category"><a href="#" class="sub-item">{{$item->title}}</a><div class="sub-sub-btn-primary"><i class="fa-solid fa-chevron-right sub-dropdown"></i></div></div>
+                                                        <ul class="sub-sub-menu-primary">
+                                                            @foreach ($item->category as $subItem)
+                                                                <li><a href="#">{{$subItem->title}}</a></li>
+                                                            @endforeach
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                    
+                                                @else
+                                                <li>
+                                                    <a href="{{route('client.category.index', ['slug' => $item->slug])}}" class="sub-item">{{$item->title}}</a>
+                                                    
+                                                </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </li>
                                 @else
-                                    <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                       title="{{ $row->title }}" rel="nofollow sponsored">
-                                        <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
-                                             title="{{ $row->title }}">
-                                    </a>
+                                    <li class="list-group-item"><a href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a></li>
+                                @endif                                
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                   <div class="promotion">
+                    <ul class="box-promotion">
+                        <li><a href="#">Deal Vạn năng - Mua 1 tặng 1</a></li>
+                        <li><a href="#">Địa Gia Dụng - Giảm 50%</a></li>
+                        <li><a href="#">Bắt Trend Giá Sốc</a></li>
+                        <li><a href="#">Triệu Deal 0 Đồng</a></li>
+                        <li><a href="#">Sale Shop Mới - Giảm 69%</a></li>
+                    </ul>
+                   </div>
+                    <div class="banner">
+                        <a target="_blank" href="{{$data['ads_home']->url}}" rel="nofollow">
+                            <img src="{{ \App\Helpers\Helpers::renderThumb($data['ads_home']->thumbnail, 'slide') }}" alt="" class="image-banner">
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="box-trading">
+            <div class="box-trading-floor">
+                <div class="item-trading shopee">
+                    <div class="box-info">
+                        <div class="icon">
+                            <img src="./assets/images/icons/shopee.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <h4>Shopee</h4>
+                            <p>
+                                Freeship toàn quốc
+                                </p>
+                        </div>
+                    </div>
+                    <a href="" class="item-link">Mua sắm ngay</a>
+                    <div class="date-sale"></div>
+                    <div class="number-date">10.10</div>
+                </div>
+                <div class="item-trading lazada">
+                    <div class="box-info">
+                        <div class="icon">
+                            <img src="./assets/images/icons/lazada.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <h4>Lazada</h4>
+                            <p>
+                                Freeship toàn quốc
+                                </p>
+                        </div>
+                    </div>
+                    <a href="" class="item-link">Mua sắm ngay</a>
+                    <div class="date-sale"></div>
+                    <div class="number-date">10.10</div>
+                </div>
+                <div class="item-trading tiki">
+                    <div class="box-info">
+                        <div class="icon">
+                            <img src="./assets/images/icons/tiki.jpg" alt="">
+                        </div>
+                        <div class="content">
+                            <h4>Tiki</h4>
+                            <p>
+                                Freeship toàn quốc
+                                </p>
+                        </div>
+                    </div>
+                    <a href="" class="item-link">Mua sắm ngay</a>
+                    <div class="date-sale"></div>
+                    <div class="number-date">10.10</div>
+                </div>
+                <div class="item-trading sendo">
+                    <div class="box-info">
+                        <div class="icon">
+                            <img src="./assets/images/icons/sendo.svg" alt="">
+                        </div>
+                        <div class="content">
+                            <h4>Sendo</h4>
+                            <p>
+                                Freeship toàn quốc
+                                </p>
+                        </div>
+                    </div>
+                    <a href="" class="item-link">Mua sắm ngay</a>
+                    <div class="date-sale"></div>
+                    <div class="number-date">10.10</div>
+                </div>
+            </div>
+        </section>
+        <section class="box-product product-top">
+            <div class="product-header">
+                <h2>Tìm kiếm nhiều</h2>
+                <a href="#">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
+            </div>
+            <div class="owl-carousel owl-theme owl-product">
+                @foreach($data['products'] as $row)
+                    @if($row->type == "crawler")
+                        <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" class="card item-product">
+                            <div class="box-image">
+                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                                title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                            </div>
+                            <div class="card-body">
+                                <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                <h5 class="card-title product-title" title="{{ $row->title }}">
+                                    {{ $row->title }}
+                                </h5>
+                                <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                            </div>
+                        </a>
+                    @else
+                        <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}" class="card item-product">
+                            <div class="box-image">
+                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                                title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                            </div>
+                            <div class="card-body">
+                                <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                <h5 class="card-title product-title" title="{{ $row->title }}">
+                                    {{ $row->title }}
+                                </h5>
+                                <p class="card-text note"></p>
+                            </div>
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        </section>
+        @foreach($data['cate'] as $cate)
+            <section class="box-product">
+                <div class="product-header">
+                    <h2>{{$cate['name']}}</h2>
+                    <a href="{{ route('client.category.index', ['slug' => $cate['slug']])}}">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 mb-4">
+                        <div class="box-image-ads">
+                            <img src="./assets/images/products/image_ads.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="box-image-ads">
+                            <img src="./assets/images/products/image_ads.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="product-list">
+                    @foreach($cate['data'] as $row)
+                        @if($row->type == "crawler")
+                            <a rel="nofollow sponsored" title="{{ $row->title }}" href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" class="item-product card-product">
+                                <div class="box-image">
+                                    <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                                    title="{{ $row->title }}" class="card-img-top">
+                                </div>
+                                <div class="card-body">
                                     <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                    <div class="name-sp">
-                                        <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                           title="{{ $row->title }}" rel="nofollow sponsored">
-                                            {{ $row->title }}
-                                        </a>
-                                    </div>
-                                    <div class="count-location-buy"></div>
-                                @endif
-                            </div>
-                        </li>
+                                    <h5 class="card-title product-title">{{ $row->title }}</h5>
+                                    <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                </div>
+                            </a>
+                        @else
+                            <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                title="{{ $row->title }}" rel="nofollow sponsored" class="item-product card-product">
+                                <div class="box-image">
+                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
+                                    title="{{ $row->title }}" class="card-img-top" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                    <h5 class="card-title product-title">{{ $row->title }}</h5>
+                                    <p class="card-text note"></p>
+                                </div>
+                            </a>
+                        @endif
+                        
                     @endforeach
-                </ul>
-            </div>
-        </section>
-    @endforeach
-    <?php
-    $arr1 = [];
-    $arr2 = [];
-    $dem = 0;
-    if (isset($data)) {
-        foreach ($data['ads_home'] as $k => $row) {
-            if ($dem < 2) {
-                $arr1[] = $row;
-            } else {
-                $arr2[] = $row;
-            }
-            $dem++;
-        }
-    }
-    ?>
-
-    @if(!empty($arr1))
-        <section>
-            <div class="wrap-slide slidehome" style="display: none;">
-                <div id="slideHome1" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        @foreach($arr1 as $k=>$row)
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $k }}"
-                                class="{{ !$k ? 'active' : '' }}"></li>
-                        @endforeach
-                    </ol>
-                    <div class="carousel-inner">
-                        @foreach($arr1 as $k => $row)
-                            <div class="carousel-item {{ !$k ? 'active' : '' }}">
-                                <a href="{{ $row->url }}" title="{{ $row->title }}">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'slide') }}"
-                                         title="{{ $row->title }}">
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                    <a class="carousel-control-prev" href="#slideHome1" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#slideHome1" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
+            </section>
+        @endforeach
+        <section class="box-product new-promotion">
+            <div class="product-header">
+                <h2>{{ !empty($data['cat_tintuc']->title) ? $data['cat_tintuc']->title : '' }}</h2>
+                <a href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
             </div>
-            <div class="wrap-ads">
-                <ul>
-                    @foreach($arr1 as $k=>$row)
-                        <li>
-                            <a href="{{ $row->url }}" title="{{ $row->title }}" target="_blank">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'ads_home') }}"
-                                     title="{{ $row->title }}" alt="{{ $row->title }}"/>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </section>
-    @endif
-    <section id="box-new">
-        <div class="nr-head">
-            <h2>{{ !empty($data['cat_kienthuc']->title) ? $data['cat_kienthuc']->title : '' }}</h2>
-            <p>{{ !empty($data['cat_kienthuc']->description) ? $data['cat_kienthuc']->description : '' }}</p>
-        </div>
-        <div class="nr-content">
-            <ul>
-                @foreach($data['kienthuc'] as $row)
-                    <li>
-                        <div class="pr-item">
-                            <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-                               title="{{ $row->title }}">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
-                                     title="{{ $row->title }}">
-                            </a>
-                            <div class="name-title">
-                                <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-                                   title="{{ $row->title }}">
-                                    {{ $row->title }}
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="view-all">
-            <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}"
-               title="Xem tất cả">
-                Xem tất cả
-            </a>
-        </div>
-    </section>
-
-    @if(!empty($arr2))
-        <section>
-            <div class="wrap-slide slidehome" style="display: none;">
-                <div id="slideHome2" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        @foreach($arr2 as $k=>$row)
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $k }}"
-                                class="{{ !$k ? 'active' : '' }}"></li>
-                        @endforeach
-                    </ol>
-                    <div class="carousel-inner">
-                        @foreach($arr2 as $k => $row)
-                            <div class="carousel-item {{ !$k ? 'active' : '' }}">
-                                <a href="{{ $row->url }}" title="{{ $row->title }}">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'slide') }}"
-                                         title="{{ $row->title }}">
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                    <a class="carousel-control-prev" href="#slideHome2" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#slideHome2" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-            <div class="wrap-ads">
-                <ul>
-                    @foreach($arr2 as $k=>$row)
-                        <li>
-                            <a href="{{ $row->url }}" title="{{ $row->title }}" target="_blank">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'ads_home') }}"
-                                     title="{{ $row->title }}" alt="{{ $row->title }}"/>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </section>
-    @endif
-
-    <section id="box-new">
-        <div class="nr-head">
-            <h2>{{ !empty($data['cat_tintuc']->title) ? $data['cat_tintuc']->title : '' }}</h2>
-            <p>{{ !empty($data['cat_tintuc']->description) ? $data['cat_tintuc']->description : '' }}</p>
-        </div>
-        <div class="nr-content">
-            <ul>
+            <div class="owl-carousel owl-theme owl-promotion">
                 @foreach($data['news'] as $row)
-                    <li>
-                        <div class="pr-item">
-                            <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-                               title="{{ $row->title }}">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
-                                     title="{{ $row->title }}">
-                            </a>
-                            <div class="name-title">
-                                <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-                                   title="{{ $row->title }}">
-                                    {{ $row->title }}
-                                </a>
+                    <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
+                        title="{{ $row->title }}" class="card item-promotion">
+                        <div class="box-image">
+                            <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
+                            title="{{ $row->title }}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="promotion-title" title="{{ $row->title }}">{{ $row->title }}</h5>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+        <section class="box-product knowledge">
+            <div class="product-header">
+                <h2>{{ !empty($data['cat_kienthuc']->title) ? $data['cat_kienthuc']->title : '' }}</h2>
+                <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}"
+                    title="Xem tất cả">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
+            </div>
+            <div class="owl-carousel owl-theme owl-knowledge">
+                @foreach($data['kienthuc'] as $row)
+                    <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
+                        title="{{ $row->title }}" class="card item-knowledge">
+                        <div class="box-image">
+                            <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
+                            title="{{ $row->title }}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="knowledge-title">
+                                {{ $row->title }}
+                            </h5>
+                            <div class="overview">
+                                {{$row->description}}
+                            </div>
+                            <div class="box-user">
+                                <div class="avatar-user">
+                                    <img src="./assets/images/products/avatar.svg" alt="">
+                                </div>
+                                <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->view}}</span></div>
                             </div>
                         </div>
-                    </li>
+                    </a>
                 @endforeach
-            </ul>
-        </div>
-        <div class="view-all">
-            <a href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}"
-               title="Xem tất cả">
-                Xem tất cả
-            </a>
-        </div>
-    </section>
-
+            </div>
+        </section>
+    </div>
+</main>
 @endsection
-
-@section('javascript')
-    <script type="text/javascript">
-        $('#slideHome1').carousel({
-            interval: 5000
-        });
-        $('#slideHome2').carousel({
-            interval: 6000
-        });
-    </script>
-@endsection
-
-

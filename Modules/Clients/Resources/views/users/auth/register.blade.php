@@ -1,46 +1,111 @@
-@extends('clients::layouts.auth.login')
-
+@extends('clients::layouts.index')
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/css/global.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/login.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+<style>
+    .form-item {
+        position: relative
+    }
+    .form-item .invalid-feedback {
+        position: absolute;
+        left: 0px;
+        bottom: -21px;
+    }
+</style>
+@endsection
 @section('content')
-    <section id="login">
-        <div class="wrap-login">
-            <h1>{{ !empty($data['common']['title_seo']) ? $data['common']['title_seo'] : '' }}</h1>
-            <form method="post" action="" id="form-register">
-                @csrf()
-                <div class="form-group">
-                    <label for="name">Tên đầy đủ</label>
-                    <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name" />
-                </div>
-                <div class="form-group">
-                    <label for="username">Tài khoản</label>
-                    <input type="text" name="username" value="{{ old('username') }}" class="form-control" id="username" />
-                </div>
-                <div class="form-group">
-                    <label for="username">Số điện thoại</label>
-                    <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" id="phone" />
-                </div>
-                <div class="form-group">
-                    <label for="password">Mật khẩu</label>
-                    <input type="password" name="password" class="form-control" id="password" />
-                </div>
-                <div class="form-group">
-                    <label for="re-password">Nhập lại mật khẩu</label>
-                    <input type="password" name="password_confirmation" class="form-control" id="re-password" />
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email" />
-                </div>
-                <div class="form-group">
-                    <label for="email">Mã xác thực</label>
-                    <input type="text" name="verify_code" value="{{ old('verify_code') }}" class="form-control" id="verify_code" />
-                </div>
-                <button type="submit" class="btn btn-danger">Đăng ký</button>
-                @if($errors->has('accountNotFound'))
-                    <p class="alert alert-danger mt-3">{{$errors->first('accountNotFound')}}</p>
-                @endif
-            </form>
+<main class="main">
+    <div class="container login">
+        <div class="nd-breadcrumb">
+            <div class="breadcrumb-custom">
+                <a href="/">Trang chủ</a>
+                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></span>
+                <span>Đăng ký</span>
+               
+            </div>
         </div>
-    </section>
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-12 col-md-5 col-lg-4 right">
+                <h3 class="title">Đăng ký</h3>
+                <form  method="POST" id="form-register">
+                    @csrf
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/full_name.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Tên đầy đủ">
+                        </div>
+                    </div>
+                    <span id="name"></span>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/full_name.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="text" name="username" id="username" value="{{ old('username') }}" placeholder="Tài khoản">
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/phone.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="text" name="phone" id="phone" value="{{ old('phone') }}" placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/email.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Địa chỉ Email">
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/password.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Mật khẩu">
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/password.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="password" name="password_confirmation" id="re-password" placeholder="Nhập lại mật khẩu">
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/key.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="text" placeholder="Mã xác thực">
+                        </div>
+                    </div>
+                    <p class="t-right">
+                        <a class="a-none text-primary" href="">Hướng dẫn lấy mã</a>
+                    </p>
+                    <div class="form-item" style="justify-content: center">
+                        <button type="submit" class="w-100">
+                            Đăng ký
+                        </button>
+                    </div>
+                    @if($errors->has('accountNotFound'))
+                        <p class="alert alert-danger mt-3">{{$errors->first('accountNotFound')}}</p>
+                    @endif
+                    <p class="t-center">
+                        Bạn đã có tài khoản? <a href="{{ route('client.user.login') }}" class="a-none f-bold text-primary">Đăng nhập</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
 @endsection
 
 @section('validate')

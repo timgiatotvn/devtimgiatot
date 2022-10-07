@@ -1,8 +1,7 @@
-<link rel="stylesheet" href="{{ asset('/static/client/css/bootstrap/bootstrap.min.css') }}"/>
-<link rel="stylesheet" href="{{ asset('/static/client/font-awesome-4.7.0/css/font-awesome.css') }}"/>
-<link rel="stylesheet" href="{{ asset('/static/client/css/menu/ddsmoothmenu.css') }}"/>
+<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 @yield('style')
-<link rel="stylesheet" href="{{ asset('/static/client/css/style.css') }}"/>
-<link rel="stylesheet" href="{{ asset('/static/client/css/responsive.css') }}"/>
-<link rel="stylesheet" href="{{ asset('/static/client/css/ftoc.css') }}"/>
-<link rel="stylesheet" href="{{ asset('/static/admin/css/cssCustom.css') }}"/>

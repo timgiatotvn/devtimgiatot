@@ -63,7 +63,7 @@ class HomeController extends Controller
                                    ->where('status', 1)
                                    ->inRandomOrder()
                                    ->first();
-            $data['ads_home'] = $this->clientAdvService->getListAdsLimit(['limit' => 4]);
+            //$data['ads_home'] = $this->clientAdvService->getListAdsLimit(['limit' => 4]);
             $data['page_home'] = true;
             $cate_tim_gia_tot = Category::where('slug', 'tim-gia-tot')->first();
             $data['category_products'] = Category::where('parent_id', $cate_tim_gia_tot->id)

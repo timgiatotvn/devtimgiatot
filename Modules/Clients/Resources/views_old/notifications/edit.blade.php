@@ -4,19 +4,15 @@
     <section id="user-page">
         <div class="wrap-user-page">
             <h1>
-                Thêm thông báo
+                Sửa thông báo
             </h1>
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    {{session('error')}}
-                </div>
-            @endif
+
             <div class="main-user-page">
-                <form style="width: 100%" method="post" action="{{ route('client.user.notification.store') }}" id="form-update">
+                <form style="width: 100%" method="post" action="{{ route('client.user.notification.update', ['id' => $noti->id]) }}" id="form-update">
                     @csrf()
                     <div class="form-group">
                         <label for="name">Tiêu đề</label>
-                        <input type="text" required class="form-control" name="title" placeholder="Tiêu đề">
+                        <input type="text" value="{{$noti->title}}" class="form-control" name="title" placeholder="Tiêu đề">
                     </div>
                     {{-- <div class="form-group">
                         <div class="input-group">
@@ -26,21 +22,21 @@
                                     <i class="fa fa-picture-o"></i> CHOOSE
                                 </a>
                             </span>
-                            <input id="thumbnail" class="form-control" type="text" name="thumbnail"
+                            <input id="thumbnail" value="{{$noti->thumbnail}}" class="form-control" type="text" name="thumbnail"
                                 readonly>
                         </div>
                     </div> --}}
                     <div class="form-group">
                         <label>Mô tả</label>
                         {{-- <textarea class="form-control tinymce-mini"
-                                  name="description"></textarea> --}}
+                                  name="description">{{$noti->description}}</textarea> --}}
                         <textarea class="form-control" rows="5"
-                                  name="description"></textarea>
+                                  name="description">{{$noti->description}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Nội dung</label>
                         <textarea class="tinymce"
-                                  name="content"></textarea>
+                                  name="content">{{$noti->content}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Trạng thái</label>
@@ -48,32 +44,32 @@
                             <div class="col-sm-2">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="status" value="1">
+                                        <input @if($noti->status == 1){{'checked'}}@endif type="radio" class="form-check-input" name="status" value="1">
                                         Đăng ngay
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="status" value="2">
+                                        <input @if($noti->status == 2){{'checked'}}@endif type="radio" class="form-check-input" name="status" value="2">
                                         Lên lịch
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="status"
+                                        <input @if($noti->status == 3){{'checked'}}@endif type="radio" class="form-check-input" name="status"
                                                value="3">
                                         Huỷ đăng
                                     </label>
                                 </div>
                             </div>
                         </div>
-                        <div class="row date" style="display: none">
+                        <div class="row date" style="@if($noti->status != 2){{'display: none'}}@endif">
                             <div class='col-sm-4'>
                                 <div class="form-group">
-                                    <input type="date" name="publish_at" class="form-control">
+                                    <input type="date" value="{{$noti->publish_at != '' ? date('Y-m-d', strtotime($noti->publish_at)) : date('Y-m-d')}}" name="publish_at" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="hour" value="{{date('h:i:s')}}" placeholder="H:i:s" class="form-control">
+                                    <input type="text" name="hour" value="{{$noti->publish_at != '' ? date('H:i:s', strtotime($noti->publish_at)) : date('h:i:s')}}" placeholder="H:i:s" class="form-control">
                                 </div>
                             </div>
                         </div>

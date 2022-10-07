@@ -1,8 +1,8 @@
 <nav id="sitebar-user">
     <div class="wrap-menu-user">
-        {{-- <label class="head">Chức năng</label> --}}
+        <label class="head">Chức năng</label>
         <ul>
-            <li style="padding-top: 0px">
+            <li>
                 <a href="{{ route('client.user.show') }}" class="{{ Request::routeIs('client.user.show') ? 'active' : '' }}" title="Thông tin cá nhân">Thông tin cá nhân</a>
             </li>
             {{-- <li>

@@ -16,7 +16,7 @@
                     @csrf()
                     <div class="form-group">
                         <label for="name">Tiêu đề</label>
-                        <input type="text" required class="form-control" name="title" placeholder="Tiêu đề">
+                        <input type="text" class="form-control" name="title" placeholder="Tiêu đề">
                     </div>
                     {{-- <div class="form-group">
                         <div class="input-group">

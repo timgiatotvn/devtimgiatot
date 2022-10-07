@@ -1,59 +1,147 @@
-@extends('clients::layouts.contact')
+@extends('clients::layouts.index')
+
+@section('style')
+<link rel="stylesheet" href="{{asset('assets/css/contact.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/global.css')}}">
+<style>
+    .form-item {
+        position: relative
+    }
+    .form-item .invalid-feedback {
+        position: absolute;
+        left: 0px;
+        bottom: -21px;
+    }
+</style>
+@endsection
 
 @section('content')
-
-    <section id="box-new-detail">
-        <div class="nrd-head">
-            <h1>Liên hệ</h1>
-        </div>
-        <div class="wrap-info-new-detail">
-            <div class="content-view">
-                <div class="ctct">{!! !empty($data_common['setting']->content_contact) ? $data_common['setting']->content_contact : '' !!}</div>
+<main class="main">
+    <div class="container contact">
+        <div class="nd-breadcrumb">
+            <div class="breadcrumb-custom">
+                <a href="#">Trang chủ</a>
+                <span><img src="./assets/images/icons/arrow.svg" alt=""></span>
+                <span>Liên hệ</span>
+            
             </div>
         </div>
-    </section>
-
-    <section id="user-page" style="background: #ddd;">
-
-        @if (Session::has('success'))
-            <div class="alert alert-success mb-3"> {!! Session::get('success') !!}</div>
-        @endif
-        @if($errors->has('accountNotFound'))
-            <p class="alert alert-danger mb-3">{{$errors->first('accountNotFound')}}</p>
-        @endif
-
-        <div class="wrap-user-page">
-            <div class="main-user-page">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-6 left">
+                <p>
+                    <img class="banner" src="./assets/images/contacts/1.svg" alt="">
+                </p>
+                <ul>
+                    <li class="row">
+                        <div class="icon col-2 col-sm-1 col-lg-1">
+                            <div>
+                                <img src="./assets/images/icons/location.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="text col-10 col-sm-11 col-lg-11">
+                            <span>
+                                Tầng 12, Tòa nhà Licogi 13, Số 164 Khuất Duy Tiến, P. Nhân Chính, Q. Thanh Xuân, Hà Nội.
+                            </span>
+                        </div>
+                    </li>
+                    <li class="row">
+                        <div class="icon col-2 col-sm-1 col-lg-1">
+                            <div>
+                                <img src="./assets/images/icons/phone.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="text col-10 col-sm-11 col-lg-11">
+                            <span>
+                                0246.29.27.089 / 0981.185.620
+                            </span>
+                        </div>
+                    </li>
+                    <li class="row">
+                        <div class="icon col-2 col-sm-1 col-lg-1">
+                            <div>
+                                <img src="./assets/images/icons/web.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="text col-10 col-sm-11 col-lg-11">
+                            <span>
+                                <a href="">https://timgiatot.vn</a>
+                            </span>
+                        </div>
+                    </li>
+                    <li class="row">
+                        <div class="icon col-2 col-sm-1 col-lg-1">
+                            <div>
+                                <img src="./assets/images/icons/email.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="text col-10 col-sm-11 col-lg-11">
+                            <span>
+                                info@timgiatot.vn
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-6 right">
+                <p class="title">
+                    Liên hệ
+                </p>
+                <p>
+                    {{-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the indus. --}}
+                </p>
+                @if (Session::has('success'))
+                    <div class="alert alert-success mb-3"> {!! Session::get('success') !!}</div>
+                @endif
+                @if($errors->has('accountNotFound'))
+                    <p class="alert alert-danger mb-3">{{$errors->first('accountNotFound')}}</p>
+                @endif
                 <form method="post" action="" class="form-payment" id="form-contact">
-                    @csrf()
-                    <div class="form-group">
-                        <label for="name">Tên</label>
-                        <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name"/>
+                    @csrf
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/full_name.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="text" name="name" value="{{ old('name') }}" id="name" placeholder="Họ và tên">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email"/>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/email.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="email" name="email" value="{{ old('email') }}" id="email" placeholder="Địa chỉ Email">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Điện thoại</label>
-                        <input type="text" name="phone" value="{{ old('phone') }}" class="form-control" id="phone"/>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/phone.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="text" name="phone" value="{{ old('phone') }}" id="phone" placeholder="Số điện thoại">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="address">Địa chỉ</label>
-                        <input type="text" name="address" value="{{ old('address') }}" class="form-control" id="address"/>
+                    <div class="form-item">
+                        <div class="icon">
+                            <img src="{{asset('assets/images/icons/location.svg')}}" alt="">
+                        </div>
+                        <div class="input">
+                            <input type="text" name="address" value="{{ old('address') }}" id="address" placeholder="Địa chỉ">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="address">Yêu cầu thêm</label>
-                        <textarea name="content" placeholder="Yêu cầu thêm" rows="5" class="form-control mb-3">{{ old('content') }}</textarea>
+                    <div class="form-item">
+                        <textarea name="content" placeholder="Yêu cầu thêm" id="" cols="30" rows="10">{{ old('content') }}</textarea>
                     </div>
-                    <div class="wrap-action-cart">
-                        <button type="submit" class="btn btn-sm btn-primary">Gửi đi</button>
+                    <div class="form-item" style="justify-content: center">
+                        <button>
+                            Gửi đi
+                        </button>
                     </div>
                 </form>
             </div>
-
         </div>
-    </section>
+    </div>
+</main>
 @endsection
 
 @section('validate')
