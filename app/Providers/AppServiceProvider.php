@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Model\Category;
 use App\Model\EmailSetting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -42,6 +44,15 @@ class AppServiceProvider extends ServiceProvider
                 $setConfig->set('mail.username', $setting->username);
                 $setConfig->set('mail.password', $setting->password);
             }
+            $cate_tim_gia_tot = Category::where('slug', 'tim-gia-tot')->first();
+            $category_products = Category::where('parent_id', $cate_tim_gia_tot->id)
+                                                 ->where('type', 'product')
+                                                 ->with(['category' => function ($query) {
+                                                    $query->with('category');
+                                                 }])
+                                                 ->get();
+            View::share('data_share', [
+                'category_products' => $category_products]);
         } catch(\Exception $e) {
         }
     }

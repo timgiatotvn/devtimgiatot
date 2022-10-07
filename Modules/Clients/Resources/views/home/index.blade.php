@@ -151,14 +151,14 @@
                     @if($row->type == "crawler")
                         <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" class="card item-product">
                             <div class="box-image">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumnail), 'list_product') }}"
                                 title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                             </div>
                             <div class="card-body">
                                 <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                <h5 class="card-title product-title" title="{{ $row->title }}">
+                                <h3 class="card-title product-title" title="{{ $row->title }}">
                                     {{ $row->title }}
-                                </h5>
+                                </h3>
                                 <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
                             </div>
                         </a>
@@ -170,9 +170,9 @@
                             </div>
                             <div class="card-body">
                                 <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                <h5 class="card-title product-title" title="{{ $row->title }}">
+                                <h3 class="card-title product-title" title="{{ $row->title }}">
                                     {{ $row->title }}
-                                </h5>
+                                </h3>
                                 <p class="card-text note"></p>
                             </div>
                         </a>
@@ -208,7 +208,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                    <h5 class="card-title product-title">{{ $row->title }}</h5>
+                                    <h3 class="card-title product-title">{{ $row->title }}</h3>
                                     <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
                                 </div>
                             </a>
@@ -221,7 +221,7 @@
                                 </div>
                                 <div class="card-body">
                                     <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                    <h5 class="card-title product-title">{{ $row->title }}</h5>
+                                    <h3 class="card-title product-title">{{ $row->title }}</h3>
                                     <p class="card-text note"></p>
                                 </div>
                             </a>
@@ -245,7 +245,7 @@
                             title="{{ $row->title }}" class="card-img-top" alt="...">
                         </div>
                         <div class="card-body">
-                            <h5 class="promotion-title" title="{{ $row->title }}">{{ $row->title }}</h5>
+                            <h3 class="promotion-title" title="{{ $row->title }}">{{ $row->title }}</h3>
                         </div>
                     </a>
                 @endforeach
@@ -266,9 +266,9 @@
                             title="{{ $row->title }}" class="card-img-top" alt="...">
                         </div>
                         <div class="card-body">
-                            <h5 class="knowledge-title">
+                            <h3 class="knowledge-title">
                                 {{ $row->title }}
-                            </h5>
+                            </h3>
                             <div class="overview">
                                 {{$row->description}}
                             </div>

@@ -119,9 +119,29 @@
                             <h2>
                                 {{$data['category']->title}}
                             </h2>
-                            <p class="category-review">
-                                <p class="category-review">Đánh giá và nhận xét sản phẩm qua hàng loạt mô tả chi tiết. Giúp bạn có cái nhìn đầy đủ về sản phẩm mà bạn đang quan tâm</p>
-                            </p>
+                            {{-- <p class="category-review"> --}}
+                                {{-- <p class="category-review">Đánh giá và nhận xét sản phẩm qua hàng loạt mô tả chi tiết. Giúp bạn có cái nhìn đầy đủ về sản phẩm mà bạn đang quan tâm</p> --}}
+                                
+                            {{-- </p> --}}
+                            @php
+                                if (strlen($data['category']->description)) {
+                                    $style = "-webkit-line-clamp: 10;
+                                            -webkit-box-orient: vertical;
+                                            display: -webkit-box;
+                                            font-size: 16px;
+                                            line-height: 20px;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;";
+                                } else {
+                                    $style="";
+                                }
+                            @endphp
+                            <div class="description" style="{{$style}}">
+                                {!!$data['category']->description!!}
+                            </div>
+                            @if($style != '')
+                                <p class="read-more" style="cursor: pointer; color: #0D54BE">Xem thêm</p>
+                            @endif
                         </div>
                         <div class="product-list category-list">
                             @foreach($data['list'] as $row)
@@ -142,11 +162,40 @@
                         {{-- <div class="category-buttom">
                             <a href="#" class="btn btn-all">Xem thêm</a>
                         </div> --}}
-                        <p class="category-review">Đánh giá và nhận xét sản phẩm qua hàng loạt mô tả chi tiết. Giúp bạn có cái nhìn đầy đủ về sản phẩm mà bạn đang quan tâm</p>
+                        <div class="description" style="{{$style}}">
+                                {!!$data['category']->description!!}
+                        </div>
+                        @if($style != '')
+                            <p class="read-more" style="cursor: pointer; color: #0D54BE">Xem thêm</p>
+                        @endif
                     </section>
                 </div>
             </div>
         </section>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+    <style>
+        .full-content {
+            -webkit-line-clamp: unset !important;
+        }
+    </style>
+    <script>
+        $(function() {
+            $('.read-more').click(function() {
+                var name = $('.read-more').html();
+                console.log(name);
+                if (name == 'Xem thêm') {
+                    $('.read-more').html('Rút gọn');
+                    $('.description').addClass('full-content');
+                } else if (name == 'Rút gọn') {
+                    $('.read-more').html('Xem thêm');
+                    $('.description').removeClass('full-content');
+                }
+                
+            })
+        })
+    </script>
 @endsection
