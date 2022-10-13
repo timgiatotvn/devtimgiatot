@@ -80,6 +80,12 @@
                                        class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
+                                <label>Class footer scroll (Không bắt buộc)</label>
+                                <input type="text" name="scroll_class"
+                                       value="{{ !empty($templateCrawler['scroll_class']) ? $templateCrawler["scroll_class"] : '' }}"
+                                       class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
                                 <label>Link page mẫu</label>
                                 <input type="text" name="url_page_example" class="form-control" placeholder=""/>
                                 <figcaption class="figure-caption text-danger text-small">Vd:
