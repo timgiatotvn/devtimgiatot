@@ -64,7 +64,7 @@ class CrawlerCategoryRepository implements CrawlerCategoryRepositoryInterface
             } else {
                 return false;
             }
-        } catch (\Exception $e) {
+        } catch (\Exception $e) {Helpers::pre($e->getMessage());
             return false;
         }
     }
