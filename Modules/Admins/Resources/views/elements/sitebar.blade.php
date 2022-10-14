@@ -35,12 +35,12 @@
         </li>
         @if (in_array(ROLE_ADMIN, get_role_name()))
             <li class="nav-item {{ Request::routeIs('admin.config.*')? 'active' : '' }} {{ Request::routeIs('admin.config.*')? 'active' : '' }} {{ Request::routeIs('admin.config.*')? 'active' : '' }}">
-                <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-                   aria-controls="basic-ui">
+                <a class="nav-link" data-toggle="collapse" href="#basic-ui3" aria-expanded="false"
+                   aria-controls="basic-ui3">
                     <span class="menu-title">Cấu hình</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
-                <div class="collapse {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }}" id="basic-ui">
+                <div class="collapse {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }} {{ Request::routeIs('admin.config.*')? 'show' : '' }}" id="basic-ui3">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.config.home-cate')? 'active' : '' }}" href="{{ route('admin.config.home-cate') }}">Danh mục hiển thị</a>
@@ -61,12 +61,12 @@
                 </div>
             </li>
             <li class="nav-item {{ Request::routeIs('admin.statistical.*') || Request::routeIs('admin.report_install_app') ? 'active' : '' }}">
-                <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-                   aria-controls="basic-ui">
+                <a class="nav-link" data-toggle="collapse" href="#basic-ui2" aria-expanded="false"
+                   aria-controls="basic-ui2">
                     <span class="menu-title">Thống kê</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
-                <div class="collapse {{ Request::routeIs('admin.statistical.*') || Request::routeIs('admin.report_install_app') ? 'show' : '' }}" id="basic-ui">
+                <div class="collapse {{ Request::routeIs('admin.statistical.*') || Request::routeIs('admin.report_install_app') ? 'show' : '' }}" id="basic-ui2">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.statistical.*')? 'active' : '' }}" href="{{ route('admin.statistical.keyword') }}">Từ khoá</a>
@@ -82,12 +82,12 @@
         @endif
 
         <li class="nav-item {{ Request::routeIs('admin.category.*')? 'active' : '' }} {{ Request::routeIs('admin.post.*')? 'active' : '' }} {{ Request::routeIs('admin.product.*')? 'active' : '' }}">
-            <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
-               aria-controls="basic-ui">
+            <a class="nav-link" data-toggle="collapse" href="#basic-ui1" aria-expanded="false"
+               aria-controls="basic-ui1">
                 <span class="menu-title">@lang('admins::layer.menu.parent.post')</span>
                 <i class="icon-layers menu-icon"></i>
             </a>
-            <div class="collapse {{ Request::routeIs('admin.category.*')? 'show' : '' }} {{ Request::routeIs('admin.post.*')? 'show' : '' }} {{ Request::routeIs('admin.product.*')? 'show' : '' }}" id="basic-ui">
+            <div class="collapse {{ Request::routeIs('admin.category.*')? 'show' : '' }} {{ Request::routeIs('admin.post.*')? 'show' : '' }} {{ Request::routeIs('admin.product.*')? 'show' : '' }}" id="basic-ui1">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link {{ Request::routeIs('admin.category.*')? 'active' : '' }}" href="{{ route('admin.category.index') }}">@lang('admins::layer.menu.parent.post.category.title')</a>
@@ -116,7 +116,7 @@
                     <span class="menu-title">@lang('admins::layer.menu.parent.crawler')</span>
                     <i class="icon-layers menu-icon"></i>
                 </a>
-                <div class="collapse {{ Request::routeIs('admin.crawler.*')? 'show' : '' }} {{ Request::routeIs('admin.productCrawler.*')? 'show' : '' }}" id="basic-ui">
+                <div class="collapse {{ Request::routeIs('admin.crawler.*')? 'show' : '' }} {{ Request::routeIs('admin.productCrawler.*')? 'show' : '' }}111" id="basic-ui">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.crawler.website.*')? 'active' : '' }}" href="{{ route('admin.crawler.website.index') }}">@lang('admins::layer.menu.parent.crawler.website.title')</a>
