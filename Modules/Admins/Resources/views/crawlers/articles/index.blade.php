@@ -48,7 +48,7 @@
                                         <td>{{ \Helpers::renderSTT($k + 1, $data['list']) }}</td>
                                         <td><img src="{{ $row->thumbnail }}" class="mw-100"></td>
                                         <td>
-                                            <div style="overflow: hidden; text-overflow: ellipsis; word-break: break-all; max-width: 250px;">
+                                            <div style="overflow: hidden; text-overflow: ellipsis; word-break: break-all; max-width: 350px;">
                                             {{ $row->name }}
                                             </div>
                                         </td>
