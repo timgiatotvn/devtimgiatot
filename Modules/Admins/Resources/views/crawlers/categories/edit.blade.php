@@ -55,6 +55,10 @@
                                 <input type="text" value="{{ $data['detail']->class_url_a }}" name="class_url_a" class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
+                                <label>Class header scroll (Không bắt buộc)</label>
+                                <input type="text" name="scroll_top_class" value="{{ $data['detail']->scroll_top_class }}" class="form-control" placeholder=""/>
+                            </div>
+                            <div class="form-group">
                                 <label>Class footer scroll (Không bắt buộc)</label>
                                 <input type="text" name="scroll_class" value="{{ $data['detail']->scroll_class }}" class="form-control" placeholder=""/>
                             </div>
