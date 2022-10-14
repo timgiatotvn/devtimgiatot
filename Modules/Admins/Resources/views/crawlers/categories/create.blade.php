@@ -79,12 +79,12 @@
                                        value="{{ !empty($templateCrawler['class_url_a']) ? $templateCrawler["class_url_a"] : '' }}"
                                        class="form-control" placeholder=""/>
                             </div>
-                            <div class="form-group">
-                                <label>Class header scroll (Không bắt buộc)</label>
-                                <input type="text" name="scroll_top_class"
-                                       value="{{ !empty($templateCrawler['scroll_top_class']) ? $templateCrawler["scroll_top_class"] : '' }}"
-                                       class="form-control" placeholder=""/>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Class header scroll (Không bắt buộc)</label>--}}
+{{--                                <input type="text" name="scroll_top_class"--}}
+{{--                                       value="{{ !empty($templateCrawler['scroll_top_class']) ? $templateCrawler["scroll_top_class"] : '' }}"--}}
+{{--                                       class="form-control" placeholder=""/>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <label>Class footer scroll (Không bắt buộc)</label>
                                 <input type="text" name="scroll_class"
