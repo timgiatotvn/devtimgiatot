@@ -201,7 +201,25 @@ class CategoriesController extends Controller
                 "class_detail_description" => ".style__Wrapper-sc-12gwspu-0 .content.has-table",
                 "class_detail_content" => ".style__Wrapper-sc-12gwspu-0 .ToggleContent__Wrapper-sc-1dbmfaw-1",
                 "type_crawler" => "ajax",
-            ]
+            ],
+            "lazada" => [
+                "domain_url" => "https://www.lazada.vn",
+                "class_root_list" => ".Bm3ON",
+                "class_parent" => ".Bm3ON",
+                "class_url_image" => "._95X4G .picture-wrapper",
+                "class_url_image_attr" => "src",
+                "class_url_a" => "._95X4G a",
+                "scroll_class" => ".desktop-footer",
+                "class_detail" => "#root",
+                "class_detail_name" => "h1.pdp-mod-product-badge-title",
+                "class_detail_price" => ".pdp-price.pdp-price_type_normal.pdp-price_color_orange",
+                "class_detail_price_root" => ".pdp-price.pdp-price_type_deleted.pdp-price_color_lightgray",
+                "class_detail_price_sale" => "",
+                "class_detail_price_sale_root" => "",
+                "class_detail_description" => "h1.pdp-mod-product-badge-title",
+                "class_detail_content" => ".html-content.detail-content",
+                "type_crawler" => "ajax",
+            ],
         ];
 
         return !empty($data[$site]) ? $data[$site] : [];

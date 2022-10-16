@@ -47,7 +47,11 @@
                                     <tr>
                                         <td>{{ \Helpers::renderSTT($k + 1, $data['list']) }}</td>
                                         <td><img src="{{ $row->thumbnail }}" class="mw-100"></td>
-                                        <td>{{ $row->name }}</td>
+                                        <td>
+                                            <div style="overflow: hidden; text-overflow: ellipsis; word-break: break-all; max-width: 350px;">
+                                            {{ $row->name }}
+                                            </div>
+                                        </td>
                                         <td>{{ !empty($row->crawlerCategory->domain_url) ? $row->crawlerCategory->domain_url : '' }}</td>
                                         <td>{{ \Helpers::renderStatus($row->status) }}</td>
                                         <td>{{ \Helpers::formatDate($row->created_at) }}</td>

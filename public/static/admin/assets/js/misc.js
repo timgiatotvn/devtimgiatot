@@ -126,7 +126,7 @@ if ($('canvas').length) {
             if (current !== "index.html") {
               $(this).parents('.nav-item').last().find(".nav-link").attr("aria-expanded", "true");
               if ($(this).parents('.sub-menu').length) {
-                $(this).closest('.collapse').addClass('show');
+                //$(this).closest('.collapse').addClass('show');
               }
             }
           }

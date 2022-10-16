@@ -54,6 +54,14 @@
                                 <label>Class bao link chi tiết sản phẩm</label>
                                 <input type="text" value="{{ $data['detail']->class_url_a }}" name="class_url_a" class="form-control" placeholder=""/>
                             </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Class header scroll (Không bắt buộc)</label>--}}
+{{--                                <input type="text" name="scroll_top_class" value="{{ $data['detail']->scroll_top_class }}" class="form-control" placeholder=""/>--}}
+{{--                            </div>--}}
+                            <div class="form-group">
+                                <label>Class footer scroll (Không bắt buộc)</label>
+                                <input type="text" name="scroll_class" value="{{ $data['detail']->scroll_class }}" class="form-control" placeholder=""/>
+                            </div>
                             <div class="form-group">
                                 <label>Link page mẫu</label>
                                 <input type="text" value="{{ $data['detail']->url_page_example }}" name="url_page_example" class="form-control" placeholder=""/>
