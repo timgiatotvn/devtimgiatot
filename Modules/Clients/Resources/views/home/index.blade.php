@@ -144,7 +144,7 @@
         <section class="box-product product-top">
             <div class="product-header">
                 <h2>Tìm kiếm nhiều</h2>
-                <a href="#">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
+                <a href="#">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
             </div>
             <div class="owl-carousel owl-theme owl-product">
                 @foreach($data['products'] as $row)
@@ -184,17 +184,17 @@
             <section class="box-product">
                 <div class="product-header">
                     <h2>{{$cate['name']}}</h2>
-                    <a href="{{ route('client.category.index', ['slug' => $cate['slug']])}}">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
+                    <a href="{{ route('client.category.index', ['slug' => $cate['slug']])}}">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
                 </div>
                 <div class="row">
                     <div class="col-lg-6 mb-4">
                         <div class="box-image-ads">
-                            <img src="./assets/images/products/image_ads.jpg" alt="">
+                            <img src="{{asset('assets/images/products/image_ads.jpg')}}" alt="">
                         </div>
                     </div>
-                    <div class="col-lg-6 mb-4">
+                    <div class="d-none d-sm-none d-md-block col-lg-6 mb-4">
                         <div class="box-image-ads">
-                            <img src="./assets/images/products/image_ads.jpg" alt="">
+                            <img src="{{asset('assets/images/products/image_ads.jpg')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                                 title="{{ $row->title }}" rel="nofollow sponsored" class="item-product card-product">
                                 <div class="box-image">
                                     <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
-                                    title="{{ $row->title }}" class="card-img-top" alt="...">
+                                    title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                                 </div>
                                 <div class="card-body">
                                     <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
@@ -234,15 +234,30 @@
         <section class="box-product new-promotion">
             <div class="product-header">
                 <h2>{{ !empty($data['cat_tintuc']->title) ? $data['cat_tintuc']->title : '' }}</h2>
-                <a href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
+                <a href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
             </div>
-            <div class="owl-carousel owl-theme owl-promotion">
+            <div class="promotion_mobile">
+                @foreach($data['news'] as $row)
+                    <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}" class="card item-promotion">
+                        <div class="box-image">
+                            <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
+                                title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                        </div>
+                        <div class="card-body">
+                            <h3 class="promotion-title" title="{{ $row->title }}">{{ $row->title }}</h3>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+            <hr>
+            <a href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}" class="read-more-mobile">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
+            <div class="owl-carousel owl-theme owl-promotion promotion_desktop">
                 @foreach($data['news'] as $row)
                     <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
                         title="{{ $row->title }}" class="card item-promotion">
                         <div class="box-image">
                             <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
-                            title="{{ $row->title }}" class="card-img-top" alt="...">
+                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                         </div>
                         <div class="card-body">
                             <h3 class="promotion-title" title="{{ $row->title }}">{{ $row->title }}</h3>
@@ -255,15 +270,41 @@
             <div class="product-header">
                 <h2>{{ !empty($data['cat_kienthuc']->title) ? $data['cat_kienthuc']->title : '' }}</h2>
                 <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}"
-                    title="Xem tất cả">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a>
+                    title="Xem tất cả">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
             </div>
-            <div class="owl-carousel owl-theme owl-knowledge">
+            <div class="knowledge_mobile">
+                <div class="row">
+                    @foreach($data['kienthuc'] as $row)
+                        <div class="col-lg-4 mb-4">
+                            <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
+                                title="{{ $row->title }}" class="card item-knowledge">
+                                <div class="box-image">
+                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}" class="card-img-top" alt="{{ $row->title }}">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="knowledge-title">{{ $row->title }}</h5>
+                                    <div class="overview">{{$row->description}}</div>
+                                    <div class="box-user">
+                                        <div class="avatar-user">
+                                            <img src="{{asset('assets/images/products/avatar.svg')}}" alt="">
+                                        </div>
+                                        <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->total_views}}</span></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                    <hr>
+                    <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}" class="read-more-mobile">Xem thêm <img src="images/icons/arrow.svg" alt=""></a>
+                </div>
+            </div>
+            <div class="owl-carousel owl-theme owl-knowledge knowledge_desktop">
                 @foreach($data['kienthuc'] as $row)
                     <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
                         title="{{ $row->title }}" class="card item-knowledge">
                         <div class="box-image">
                             <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
-                            title="{{ $row->title }}" class="card-img-top" alt="...">
+                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                         </div>
                         <div class="card-body">
                             <h3 class="knowledge-title">
@@ -274,9 +315,9 @@
                             </div>
                             <div class="box-user">
                                 <div class="avatar-user">
-                                    <img src="./assets/images/products/avatar.svg" alt="">
+                                    <img src="{{asset('assets/images/products/avatar.svg')}}" alt="">
                                 </div>
-                                <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->view}}</span></div>
+                                <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->total_views}}</span></div>
                             </div>
                         </div>
                     </a>

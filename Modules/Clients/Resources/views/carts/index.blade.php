@@ -32,7 +32,7 @@
 </style>
 @endsection
 @section('content')
-<main class="main">
+<main class="main page-cart">
     <div class="container">
         @include('clients::elements.extend.breadcrumb')
         <div class="row justify-content-center">
@@ -75,12 +75,7 @@
                                 <form id="form-{{$row->id}}" method="post" action="{{ route('client.card.update', ['id' => $row->id]) }}"
                                     style="width: inherit !important;">
                                   @csrf()
-                                  <div style="display: flex;
-                                  width: 116px;
-                                  justify-content: space-between;
-                                  border: 1px solid #E6E8EC;
-                                  padding: 5px 7px;
-                                  border-radius: 4px;">
+                                  <div class="amount">
                                         <img onclick="onDown({{$row->id}})" style="cursor: pointer" src="{{asset('assets/images/icons/down.svg')}}" alt="">
                                         <input style="width: 50px;
                                         border: 0px;
@@ -190,6 +185,9 @@
                                 <input value="{{ \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->check() ? \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->user()->name : '' }}" type="text" name="name" id="name" placeholder="Họ và tên">
                             </div>
                         </div>
+                        @error('name')
+                            <p class="text text-danger">{{$message}}</p>
+                        @enderror
                         <div class="form-item">
                             <div class="icon">
                                 <img src="{{asset('assets/images/icons/email.svg')}}" alt="">
@@ -198,22 +196,20 @@
                                 <input value="{{ \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->check() ? \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->user()->email : '' }}" type="email" name="email" id="email" placeholder="Địa chỉ Email">
                             </div>
                         </div>
+                        @error('email')
+                            <p class="text text-danger">{{$message}}</p>
+                        @enderror
                         <div class="form-item">
                             <div class="icon">
                                 <img src="{{asset('assets/images/icons/phone.svg')}}" alt="">
                             </div>
                             <div class="input">
-                                <input value="{{ \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->check() ? \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->user()->phone : '' }}" type="text" name="phone" id="email" placeholder="Số điện thoại">
+                                <input value="{{ \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->check() ? \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->user()->phone : '' }}" type="text" name="phone" id="phone" placeholder="Số điện thoại">
                             </div>
                         </div>
-                        <div class="form-item">
-                            <div class="icon">
-                                <img src="{{asset('assets/images/icons/phone.svg')}}" alt="">
-                            </div>
-                            <div class="input">
-                                <input type="text" name="phone" id="phone" placeholder="Số điện thoại">
-                            </div>
-                        </div>
+                        @error('phone')
+                            <p class="text text-danger">{{$message}}</p>
+                        @enderror
                         <div class="form-item">
                             <div class="icon">
                                 <img src="{{asset('assets/images/icons/location.svg')}}" alt="">
@@ -222,19 +218,22 @@
                                 <input type="text" name="address" id="address" placeholder="Địa chỉ">
                             </div>
                         </div>
+                        @error('address')
+                            <p class="text text-danger">{{$message}}</p>
+                        @enderror
                         <div class="form-item">
                             <textarea name="content" placeholder="Yêu cầu thêm" id="" cols="30" rows="10">{{ old('content') }}</textarea>
                         </div>
                         <div class="form-item">
                             <div class="row w-100">
-                                <div class="col-lg-6">
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                     <a href="{{ route('client.category.search', ['key' => 1]) }}" title="">
-                                        <button style="background: unset; color: #23262F; border: 1px solid #777E90;" type="button" class="btn btn-sm btn-primary">Tiếp tục mua hàng</button>
+                                        <button class="continue-buy" style="background: unset; color: #23262F; border: 1px solid #777E90;" type="button" class="btn btn-sm btn-primary">Tiếp tục mua hàng</button>
                                     </a>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                     <p style="text-align: right">
-                                        <button type="submit">Thanh toán</button>
+                                        <button class="payment" type="submit">Thanh toán</button>
                                     </p>
                                     
                                 </div>
@@ -280,4 +279,12 @@
         $("#form-" + id).submit();
     }
 </script>
+@endsection
+
+@section('validate')
+    {!! JsValidator::formRequest('Modules\Clients\Http\Requests\Cart\CreateRequest','#form-cart'); !!}
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="{{ url('/vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 @endsection

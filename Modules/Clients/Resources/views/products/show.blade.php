@@ -17,13 +17,16 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="content-detail">
-                                    <h4>
-                                        <a href="{{ route('client.product.show', ['slug' => $data['detail']->slug.'-'.$data['detail']->id]) }}"
+                                    <h2 title="{{ $data['detail']->title }}">
+                                        <a class="a-none" href="{{ route('client.product.show', ['slug' => $data['detail']->slug.'-'.$data['detail']->id]) }}"
                                             title="{{ $data['detail']->title }}" rel="nofollow sponsored">
                                              {{ $data['detail']->title }}
                                          </a>
-                                    </h4>
+                                    </h2>
                                     <div class="des">{!! $data['detail']->description !!}</div>
+                                    <div class="price" style="color: #C81C3D; font-weight: bold">
+                                        {{ \App\Helpers\Helpers::formatPrice($data['detail']->price) }}đ
+                                    </div>
                                     <div class="box-social">
                                         <span>Chia sẻ</span>
                                         <div class="item-social"><img src="{{asset('assets/images/icons/twitter.png')}}" alt=""></div>
@@ -73,7 +76,7 @@
                             <div class="item-product card-product">
                                 <div class="box-image">
                                     <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
-                                    title="{{ $row->title }}" class="card-img-top" alt="...">
+                                    title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                                 </div>
                                 <div class="card-body">
                                     <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>

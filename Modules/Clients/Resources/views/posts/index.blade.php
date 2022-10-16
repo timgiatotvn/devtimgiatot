@@ -50,16 +50,16 @@
                                         title="{{ $row->title }}" class="card item-knowledge">
                                         <div class="box-image">
                                             <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new_index') }}"
-                                            title="{{ $row->title }}" class="card-img-top" alt="...">
+                                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                                         </div>
                                         <div class="card-body">
                                             <h5 class="knowledge-title">{{ $row->title }}</h5>
                                             <div class="overview">{{ $row->description }}</div>
                                             <div class="box-user">
                                                 <div class="avatar-user">
-                                                    <img src="./assets/images/products/avatar.svg" alt="">
+                                                    <img src="{{asset('assets/images/products/avatar.svg')}}">
                                                 </div>
-                                                <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->view}}</span></div>
+                                                <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->total_views}}</span></div>
                                             </div>
                                         </div>
                                     </a>

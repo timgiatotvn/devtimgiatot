@@ -17,9 +17,9 @@
         @endforeach
     </ul>
 </div>
-<div class="image-ads mb-4">
-    <img src="./assets/images/products/promotion.png" alt="" style="width:100%">
+<div class="d-none d-sm-none d-md-none d-lg-block image-ads mb-4">
+    <img src="{{asset('assets/images/products/promotion.png')}}" alt="" style="width:100%">
 </div>
-<div class="image-ads">
-    <img src="./assets/images/products/promotion.png" alt="" style="width:100%">
+<div class="d-none d-sm-none d-md-none d-lg-block image-ads">
+    <img src="{{asset('assets/images/products/promotion.png')}}" alt="" style="width:100%">
 </div>

@@ -37,9 +37,9 @@
                             {{ $data['detail']->title }}
                         </h2>
                         <div class="box-date">
-                            <p class="item"><img src="./assets/images/icons/clock.svg" alt=""><span>{{date('d/m/Y', strtotime($data['detail']->created_at))}}</span></p>
-                            <p class="item"><img src="./assets/images/icons/user-edit.svg" alt=""><span class="author">{{!empty($data['detail']->customer_name) ? $data['detail']->customer_name : $data['detail']->author_name}}</span></p>
-                            <p class="item"><img src="./assets/images/icons/eye-r.svg" alt=""><span>{{number_format($data['detail']->total_views)}}</span></p>
+                            <p class="item"><img src="{{asset('assets/images/icons/clock.svg')}}" alt=""><span>{{date('d/m/Y', strtotime($data['detail']->created_at))}}</span></p>
+                            <p class="item"><img src="{{asset('assets/images/icons/user-edit.svg')}}" alt=""><span class="author">{{!empty($data['detail']->customer_name) ? $data['detail']->customer_name : $data['detail']->author_name}}</span></p>
+                            <p class="item"><img src="{{asset('assets/images/icons/eye-r.svg')}}" alt=""><span>{{number_format($data['detail']->total_views)}}</span></p>
                         </div>
                         <hr>
                         {{-- <div class="table-of-contents">
@@ -169,7 +169,11 @@
                             if($tocContainer !=""){
                         ?>
                         <div class="table-of-contents" style="padding-block: 20px">
-                            <div class="content-new"><img src="./assets/images/icons/menu2.svg" alt=""><span>Nội dung bài viết</span></div>
+                            <div class="content-new">
+                                <img src="{{asset('assets/images/icons/menu2.svg')}}" alt="">
+                                <span>Nội dung bài viết</span>
+                                <img class="open-table-content" src="{{asset('assets/images/icons/arrow-down.svg')}}" alt="">
+                            </div>
                             <ol>
                                 <?php echo $tocContainer; ?>
                                 {{-- <li class="first"><span>Lợi ích của phần mềm đăng bài hàng loạt trên Facebook</span>
@@ -225,4 +229,14 @@
         </section>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+    <script>
+        $(function(){
+            $('.open-table-content').click(function(){
+                $('.wrapper .main .new-detail .table-of-contents ol').toggle('slow');
+            })
+        })
+    </script>
 @endsection

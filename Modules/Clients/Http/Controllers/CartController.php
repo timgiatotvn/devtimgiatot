@@ -3,6 +3,7 @@
 namespace Modules\Clients\Http\Controllers;
 
 use App\Helpers\Helpers;
+use App\Model\CartItem;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCartService;
 use App\Service\Clients\ClientCategoryService;
@@ -12,6 +13,7 @@ use App\Service\Clients\SettingService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
 use Modules\Clients\Http\Requests\Cart\CreateRequest;
@@ -55,6 +57,11 @@ class CartController extends Controller
         try {
             $data['common'] = Helpers::metaHead((object)["title_seo" => "Giỏ hàng"]);
             $data['list'] = !empty($_SESSION['shopping_cart']) ? $_SESSION['shopping_cart'] : [];
+            
+            if (count($data['list']) == 0) {
+                return back();
+            }
+            
             return view('clients::carts.index', ['data' => $data]);
         } catch (\Exception $e) {
             if (empty($e->getMessage())) abort(404); else abort('500');
@@ -88,9 +95,13 @@ class CartController extends Controller
     public function store(CreateRequest $request)
     {
         try {
-            if($this->clientCartService->store($request->all())){
+            $inputs = $request->all();
+            $inputs['code'] = 'TGT' . substr(rand(), 0, 5) . 'TGT';
+            if($this->clientCartService->store($inputs)){
                 session()->flash('success', __('clients::layer.user.payment.success'));
-                return redirect(route('client.card.index'));
+
+                return redirect()->route('client.cart.payment', ['code' => $inputs['code']]);
+                //return redirect(route('client.card.index'));
             }else{
                 $errors = new MessageBag(['accountNotFound' => __('clients::layer.user.payment.error')]);
                 return back()->withInput($request->all())->withErrors($errors);
@@ -99,6 +110,20 @@ class CartController extends Controller
             $errors = new MessageBag(['accountNotFound' => $e->getMessage()]);
             return back()->withInput([])->withErrors($errors);
         }
+    }
+
+    public function payment($code)
+    {
+        $checkCode = DB::table('carts')->where('code', $code)->first();
+
+        if (empty($checkCode)) {
+            $errors = new MessageBag(['accountNotFound' => 'Đơn hàng không tồn tại']);
+
+            return back()->withErrors($errors);
+        }
+        $total = CartItem::where('cart_code', $checkCode->code)->sum('sum_price');
+
+        return view('clients::carts.payment', ['order' => $checkCode, 'total' => $total]);
     }
 
     /**

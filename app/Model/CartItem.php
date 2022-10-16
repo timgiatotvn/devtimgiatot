@@ -8,6 +8,14 @@ class CartItem extends Model
 {
     protected $table = 'cart_items';
 
+    protected $fillable = [
+        'cart_id',
+        'sum_price',
+        'price',
+        'sl',
+        'product_id'
+    ];
+
     public function productDetail()
     {
         return $this->hasOne(Product::class, 'id','product_id');

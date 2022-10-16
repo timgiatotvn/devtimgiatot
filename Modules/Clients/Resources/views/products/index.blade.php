@@ -85,7 +85,7 @@
                     @if(count($data['category_products']) > 0)
                         <div class="card sidebar-category">
                             <div class="card-header">
-                                <img src="./assets/images/icons/menu.svg" alt=""><span>Danh mục sản phẩm</span>
+                                <img src="{{asset('assets/images/icons/menu.svg')}}" alt=""><span>Danh mục sản phẩm</span>
                             </div>
                             <ul class="list-group list-group-flush list-category">
                                 @foreach ($data['category_products'] as $cate_item)
@@ -148,7 +148,7 @@
                                 <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" title="{{ $row->title }}" class="item-product card-product">
                                     <div class="box-image">
                                         <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
-                                        title="{{ $row->title }}" class="card-img-top" alt="...">
+                                        title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                                     </div>
                                     <div class="card-body">
                                         <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>

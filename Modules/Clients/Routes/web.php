@@ -75,6 +75,7 @@ Route::prefix('')->group(function() {
         Route::post('/store', 'CartController@store')->name('client.card.store');
         Route::post('/update/{id}', 'CartController@update')->name('client.card.update');
         Route::get('/destroy/{id}', 'CartController@destroy')->name('client.card.destroy');
+        Route::get('/payment/{code}', 'CartController@payment')->name('client.cart.payment');
     });
 
     //contact

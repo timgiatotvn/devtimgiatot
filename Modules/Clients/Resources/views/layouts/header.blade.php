@@ -1,4 +1,21 @@
 <header class="header">
+    <div class="download-app">
+        <div class="box-app">
+            <button onclick="closeDiv('download-app')" class="close-download"><img src="{{asset('assets/images/icons/close-m.svg')}}" alt=""></button>
+            <div class="info-app">
+                <div class="box-icon">
+                    <img src="{{asset('assets/images/icons/logo_app.webp')}}" alt="">
+                </div>
+                <div class="content-app">
+                    <h4>Tìm giá tốt</h4>
+                    <p class="mb-0">SubTitle lorem input</p>
+                </div>
+            </div>
+        </div>
+        <div class="btn-download">
+            <a href="https://play.google.com/store/apps/details?id=com.timgiatot.timgiatot" target="_blank" class="btn">Tải App</a>
+        </div>
+    </div>
     <div class="menu-layout" id="clickMenuLayout"></div>
     <section class="header-top">
         <div class="container">
@@ -34,7 +51,11 @@
                 <div class="box-logo">
                     <div class="icon-menu"><button class="button-open-menu" type="button" id="clickOpenMenu"><img src="{{asset('assets/images/icons/menu.svg')}}" alt=""></button></div>
                     <a class="logo" href="/"><img src="{{asset('assets/images/icons/timgiatotvn2.svg')}}" alt=""></a>
-                    <div class="user-icon"><img src="{{asset('assets/images/icons/users.svg')}}" alt=""></div>
+                    <div class="user-icon">
+                        <a href="/users/dang-nhap">
+                            <img src="{{asset('assets/images/icons/users.svg')}}" alt="">
+                        </a>
+                    </div>
                 </div>
                 <div class="navbar-mobile" id="menu_mobile">
                     <div class="close-navbar"><button type="button" id="closeMenu"><img src="{{asset('assets/images/icons/close-m.svg')}}" alt=""></button></div>
@@ -54,7 +75,23 @@
                                             </div>
                                             <ul class="sub-sub-nav-item">
                                                 @foreach ($cate_items->category as $cate_item)
-                                                    <li><a href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a></li>
+                                                    <li>
+                                                        <div class="sub-nav-item">
+                                                            <a href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a>
+                                                            @if ($cate_item->category->count() > 0)
+                                                            <div class="sub-sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
+                                                            @endif
+                                                        </div>
+                                                        @if ($cate_item->category->count() > 0)
+                                                            <ul class="sub-sub-nav-item">
+                                                                @foreach ($cate_item->category as $item)
+                                                                    <li>
+                                                                        <a href="{{route('client.category.index', ['slug' => $item->slug])}}">{{$item->title}}</a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         </li>
@@ -65,13 +102,25 @@
                             </ul>
                         </li>
                         <li><a href="/gioi-thieu-ve-chung-toi.html">Giới thiệu</a></li>
-                        <li><a href="/kien-thuc">Kiến thức</a></li>
+                        <li>
+                            <div class="nav-item">
+                                <a href="/kien-thuc">Kiến thức</a><div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
+                            </div>
+                            <ul class="sub-menu-primary">
+                                @foreach ($data_share['cate_kien_thuc'] as $categoryItem)
+                                    <li>
+                                        <a href="{{route('client.category.index', ['slug' => $categoryItem->slug])}}">{{$categoryItem->title}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
                         <li><a href="/tin-tuc">Tin tức</a></li>
                         <li><a href="/doi-tac">Đối tác</a></li>
+                        <li><a href="/lien-he">Liên hệ</a></li>
                     </ul>
                     <hr>
                     <div class="info">
-                        <p><img src="{{asset('assets/images/icons/Email.svg')}}" alt=""><a href="#">info@timgiatot.vn</a></p>
+                        <p><img src="{{asset('assets/images/icons/email1.svg')}}" alt=""><a href="#">info@timgiatot.vn</a></p>
                         <div class="social-header">
                             <div class="item-social"><img src="{{asset('assets/images/icons/twitter.png')}}" alt=""></div>
                             <div class="item-social"><img src="{{asset('assets/images/icons/facebook.png')}}" alt=""></div>

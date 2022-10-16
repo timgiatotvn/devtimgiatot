@@ -45,6 +45,7 @@ class AppServiceProvider extends ServiceProvider
                 $setConfig->set('mail.password', $setting->password);
             }
             $cate_tim_gia_tot = Category::where('slug', 'tim-gia-tot')->first();
+            $cate_kien_thuc = Category::where('parent_id', 3)->get();
             $category_products = Category::where('parent_id', $cate_tim_gia_tot->id)
                                                  ->where('type', 'product')
                                                  ->with(['category' => function ($query) {
@@ -52,7 +53,9 @@ class AppServiceProvider extends ServiceProvider
                                                  }])
                                                  ->get();
             View::share('data_share', [
-                'category_products' => $category_products]);
+                'category_products' => $category_products,
+                'cate_kien_thuc' => $cate_kien_thuc
+            ]);
         } catch(\Exception $e) {
         }
     }

@@ -19,5 +19,10 @@
     <script src="{{asset('assets/js/index.js')}}"></script>
     @yield('validate')
     @yield('scripts')
+    <script>
+        function closeDiv(class_name) {
+            $('.' + class_name).hide();
+        }
+    </script>
 </body>
 </html>

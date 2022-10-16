@@ -23,23 +23,28 @@
                                         title="{{ $data['detail']->title }}" rel="nofollow sponsored">{{ $data['detail']->title }}</a>
                                     </h4>
                                     <div class="des">{!! $data['detail']->description !!}</div>
-                                    <p style="font-weight: bold; font-size: 40px" class="price">{{ \App\Helpers\Helpers::formatPrice($data['detail']->price) }}đ</p>
+                                    {{-- @if(empty($ws[0]["crawler_website"]["id"]) && empty($ws[0]["article"]["id"]))
+                                        <p style="font-weight: bold; font-size: 40px" class="price">{{ \App\Helpers\Helpers::formatPrice($data['detail']->price) }}đ</p>
+                                    @endif --}}
                                     @php
                                         $ws = @json_decode($data['detail']->website_map, true);
                                     @endphp
                                     @if(!empty($ws[0]["crawler_website"]["id"]) && !empty($ws[0]["article"]["id"]))
-                                        <p>Nơi Bán Rẻ Nhất:</p>
-                                        <div class="box-price">
-                                            <div class="box-image">
-                                                <img src="{{asset('assets/images/icons/shopee.svg')}}" alt="">
-                                            </div>
-                                            <div class="content">
-                                                <p class="price">
-                                                    {{ \App\Helpers\Helpers::formatPrice($data['detail']->price) }}đ
-                                                </p>
-                                                <p class="time-update">Cập nhật {{ \Carbon\Carbon::parse($ws[0]["crawler_website"]["created_at"])->diffForHumans()}}</p>
+                                        <div class="box-place-sale">
+                                            <p>Nơi Bán Rẻ Nhất:</p>
+                                            <div class="box-price">
+                                                <div class="box-image">
+                                                    <img src="{{asset('assets/images/icons/shopee.svg')}}" alt="">
+                                                </div>
+                                                <div class="content">
+                                                    <p class="price">
+                                                        {{ \App\Helpers\Helpers::formatPrice($data['detail']->price) }}đ
+                                                    </p>
+                                                    <p class="time-update">Cập nhật {{ \Carbon\Carbon::parse($ws[0]["crawler_website"]["created_at"])->diffForHumans()}}</p>
+                                                </div>
                                             </div>
                                         </div>
+                                        
                                     @endif
                                     <div class="box-social">
                                         <span>Chia sẻ</span>

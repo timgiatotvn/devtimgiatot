@@ -68,16 +68,16 @@ class ClientCartService
                 }
                 $data = [
                     'user_id' => !empty($user->id) ? $user->id : '',
+                    'code' => $_data['code'],
                     'name' => !empty($_data['name']) ? $_data['name'] : '',
                     'email' => !empty($_data['email']) ? $_data['email'] : '',
                     'phone' => !empty($_data['phone']) ? $_data['phone'] : '',
                     'address' => !empty($_data['address']) ? $_data['address'] : '',
                     'content' => !empty($_data['content']) ? $_data['content'] : '',
                     'type' => self::key_cart,
-                    'created_at' => date("Y/m/d H:i:s"),
-                    'updated_at' => date("Y/m/d H:i:s")
+                    'created_at' => date("Y-m-d H:i:s"),
+                    'updated_at' => date("Y-m-d H:i:s")
                 ];
-
                 $cart = $this->repository->store($data);
                 if (!empty($cart->id)) {
                     $listCart = $_SESSION[self::key_session_cart];
@@ -89,13 +89,14 @@ class ClientCartService
                         $price = $row->price * $sl;
                         $sum_money += $price;
                         $data_item[] = [
+                            'cart_code' => $_data['code'],
                             'cart_id' => $cart->id,
                             'product_id' => $row->id,
                             'sl' => $sl,
                             'price' => $row->price,
                             'sum_price' => $price,
-                            'created_at' => date("Y/m/d H:i:s"),
-                            'updated_at' => date("Y/m/d H:i:s")
+                            'created_at' => date("Y-m-d H:i:s"),
+                            'updated_at' => date("Y-m-d H:i:s")
                         ];
                     }
                     if($this->repository->storeItem($data_item)){
@@ -108,6 +109,7 @@ class ClientCartService
             DB::rollBack();
             return false;
         } catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollBack();
             return false;
         }
