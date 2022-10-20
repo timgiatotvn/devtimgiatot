@@ -11,7 +11,9 @@
                 </div>
                 <div class="content-promotion">
                     <h4 class="title" title="{{ $newsItem->title }}">{{ $newsItem->title }}</h4>
-                    <div class="overview">{!!$newsItem->description!!}</div>
+                    <div class="overview">
+                        {!!$newsItem->description!!}
+                    </div>
                 </div>
             </a>
         @endforeach

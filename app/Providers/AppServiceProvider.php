@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
         try {
-            \Carbon\Carbon::setLocale(config('app.locale'));
+            \Carbon\Carbon::setLocale('vi');
             $setting = EmailSetting::first();
 
             if ($setting) {
@@ -51,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
                                                  ->with(['category' => function ($query) {
                                                     $query->with('category');
                                                  }])
+                                                 ->oldest('sort')
                                                  ->get();
             View::share('data_share', [
                 'category_products' => $category_products,

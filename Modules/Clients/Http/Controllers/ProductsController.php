@@ -95,8 +95,7 @@ class ProductsController extends Controller
             }
             $data['common'] = Helpers::metaHead($data['detail']);
             $data['cate_parent'] = !empty($data['detail']->category_parent_id) ? $this->clientCategoryService->findById($data['detail']->category_parent_id) : [];
-
-            //$data['related'] = $this->clientProductService->getListRelated(['category_id' => $data['detail']->category_id]);
+            $data['related'] = $this->clientProductService->getListRelated(['category_id' => $data['detail']->category_id]);
 
             return view('clients::products.showSosanh', ['data' => $data]);
         } catch (\Exception $e) {

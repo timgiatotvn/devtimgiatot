@@ -26,13 +26,13 @@
                                             <div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
                                         </div>
                                         <ul class="sub-menu">
-                                            @foreach ($cate_item->category as $item)
+                                            @foreach ($cate_item->category->sortBy('sort') as $item)
                                                 @if($item->category->count() > 0)
                                                     <li>
-                                                        <div class="item-sub-category"><a href="#" class="sub-item">{{$item->title}}</a><div class="sub-sub-btn-primary"><i class="fa-solid fa-chevron-right sub-dropdown"></i></div></div>
+                                                        <div class="item-sub-category"><a href="{{route('client.category.index', ['slug' => $item->slug])}}" class="sub-item">{{$item->title}}</a><div class="sub-sub-btn-primary"><i class="fa-solid fa-chevron-right sub-dropdown"></i></div></div>
                                                         <ul class="sub-sub-menu-primary">
-                                                            @foreach ($item->category as $subItem)
-                                                                <li><a href="#">{{$subItem->title}}</a></li>
+                                                            @foreach ($item->category->sortBy('sort') as $subItem)
+                                                                <li><a href="{{route('client.category.index', ['slug' => $subItem->slug])}}">{{$subItem->title}}</a></li>
                                                             @endforeach
                                                             
                                                         </ul>
@@ -324,6 +324,119 @@
                 @endforeach
             </div>
         </section>
+        {{-- <section class="box-product knowledge">
+            <div class="product-header">
+                <h2>Kiến thức</h2>
+                <a href="#" class="read-more-desktop">Xem thêm <img src="images/icons/arrow.svg" alt=""></a>
+            </div>
+            <div class="owl-carousel owl-theme owl-knowledge knowledge_desktop">
+                <a href="#" class="card item-knowledge">
+                    <div class="box-image">
+                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
+                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
+                        <div class="box-user">
+                            <div class="avatar-user">
+                                <img src="images/products/avatar.svg" alt="">
+                            </div>
+                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card item-knowledge">
+                    <div class="box-image">
+                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
+                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
+                        <div class="box-user">
+                            <div class="avatar-user">
+                                <img src="images/products/avatar.svg" alt="">
+                            </div>
+                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card item-knowledge">
+                    <div class="box-image">
+                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
+                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
+                        <div class="box-user">
+                            <div class="avatar-user">
+                                <img src="images/products/avatar.svg" alt="">
+                            </div>
+                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card item-knowledge">
+                    <div class="box-image">
+                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
+                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
+                        <div class="box-user">
+                            <div class="avatar-user">
+                                <img src="images/products/avatar.svg" alt="">
+                            </div>
+                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card item-knowledge">
+                    <div class="box-image">
+                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
+                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
+                        <div class="box-user">
+                            <div class="avatar-user">
+                                <img src="images/products/avatar.svg" alt="">
+                            </div>
+                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card item-knowledge">
+                    <div class="box-image">
+                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
+                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
+                        <div class="box-user">
+                            <div class="avatar-user">
+                                <img src="images/products/avatar.svg" alt="">
+                            </div>
+                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="card item-knowledge">
+                    <div class="box-image">
+                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
+                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
+                        <div class="box-user">
+                            <div class="avatar-user">
+                                <img src="images/products/avatar.svg" alt="">
+                            </div>
+                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section> --}}
     </div>
 </main>
 @endsection

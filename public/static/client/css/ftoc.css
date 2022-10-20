@@ -844,7 +844,7 @@ figure.image.align-center{
     margin-bottom: 31px;
 }
 .contentck img {
-    height: auto;
+    height: auto !important;
 }
 .contentck p a{
     font-size: 17px;

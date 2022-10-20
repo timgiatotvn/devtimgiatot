@@ -77,14 +77,19 @@
                                     <div class="content-compare">
                                         <h4>{{ $row->name }}</h4>
                                         <div class="compare-price">
-                                            <div class="box-price">
-                                                <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }} đ</p>
+                                            <div class="box-price w-100">
+                                                <p class="d-flex justify-content-between price">
+                                                    <span>
+                                                        {{ \App\Helpers\Helpers::formatPrice($row->price) }} đ
+                                                    </span>
+                                                    <span class="button">
+                                                        <a href="{{ $row->href }}" target="_blank"
+                                                            title="{{ $row->title }}" rel="nofollow sponsored"><button class="btn btn-go-sale">Tới điểm bán</button></a>
+                                                    </span>
+                                                </p>
                                                 <p class="saling-place">Nơi bán: Toàn Quốc</p>
                                             </div>
-                                            <div class="button">
-                                                <a href="{{ $row->href }}" target="_blank"
-                                                    title="{{ $row->title }}" rel="nofollow sponsored"><button class="btn btn-go-sale">Tới điểm bán</button></a>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +106,29 @@
                             <a href="#"><span>Xem thêm</span> <i class="fa-solid fa-chevron-down"></i></a>
                         </div> --}}
                     </section>
-                    
+                    @if (count($data['related']) > 0)
+                        <section class="box-product product-relate">
+                            <div class="product-header">
+                                <h2>Sản phẩm liên quan</h2>
+                                {{-- <a href="#">Xem thêm <img src="./assets/images/icons/arrow.svg" alt=""></a> --}}
+                            </div>
+                            <div class="product-list">
+                                @foreach($data['related'] as $row)
+                                <div class="item-product card-product">
+                                    <div class="box-image">
+                                        <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
+                                        title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                        <h5 class="card-title product-title">{{ $row->title }}</h5>
+                                        <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </section>
+                    @endif
                 </div>
                 @include('clients::elements.sidebar-product')
             </div>

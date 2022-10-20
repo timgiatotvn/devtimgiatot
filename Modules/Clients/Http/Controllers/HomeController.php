@@ -71,6 +71,7 @@ class HomeController extends Controller
                                                  ->with(['category' => function ($query) {
                                                     $query->with('category');
                                                  }])
+                                                 ->oldest('sort')
                                                  ->get();
                                                  //dd($data['category_products']);
             $list_cate_show = DB::table('categories_show')

@@ -7,8 +7,8 @@
                     <img src="{{asset('assets/images/icons/logo_app.webp')}}" alt="">
                 </div>
                 <div class="content-app">
-                    <h4>Tìm giá tốt</h4>
-                    <p class="mb-0">SubTitle lorem input</p>
+                    <h4>TIMGIATOT.VN</h4>
+                    <p class="mb-0">Ứng dụng tìm kiếm và So Sánh Giá</p>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
                                                 <div class="sub-sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
                                             </div>
                                             <ul class="sub-sub-nav-item">
-                                                @foreach ($cate_items->category as $cate_item)
+                                                @foreach ($cate_items->category->sortBy('sort') as $cate_item)
                                                     <li>
                                                         <div class="sub-nav-item">
                                                             <a href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a>
@@ -84,7 +84,7 @@
                                                         </div>
                                                         @if ($cate_item->category->count() > 0)
                                                             <ul class="sub-sub-nav-item">
-                                                                @foreach ($cate_item->category as $item)
+                                                                @foreach ($cate_item->category->sortBy('sort') as $item)
                                                                     <li>
                                                                         <a href="{{route('client.category.index', ['slug' => $item->slug])}}">{{$item->title}}</a>
                                                                     </li>
