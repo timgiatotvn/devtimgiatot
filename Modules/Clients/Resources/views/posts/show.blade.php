@@ -127,8 +127,8 @@
                                                 }
                                             }
                                             $link = getIdHeadings($match);
-                                            //$list .= '<a href="#'.$link.'" class="ft-anchor"><span>'.strip_tags($match).'</span></a>';
-                                            $list .= '<span>'.strip_tags($match).'</span>';
+                                            $list .= '<a href="#'.$link.'" class="ft-anchor"><span>'.strip_tags($match).'</span></a>';
+                                            //$list .= '<span>'.strip_tags($match).'</span>';
                                             // end lists
                                             if ($i != count($matches) - 1) {
                                                 if ($current_depth > (int) $matches[$i + 1][2]) {
@@ -211,14 +211,74 @@
                             <div class="item-social"><img src="{{asset('assets/images/icons//facebook.png')}}" alt=""></div>
                             <div class="item-social"><img src="{{asset('assets/images/icons/zalo.svg')}}" alt=""></div>
                         </div>
-                        <div class="list-tag">
+                        {{-- <div class="list-tag">
                             <span class="badge item-tags">thẻ tags</span>
                             <span class="badge item-tags">thẻ tags</span>
                             <span class="badge item-tags">thẻ tags</span>
                             <span class="badge item-tags">thẻ tags</span>
-                        </div>
+                        </div> --}}
                         
                     </div>
+					<section class="news-relate">
+						<div class="row">
+							<h3 style="margin-bottom: 20px">Tin liên quan</h3>
+						</div>
+						<div class="row">
+							@foreach($data['related'] as $row)
+								<div class="news-relate-item col-6 col-sm-4 col-md-4 col-lg-4 mb-4">
+									<a href="{{ route('client.post.show', ['slug' => $row->slug]) }}">
+										<img class="thumbnail" src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}" class="card-img-top" alt="{{ $row->title }}">
+									</a>
+									<h4 class="title">
+										<a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
+											title="{{ $row->title }}">
+											{{$row->title}}
+										</a>
+									</h4>
+									<p class="description">
+										{{$row->description}}
+									</p>
+									<p class="view d-flex justify-content-between align-items-center">
+										<span>
+											<img src="{{asset('assets/images/products/avatar.svg')}}" alt="">
+										</span>
+										<span>
+											<i class="fa-regular fa-eye"></i> {{$row->total_views}}
+										</span>
+									</p>
+								</div>
+							@endforeach
+						</div>
+					</section>
+					{{-- <section class="news-relate box-product knowledge">
+						<div class="product-header">
+							<h2>Tin liên quan</h2>
+						</div>
+						<div class="knowledge_mobile d-sm-block">
+							<div class="row">
+								@foreach($data['related'] as $row)
+									<div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+										<a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
+											title="{{ $row->title }}" class="card item-knowledge">
+											<div class="box-image">
+												<img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}" class="card-img-top" alt="{{ $row->title }}">
+											</div>
+											<div class="card-body w-100">
+												<h5 class="knowledge-title">{{ $row->title }}</h5>
+												<div class="overview">{{$row->description}}</div>
+												<div class="box-user">
+													<div class="avatar-user">
+														<img src="{{asset('assets/images/products/avatar.svg')}}" alt="">
+													</div>
+													<div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->total_views}}</span></div>
+												</div>
+											</div>
+										</a>
+									</div>
+								@endforeach
+							</div>
+						</div>
+					</section> --}}
                 </div>
                 <div class="col-lg-3">
                     @include('clients::elements.news_coupon')

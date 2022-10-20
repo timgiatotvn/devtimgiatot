@@ -234,7 +234,7 @@
         <section class="box-product new-promotion">
             <div class="product-header">
                 <h2>{{ !empty($data['cat_tintuc']->title) ? $data['cat_tintuc']->title : '' }}</h2>
-                <a href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
+                <a class="d-none d-sm-block" href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
             </div>
             <div class="promotion_mobile">
                 @foreach($data['news'] as $row)
@@ -269,7 +269,7 @@
         <section class="box-product knowledge">
             <div class="product-header">
                 <h2>{{ !empty($data['cat_kienthuc']->title) ? $data['cat_kienthuc']->title : '' }}</h2>
-                <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}"
+                <a class="d-none d-sm-block" href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}"
                     title="Xem tất cả">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
             </div>
             <div class="knowledge_mobile">
@@ -295,7 +295,7 @@
                         </div>
                     @endforeach
                     <hr>
-                    <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}" class="read-more-mobile">Xem thêm <img src="images/icons/arrow.svg" alt=""></a>
+                    <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}" class="read-more-mobile">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
                 </div>
             </div>
             <div class="owl-carousel owl-theme owl-knowledge knowledge_desktop">
