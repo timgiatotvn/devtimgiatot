@@ -5,7 +5,9 @@
         </div>
         <ul class="list-group list-group-flush list-promotion">
             @foreach($data_common['top_products'] as $row)
-                <a href="" class="item-promotion">
+            @if($row->type == "crawler")
+                <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
+                    title="{{ $row->title }}" rel="nofollow sponsored" class="item-promotion">
                     <div class="image-promotion">
                         <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
                         title="{{ $row->title }}" alt="">
@@ -16,6 +18,20 @@
                         <div class="time-update">Cập nhật {{ \Carbon\Carbon::parse($row->created_at)->diffForHumans()}} </div>
                     </div>
                 </a>
+            @else
+                <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
+                    title="{{ $row->title }}" class="item-promotion">
+                    <div class="image-promotion">
+                        <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                        title="{{ $row->title }}" alt="">
+                    </div>
+                    <div class="content-promotion">
+                        <h4 class="title">{{ $row->title }}</h4>
+                        <div class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</div>
+                        <div class="time-update">Cập nhật {{ \Carbon\Carbon::parse($row->created_at)->diffForHumans()}} </div>
+                    </div>
+                </a>
+            @endif
             @endforeach
         </ul>
     </div>

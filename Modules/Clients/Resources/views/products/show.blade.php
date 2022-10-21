@@ -73,17 +73,47 @@
                         </div>
                         <div class="product-list">
                             @foreach($data['related'] as $row)
-                            <div class="item-product card-product">
-                                <div class="box-image">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
-                                    title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                                </div>
-                                <div class="card-body">
-                                    <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                    <h5 class="card-title product-title">{{ $row->title }}</h5>
-                                    <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
-                                </div>
-                            </div>
+                                @if($row->type == 'crawler')
+                                    <div class="item-product card-product">
+                                        <div class="box-image">
+                                            <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                                title="{{ $row->title }}" rel="nofollow sponsored">
+                                                <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
+                                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                            <h5 class="card-title product-title">
+                                                <a class="a-none" href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                                    title="{{ $row->title }}" rel="nofollow sponsored">
+                                                    {{ $row->title }}
+                                                </a>
+                                            </h5>
+                                            <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="item-product card-product">
+                                        <div class="box-image">
+                                            <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                                title="{{ $row->title }}" rel="nofollow sponsored">
+                                                <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
+                                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                            <h5 class="card-title product-title">
+                                                <a class="a-none" href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                                    title="{{ $row->title }}">
+                                                    {{ $row->title }}
+                                                </a>
+                                            </h5>
+                                            <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                        </div>
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     </section>

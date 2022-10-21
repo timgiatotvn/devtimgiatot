@@ -145,17 +145,32 @@
                         </div>
                         <div class="product-list category-list">
                             @foreach($data['list'] as $row)
-                                <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" title="{{ $row->title }}" class="item-product card-product">
-                                    <div class="box-image">
-                                        <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
-                                        title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                        <h5 title="{{ $row->title }}" class="card-title product-title">{{ $row->title }}</h5>
-                                        <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
-                                    </div>
-                                </a>
+                                @if($row->type == "crawler")
+                                    <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" title="{{ $row->title }}" class="item-product card-product">
+                                        <div class="box-image">
+                                            <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                            <h5 title="{{ $row->title }}" class="card-title product-title">{{ $row->title }}</h5>
+                                            <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                        </div>
+                                    </a>
+                                @else
+                                    <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
+                                        title="{{ $row->title }}" rel="nofollow sponsored" class="item-product card-product">
+                                        <div class="box-image">
+                                            <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
+                                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
+                                            <h5 title="{{ $row->title }}" class="card-title product-title">{{ $row->title }}</h5>
+                                            <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                        </div>
+                                    </a>
+                                @endif
                             @endforeach                            
                         </div>
                         {{ $data['list']->links('clients::elements.extend.pagination') }}
