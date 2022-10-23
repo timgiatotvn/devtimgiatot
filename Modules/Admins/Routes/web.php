@@ -156,6 +156,8 @@ Route::prefix('admin')->group(function () {
 
             Route::get('/smtp', 'SmtpController@config')->name('admin.config.smtp');
             Route::post('/smtp-update', 'SmtpController@update')->name('admin.config.update-smtp');
+            Route::get('/payment', 'SettingsController@viewConfigPayment')->name('admin.config.payment');
+            Route::post('/store-payment', 'SettingsController@storePayment')->name('admin.config.store-payment');
             Route::get('/template-email', 'ConfigController@listTemplateEmail')->name('admin.config.list-template-email');
             Route::get('/add-template-email', 'ConfigController@viewAddTemplateEmail')->name('admin.config.add-template-email');
             Route::post('/store-template-email', 'ConfigController@storeTemplateEmail')->name('admin.config.store-template-email');

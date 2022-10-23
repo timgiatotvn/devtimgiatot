@@ -57,6 +57,9 @@
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.config.list-template-email')? 'active' : '' }}" href="{{ route('admin.config.list-template-email') }}">Email</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('admin.config.payment')? 'active' : '' }}" href="{{ route('admin.config.payment') }}">Thanh toán</a>
+                        </li>
                     </ul>
                 </div>
             </li>

@@ -4,6 +4,7 @@ namespace Modules\Clients\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Model\CartItem;
+use App\Model\PaymentSetting;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCartService;
 use App\Service\Clients\ClientCategoryService;
@@ -115,6 +116,7 @@ class CartController extends Controller
     public function payment($code)
     {
         $checkCode = DB::table('carts')->where('code', $code)->first();
+        $paymentSetting = PaymentSetting::first();
 
         if (empty($checkCode)) {
             $errors = new MessageBag(['accountNotFound' => 'Đơn hàng không tồn tại']);
@@ -123,7 +125,7 @@ class CartController extends Controller
         }
         $total = CartItem::where('cart_code', $checkCode->code)->sum('sum_price');
 
-        return view('clients::carts.payment', ['order' => $checkCode, 'total' => $total]);
+        return view('clients::carts.payment', ['order' => $checkCode, 'total' => $total, 'paymentSetting' => $paymentSetting]);
     }
 
     /**

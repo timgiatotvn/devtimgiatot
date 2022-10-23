@@ -56,6 +56,11 @@
                                 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <img class="w-100" src="{{asset('assets/images/icons/banner_product_detail.svg')}}" alt="">
+                            </div> 
+                        </div>
                     </section>
                     <section class="content-detail mt-4">
                         <h3>Nội dung</h3>
@@ -123,4 +128,12 @@
         </section>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+<script>
+    $(function() {
+        $('.box-search input').attr('placeholder', 'Tìm kiếm sản phẩm');
+    })
+</script>
 @endsection

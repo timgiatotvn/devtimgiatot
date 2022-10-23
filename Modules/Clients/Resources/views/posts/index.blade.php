@@ -40,6 +40,34 @@
                 </div>
                 <div class="col-lg-9">
                     <section class="box-product knowledge category-knowledge">
+                        <div class="d-block d-sm-block d-md-none menu-category-mobile">
+                            <p style="text-align: right">
+                                <span id="open-menu-category" style="padding: 10px 10px; border: 1px solid #ccc; cursor: pointer">
+                                    Các chuyên mục <i class="fa-solid fa-bars"></i>
+                                </span>
+                            </p>
+                            <ul class="list-category-mobile list-group list-group-flush list-category">
+                                @foreach ($data['category_products'] as $cate_item)
+                                    {{-- @if ($cate_item->category->count())
+                                        <li class="list-group-item">
+                                            <div class="item-category">
+                                                <a class="a-none" href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a>
+                                                <div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
+                                            </div>
+                                            <ul class="sub-menu">
+                                                @foreach ($cate_item->category as $item)
+                                                    <li>
+                                                        <a class="a-none" href="{{route('client.category.index', ['slug' => $item->slug])}}" class="sub-item">{{$item->title}}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @else --}}
+                                        <li class="list-group-item"><a style="color: #23262F" class="a-none" href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a></li>
+                                    {{-- @endif                                 --}}
+                                @endforeach
+                            </ul>
+                        </div>
                         <div class="category-product-header">
                             <h2>{{$data['category']->title}}</h2>
                         </div>
@@ -54,7 +82,7 @@
                                         </div>
                                         <div class="card-body">
                                             <h5 class="knowledge-title">{{ $row->title }}</h5>
-                                            <div class="overview">{{ $row->description }}</div>
+                                            <div class="overview">{{ strip_tags(html_entity_decode($row->content)) }}</div>
                                             <div class="box-user">
                                                 <div class="avatar-user">
                                                     <img src="{{asset('assets/images/products/avatar.svg')}}">
@@ -73,4 +101,20 @@
         </section>
     </div>
 </main>
+<style>
+    .list-category-mobile {
+        display: none;
+    }
+</style>
+@endsection
+
+@section('scripts')
+<script>
+    $(function() {
+        $('.box-search input').attr('placeholder', 'Tìm kiếm tin tức');
+        $('#open-menu-category').click(function() {
+            $('.list-category-mobile').toggle();
+        })
+    })
+</script>
 @endsection

@@ -55,19 +55,29 @@
                                 <p>
                                     Bước 1: Quét mã/Chuyển tiền
                                 </p>
-                                <img src="{{asset('assets/images/icons/qrcode.svg')}}" alt="">
+                                @if (!empty($paymentSetting))
+                                    <img style="max-width: 100%" src="{{$paymentSetting->qr_code}}" alt="">
+                                @else
+                                    <img src="{{asset('assets/images/icons/qrcode.svg')}}" alt="">
+                                @endif
                             </center>
                             <p class="d-flex justify-content-between" style="margin-top: 20px">
                                 <span>Tên ngân hàng:</span>
-                                <span style="color: #0D54BE; font-weight: 700">Vietcombank</span>
+                                <span style="color: #0D54BE; font-weight: 700">
+                                    {{!empty($paymentSetting) ? $paymentSetting->bank_name : ''}}
+                                </span>
                             </p>
                             <p class="d-flex justify-content-between">
                                 <span>Số tài khoản:</span>
-                                <span style="color: #0D54BE; font-weight: 700">0901000057037</span>
+                                <span style="color: #0D54BE; font-weight: 700">
+                                    {{!empty($paymentSetting) ? $paymentSetting->bank_account_number : ''}}
+                                </span>
                             </p>
                             <p class="d-flex justify-content-between">
                                 <span>Chủ tài khoản</span>
-                                <span style="color: #0D54BE; font-weight: 700">NGUYEN VAN NAM</span>
+                                <span style="color: #0D54BE; font-weight: 700">
+                                    {{!empty($paymentSetting) ? $paymentSetting->bank_account_name : ''}}
+                                </span>
                             </p>
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-6">

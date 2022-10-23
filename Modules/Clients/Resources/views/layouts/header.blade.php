@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="btn-download">
-            <a href="https://play.google.com/store/apps/details?id=com.timgiatot.timgiatot" target="_blank" class="btn">Tải App</a>
+            <a href="https://timgiatot.com.vn/" target="_blank" class="btn">Tải App</a>
         </div>
     </div>
     <div class="menu-layout" id="clickMenuLayout"></div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-lg-6">
                     <ul class="d-flex align-items-center menu-bar-right">
-                        <li><div class="gmail"><img src="{{asset('assets/images/icons/Email.svg')}}" alt=""><a href="">info@timgiatot.vn</a></div></li>
+                        <li><div class="gmail"><img src="{{asset('assets/images/icons/Email_red.svg')}}" alt=""><a href="">info@timgiatot.vn</a></div></li>
                         <li>
                             <a class="icon" href=""><img src="{{asset('assets/images/icons/twitter.png')}}" alt=""></a>
                             <a class="icon" href=""><img src="{{asset('assets/images/icons/facebook.png')}}" alt=""></a>

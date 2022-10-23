@@ -224,7 +224,16 @@
 							<h3 style="margin-bottom: 20px">Tin liên quan</h3>
 						</div>
 						<div class="row">
-							@foreach($data['related'] as $row)
+                            <ul class="list-news-relate">
+                                @foreach($data['related'] as $row)
+                                    <li>
+                                        <a title="{{$row->title}}" href="{{ route('client.post.show', ['slug' => $row->slug]) }}">
+                                            {{$row->title}}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+							{{-- @foreach($data['related'] as $row)
 								<div class="news-relate-item col-6 col-sm-4 col-md-4 col-lg-4 mb-4">
 									<a href="{{ route('client.post.show', ['slug' => $row->slug]) }}">
 										<img class="thumbnail" src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}" class="card-img-top" alt="{{ $row->title }}">
@@ -247,38 +256,9 @@
 										</span>
 									</p>
 								</div>
-							@endforeach
+							@endforeach --}}
 						</div>
 					</section>
-					{{-- <section class="news-relate box-product knowledge">
-						<div class="product-header">
-							<h2>Tin liên quan</h2>
-						</div>
-						<div class="knowledge_mobile d-sm-block">
-							<div class="row">
-								@foreach($data['related'] as $row)
-									<div class="col-sm-4 col-md-4 col-lg-4 mb-4">
-										<a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-											title="{{ $row->title }}" class="card item-knowledge">
-											<div class="box-image">
-												<img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}" class="card-img-top" alt="{{ $row->title }}">
-											</div>
-											<div class="card-body w-100">
-												<h5 class="knowledge-title">{{ $row->title }}</h5>
-												<div class="overview">{{$row->description}}</div>
-												<div class="box-user">
-													<div class="avatar-user">
-														<img src="{{asset('assets/images/products/avatar.svg')}}" alt="">
-													</div>
-													<div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->total_views}}</span></div>
-												</div>
-											</div>
-										</a>
-									</div>
-								@endforeach
-							</div>
-						</div>
-					</section> --}}
                 </div>
                 <div class="col-lg-3">
                     @include('clients::elements.news_coupon')
@@ -297,6 +277,11 @@
             $('.open-table-content').click(function(){
                 $('.wrapper .main .new-detail .table-of-contents ol').toggle('slow');
             })
+        })
+    </script>
+    <script>
+        $(function() {
+            $('.box-search input').attr('placeholder', 'Tìm kiếm tin tức');
         })
     </script>
 @endsection

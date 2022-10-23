@@ -72,7 +72,7 @@
                             @foreach($data['sosanh'] as $row)
                                 <div class="item-compare">
                                     <div class="image-compare">
-                                        <img src="{{ $row->crawlerCategory->crawlerWebsite->thumbnail }}" alt="">
+                                        <img src="{{ !empty($row->crawlerCategory->crawlerWebsite) ? $row->crawlerCategory->crawlerWebsite->thumbnail : '' }}" alt="">
                                     </div>
                                     <div class="content-compare">
                                         <h4>{{ $row->name }}</h4>
@@ -161,4 +161,12 @@
         </section>
     </div>
 </main>
+@endsection
+
+@section('scripts')
+<script>
+    $(function() {
+        $('.box-search input').attr('placeholder', 'Tìm kiếm sản phẩm');
+    })
+</script>
 @endsection

@@ -12,7 +12,8 @@
                 <div class="content-promotion">
                     <h4 class="title" title="{{ $newsItem->title }}">{{ $newsItem->title }}</h4>
                     <div class="overview">
-                        {!!$newsItem->description!!}
+                        {{-- {!!$newsItem->description!!} --}}
+                        {{ strip_tags(html_entity_decode($newsItem->content)) }}
                     </div>
                 </div>
             </a>

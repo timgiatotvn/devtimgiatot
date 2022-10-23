@@ -58,11 +58,10 @@
                             $sum_money += $price;
                             @endphp
                         <div class="row">
-                            <div class="col-lg-2">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
-                                title="{{ $row->title }}" alt="">
+                            <div class="col-3 col-sm-2 col-md-2 col-lg-2">
+                                <img class="w-100" src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}" alt="">
                             </div>
-                            <div class="col-lg-8">
+                            <div class="col-9 col-sm-8 col-md-8 col-lg-8">
                                 <p style="margin-bottom: 0px">
                                     <b>{{ $row->title }}</b>
                                 </p>
@@ -71,7 +70,7 @@
                                 </p>
                                 
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-12 col-lg-2">
                                 <form id="form-{{$row->id}}" method="post" action="{{ route('client.card.update', ['id' => $row->id]) }}"
                                     style="width: inherit !important;">
                                   @csrf()
@@ -224,11 +223,11 @@
                         <div class="form-item">
                             <textarea name="content" placeholder="Yêu cầu thêm" id="" cols="30" rows="10">{{ old('content') }}</textarea>
                         </div>
-                        <div class="form-item">
-                            <div class="row w-100">
+                        {{-- <div class="form-item"> --}}
+                            <div class="row">
                                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                                     <a href="{{ route('client.category.search', ['key' => 1]) }}" title="">
-                                        <button class="continue-buy" style="background: unset; color: #23262F; border: 1px solid #777E90;" type="button" class="btn btn-sm btn-primary">Tiếp tục mua hàng</button>
+                                        <button class="continue-buy" style="background: unset; color: #23262F; border: 1px solid #777E90;" type="button" class="btn btn-sm btn-primary">Tiếp tục mua sắm</button>
                                     </a>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-6 col-lg-6">
@@ -238,7 +237,7 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        {{-- </div> --}}
                         {{-- <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" name="email" {{ \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->check() ? 'readonly="readonly"' : '' }} value="{{ \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->check() ? \Illuminate\Support\Facades\Auth::guard(\Helpers::renderGuard(1))->user()->email : '' }}" class="form-control" id="email"/>

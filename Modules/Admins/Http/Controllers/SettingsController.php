@@ -7,6 +7,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Helpers\Helpers;
+use App\Model\PaymentSetting;
 use Illuminate\Support\MessageBag;
 use App\Service\Admins\Setting;
 
@@ -20,7 +21,6 @@ class SettingsController extends Controller
         $this->settingService = $settingService;
     }
 
-
     public function edit($id){
         try {
             $data['common'] = Helpers::titleAction([__('admins::layer.setting.edit.title'), __('admins::layer.setting.index.title2')]);
@@ -31,6 +31,15 @@ class SettingsController extends Controller
         } catch (\Exception $e) {
             return !empty($e->getMessage()) ? abort('500') : abort(404);
         }
+    }
+
+    public function viewConfigPayment()
+    {
+        $paymentSetting = PaymentSetting::first();
+
+        return view('admins::settings.payment', [
+            'paymentSetting' => $paymentSetting
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -51,5 +60,16 @@ class SettingsController extends Controller
         }
     }
 
+    public function storePayment(Request $request)
+    {
+        $paymentSetting = PaymentSetting::first();
 
+        if (empty($paymentSetting)) {
+            PaymentSetting::create($request->except('_token'));
+        } else {
+            $paymentSetting->update($request->except('_token'));
+        }
+
+        return back()->with('success', 'Cập nhật thành công');
+    }
 }

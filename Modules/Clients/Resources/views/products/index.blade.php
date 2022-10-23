@@ -167,7 +167,7 @@
                                         <div class="card-body">
                                             <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
                                             <h5 title="{{ $row->title }}" class="card-title product-title">{{ $row->title }}</h5>
-                                            <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                            {{-- <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p> --}}
                                         </div>
                                     </a>
                                 @endif
@@ -209,8 +209,8 @@
                     $('.read-more').html('Xem thêm');
                     $('.description').removeClass('full-content');
                 }
-                
             })
+            $('.box-search input').attr('placeholder', 'Tìm kiếm sản phẩm');
         })
     </script>
 @endsection
