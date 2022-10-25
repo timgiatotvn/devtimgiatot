@@ -227,7 +227,7 @@ class CategoriesController extends Controller
                 "class_url_image" => ".main-contain .item-img",
                 "class_url_image_attr" => "src",
                 "class_url_a" => "a.main-contain",
-                "scroll_class" => "",
+                "scroll_class" => ".footer",
                 "class_detail" => "section.detail",
                 "class_detail_name" => "h1",
                 "class_detail_price" => ".box-price-present",
