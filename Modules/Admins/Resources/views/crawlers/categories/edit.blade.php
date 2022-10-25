@@ -120,14 +120,14 @@
                                 <label>Loại web</label>
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input type="radio" class="form-check-input" name="type_crawler"
-                                                       value="static"
-                                                        {{ ($data['detail']->type_crawler == "static") ? 'checked' : '' }}>
-                                                Static
-                                            </label>
-                                        </div>
+{{--                                        <div class="form-check">--}}
+{{--                                            <label class="form-check-label">--}}
+{{--                                                <input type="radio" class="form-check-input" name="type_crawler"--}}
+{{--                                                       value="static"--}}
+{{--                                                        {{ ($data['detail']->type_crawler == "static") ? 'checked' : '' }}>--}}
+{{--                                                Static--}}
+{{--                                            </label>--}}
+{{--                                        </div>--}}
                                         <div class="form-check">
                                             <label class="form-check-label">
                                                 <input type="radio" class="form-check-input" name="type_crawler"

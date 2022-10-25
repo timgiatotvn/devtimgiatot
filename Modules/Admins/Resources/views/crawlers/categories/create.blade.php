@@ -176,29 +176,29 @@
                                     <div class="col-sm-2">
                                         @if(!empty($templateCrawler["type_crawler"]))
                                             @if($templateCrawler["type_crawler"] == "static")
+{{--                                                <div class="form-check">--}}
+{{--                                                    <label class="form-check-label">--}}
+{{--                                                        <input type="radio" class="form-check-input" name="type_crawler"--}}
+{{--                                                               value="static"--}}
+{{--                                                               checked>--}}
+{{--                                                        Static--}}
+{{--                                                    </label>--}}
+{{--                                                </div>--}}
                                                 <div class="form-check">
                                                     <label class="form-check-label">
                                                         <input type="radio" class="form-check-input" name="type_crawler"
-                                                               value="static"
-                                                               checked>
-                                                        Static
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="type_crawler"
-                                                               value="ajax">
+                                                               value="ajax" checked>
                                                         Ajax
                                                     </label>
                                                 </div>
                                             @else
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input type="radio" class="form-check-input" name="type_crawler"
-                                                               value="static">
-                                                        Static
-                                                    </label>
-                                                </div>
+{{--                                                <div class="form-check">--}}
+{{--                                                    <label class="form-check-label">--}}
+{{--                                                        <input type="radio" class="form-check-input" name="type_crawler"--}}
+{{--                                                               value="static">--}}
+{{--                                                        Static--}}
+{{--                                                    </label>--}}
+{{--                                                </div>--}}
                                                 <div class="form-check">
                                                     <label class="form-check-label">
                                                         <input type="radio" class="form-check-input" name="type_crawler"
@@ -208,18 +208,18 @@
                                                 </div>
                                             @endif
                                         @else
+{{--                                            <div class="form-check">--}}
+{{--                                                <label class="form-check-label">--}}
+{{--                                                    <input type="radio" class="form-check-input" name="type_crawler"--}}
+{{--                                                           value="static"--}}
+{{--                                                           checked>--}}
+{{--                                                    Static--}}
+{{--                                                </label>--}}
+{{--                                            </div>--}}
                                             <div class="form-check">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" name="type_crawler"
-                                                           value="static"
-                                                           checked>
-                                                    Static
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="type_crawler"
-                                                           value="ajax">
+                                                           value="ajax" checked>
                                                     Ajax
                                                 </label>
                                             </div>
