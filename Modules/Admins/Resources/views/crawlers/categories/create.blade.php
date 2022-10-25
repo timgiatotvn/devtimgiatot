@@ -40,6 +40,9 @@
                                     <option value="?template=dienmayxanh" @if(!empty($_GET["template"])) {{ ($_GET["template"] == "dienmayxanh")? "selected" : "" }} @endif>
                                         Dienmayxanh
                                     </option>
+                                    <option value="?template=thegioididong" @if(!empty($_GET["template"])) {{ ($_GET["template"] == "thegioididong")? "selected" : "" }} @endif>
+                                        Thegioididong
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">

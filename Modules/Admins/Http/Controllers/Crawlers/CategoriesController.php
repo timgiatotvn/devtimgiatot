@@ -238,6 +238,24 @@ class CategoriesController extends Controller
                 "class_detail_content" => ".content-article",
                 "type_crawler" => "ajax",
             ],
+            "thegioididong" => [
+                "domain_url" => "https://www.thegioididong.com",
+                "class_root_list" => ".listproduct .item.ajaxed",
+                "class_parent" => ".listproduct .item.ajaxed",
+                "class_url_image" => ".item-img",
+                "class_url_image_attr" => "src",
+                "class_url_a" => "a.main-contain",
+                "scroll_class" => ".footer",
+                "class_detail" => ".detail",
+                "class_detail_name" => "h1",
+                "class_detail_price" => ".box-price .box-price-present",
+                "class_detail_price_root" => ".box-price .box-price-old",
+                "class_detail_price_sale" => "",
+                "class_detail_price_sale_root" => "",
+                "class_detail_description" => ".article .article__content",
+                "class_detail_content" => ".article .article__content",
+                "type_crawler" => "ajax",
+            ],
         ];
 
         return !empty($data[$site]) ? $data[$site] : [];
