@@ -62,16 +62,16 @@
                                 <label>Class footer scroll (Không bắt buộc)</label>
                                 <input type="text" name="scroll_class" value="{{ $data['detail']->scroll_class }}" class="form-control" placeholder=""/>
                             </div>
-                            <div class="form-group">
-                                <label>Link page mẫu</label>
-                                <input type="text" value="{{ $data['detail']->url_page_example }}" name="url_page_example" class="form-control" placeholder=""/>
-                                <figcaption class="figure-caption text-danger text-small">Vd: https://timgiatot.vn/tim-gia-tot?page=</figcaption>
-                            </div>
-                            <div class="form-group">
-                                <label>Tổng page</label>
-                                <input type="text" value="{{ $data['detail']->page_max }}" name="page_max" class="form-control" placeholder=""/>
-                                <figcaption class="figure-caption text-danger text-small">Vd: 10</figcaption>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Link page mẫu</label>--}}
+{{--                                <input type="text" value="{{ $data['detail']->url_page_example }}" name="url_page_example" class="form-control" placeholder=""/>--}}
+{{--                                <figcaption class="figure-caption text-danger text-small">Vd: https://timgiatot.vn/tim-gia-tot?page=</figcaption>--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label>Tổng page</label>--}}
+{{--                                <input type="text" value="{{ $data['detail']->page_max }}" name="page_max" class="form-control" placeholder=""/>--}}
+{{--                                <figcaption class="figure-caption text-danger text-small">Vd: 10</figcaption>--}}
+{{--                            </div>--}}
                             <div style="background: #0a6aa1; color: #fff; padding: 20px 20px 1px 20px; margin-bottom: 15px;">
                                 <h4 class="mb-3">Chi tiết</h4>
                                 <div class="form-group">

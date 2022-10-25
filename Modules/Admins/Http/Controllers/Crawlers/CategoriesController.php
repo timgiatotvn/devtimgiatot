@@ -220,6 +220,24 @@ class CategoriesController extends Controller
                 "class_detail_content" => ".html-content.detail-content",
                 "type_crawler" => "ajax",
             ],
+            "dienmayxanh" => [
+                "domain_url" => "https://www.dienmayxanh.com",
+                "class_root_list" => ".listproduct .item",
+                "class_parent" => ".listproduct .item",
+                "class_url_image" => ".main-contain .item-img",
+                "class_url_image_attr" => "src",
+                "class_url_a" => "a.main-contain",
+                "scroll_class" => "",
+                "class_detail" => "section.detail",
+                "class_detail_name" => "h1",
+                "class_detail_price" => ".box-price-present",
+                "class_detail_price_root" => ".box-price-old",
+                "class_detail_price_sale" => "",
+                "class_detail_price_sale_root" => "",
+                "class_detail_description" => ".short-article",
+                "class_detail_content" => ".content-article",
+                "type_crawler" => "ajax",
+            ],
         ];
 
         return !empty($data[$site]) ? $data[$site] : [];
