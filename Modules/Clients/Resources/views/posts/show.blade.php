@@ -127,8 +127,8 @@
                                                 }
                                             }
                                             $link = getIdHeadings($match);
-                                            $list .= '<a href="#'.$link.'" class="ft-anchor"><span>'.strip_tags($match).'</span></a>';
-                                            //$list .= '<span>'.strip_tags($match).'</span>';
+                                            // $list .= '<a href="#'.$link.'" class="ft-anchor"><span>'.strip_tags($match).'</span></a>';
+                                            $list .= strip_tags($match);
                                             // end lists
                                             if ($i != count($matches) - 1) {
                                                 if ($current_depth > (int) $matches[$i + 1][2]) {
@@ -282,6 +282,10 @@
     <script>
         $(function() {
             $('.box-search input').attr('placeholder', 'Tìm kiếm tin tức');
+            $('.table-of-contents ol li').click(function() {
+                const index = $(this).index();
+                $(window).scrollTop($('.content-page h2:eq(' + index + ')').offset().top);
+            });
         })
     </script>
 @endsection
