@@ -12,7 +12,7 @@
                         </p>
                 </div>
             </div>
-            <a href="" class="item-link">Mua sắm ngay</a>
+            <a href="https://shopee.vn/" class="item-link">Mua sắm ngay</a>
             <div class="date-sale"></div>
             <div class="number-date">11.11</div>
         </div>
@@ -28,7 +28,7 @@
                         </p>
                 </div>
             </div>
-            <a href="" class="item-link">Mua sắm ngay</a>
+            <a href="https://www.lazada.vn/" class="item-link">Mua sắm ngay</a>
             <div class="date-sale"></div>
             <div class="number-date">11.11</div>
         </div>
@@ -44,7 +44,7 @@
                         </p>
                 </div>
             </div>
-            <a href="" class="item-link">Mua sắm ngay</a>
+            <a href="https://tiki.vn/" class="item-link">Mua sắm ngay</a>
             <div class="date-sale"></div>
             <div class="number-date">11.11</div>
         </div>
@@ -60,7 +60,7 @@
                         </p>
                 </div>
             </div>
-            <a href="" class="item-link">Mua sắm ngay</a>
+            <a href="https://sendo.vn" class="item-link">Mua sắm ngay</a>
             <div class="date-sale"></div>
             <div class="number-date">11.11</div>
         </div>
