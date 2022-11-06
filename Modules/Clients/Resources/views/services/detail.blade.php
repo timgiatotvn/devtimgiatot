@@ -24,7 +24,7 @@
             <div class="box-title-school">
                 <div class="logo-title">
                     <div class="logo">
-                        <img src="{{$service->logo}}" alt="">
+                        <img src="{{$service->logo}}" style="width: 64px; height: 64px; object-fit: cover" alt="">
                         <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="">
                     </div>
                     <div class="title-address">

@@ -68,7 +68,7 @@
                             <div class="infor-school">
                                 <div class="logo-title">
                                     <div class="logo">
-                                        <img src="{{$serviceItem->logo}}" alt="">
+                                        <img src="{{$serviceItem->logo}}" style="width: 64px; height: 64px; object-fit: cover" alt="">
                                         <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="">
                                     </div>
                                     <h4 class="title">
