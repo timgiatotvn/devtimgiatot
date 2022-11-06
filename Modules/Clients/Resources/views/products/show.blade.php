@@ -115,7 +115,7 @@
                                                     {{ $row->title }}
                                                 </a>
                                             </h5>
-                                            <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
+                                            {{-- <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p> --}}
                                         </div>
                                     </div>
                                 @endif

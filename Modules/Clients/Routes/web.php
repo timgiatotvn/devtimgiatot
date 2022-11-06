@@ -81,16 +81,22 @@ Route::prefix('')->group(function() {
     //contact
     Route::get('/lien-he', 'ContactController@create')->name('client.contact.create');
     Route::post('/lien-he', 'ContactController@store');
-
+    Route::post('/get-district', 'CategoriesController@getDistrict')->name('client.service.get_district');
     //feed product
     Route::get('/product-feed', 'ProductsController@feed');
-
+    Route::post('/add-advise-request', 'CategoriesController@addAdviseRequest')->name('client.add_advise_request');
     //base
     Route::get('/', 'HomeController@index')->name('client.home');
     Route::get('/so-sanh-gia/{slug}.htm', 'ProductsController@showSosanh')->name('client.product.showSosanh');
     Route::get('/{slug}.htm', 'ProductsController@show')->name('client.product.show');
     Route::get('/{slug}.html', 'PostsController@show')->name('client.post.show');
     Route::get('/search', 'CategoriesController@search')->name('client.category.search');
+    Route::get('/dich-vu', 'CategoriesController@serviceCategory')->name('client.service.category');
+    Route::get('/dich-vu/tim-kiem', 'CategoriesController@resultSearchService')->name('client.result_search_service');
+    Route::post('/load-more-category-service', 'CategoriesController@loadMoreCategoryService')->name('client.load_more_category_service');
+    Route::post('/load-more-service-relate', 'CategoriesController@loadMoreServiceRelate')->name('client.load_more_service_relate');
+    Route::get('/dich-vu/{slug}', 'CategoriesController@listService')->name('client.service.list');
+    Route::get('/dich-vu/{category}/{slug}-{id}', 'CategoriesController@detailService')->name('client.service.detail')->where(array('slug' => '[a-z0-9\-]+', 'id' => '[0-9]+'));
     Route::get('/{slug}', 'CategoriesController@index')->name('client.category.index');
     Route::get('/crawl/data', 'CrawlController@crawlData');
 });

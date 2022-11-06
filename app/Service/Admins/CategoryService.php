@@ -12,8 +12,8 @@ class CategoryService
     private $categoryRepository;
     const TYPE2 = ['new', 'product', 'link', 'crawler'];
     const TYPE_TEXT2 = ['new' => 'Tin tức', 'product' => 'Sản phẩm', 'link' => 'Link', 'crawler' => 'Sản phẩm so sánh'];
-    const TYPE = ['new', 'product', 'link'];
-    const TYPE_TEXT = ['new' => 'Tin tức', 'product' => 'Sản phẩm', 'link' => 'Link'];
+    const TYPE = ['new', 'product', 'link', 'service'];
+    const TYPE_TEXT = ['new' => 'Tin tức', 'product' => 'Sản phẩm', 'link' => 'Link', 'service' => 'Dịch vụ'];
 
     public function __construct(CategoryRepositoryInterface $categoryRepository)
     {

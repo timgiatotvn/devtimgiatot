@@ -49,6 +49,20 @@ Route::prefix('admin')->group(function () {
             Route::post('/store-link', 'CrawlController@storeLink')->name('admin.crawls.store-link');
         });
 
+        Route::prefix('service')->middleware('check-is-admin')->group(function () {
+            Route::get('/list', 'ServiceController@list')->name('admin.service.index');
+            Route::get('/add', 'ServiceController@add')->name('admin.service.add');
+            Route::post('/store', 'ServiceController@storeService')->name('admin.service.store');
+            Route::get('/{id}/edit', 'ServiceController@edit')->name('admin.service.edit');
+            Route::post('/{id}/update', 'ServiceController@updateService')->name('admin.service.update');
+            Route::get('/{id}/delete', 'ServiceController@delete')->name('admin.service.delete');
+            Route::post('/get-district', 'ServiceController@getDistrict')->name('admin.service.get_district');
+        });
+
+        Route::prefix('request')->middleware('check-is-admin')->group(function () {
+            Route::get('/', 'ServiceController@listRequestAdvise')->name('admin.request.index');
+        });
+
         //Advertisement
         Route::prefix('advertisements')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'AdvertisementsController@index')->name('admin.advertisement.index');

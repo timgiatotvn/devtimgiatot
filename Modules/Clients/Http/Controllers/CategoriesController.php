@@ -13,6 +13,8 @@ use Illuminate\Routing\Controller;
 use App\Model\Category;
 use App\Model\Post;
 use App\Helpers\Helpers;
+use App\Model\AdviseRequest;
+use App\Model\Service;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +40,6 @@ class CategoriesController extends Controller
         $this->clientCategoryService = $clientCategoryService;
         $this->clientProductService = $clientProductService;
         $this->clientPostService = $clientPostService;
-
         $this->setting = $this->clientSettingService->findFirst();
         View::share('data_common', [
             'logo' => $this->clientAdvService->findByLogo(),
@@ -99,6 +100,179 @@ class CategoriesController extends Controller
         } catch (\Exception $e) {
             if (empty($e->getMessage())) abort(404); else abort('500');
         }
+    }
+
+    public function listService($slug, Request $request)
+    {
+        $services = Service::query();
+        $districts = [];
+        $category = Category::where('slug', $slug)->first();
+        $services->where('category_id', $category->id)
+                 ->where('status', 1);
+        if (isset($request->province_id) && $request->province_id != -1) {
+            $services->where('province_id', $request->province_id);
+            $districts = DB::table('districts')->where('province_id', $request->province_id)->get();
+        }
+        if (isset($request->district_id) && $request->district_id != -1) {
+            $services->where('district_id', $request->district_id);
+        }
+        if (isset($request->service_name) && $request->service_name != '') {
+            $services->where('title', 'like', '%' . $request->service_name . '%');
+        }
+        $data['common'] = [
+            'title_seo' => $category->title,
+            'meta_des' => strip_tags($category->description)
+        ];
+
+        return view("clients::services.list", [
+            'services' => $services->latest()->paginate(20),
+            'inputs' => $request->all(),
+            'category' => $category,
+            'districts' => $districts,
+            'provinces' => DB::table('provinces')->get(),
+            'data' => $data
+        ]);
+    }
+
+    public function resultSearchService(Request $request)
+    {
+        $services = Service::query();
+        $services->where('status', 1);
+        $districts = [];
+        if (isset($request->province_id) && $request->province_id != -1) {
+            $services->where('province_id', $request->province_id);
+            $districts = DB::table('districts')->where('province_id', $request->province_id)->get();
+        }
+        if (isset($request->district_id) && $request->district_id != -1) {
+            $services->where('district_id', $request->district_id);
+        }
+        if (isset($request->service_name) && $request->service_name != '') {
+            $services->where('title', 'like', '%' . $request->service_name . '%');
+        }
+        $data['common'] = [
+            'title_seo' => 'Kết quả tìm kiếm dịch vụ',
+            'meta_des' => ''
+        ];
+
+        return view("clients::services.search", [
+            'services' => $services->latest()->paginate(20),
+            'inputs' => $request->all(),
+            'districts' => $districts,
+            'provinces' => DB::table('provinces')->get(),
+            'data' => $data
+        ]);
+    }
+
+    public function addAdviseRequest(Request $request)
+    {
+        AdviseRequest::create($request->except('_token'));
+
+        return back();
+    }
+
+    public function detailService($category, $slug, $id)
+    {
+        $service = Service::where('slug', $slug)
+                          ->where('id', $id)
+                           ->first();
+        $data['common'] = [
+            'title_seo' => $service->title,
+            'meta_des' => strip_tags($service->description)
+        ];
+        $serviceRelates = Service::where('id', '!=', $id)
+                                 ->where('category_id', $service->category_id)
+                                 ->latest()
+                                 ->take(4)
+                                 ->get();
+
+        return view("clients::services.detail", [
+            'service' => $service,
+            'serviceRelates' => $serviceRelates,
+            'data' => $data
+        ]);
+    }
+
+    public function loadMoreServiceRelate(Request $request)
+    {
+        $serviceRelates = Service::where('category_id', $request->category_id)
+                                 ->latest()
+                                 ->offset($request->offset)
+                                 ->take(4)
+                                 ->get();
+        $string = "";
+        foreach ($serviceRelates as $item) {
+            $link = route('client.service.detail', ['category' => $item->category->slug, 'slug' => $item->slug, 'id' => $item->id]);
+            $description = strip_tags($item->description);
+            $string.= "
+            <div class='item-service-relate'>
+                <div class='image-relate'>
+                    <a href='$link'>
+                        <img src='$item->thumbnail'>
+                    </a>
+                </div>
+                <div class='panel-service'>
+                    <h4>
+                        <a class='a-none' href='$link'>$item->title</a>
+                    </h4>
+                    <p>
+                        $description
+                    </p>
+                </div>
+            </div>
+            ";
+        }
+
+        return response()->json([
+            'success' => true,
+            'total' => count($serviceRelates),
+            'string' => $string
+        ]);
+    }
+
+    public function getDistrict(Request $request)
+    {
+        $districts = DB::table('districts')->where('province_id', $request->province_id)->get();
+        
+        return response()->json(['success' => true, 'data' => $districts]);
+    }
+
+    public function serviceCategory()
+    {
+        $categories = Category::where('type', 'service')->latest()->take(8)->get();
+
+        return view("clients::services.category", [
+            'categories' => $categories,
+            'provinces' => DB::table('provinces')->get()
+        ]);
+    }
+
+    public function loadMoreCategoryService(Request $request)
+    {
+        $categories = Category::where('type', 'service')
+                              ->latest()
+                              ->offset($request->offset)
+                              ->take(4)
+                              ->get();
+        $string = "";
+        foreach ($categories as $item) {
+            $link = route('client.service.list', ['slug' => $item->slug]);
+            $description = strip_tags($item->description);
+            $string.= "<a href='$link' class='item-service'>
+                            <div class='image-service'>
+                                <img src='$item->thumbnail'>
+                            </div>
+                            <div class='panel-service'>
+                                <h4 class='title'>$item->title</h4>
+                                <p class='overview'>$description</p>
+                            </div>
+                        </a>";
+        }
+
+        return response()->json([
+            'success' => true,
+            'total' => count($categories),
+            'string' => $string
+        ]);
     }
 
     public function search()

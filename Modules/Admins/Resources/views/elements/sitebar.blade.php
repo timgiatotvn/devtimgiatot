@@ -194,6 +194,18 @@
                     <i class="icon-bell menu-icon"></i>
                 </a>
             </li>
+            <li class="nav-item {{ Request::routeIs('admin.service.*')? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.service.index') }}">
+                    <span class="menu-title">Dịch vụ</span>
+                    <i class="icon-bell menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item {{ Request::routeIs('admin.request.*')? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.request.index') }}">
+                    <span class="menu-title">Yêu cầu tư vấn</span>
+                    <i class="icon-bell menu-icon"></i>
+                </a>
+            </li>
             <li class="nav-item {{ Request::routeIs('admin.category.*')? 'active' : '' }} {{ Request::routeIs('admin.post.*')? 'active' : '' }} {{ Request::routeIs('admin.product.*')? 'active' : '' }}">
                 <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="false"
                    aria-controls="basic-ui">

@@ -32,9 +32,13 @@
                                        class="form-control" placeholder=""/>
                             </div>
                             <div class="form-group">
-                                <label>Mô tả</label>
+                                <label>Mô tả 1</label>
                                 <textarea name="description" placeholder="Mô tả" rows="4"
                                           class="form-control tinymce">{{ $data['detail']->description }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả 2</label>
+                                <textarea name="description2" placeholder="Mô tả" rows="4" class="form-control tinymce">{{ $data['detail']->description2 }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Vị trí</label>

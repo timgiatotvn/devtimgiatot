@@ -27,6 +27,7 @@
                         <li><a href="/tin-tuc">Tin tức</a></li>
                         <li><a href="/doi-tac">Đối tác</a></li>
                         <li><a href="/lien-he">Liên hệ</a></li>
+                        <li><a href="/dich-vu">Dịch vụ</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6">

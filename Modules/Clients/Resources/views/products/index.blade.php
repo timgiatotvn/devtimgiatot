@@ -57,23 +57,23 @@
                                 
                             {{-- </p> --}}
                             @php
-                                if (strlen($data['category']->description)) {
+                                if (strlen($data['category']->description) > 300) {
                                     $style = "-webkit-line-clamp: 10;
                                             -webkit-box-orient: vertical;
                                             display: -webkit-box;
-                                            font-size: 16px;
-                                            line-height: 20px;
+                                            font-size: 14px;
+                                            line-height: 32px;
                                             overflow: hidden;
                                             text-overflow: ellipsis;";
                                 } else {
                                     $style="";
                                 }
                             @endphp
-                            <div class="description" style="{{$style}}">
+                            <div class="description1" style="{{$style}}">
                                 {!!$data['category']->description!!}
                             </div>
                             @if($style != '')
-                                <p class="read-more" style="cursor: pointer; color: #0D54BE">Xem thêm</p>
+                                <p class="read-more1" onclick="readMore(1)" style="cursor: pointer; color: #0D54BE; text-align: center">Xem thêm</p>
                             @endif
                         </div>
                         <div class="product-list category-list">
@@ -110,11 +110,24 @@
                         {{-- <div class="category-buttom">
                             <a href="#" class="btn btn-all">Xem thêm</a>
                         </div> --}}
-                        <div class="description" style="{{$style}}">
-                                {!!$data['category']->description!!}
+                        @php
+                            if (strlen($data['category']->description2) > 300) {
+                                $style = "-webkit-line-clamp: 10;
+                                        -webkit-box-orient: vertical;
+                                        display: -webkit-box;
+                                        font-size: 14px;
+                                        line-height: 32px;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;";
+                            } else {
+                                $style="";
+                            }
+                        @endphp
+                        <div class="description2" style="{{$style}}">
+                                {!!$data['category']->description2!!}
                         </div>
                         @if($style != '')
-                            <p class="read-more" style="cursor: pointer; color: #0D54BE">Xem thêm</p>
+                            <p class="read-more2" onclick="readMore(2)" style="cursor: pointer; color: #0D54BE; text-align: center">Xem thêm</p>
                         @endif
                     </section>
                 </div>
@@ -131,18 +144,18 @@
         }
     </style>
     <script>
+        function readMore(number) {
+            var name = $('.read-more' + number).html();
+            if (name == 'Xem thêm') {
+                $('.read-more' + number).html('Rút gọn');
+                $('.description' + number).addClass('full-content');
+            } else if (name == 'Rút gọn') {
+                $('.read-more' + number).html('Xem thêm');
+                $('.description' + number).removeClass('full-content');
+            }
+        }
         $(function() {
-            $('.read-more').click(function() {
-                var name = $('.read-more').html();
-                console.log(name);
-                if (name == 'Xem thêm') {
-                    $('.read-more').html('Rút gọn');
-                    $('.description').addClass('full-content');
-                } else if (name == 'Rút gọn') {
-                    $('.read-more').html('Xem thêm');
-                    $('.description').removeClass('full-content');
-                }
-            })
+            
             $('.box-search input').attr('placeholder', 'Tìm kiếm sản phẩm');
         })
     </script>
