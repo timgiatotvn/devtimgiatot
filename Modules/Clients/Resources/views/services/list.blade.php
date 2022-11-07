@@ -68,7 +68,7 @@
                             <div class="infor-school">
                                 <div class="logo-title">
                                     <div class="logo">
-                                        <img src="{{$serviceItem->logo}}" style="width: 64px; height: 64px; object-fit: cover" alt="">
+                                        <img class="logo-service" src="{{$serviceItem->logo}}" alt="">
                                         <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="">
                                     </div>
                                     <h4 class="title">
@@ -118,7 +118,7 @@
                                         @endfor
                                         <p class="number_rate">{{number_format($serviceItem->total_rate)}} đánh giá</p>
                                     </div>
-                                    <button class="btn btn-detail"><a class="a-none" style="color: #fff" href="{{route('client.service.detail', ['caetgory' => $category->slug, 'slug' => $serviceItem->slug, 'id' => $serviceItem->id])}}">Xem chi tiết</a> <img src="" alt=""></button>
+                                    <button class="btn btn-detail"><a class="a-none" style="color: #fff" href="{{route('client.service.detail', ['caetgory' => $category->slug, 'slug' => $serviceItem->slug, 'id' => $serviceItem->id])}}">Xem chi tiết</a> <img src="{{asset('assets/images/icons/Icon R.svg')}}" alt=""></button>
                                 </div>
                                 <div class="item-price">
                                     <div class="label-price">Giá dịch vụ chỉ từ:</div>

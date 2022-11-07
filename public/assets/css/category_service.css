@@ -322,7 +322,8 @@
 @media screen and (min-width: 1024px) {
   .result-search .list-service {
     -ms-grid-columns: (auto)[4];
-        grid-template-columns: repeat(4, auto);
+    /* grid-template-columns: repeat(4, auto); */
+    grid-template-columns: 25% 25% 25% 25%;
     gap: 24px;
   }
 }
@@ -356,7 +357,7 @@
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
 }
 
 .result-search .list-service .item-service .panel-service {
@@ -709,7 +710,12 @@
   bottom: 0;
   right: 0;
 }
-
+.logo-service {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 64px;
+}
 .list-school .item-school .infor-school .logo-title .title {
   margin-left: 12px;
   margin-bottom: 0;
@@ -991,7 +997,10 @@
   letter-spacing: 0.005em;
   color: #FFFFFF;
 }
-
+.detail-school .banner-detail .image-desktop {
+  height: 460px;
+  object-fit: cover;
+}
 .list-school .item-school .infor-price .item-contact .zalo {
   width: 15%;
 }

@@ -24,7 +24,7 @@
             <div class="box-title-school">
                 <div class="logo-title">
                     <div class="logo">
-                        <img src="{{$service->logo}}" style="width: 64px; height: 64px; object-fit: cover" alt="">
+                        <img class="logo-service" src="{{$service->logo}}" alt="">
                         <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="">
                     </div>
                     <div class="title-address">
@@ -68,7 +68,7 @@
                             </div>
                             <div class="item-contact">
                                 <button class="btn btn-contact-school">Liên hệ</button>
-                                <a href="#" class="zalo"><img src="images/icons/MXH_zalo.svg" alt=""></a>
+                                <a target="_blank" href="https://zalo.me/{{$service->zalo}}" class="zalo"><img src="{{asset('assets/images/icons/MXH_zalo.svg')}}" alt=""></a>
                             </div>
                         </div>
                         <div class="box-form">

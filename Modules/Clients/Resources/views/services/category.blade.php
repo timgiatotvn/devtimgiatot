@@ -64,7 +64,7 @@
                         </div>
                         <div class="panel-service">
                             <h4 class="title">{{$categoryItem->title}}</h4>
-                            <p class="overview">{{strip_tags($categoryItem->description)}}</p>
+                            <p class="overview">Top 10 các đơn vị cung cấp uy tín</p>
                         </div>
                     </a>
                 @endforeach
