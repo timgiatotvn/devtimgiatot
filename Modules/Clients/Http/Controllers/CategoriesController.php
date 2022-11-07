@@ -238,7 +238,11 @@ class CategoriesController extends Controller
 
     public function serviceCategory()
     {
-        $categories = Category::where('type', 'service')->latest()->take(8)->get();
+        $categories = Category::where('type', 'service')
+                             ->latest()
+                             ->take(8)
+                             ->oldest('sort')
+                             ->get();
 
         return view("clients::services.category", [
             'categories' => $categories,

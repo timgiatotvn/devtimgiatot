@@ -38,19 +38,19 @@
                         <div class="btn-sub-footer"><i class="fa-solid fa-chevron-right dropdown"></i></div>
                     </div>
                     <ul class="connect-social nav-footer-mobile">
-                        <li><a href="#"><img src="./assets/images/icons/twitter.png" alt=""></a></li>
-                        <li><a href="#"><img src="./assets/images/icons/facebook.png" alt=""></a></li>
-                        <li><a href="#"><img src="./assets/images/icons/youtube.png" alt=""></a></li>
-                        <li><a href="#"><img src="./assets/images/icons/zalo.svg" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/twitter.png')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/facebook.png')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/youtube.png')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/zalo.svg')}}" alt=""></a></li>
                     </ul>
                 </div>
                 <div class="column-footer column-footer-desktop">
                     <h2>Kết nối với chúng tôi</h2>
                     <ul class="connect-social">
-                        <li><a href="#"><img src="./assets/images/icons/twitter.png" alt=""></a></li>
-                        <li><a href="#"><img src="./assets/images/icons/facebook.png" alt=""></a></li>
-                        <li><a href="#"><img src="./assets/images/icons/youtube.png" alt=""></a></li>
-                        <li><a href="#"><img src="./assets/images/icons/zalo.svg" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/twitter.png')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/facebook.png')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/youtube.png')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{asset('assets/images/icons/zalo.svg')}}" alt=""></a></li>
                     </ul>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     <h2>Tải ứng dụng</h2>
                     <ul class="download-app">
                         <li class="icon-app"><a href="https://apps.apple.com/us/app/timgiatot/id1631308200" target="_blank" rel="nofollow"><img src="{{asset('assets/images/icons/Taiappstore.svg')}}" alt=""></a></li>
-                        <li class="icon-app"><a href="https://play.google.com/store/apps/details?id=com.timgiatot.timgiatot" target="_blank" rel="nofollow"><img src="./assets/images/icons/Taiappchplay.svg" alt=""></a></li>
+                        <li class="icon-app"><a href="https://play.google.com/store/apps/details?id=com.timgiatot.timgiatot" target="_blank" rel="nofollow"><img src="{{asset('assets/images/icons/Taiappchplay.svg')}}" alt=""></a></li>
                     </ul>
                 </div>
             </div>

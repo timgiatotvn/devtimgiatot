@@ -150,7 +150,7 @@
                                                 @endif
                                             </td>
                                             <td align="center">
-                                                <a href="{{route('admin.service.edit', ['id' => $serviceItem->id])}}">Sửa</a> / <a href="" onclick="return confirm('Bạn có chắc chắn muốn xóa')">Xóa</a>
+                                                <a href="{{route('admin.service.edit', ['id' => $serviceItem->id])}}">Sửa</a> / <a href="{{route('admin.service.delete', ['id' => $serviceItem->id])}}" onclick="return confirm('Bạn có chắc chắn muốn xóa')">Xóa</a>
                                             </td>
                                         </tr>
                                     @endforeach
