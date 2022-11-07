@@ -239,7 +239,6 @@ class CategoriesController extends Controller
     public function serviceCategory()
     {
         $categories = Category::where('type', 'service')
-                             ->latest()
                              ->take(8)
                              ->oldest('sort')
                              ->get();
@@ -253,7 +252,7 @@ class CategoriesController extends Controller
     public function loadMoreCategoryService(Request $request)
     {
         $categories = Category::where('type', 'service')
-                              ->latest()
+                              ->oldest('sort')
                               ->offset($request->offset)
                               ->take(4)
                               ->get();
