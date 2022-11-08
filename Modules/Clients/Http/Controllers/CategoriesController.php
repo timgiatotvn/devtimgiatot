@@ -120,8 +120,9 @@ class CategoriesController extends Controller
             $services->where('title', 'like', '%' . $request->service_name . '%');
         }
         $data['common'] = [
-            'title_seo' => $category->title,
-            'meta_des' => strip_tags($category->description)
+            'title_seo' => $category->title_seo,
+            'meta_key' => $category->meta_key,
+            'meta_des' => $category->meta_des
         ];
 
         return view("clients::services.list", [
