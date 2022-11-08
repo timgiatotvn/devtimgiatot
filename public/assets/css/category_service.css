@@ -322,8 +322,8 @@
 @media screen and (min-width: 1024px) {
   .result-search .list-service {
     -ms-grid-columns: (auto)[4];
-    /* grid-template-columns: repeat(4, auto); */
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-template-columns: 25% 25% 25% 25%; */
     gap: 24px;
   }
 }
