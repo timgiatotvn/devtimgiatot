@@ -10,9 +10,9 @@
         <div class="nd-breadcrumb">
             <div class="breadcrumb-custom">
                 <a href="/">Trang chủ</a>
-                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></span>
+                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt="icon-arrow"></span>
                 <a href="/dich-vu">Dịch vụ</a>
-                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></span>
+                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt="icon-arrow"></span>
                 <span>{{$category->title}}</span>
             </div>
         </div>
@@ -47,8 +47,8 @@
                 <div class="box-search-filter box-filter-school mobile">
                     <div class="box">
                         <input type="text" class="form-control input-search-mobile" placeholder="Nhập dịch vụ cần tìm">
-                        <button class="btn btn-filter"><img src="{{asset('assets/images/icons/icon-fillter.svg')}}" alt="">Bộ lọc</button>                        
-                        <button class="btn btn-search"><img src="{{asset('images/icons/icon_search_white.svg')}}" alt=""></button>
+                        <button class="btn btn-filter"><img src="{{asset('assets/images/icons/icon-fillter.svg')}}" alt="icon-filter">Bộ lọc</button>                        
+                        <button class="btn btn-search"><img src="{{asset('images/icons/icon_search_white.svg')}}" alt="icon-search"></button>
                     </div>
                 </div>
             </form>
@@ -60,7 +60,7 @@
                         <div class="col-lg-3">
                             <div class="item-image">
                                 <a href="{{route('client.service.detail', ['caetgory' => $category->slug, 'slug' => $serviceItem->slug, 'id' => $serviceItem->id])}}">
-                                    <img class="img-school" src="{{$serviceItem->thumbnail}}" alt="">
+                                    <img class="img-school" src="{{$serviceItem->thumbnail}}" alt="{{$serviceItem->title}}">
                                 </a>
                             </div>
                         </div>
@@ -68,8 +68,8 @@
                             <div class="infor-school">
                                 <div class="logo-title">
                                     <div class="logo">
-                                        <img class="logo-service" src="{{$serviceItem->logo}}" alt="">
-                                        <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="">
+                                        <img class="logo-service" src="{{$serviceItem->logo}}" alt="{{$serviceItem->title}}">
+                                        <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="icon-check">
                                     </div>
                                     <h4 class="title">
                                         <a class="a-none" href="{{route('client.service.detail', ['caetgory' => $category->slug, 'slug' => $serviceItem->slug, 'id' => $serviceItem->id])}}">
@@ -101,7 +101,7 @@
                                         </div>
                                     @endif
                                     <div class="address-school">
-                                        <img src="{{asset('assets/images/icons/location.svg')}}" alt="">
+                                        <img src="{{asset('assets/images/icons/location.svg')}}" alt="icon-location">
                                         <p>
                                             {{$serviceItem->address}}
                                         </p>
@@ -114,11 +114,11 @@
                                 <div class="item-rate-detail">
                                     <div class="rating">
                                         @for ($star = 0; $star <= $serviceItem->rate; $star++)
-                                            <span><img src="{{asset('assets/images/icons/Star.svg')}}" alt=""></span>
+                                            <span><img src="{{asset('assets/images/icons/Star.svg')}}" alt="icon-star"></span>
                                         @endfor
                                         <p class="number_rate">{{number_format($serviceItem->total_rate)}} đánh giá</p>
                                     </div>
-                                    <button class="btn btn-detail"><a class="a-none" style="color: #fff" href="{{route('client.service.detail', ['caetgory' => $category->slug, 'slug' => $serviceItem->slug, 'id' => $serviceItem->id])}}">Xem chi tiết</a> <img src="{{asset('assets/images/icons/Icon R.svg')}}" alt=""></button>
+                                    <button class="btn btn-detail"><a class="a-none" style="color: #fff" href="{{route('client.service.detail', ['caetgory' => $category->slug, 'slug' => $serviceItem->slug, 'id' => $serviceItem->id])}}">Xem chi tiết</a> <img src="{{asset('assets/images/icons/Icon R.svg')}}" alt="icon-detail"></button>
                                 </div>
                                 <div class="item-price">
                                     <div class="label-price">Giá dịch vụ chỉ từ:</div>
@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="item-contact">
                                     <button class="btn btn-contact-school">Liên hệ</button>
-                                    <a href="https://zalo.me/{{$serviceItem->zalo}}" target="_blank" class="zalo"><img src="{{asset('assets/images/icons/MXH_zalo.svg')}}" alt=""></a>
+                                    <a href="https://zalo.me/{{$serviceItem->zalo}}" target="_blank" class="zalo"><img src="{{asset('assets/images/icons/MXH_zalo.svg')}}" alt="icon-zalo"></a>
                                 </div>
                             </div>
                         </div>

@@ -10,29 +10,29 @@
         <div class="nd-breadcrumb">
             <div class="breadcrumb-custom">
                 <a href="/">Trang chủ</a>
-                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></span>
+                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt="icon"></span>
                 <a href="{{route('client.service.list', ['slug' => $service->category->slug])}}">{{$service->category->title}}</a>
-                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></span>
+                <span><img src="{{asset('assets/images/icons/arrow.svg')}}" alt="icon"></span>
                 <span>{{$service->title}}</span>
             </div>
         </div>
         <section class="detail-school">
             <div class="banner-detail">
-                <img class="image-desktop" src="{{$service->banner}}" style="width: 100%;" alt="">
-                <img class="image-mobile" src="{{$service->banner}}" style="width: 100%;" alt="">
+                <img class="image-desktop" src="{{$service->banner}}" style="width: 100%;" alt="{{$service->title}}">
+                <img class="image-mobile" src="{{$service->banner}}" style="width: 100%;" alt="{{$service->title}}">
             </div>
             <div class="box-title-school">
                 <div class="logo-title">
                     <div class="logo">
-                        <img class="logo-service" src="{{$service->logo}}" alt="">
-                        <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="">
+                        <img class="logo-service" src="{{$service->logo}}" alt="{{$service->title}}">
+                        <img src="{{asset('assets/images/icons/akar-icons_check.svg')}}" class="standard-school" alt="icon-check">
                     </div>
                     <div class="title-address">
                         <h4 class="title">
                             {{$service->title}}
                         </h4>
                         <div class="address-school">
-                            <img src="images/icons/location.svg" alt="">
+                            <img src="images/icons/location.svg" alt="icon-location">
                             <p>{{$service->address}}</p>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                <div class="col-lg-8">
                   <div class="box-info">
                         <div class="detail-title">
-                            <img src="{{asset('assets/images/icons/frame_detail.svg')}}" alt=""><span>Thông tin chi tiết</span>
+                            <img src="{{asset('assets/images/icons/frame_detail.svg')}}" alt="icon"><span>Thông tin chi tiết</span>
                         </div>
                         <div class="content">
                             {!!$service->content!!}
@@ -56,7 +56,7 @@
                                 <div class="item-rate-detail">
                                     <div class="rating">
                                         @for ($star = 0; $star <= $service->rate; $star++)
-                                            <span><img src="{{asset('assets/images/icons/Star.svg')}}" alt=""></span>
+                                            <span><img src="{{asset('assets/images/icons/Star.svg')}}" alt="icon-star"></span>
                                         @endfor
                                         <p class="number_rate">{{number_format($service->total_rate)}} đánh giá</p>
                                     </div>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="item-contact">
                                 <button class="btn btn-contact-school">Liên hệ</button>
-                                <a target="_blank" href="https://zalo.me/{{$service->zalo}}" class="zalo"><img src="{{asset('assets/images/icons/MXH_zalo.svg')}}" alt=""></a>
+                                <a target="_blank" href="https://zalo.me/{{$service->zalo}}" class="zalo"><img src="{{asset('assets/images/icons/MXH_zalo.svg')}}" alt="icon-zalo"></a>
                             </div>
                         </div>
                         <div class="box-form">
@@ -79,19 +79,19 @@
                             <form action="{{route('client.add_advise_request')}}" method="POST">
                                 @csrf
                                 <div class="group-input">
-                                    <img class="icon-input" src="{{asset('assets/images/icons/icon_user.svg')}}" alt="">
+                                    <img class="icon-input" src="{{asset('assets/images/icons/icon_user.svg')}}" alt="icon-user">
                                     <input type="text" class="form-control" name="full_name" placeholder="Họ và tên">
                                 </div>
                                 <div class="group-input">
-                                    <img class="icon-input" src="{{asset('assets/images/icons/address_icon.svg')}}" alt="">
+                                    <img class="icon-input" src="{{asset('assets/images/icons/address_icon.svg')}}" alt="icon-email">
                                     <input type="text" class="form-control" name="email" placeholder="Địa chỉ email">
                                 </div>
                                 <div class="group-input">
-                                    <img class="icon-input" src="{{asset('assets/images/icons/phone.svg')}}" alt="">
+                                    <img class="icon-input" src="{{asset('assets/images/icons/phone.svg')}}" alt="icon-phone">
                                     <input type="text" class="form-control" name="phone" placeholder="Số điện thoại">
                                 </div>
                                 <div class="group-input">
-                                    <img class="icon-input" src="{{asset('assets/images/icons/icon-location.svg')}}" alt="">
+                                    <img class="icon-input" src="{{asset('assets/images/icons/icon-location.svg')}}" alt="icon-location">
                                     <input type="text" class="form-control" name="address" placeholder="Địa chỉ">
                                 </div>
                                 <textarea id="" rows="4" name="description" class="form-control" placeholder="Yêu cầu thêm"></textarea>
@@ -115,7 +115,7 @@
                         <div class="item-service-relate">
                             <div class="image-relate">
                                 <a href="{{route('client.service.detail', ['category' => $item->category->slug, 'slug' => $item->slug, 'id' => $item->id])}}">
-                                    <img src="{{$item->thumbnail}}" alt="">
+                                    <img src="{{$item->thumbnail}}" alt="{{$item->title}}">
                                 </a>
                             </div>
                             <div class="panel-service">

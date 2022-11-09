@@ -55,20 +55,11 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                   <div class="promotion">
-                    <ul class="box-promotion">
-                        <li><a href="#">Deal Vạn năng - Mua 1 tặng 1</a></li>
-                        <li><a href="#">Địa Gia Dụng - Giảm 50%</a></li>
-                        <li><a href="#">Bắt Trend Giá Sốc</a></li>
-                        <li><a href="#">Triệu Deal 0 Đồng</a></li>
-                        <li><a href="#">Sale Shop Mới - Giảm 69%</a></li>
-                    </ul>
-                   </div>
+                    @include('clients::elements.list_deal')
                     <div class="banner">
                         <a target="_blank" href="{{$data['ads_home']->url}}" rel="nofollow">
                             <img src="{{ \App\Helpers\Helpers::renderThumb($data['ads_home']->thumbnail, 'slide') }}" alt="" class="image-banner">
                         </a>
-                        
                     </div>
                 </div>
             </div>
@@ -77,7 +68,7 @@
         <section class="box-product product-top">
             <div class="product-header">
                 <h2>Tìm kiếm nhiều</h2>
-                <a href="#">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
+                <a href="#">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt="icon-arrow"></a>
             </div>
             <div class="owl-carousel owl-theme owl-product">
                 @foreach($data['products'] as $row)
