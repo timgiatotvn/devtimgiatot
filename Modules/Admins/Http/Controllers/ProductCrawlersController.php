@@ -50,29 +50,33 @@ class ProductCrawlersController extends Controller
 
     public function indexCR()
     {
-        if (\request()->has('file_exels')) {
-            $updateFile = \request()->file('file_exels');
-            $fileExtension = $updateFile->getClientOriginalExtension();
-            if ($fileExtension == "xlsx") {
-                $excelData = Excel::toArray([], $updateFile);
+        try {
+            if (\request()->has('file_exels')) {
+                $updateFile = \request()->file('file_exels');
+                $fileExtension = $updateFile->getClientOriginalExtension();
+                if ($fileExtension == "xlsx") {
+                    $excelData = Excel::toArray([], $updateFile);
 
-                if (!empty($excelData[0])) {
-                    unset($excelData[0][0]);
-                    foreach ($excelData[0] as $row) {
-                        if (!empty($row[0])) {
-                            $data = [
-                                "title" => $row[0],
-                                "keyword_suggest" => $row[1],
-                                "category_id" => $row[2],
-                                "type" => "crawler"
-                            ];
-                            $this->productService->create($data);
+                    if (!empty($excelData[0])) {
+                        unset($excelData[0][0]);
+                        foreach ($excelData[0] as $row) {
+                            if (!empty($row[0])) {
+                                $data = [
+                                    "title" => $row[0],
+                                    "keyword_suggest" => $row[1],
+                                    "category_id" => $row[2],
+                                    "type" => "crawler"
+                                ];
+                                $this->productService->create($data);
+                            }
                         }
                     }
                 }
             }
+            return redirect(route('admin.productCrawler.index'));
+        } catch (\Exception $e) {
+            Helpers::pre($e->getMessage());
         }
-        return redirect(route('admin.productCrawler.index'));
     }
 
     /**
