@@ -10,7 +10,7 @@
                     @if(count($data['category_products']) > 0)
                         <div class="card sidebar-category">
                             <div class="card-header">
-                                <img src="./assets/images/icons/menu.svg" alt=""><span>Danh mục {{$data['category']->title}}</span>
+                                <img src="{{asset('assets/images/icons/menu.svg')}}" alt=""><span>Danh mục {{$data['category']->title}}</span>
                             </div>
                             <ul class="list-group list-group-flush list-category">
                                 @foreach ($data['category_products'] as $cate_item)
@@ -29,7 +29,9 @@
                                             </ul>
                                         </li>
                                     @else
-                                        <li class="list-group-item"><a href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a></li>
+                                    <a class="a-none" href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">
+                                        <li class="list-group-item">{{$cate_item->title}}</li>
+                                    </a>
                                     @endif                                
                                 @endforeach
                             </ul>
@@ -47,7 +49,7 @@
                                 </span>
                             </p>
                             <ul class="list-category-mobile list-group list-group-flush list-category">
-                                @foreach ($data['category_products'] as $cate_item)
+                                @foreach ($data['category_products_mobile'] as $cate_item)
                                     {{-- @if ($cate_item->category->count())
                                         <li class="list-group-item">
                                             <div class="item-category">
@@ -63,7 +65,9 @@
                                             </ul>
                                         </li>
                                     @else --}}
-                                        <li class="list-group-item"><a style="color: #23262F" class="a-none" href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a></li>
+                                    <a style="color: #23262F" class="a-none" href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">
+                                        <li class="list-group-item">{{$cate_item->title}}</li>
+                                    </a>
                                     {{-- @endif                                 --}}
                                 @endforeach
                             </ul>

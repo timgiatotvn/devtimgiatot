@@ -22,6 +22,9 @@
         .contentck p {
             margin-bottom: 16px !important;
         }
+        .content-page figure {
+            width: unset !important;
+        }
     </style>
 @endsection
 

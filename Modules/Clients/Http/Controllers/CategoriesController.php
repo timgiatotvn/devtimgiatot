@@ -77,12 +77,26 @@ class CategoriesController extends Controller
 
                 return view('clients::products.index', ['data' => $data]);
             } else {
+                // $cate_kien_thuc = Category::where('parent_id', 4)->get();
+                // dd($cate_kien_thuc);
                 $data['category_products'] = Category::where('parent_id', $data['category']->id)
-                                                 ->where('type', 'new')
-                                                 ->with(['category' => function ($query) {
-                                                    $query->with('category');
-                                                 }])
-                                                 ->get();
+                                                    ->where('type', 'new')
+                                                    ->with(['category' => function ($query) {
+                                                        $query->with('category');
+                                                    }])
+                                                    ->get();
+                $data['category_products_mobile'] = Category::where(function($query) use ($data) {
+                                                        if ($data['category']->parent_id == '') {
+                                                            $query->where('parent_id', $data['category']->id);
+                                                        } else {
+                                                            $query->where('parent_id', $data['category']->parent_id);
+                                                        }
+                                                    })
+                                                    ->where('type', 'new')
+                                                    ->with(['category' => function ($query) {
+                                                        $query->with('category');
+                                                    }])
+                                                    ->get();
                 if (empty($data['category']->title_seo)) $data['category']->title_seo = "Thông tin hữu ích về " . $data['category']->title . " - " . @ucfirst($_SERVER["HTTP_HOST"]);
                 if (empty($data['category']->meta_des)) {
                     $des = !empty($data['category']->description) ? $data['category']->description : "";

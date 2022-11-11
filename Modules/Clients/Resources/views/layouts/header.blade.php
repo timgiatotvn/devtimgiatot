@@ -71,7 +71,7 @@
                                     @if ($cate_items->category->count() > 0)
                                         <li>
                                             <div class="sub-nav-item">
-                                                <a href="{{route('client.category.index', ['slug' => $cate_items->slug])}}">{{$cate_items->title}}</a>
+                                                {{$cate_items->title}}</a>
                                                 <div class="sub-sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
                                             </div>
                                             <ul class="sub-sub-nav-item">
@@ -109,9 +109,11 @@
                             </div>
                             <ul class="sub-menu-primary">
                                 @foreach ($data_share['cate_kien_thuc'] as $categoryItem)
-                                    <li>
-                                        <a href="{{route('client.category.index', ['slug' => $categoryItem->slug])}}">{{$categoryItem->title}}</a>
-                                    </li>
+                                    <a href="{{route('client.category.index', ['slug' => $categoryItem->slug])}}">
+                                        <li>
+                                            {{$categoryItem->title}}
+                                        </li>
+                                    </a>
                                 @endforeach
                             </ul>
                         </li>
