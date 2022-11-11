@@ -75,7 +75,7 @@
                     @if($row->type == "crawler")
                         <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" class="card item-product">
                             <div class="box-image">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumnail), 'list_product') }}"
+                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
                                 title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
                             </div>
                             <div class="card-body">
