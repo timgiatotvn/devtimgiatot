@@ -184,6 +184,8 @@ Route::prefix('admin')->group(function () {
         Route::prefix('product-crawlers')->middleware('check-is-admin')->group(function () {
             Route::get('/', 'ProductCrawlersController@index')->name('admin.productCrawler.index');
             Route::post('/', 'ProductCrawlersController@actionIndex');
+            Route::get('/cr', 'ProductCrawlersController@indexCR')->name('admin.productCrawler.cr');
+            Route::post('/cr', 'ProductCrawlersController@indexCR');
             Route::get('/create', 'ProductCrawlersController@create')->name('admin.productCrawler.create');
             Route::post('/create', 'ProductCrawlersController@store');
             Route::get('/edit/{id}', 'ProductCrawlersController@edit')->name('admin.productCrawler.edit');

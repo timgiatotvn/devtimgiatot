@@ -10,6 +10,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\MessageBag;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Admins\Http\Requests\ProductCrawler\CreateRequest;
 use Modules\Admins\Http\Requests\ProductCrawler\EditRequest;
 
@@ -47,6 +48,33 @@ class ProductCrawlersController extends Controller
         }
     }
 
+    public function indexCR()
+    {
+        if (\request()->has('file_exels')) {
+            $updateFile = \request()->file('file_exels');
+            $fileExtension = $updateFile->getClientOriginalExtension();
+            if ($fileExtension == "xlsx") {
+                $excelData = Excel::toArray([], $updateFile);
+
+                if (!empty($excelData[0])) {
+                    unset($excelData[0][0]);
+                    foreach ($excelData[0] as $row) {
+                        if (!empty($row[0])) {
+                            $data = [
+                                "title" => $row[0],
+                                "keyword_suggest" => $row[1],
+                                "category_id" => $row[2],
+                                "type" => "crawler"
+                            ];
+                            $this->productService->create($data);
+                        }
+                    }
+                }
+            }
+        }
+        return redirect(route('admin.productCrawler.index'));
+    }
+
     /**
      * Category add
      * @method GET
@@ -70,6 +98,7 @@ class ProductCrawlersController extends Controller
     {
         try {
             $_params = $request->all();
+            $_params["type"] = "crawler";
             if ($this->productService->create($_params)) {
                 return redirect(route('admin.productCrawler.index'));
             } else {

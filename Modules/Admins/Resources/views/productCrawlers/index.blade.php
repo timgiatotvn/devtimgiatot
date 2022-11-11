@@ -6,7 +6,7 @@
                 <div class="d-flex flex-column flex-md-row align-items-center">
                     <h4 class="mb-md-0 mb-4 mr-4">{{ !empty($data['common']['title']) ? $data['common']['title'] : '' }}</h4>
                     <div class="wrapper d-flex align-items-center">
-                        <form class="form-inline">
+                        <form class="form-inline mr-3">
                             <input type="text" name="keyword"
                                    value="{{ request()->has('keyword') ? request()->get('keyword') : '' }}"
                                    class="form-control mb-0 mr-sm-2"
@@ -18,6 +18,14 @@
                             </div>
                             <button type="submit"
                                     class="btn btn-primary mb-0">@lang('admins::layer.search.button.title')</button>
+                        </form>
+                        <form action="{{ route("admin.productCrawler.cr") }}" class="form-inline" method="post" enctype="multipart/form-data">
+                            @csrf()
+                            <div class="input-group mb-0 mr-sm-2" width="220px">
+                                <input type="file" name="file_exels" />
+                            </div>
+                            <button type="submit"
+                                    class="btn btn-primary mb-0">Upload file</button>
                         </form>
                     </div>
                     <div class="wrapper ml-md-auto d-flex flex-column flex-md-row kanban-toolbar ml-n2 ml-md-0 mt-4 mt-md-0">
