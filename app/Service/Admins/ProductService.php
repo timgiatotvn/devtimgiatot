@@ -111,7 +111,7 @@ class ProductService
             'data' => count($result) > 0 ? "|" . implode("|", $result) . "|" : "",
             'website_map' => json_encode($get_product_min['website_map']),
             'price_min' => $get_product_min['price'],
-            'thumbnail' => $get_product_min['website_map'][0]['article']['thumbnail']
+            'thumbnail' => !empty($get_product_min['website_map'][0]['article']['thumbnail']) ? $get_product_min['website_map'][0]['article']['thumbnail'] : ''
         ];
     }
 
