@@ -200,6 +200,12 @@
                     <i class="icon-bell menu-icon"></i>
                 </a>
             </li>
+            <li class="nav-item {{ Request::routeIs('admin.seller.*')? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.seller.product.list') }}">
+                    <span class="menu-title">Sản phẩm người bán</span>
+                    <i class="icon-bell menu-icon"></i>
+                </a>
+            </li>
             <li class="nav-item {{ Request::routeIs('admin.request.*')? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('admin.request.index') }}">
                     <span class="menu-title">Yêu cầu tư vấn</span>

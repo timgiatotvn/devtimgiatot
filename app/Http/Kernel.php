@@ -73,7 +73,9 @@ class Kernel extends HttpKernel
         'ckfinderAuth' => \Modules\Admins\Http\Middleware\CustomCKFinderAuth::class,
         'authenticationMobileApp' => AuthenticateMobileApp::class,
         'check-auth' => \App\Http\Middleware\CheckAuthMiddleware::class,
-        'check-auth-admin' => \App\Http\Middleware\CheckAuthAdminMiddleware::class
+        'check-auth-admin' => \App\Http\Middleware\CheckAuthAdminMiddleware::class,
+        'check-login-seller' => \App\Http\Middleware\CheckLoginMiddleware::class,
+        'check-owner-product' => \App\Http\Middleware\CheckOwnerProductMiddleware::class
     ];
 
     /**

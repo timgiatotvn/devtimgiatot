@@ -41,10 +41,11 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Username</th>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>SĐT</th>
+                                        <th>Khách hàng</th>
+                                        <th>Tên shop</th>
+                                        <th>SL sản phẩm</th>
+                                        <th>SL đơn</th>
+                                        <th>Duyệt bán hàng</th>
                                         <th>Giới hạn push</th>
                                         <th>Tổng Push Notification</th>
                                     </tr>
@@ -53,10 +54,34 @@
                                     @foreach ($customers as $key => $item)
                                         <tr>
                                             <td>{{$key + 1}}</td>
-                                            <td>{{$item->username}}</td>
-                                            <td>{{$item->name}}</td>
-                                            <td>{{$item->email}}</td>
-                                            <td>{{$item->phone}}</td>
+                                            <td>
+                                                <p>
+                                                    {{$item->username}}
+                                                </p>
+                                                <p>{{$item->name}}</p>
+                                                <p>{{$item->email}}</p>
+                                                <p>{{$item->phone}}</p>
+                                            </td>
+                                            <td>
+                                                {{$item->shop_name}}
+                                            </td>
+                                            <td align="center">
+                                                {{number_format($item->products_count)}}
+                                            </td>
+                                            <td align="center">
+                                                {{number_format($item->cart_items_count)}}
+                                            </td>
+                                            <td>
+                                                @if ($item->status_sale)
+                                                    <a onclick="return confirm('Bạn có chắc chắn?')" href="{{route('admin.accept-seller', ['id' => $item->id, 'status' => 0])}}" class="btn btn-danger" href="">
+                                                        Từ chối bán
+                                                    </a>
+                                                @else
+                                                    <a onclick="return confirm('Bạn có chắc chắn?')" href="{{route('admin.accept-seller', ['id' => $item->id, 'status' => 1])}}" class="btn btn-success" href="">
+                                                        Duyệt bán
+                                                    </a>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <form method="POST" action="{{route('admin.customer.update-push-number', ['id' => $item->id])}}">
                                                     @csrf

@@ -4,6 +4,7 @@ namespace Modules\Clients\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Model\CartItem;
+use App\Model\User;
 use App\Model\PaymentSetting;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCartService;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\MessageBag;
 use Modules\Clients\Http\Requests\Cart\CreateRequest;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -98,7 +100,23 @@ class CartController extends Controller
         try {
             $inputs = $request->all();
             $inputs['code'] = 'TGT' . substr(rand(), 0, 5) . 'TGT';
-            if($this->clientCartService->store($inputs)){
+            if($this->clientCartService->store($inputs)) {
+                $cartItems = CartItem::where('cart_code', $inputs['code'])
+                                    ->whereNotNull('shop_id')
+                                    ->with('cart')
+                                    ->get()
+                                    ->groupBy('shop_id');
+                foreach ($cartItems as $shop_id => $item) {
+                    $user = User::find($shop_id);
+
+                    if (!empty($user)) {
+                        Mail::send('clients::mails.mail_to_shop_after_order', ['datas' => $item], function($message) use ($user) {
+                            $message->to($user->email)
+                                    ->subject('Thông báo khách đặt hàng');
+                        });
+                    }
+                }
+                
                 session()->flash('success', __('clients::layer.user.payment.success'));
 
                 return redirect()->route('client.cart.payment', ['code' => $inputs['code']]);
@@ -108,6 +126,7 @@ class CartController extends Controller
                 return back()->withInput($request->all())->withErrors($errors);
             }
         } catch (\Exception $e) {
+            dd($e->getMessage());
             $errors = new MessageBag(['accountNotFound' => $e->getMessage()]);
             return back()->withInput([])->withErrors($errors);
         }

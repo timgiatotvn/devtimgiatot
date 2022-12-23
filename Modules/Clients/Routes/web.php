@@ -36,6 +36,22 @@ Route::get('/ma-xac-thuc', function () {
     }
 });
 
+Route::group(['prefix' => 'nguoi-ban', 'middleware' => 'check-login-seller', 'as' => 'seller.'], function () {
+    Route::get('/', 'SellerController@index')->name('index');
+    Route::post('/update-name-shop', 'SellerController@updateNameShop')->name('update-name-shop');
+    Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+        Route::get('/list', 'SellerController@listProduct')->name('list');
+        Route::get('/add', 'SellerController@formAddProduct')->name('form-add-product');
+        Route::get('/{id}/edit', 'SellerController@formEditProduct')->name('form-edit-product');
+        Route::post('/store-product', 'SellerController@storeProduct')->name('store-product');
+        Route::post('{id}/update-product', 'SellerController@updateProduct')->name('update-product')->middleware('check-owner-product');
+        Route::get('/{id}/delete', 'SellerController@deleteProduct')->name('delete-product')->middleware('check-owner-product');
+    });
+    Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
+        Route::get('/list', 'SellerController@listOrder')->name('list');
+    });
+});
+
 Route::prefix('')->group(function() {
     //user
     Route::prefix('users')->group(function () {

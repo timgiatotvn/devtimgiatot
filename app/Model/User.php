@@ -17,7 +17,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'push_number', 'username', 'phone', 'status', 'type'
+        'name',
+        'email',
+        'password',
+        'push_number',
+        'username',
+        'phone',
+        'status',
+        'type',
+        'shop_name', 
+        'status_sale' // 0 = chưa dk bán, 1 = đã dk bán hàng
     ];
 
     /**
@@ -41,5 +50,15 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->hasMany(Notification::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'shop_id', 'id');
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class, 'shop_id', 'id');
     }
 }

@@ -208,6 +208,12 @@ Route::prefix('admin')->group(function () {
         Route::prefix('customers')->middleware('check-is-admin')->group(function () {
             Route::get('/list', 'CustomerController@index')->name('admin.customer.index');
             Route::post('/{id}/update-push-number', 'CustomerController@updatePushNumber')->name('admin.customer.update-push-number');
+            Route::get('/accept-seller', 'CustomerController@acceptSeller')->name('admin.accept-seller');
+        });
+
+        Route::group(['prefix' => 'seller'], function () {
+            Route::get('/product', 'SellerController@listProduct')->name('admin.seller.product.list');
+            Route::get('/change-status', 'SellerController@changeStatusProduct')->name('admin.seller.product.change-status');
         });
         //Crawler
         Route::prefix('crawlers')->middleware('check-is-admin')->group(function () {

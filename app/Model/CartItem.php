@@ -13,12 +13,18 @@ class CartItem extends Model
         'sum_price',
         'price',
         'sl',
-        'product_id'
+        'product_id',
+        'shop_id'
     ];
 
     public function productDetail()
     {
         return $this->hasOne(Product::class, 'id','product_id');
+    }
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
     }
 
 }

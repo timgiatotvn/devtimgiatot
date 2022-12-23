@@ -11,6 +11,8 @@ class Product extends Model
 
     use Notifiable;
     protected $fillable = [
+        'shop_id',
+        'images',
         'title',
         'slug',
         'category_id',
@@ -23,6 +25,8 @@ class Product extends Model
         'view',
         'status',
         'type',
+        'price',
+        'price_root',
         'choose_1',
         'choose_2',
         'choose_3',
@@ -37,5 +41,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'shop_id', 'id');
     }
 }

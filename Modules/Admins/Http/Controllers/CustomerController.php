@@ -21,11 +21,18 @@ class CustomerController extends Controller
         }
         // dd($customers->with('->get());
         $data = [
-            'customers' => $customers->paginate(20),
+            'customers' => $customers->withCount(['products', 'cartItems'])->paginate(20),
             'inputs' => $request->all()
         ];
 
         return view('admins::customers.index', $data);
+    }
+
+    public function acceptSeller(Request $request)
+    {
+        User::whereId($request->id)->update(['status_sale' => $request->status]);
+
+        return back()->with('success', 'Cập nhật thành công');
     }
 
     public function updatePushNumber(Request $request, $userId)

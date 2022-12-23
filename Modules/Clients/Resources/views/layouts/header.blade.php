@@ -39,7 +39,11 @@
                             <a class="icon" href=""><img src="{{asset('assets/images/icons/youtube.png')}}" alt=""></a>
                             <a class="icon" href=""><img src="{{asset('assets/images/icons/zalo.svg')}}" alt=""></a>
                         </li>
-                        <li><a href="{{ route('client.user.login') }}" class="auth">Đăng nhập</a><a href="{{ route('client.user.register') }}" class="auth">Đăng ký</a></li>
+                        <li>
+                            <a href="{{ route('seller.index') }}" class="auth">Người bán</a>
+                            <a href="{{ route('client.user.login') }}" class="auth">Đăng nhập</a>
+                            <a href="{{ route('client.user.register') }}" class="auth">Đăng ký</a>
+                        </li>
                     </ul>
                 </div>
             </div>

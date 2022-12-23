@@ -6,6 +6,7 @@ use App\Helpers\Helpers;
 use App\Repository\Clients\Cart\ClientCartRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Model\Product;
 
 class ClientCartService
 {
@@ -88,9 +89,11 @@ class ClientCartService
                         $row = $row['detail'];
                         $price = $row->price * $sl;
                         $sum_money += $price;
+                        $product = Product::whereId($row->id)->first();
                         $data_item[] = [
                             'cart_code' => $_data['code'],
                             'cart_id' => $cart->id,
+                            'shop_id' => !empty($product) ? $product->shop_id : NULL,
                             'product_id' => $row->id,
                             'sl' => $sl,
                             'price' => $row->price,
@@ -109,7 +112,6 @@ class ClientCartService
             DB::rollBack();
             return false;
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
             return false;
         }
