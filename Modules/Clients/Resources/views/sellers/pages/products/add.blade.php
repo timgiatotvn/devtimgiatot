@@ -32,7 +32,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('seller.product.store-product')}}">
+                        <form method="POST" action="{{route('seller.product.store-product')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 @if(session('success'))
@@ -94,8 +94,16 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh thumbnail</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh thumbnail</label><br>
+                                        <p>
+                                            <input type="file" name="thumbnail">
+                                        </p>
+                                        @error('thumbnail')
+                                            <p class="text text-danger">
+                                                {{$message}}
+                                            </p>
+                                        @enderror
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -110,13 +118,21 @@
                                             <p class="text text-danger">
                                                 {{$message}}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh chi tiêt 1</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh chi tiêt 1</label><br>
+                                        <p>
+                                            <input type="file" name="images[]">
+                                        </p>
+                                        @error('images.0')
+                                            <p class="text text-danger">
+                                                {{$message}}
+                                            </p>
+                                        @enderror
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail1" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -131,13 +147,21 @@
                                             <p class="text text-danger">
                                                 {{$message}}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh chi tiêt 2</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh chi tiêt 2</label><br>
+                                        <p>
+                                            <input type="file" name="images[]">
+                                        </p>
+                                        @error('images.1')
+                                            <p class="text text-danger">
+                                                {{$message}}
+                                            </p>
+                                        @enderror
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail2" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -152,13 +176,16 @@
                                             <p class="text text-danger">
                                                 {{$message}}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh chi tiêt 3</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh chi tiêt 3</label> <br>
+                                        <p>
+                                            <input type="file" name="images[]">
+                                        </p>
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail3" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -168,7 +195,7 @@
                                             <input id="thumbnail3" class="form-control" type="text" name="images[]"
                                                     readonly>
                                         </div>
-                                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                                        <img id="holder" style="margin-top:15px;max-height:100px;"> --}}
                                         @error('images.2')
                                             <p class="text text-danger">
                                                 {{$message}}

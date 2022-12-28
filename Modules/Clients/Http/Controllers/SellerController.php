@@ -108,20 +108,40 @@ class SellerController extends Controller
             'price' => 'required',
             'description' => 'required|min:20',
             'content' => 'required|min:100',
-            'thumbnail' => 'required',
-            'images' => 'required|array',
-            'images.*' => 'required'
+            'thumbnail' => 'nullable|mimes:jpg,png',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|mimes:jpg,png'
         ]);
         if ($validator->fails()) {
             return redirect()->back()
             ->withErrors($validator)
             ->withInput();
         }
-        $inputs = $request->except('_token', 'images');
-        $inputs['images'] = json_encode($request->images);
-        Product::whereId($id)->update($inputs);
+        $product = Product::find($id);
+        $inputs = $request->except('_token', 'images', 'thumbnail');
+        
+        if (!empty($request->thumbnail)) {
+            $thumbnail = $request->thumbnail;
+            \Storage::disk('s3')->put('photos/' . $thumbnail->getClientOriginalName(), file_get_contents($thumbnail));
+            $s3 = \Storage::disk('s3')->getAdapter()->getClient();
+            $inputs['thumbnail'] = $s3->getObjectUrl(env('AWS_BUCKET'), 'photos/' . $thumbnail->getClientOriginalName());
+        } else {
+            $inputs['thumbnail'] = $product->thumbnail;
+        }
+        if (!empty($request->images) && count($request->images) > 0) {
+            $links = [];
+            foreach ($request->images as $imageItem) {
+                \Storage::disk('s3')->put('photos/' . $imageItem->getClientOriginalName(), file_get_contents($imageItem));
+                $s3 = \Storage::disk('s3')->getAdapter()->getClient();
+                $links[] = $s3->getObjectUrl(env('AWS_BUCKET'), 'photos/' . $imageItem->getClientOriginalName());
+            }
+            $inputs['images'] = json_encode($links);
+        } else {
+            $inputs['images'] = $product->images;
+        }
+        $product->update($inputs);
 
-        return back()->with('success', 'Thêm thành công');
+        return back()->with('success', 'Sửa thành công');
     }
 
     public function storeProduct(Request $request)
@@ -133,9 +153,9 @@ class SellerController extends Controller
             'price' => 'required',
             'description' => 'required|min:20',
             'content' => 'required|min:100',
-            'thumbnail' => 'required',
-            'images' => 'required|array',
-            'images.*' => 'required'
+            'thumbnail' => 'required|mimes:png,jpg',
+            'images' => 'nullable|array',
+            'images.*' => 'nullable|mimes:png,jpg,PNG'
         ]);
         if ($validator->fails()) {
            // dd($validator);
@@ -143,12 +163,27 @@ class SellerController extends Controller
             ->withErrors($validator)
             ->withInput();
         }
-        $inputs = $request->except('_token', 'images');
+        $inputs = $request->except('_token', 'images', 'thumbnail');
         $inputs['slug'] = str_slug($inputs['title']);
         $inputs['type'] = 'product';
         $inputs['status'] = 0;
         $inputs['shop_id'] = auth('users')->user()->id;
-        $inputs['images'] = json_encode($request->images);
+        $thumbnail = $request->thumbnail;
+        \Storage::disk('s3')->put('photos/' . $thumbnail->getClientOriginalName(), file_get_contents($thumbnail));
+        $s3 = \Storage::disk('s3')->getAdapter()->getClient();
+        $inputs['thumbnail'] = $s3->getObjectUrl(env('AWS_BUCKET'), 'photos/' . $thumbnail->getClientOriginalName());
+
+        if (!empty($request->images) && count($request->images) > 0) {
+            $links = [];
+            foreach ($request->images as $imageItem) {
+                \Storage::disk('s3')->put('photos/' . $imageItem->getClientOriginalName(), file_get_contents($imageItem));
+                $s3 = \Storage::disk('s3')->getAdapter()->getClient();
+                $links[] = $s3->getObjectUrl(env('AWS_BUCKET'), 'photos/' . $imageItem->getClientOriginalName());
+            }
+            $inputs['images'] = json_encode($links);
+        } else {
+            $inputs['images'] = json_encode([]);
+        }        
         Product::create($inputs);
 
         return back()->with('success', 'Thêm thành công');

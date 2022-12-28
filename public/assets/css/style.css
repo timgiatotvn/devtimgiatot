@@ -1862,7 +1862,7 @@ p {
 }
 .wrapper .footer .column-footer h2 {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 16px !important;
   line-height: 24px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -1870,7 +1870,7 @@ p {
 }
 .wrapper .footer .column-footer .item-info {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 14px !important;
   line-height: 20px;
   letter-spacing: 0.25px;
   color: #23262F;

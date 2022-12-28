@@ -4,10 +4,10 @@
             <div class="col-lg-6">
                 <div class="column-footer">
                     <h2>CÔNG TY CP CÔNG NGHỆ VÀ TRUYỀN THÔNG WEB89 VIỆT NAM</h2>
-                    <p class="item-info"><img src="./assets/images/icons/location.svg" alt=""><span>Tầng 12, Tòa nhà Licogi 13, Số 164 Khuất Duy Tiến, P. Nhân Chính, Q. Thanh Xuân, Hà Nội.</span></p>
-                    <p class="item-info"><img src="./assets/images/icons/fax.svg" alt=""><span>0108806638 cấp ngày 05/07/2019 do Sở KHĐT Hà Nội cấp.</span></p>
-                    <p class="item-info"><img src="./assets/images/icons/telephone.svg" alt=""><span>Điện thoại: 0246.29.27.089 / Hotline: 0981.185.620</span></p>
-                    <p class="item-info"><img src="./assets/images/icons/mdi_web.svg" alt=""><span>Website: https://timgiatot.vn - Email: info@timgiatot.vn</span></p>
+                    <p class="item-info"><img src="{{asset('assets/images/icons/location_footer.svg')}}" alt=""><span>Tầng 12, Tòa nhà Licogi 13, Số 164 Khuất Duy Tiến, P. Nhân Chính, Q. Thanh Xuân, Hà Nội.</span></p>
+                    <p class="item-info"><img src="{{asset('assets/images/icons/fax.svg')}}" alt=""><span>0108806638 cấp ngày 05/07/2019 do Sở KHĐT Hà Nội cấp.</span></p>
+                    <p class="item-info"><img src="{{asset('assets/images/icons/telephone.svg')}}" alt=""><span>Điện thoại: 0246.29.27.089 / Hotline: 0981.185.620</span></p>
+                    <p class="item-info"><img src="{{asset('assets/images/icons/mdi_web.svg')}}" alt=""><span>Website: https://timgiatot.vn - Email: info@timgiatot.vn</span></p>
                     <div class="note"><span>Lưu ý:</span> Timgiatot.vn là ứng dụng so sánh giá online, cung cấp thông tin giá cả từ nhiều nguồn, nhà cung cấp, nhà bán hàng khác nhau để đưa ra giá tốt nhất. Quý khách tham khảo sản phẩm và liên hệ trực tiếp với nhà cung cấp để có thể có giá tốt hơn. Bằng khả năng sẵn có cùng sự nỗ lực không ngừng, chúng tôi đã tổng hợp hơn 50 triệu sản phẩm, giúp bạn có thể so sánh giá, tìm giá rẻ nhất trước khi mua. Chúng tôi không bán hàng.</div>
                     <div><img src="" alt=""></div>
                 </div>

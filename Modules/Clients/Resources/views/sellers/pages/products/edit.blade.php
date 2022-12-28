@@ -32,7 +32,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{route('seller.product.update-product', ['id' => $product->id])}}">
+                        <form method="POST" action="{{route('seller.product.update-product', ['id' => $product->id])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 @if(session('success'))
@@ -94,8 +94,13 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh thumbnail</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh thumbnail</label><br>
+                                        <p>
+                                            <input type="file" name="thumbnail">
+                                            <img src="{{$product->thumbnail}}" alt="" width="50px">
+                                        </p>
+                                        
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -105,7 +110,7 @@
                                             <input id="thumbnail" value="{{!empty(old('thumbnail')) ? old('thumbnail') : $product->thumbnail}}" class="form-control" type="text" name="thumbnail"
                                                     readonly>
                                         </div>
-                                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                                        <img id="holder" style="margin-top:15px;max-height:100px;"> --}}
                                         @error('thumbnail')
                                             <p class="text text-danger">
                                                 {{$message}}
@@ -118,8 +123,15 @@
                                 @endphp
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh chi tiêt 1</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh chi tiêt 1</label><br>
+                                        <p>
+                                            <input type="file" name="images[]">
+                                            @if(!empty($images[0]))
+                                                <img src="{{$images[0]}}" alt="" width="50px">
+                                            @endif
+                                        </p>
+                                        
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail1" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -129,7 +141,7 @@
                                             <input id="thumbnail1" value="{{!empty(old('images.0')) ? old('images.0') : $images[0]}}" class="form-control" type="text" name="images[]"
                                                     readonly>
                                         </div>
-                                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                                        <img id="holder" style="margin-top:15px;max-height:100px;"> --}}
                                         @error('images.0')
                                             <p class="text text-danger">
                                                 {{$message}}
@@ -139,8 +151,15 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh chi tiêt 2</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh chi tiêt 2</label><br>
+                                        <p>
+                                            <input type="file" name="images[]">
+                                            @if(!empty($images[1]))
+                                                <img src="{{$images[1]}}" alt="" width="50px">
+                                            @endif
+                                        </p>
+                                        
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail2" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -150,7 +169,7 @@
                                             <input id="thumbnail2" value="{{!empty(old('images.1')) ? old('images.1') : $images[1]}}" class="form-control" type="text" name="images[]"
                                                     readonly>
                                         </div>
-                                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                                        <img id="holder" style="margin-top:15px;max-height:100px;"> --}}
                                         @error('images.1')
                                             <p class="text text-danger">
                                                 {{$message}}
@@ -160,8 +179,15 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group" style="margin-bottom: 0px">
-                                        <label for="">Ảnh chi tiêt 3</label>
-                                        <div class="input-group">
+                                        <label for="">Ảnh chi tiêt 3</label><br>
+                                        <p>
+                                            <input type="file" name="images[]">
+                                            @if(!empty($images[2]))
+                                                <img src="{{$images[2]}}" alt="" width="50px">
+                                            @endif
+                                        </p>
+                                        
+                                        {{-- <div class="input-group">
                                             <span class="input-group-btn">
                                                 <a data-input="thumbnail3" data-preview="holder"
                                                     class="lfm btn btn-primary">
@@ -171,7 +197,7 @@
                                             <input id="thumbnail3" value="{{!empty(old('images.2')) ? old('images.2') : $images[2]}}" class="form-control" type="text" name="images[]"
                                                     readonly>
                                         </div>
-                                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                                        <img id="holder" style="margin-top:15px;max-height:100px;"> --}}
                                         @error('images.2')
                                             <p class="text text-danger">
                                                 {{$message}}
