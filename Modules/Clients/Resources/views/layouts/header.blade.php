@@ -8,12 +8,12 @@
                 </div>
                 <div class="content-app">
                     <h4>TIMGIATOT.VN</h4>
-                    <p class="mb-0">Ứng dụng tìm kiếm và So Sánh Giá</p>
+                    <p class="mb-0">Thiết kế website, quảng cáo online, SEO tổng thể</p>
                 </div>
             </div>
         </div>
         <div class="btn-download">
-            <a href="https://timgiatot.com.vn/" target="_blank" class="btn">Tải App</a>
+            <a href="https://web89.vn/" target="_blank" class="btn">Xem ngay</a>
         </div>
     </div>
     <div class="menu-layout" id="clickMenuLayout"></div>

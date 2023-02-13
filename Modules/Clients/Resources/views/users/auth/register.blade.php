@@ -79,14 +79,14 @@
                             <input type="password" name="password_confirmation" id="re-password" placeholder="Nhập lại mật khẩu">
                         </div>
                     </div>
-                    <div class="form-item">
+                    {{-- <div class="form-item">
                         <div class="icon">
                             <img src="{{asset('assets/images/icons/key.svg')}}" alt="">
                         </div>
                         <div class="input">
                             <input type="text" placeholder="Mã xác thực">
                         </div>
-                    </div>
+                    </div> --}}
                     <p class="t-right">
                         <a class="a-none text-primary" href="">Hướng dẫn lấy mã</a>
                     </p>
