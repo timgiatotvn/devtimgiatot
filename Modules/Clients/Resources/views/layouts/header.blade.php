@@ -1,5 +1,5 @@
 <header class="header">
-    <div class="download-app">
+    {{-- <div class="download-app">
         <div class="box-app">
             <button onclick="closeDiv('download-app')" class="close-download"><img src="{{asset('assets/images/icons/close-m.svg')}}" alt=""></button>
             <div class="info-app">
@@ -15,7 +15,7 @@
         <div class="btn-download">
             <a href="https://web89.vn/" target="_blank" class="btn">Xem ngay</a>
         </div>
-    </div>
+    </div> --}}
     <div class="menu-layout" id="clickMenuLayout"></div>
     <section class="header-top">
         <div class="container">

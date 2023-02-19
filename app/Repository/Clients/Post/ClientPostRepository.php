@@ -41,7 +41,10 @@ class ClientPostRepository implements ClientPostRepositoryInterface
 //            ->leftJoin('categories', 'products.category_id', 'categories.id')
             ->whereIn('category_id', $_data['category_id'])
             //->where('choose_1', 1)
-            ->where('type', $_data['type'])
+            ->where(function ($query) use ($_data){
+                $query->whereNull('type')
+                      ->orWhere('type', $_data['type']);
+            })
             ->where('status', 1)
             ->orderBy('created_at', 'DESC')
             ->paginate($_data['limit']);
@@ -50,11 +53,14 @@ class ClientPostRepository implements ClientPostRepositoryInterface
     public function getListByCate($_data)
     {
         return DB::table(self::TABLE_NAME)
-            ->whereIn('category_id', $_data['cate_multi'])
-            ->where('type', $_data['type'])
-            ->where('status', 1)
-            ->orderBy('created_at', 'DESC')
-            ->paginate($_data['limit']);
+                ->whereIn('category_id', $_data['cate_multi'])
+                ->where(function ($query) use ($_data){
+                    $query->whereNull('type')
+                          ->orWhere('type', $_data['type']);
+                })
+                ->where('status', 1)
+                ->orderBy('created_at', 'DESC')
+                ->paginate($_data['limit']);
     }
 
     public function getListRelated($_data)
@@ -63,7 +69,10 @@ class ClientPostRepository implements ClientPostRepositoryInterface
             ->where('category_id', $_data['category_id'])
             ->where('id', '!=', $_data['id'])
             ->where('status', 1)
-            ->where('type', $_data['type'])
+            ->where(function ($query) use ($_data){
+                $query->whereNull('type')
+                      ->orWhere('type', $_data['type']);
+            })
             ->orderBy('sort', 'DESC')
             ->paginate($_data['limit']);
     }
