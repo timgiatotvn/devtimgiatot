@@ -25,6 +25,17 @@ Route::prefix('admin')->group(function () {
 //    });
 
     Route::group(['middleware' => 'admin'], function () {
+        Route::get("/danh-muc-wordpress", 'CategoryWordpressController@index')->name("category_wp.index");
+        Route::get("/danh-muc-wordpress/create", 'CategoryWordpressController@create')->name("category_wp.create");
+        Route::post("/danh-muc-wordpress/store", 'CategoryWordpressController@store')->name("category_wp.store");
+        Route::get("/danh-muc-wordpress/{id}/edit", 'CategoryWordpressController@edit')->name("category_wp.edit");
+        Route::get("/danh-muc-wordpress/{id}/delete", 'CategoryWordpressController@delete')->name("category_wp.delete");
+        Route::post("/danh-muc-wordpress/{id}/update", 'CategoryWordpressController@update')->name("category_wp.update");
+        Route::get('/widget', 'WidgetController@index')->name("widget.index");
+        Route::get('/widget/{name}/widget', 'WidgetController@edit')->name("widget.edit");
+        Route::post('/widget/{name}/store', 'WidgetController@store')->name("widget.store");
+        Route::post("/widget/{name}/update", "WidgetController@update")->name("widget.update");
+        Route::get("/widget/{name}/{id}/delete", "WidgetController@delete")->name("widget.delete");
         Route::get('/sign-out', 'Auth\LoginController@index')->name('admin.logout');
         Route::get('/', 'AdminsController@index')->name('admin.index');
 

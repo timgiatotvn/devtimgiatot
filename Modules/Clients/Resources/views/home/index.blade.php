@@ -10,14 +10,8 @@
                         <div class="card-header">
                             <img src="./assets/images/icons/menu.svg" alt=""><span>Danh mục sản phẩm</span>
                         </div>
-                        <ul class="list-group list-group-flush list-category">
-                            {{-- <li class="list-group-item">
-                                <div class="item-category"><a href="">list danh mục sản phẩm</a><div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div></div>
-                                <ul class="sub-menu">
-                                    <li><a href="#" class="sub-item">Sub Item 01</a></li>
-                                    <li><a href="#" class="sub-item">Sub Item 02</a></li>
-                                </ul>
-                            </li> --}}
+                        {!! showCategories($data['categories']) !!}
+                        {{-- <ul class="list-group list-group-flush list-category">
                             @foreach ($data['category_products'] as $cate_item)
                                 @if ($cate_item->category->count() > 0)
                                     <li class="list-group-item">
@@ -51,7 +45,7 @@
                                     <li class="list-group-item"><a href="{{route('client.category.index', ['slug' => $cate_item->slug])}}">{{$cate_item->title}}</a></li>
                                 @endif                                
                             @endforeach
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -64,303 +58,112 @@
                 </div>
             </div>
         </section>
+        {{-- {!! showCategories($data['categories']) !!} --}}
         @include('clients::elements.list_ecommerce')
-        <section class="box-product product-top">
+        <section class="box-product">
             <div class="product-header">
-                <h2>Tìm kiếm nhiều</h2>
-                <a href="#">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt="icon-arrow"></a>
+                <h2>
+                    Tìm kiếm nhiều
+                </h2>
+                <a href="https://timgiatot.vn/blog/">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
             </div>
-            <div class="owl-carousel owl-theme owl-product">
-                @foreach($data['products'] as $row)
-                    @if($row->type == "crawler")
-                        <a href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" class="card item-product">
-                            <div class="box-image">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
-                                title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                            </div>
-                            <div class="card-body">
-                                <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                <h3 class="card-title product-title" title="{{ $row->title }}">
-                                    {{ $row->title }}
-                                </h3>
-                                <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
-                            </div>
-                        </a>
-                    @else
-                        <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}" class="card item-product">
-                            <div class="box-image">
-                                <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
-                                title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                            </div>
-                            <div class="card-body">
-                                <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                <h3 class="card-title product-title" title="{{ $row->title }}">
-                                    {{ $row->title }}
-                                </h3>
-                                <p class="card-text note"></p>
-                            </div>
-                        </a>
-                    @endif
-                @endforeach
-            </div>
-        </section>
-        @foreach($data['cate'] as $cate)
-            <section class="box-product">
-                <div class="product-header">
-                    <h2>{{$cate['name']}}</h2>
-                    <a href="{{ route('client.category.index', ['slug' => $cate['slug']])}}">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
-                </div>
+            @if (!empty($data["widget"]["image_most_search"]) && $data["widget"]["image_most_search"]->content != "")
                 <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="box-image-ads">
-                            <img src="{{asset('assets/images/products/image_ads.jpg')}}" alt="">
+                    @foreach (json_decode($data["widget"]["image_most_search"]->content, true) as $key => $imageItem)
+                        <div class="{{$key == 0 ? 'col-lg-6 mb-4' : 'd-none d-sm-none d-md-block col-lg-6 mb-4'}}">
+                            <div class="box-image-ads">
+                                <img src="{{ $imageItem }}" alt="">
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
+    {{--                 
                     <div class="d-none d-sm-none d-md-block col-lg-6 mb-4">
                         <div class="box-image-ads">
                             <img src="{{asset('assets/images/products/image_ads.jpg')}}" alt="">
                         </div>
+                    </div> --}}
+                </div>
+            @endif
+            <div class="row news-list">
+                @foreach ($data["news_most_search"] as $newsItem)
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 news-item">
+                        <div class="item-product item-product card-product">
+                            <div class="box-image">
+                                <a rel="sponsored" title="{{ $newsItem['title']['rendered'] }}" href="{{ $newsItem['link'] }}" class="">
+                                    <img src="{{ !empty($newsItem['_embedded']['wp:featuredmedia'][0]['source_url']) ? $newsItem['_embedded']['wp:featuredmedia'][0]['source_url'] : '' }}" title="" style="object-fit: cover" class="card-img-top">
+                                </a>
+                                <div class="time">
+                                    <span class="date">{{ date("d", strtotime($newsItem["date"])) }}</span> <br>
+                                    <span class="month">Th{{ date("m", strtotime($newsItem["date"])) }}</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title product-title">
+                                    <a class="text-decoration-none" href="{{ $newsItem['link'] }}">
+                                        {{ $newsItem["title"]["rendered"] }}
+                                    </a>
+                                </h3>
+                                <p class="card-text note  line-clamp-2">
+                                    {{ html_entity_decode(strip_tags($newsItem["excerpt"]["rendered"])) }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="product-list">
-                    @foreach($cate['data'] as $row)
-                        @if($row->type == "crawler")
-                            <a rel="nofollow sponsored" title="{{ $row->title }}" href="{{ route('client.product.showSosanh', ['slug' => $row->slug.'-'.$row->id]) }}" class="item-product card-product">
-                                <div class="box-image">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb((!empty($row->thumbnail_cr) ? $row->thumbnail_cr : $row->thumbnail), 'list_product') }}"
-                                    title="{{ $row->title }}" class="card-img-top">
-                                </div>
-                                <div class="card-body">
-                                    <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                    <h3 class="card-title product-title">{{ $row->title }}</h3>
-                                    <p class="card-text note">Có {{ $row->count_suggest }} nơi bán</p>
-                                </div>
-                            </a>
-                        @else
-                            <a href="{{ route('client.product.show', ['slug' => $row->slug.'-'.$row->id]) }}"
-                                title="{{ $row->title }}" rel="nofollow sponsored" class="item-product card-product">
-                                <div class="box-image">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_product') }}"
-                                    title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                                </div>
-                                <div class="card-body">
-                                    <p class="price">{{ \App\Helpers\Helpers::formatPrice($row->price) }}</p>
-                                    <h3 class="card-title product-title">{{ $row->title }}</h3>
-                                    <p class="card-text note"></p>
-                                </div>
-                            </a>
-                        @endif
-                        
-                    @endforeach
-                </div>
-            </section>
-        @endforeach
-        <section class="box-product new-promotion">
-            <div class="product-header">
-                <h2>{{ !empty($data['cat_tintuc']->title) ? $data['cat_tintuc']->title : '' }}</h2>
-                <a class="d-none d-sm-block" href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
-            </div>
-            <div class="promotion_mobile">
-                @foreach($data['news'] as $row)
-                    <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}" class="card item-promotion">
-                        <div class="box-image">
-                            <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
-                                title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="promotion-title" title="{{ $row->title }}">{{ $row->title }}</h3>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-            <hr>
-            <a href="{{ !empty($data['cat_tintuc']->id) ? route('client.category.index', ['slug' => $data['cat_tintuc']->slug]) : '' }}" class="read-more-mobile">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
-            <div class="owl-carousel owl-theme owl-promotion promotion_desktop">
-                @foreach($data['news'] as $row)
-                    <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-                        title="{{ $row->title }}" class="card item-promotion">
-                        <div class="box-image">
-                            <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
-                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="promotion-title" title="{{ $row->title }}">{{ $row->title }}</h3>
-                        </div>
-                    </a>
                 @endforeach
             </div>
         </section>
-        <section class="box-product knowledge">
+        <section class="box-product">
             <div class="product-header">
-                <h2>{{ !empty($data['cat_kienthuc']->title) ? $data['cat_kienthuc']->title : '' }}</h2>
-                <a class="d-none d-sm-block" href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}"
-                    title="Xem tất cả">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
+                <h2>
+                    Ưu đãi đối tác
+                </h2>
+                <a href="https://timgiatot.vn/blog/uu-dai-tu-doi-tac">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
             </div>
-            <div class="knowledge_mobile">
+            @if (!empty($data["widget"]["image_coupon_partner"]) && $data["widget"]["image_coupon_partner"]->content != "")
                 <div class="row">
-                    @foreach($data['kienthuc'] as $row)
-                        <div class="col-lg-4 mb-4">
-                            <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-                                title="{{ $row->title }}" class="card item-knowledge">
-                                <div class="box-image">
-                                    <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}" class="card-img-top" alt="{{ $row->title }}">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="knowledge-title">{{ $row->title }}</h5>
-                                    <div class="overview">{{$row->description}}</div>
-                                    <div class="box-user">
-                                        <div class="avatar-user">
-                                            <img src="{{asset('assets/images/products/avatar.svg')}}" alt="">
-                                        </div>
-                                        <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->total_views}}</span></div>
-                                    </div>
-                                </div>
-                            </a>
+                    @foreach (json_decode($data["widget"]["image_coupon_partner"]->content, true) as $key => $imageItem)
+                        <div class="{{$key == 0 ? 'col-lg-6 mb-4' : 'd-none d-sm-none d-md-block col-lg-6 mb-4'}}">
+                            <div class="box-image-ads">
+                                <img src="{{ $imageItem }}" alt="">
+                            </div>
                         </div>
                     @endforeach
-                    <hr>
-                    <a href="{{ !empty($data['cat_kienthuc']->id) ? route('client.category.index', ['slug' => $data['cat_kienthuc']->slug]) : '' }}" class="read-more-mobile">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
+    {{--                 
+                    <div class="d-none d-sm-none d-md-block col-lg-6 mb-4">
+                        <div class="box-image-ads">
+                            <img src="{{asset('assets/images/products/image_ads.jpg')}}" alt="">
+                        </div>
+                    </div> --}}
                 </div>
-            </div>
-            <div class="owl-carousel owl-theme owl-knowledge knowledge_desktop">
-                @foreach($data['kienthuc'] as $row)
-                    <a href="{{ route('client.post.show', ['slug' => $row->slug]) }}"
-                        title="{{ $row->title }}" class="card item-knowledge">
-                        <div class="box-image">
-                            <img src="{{ \App\Helpers\Helpers::renderThumb($row->thumbnail, 'list_new') }}"
-                            title="{{ $row->title }}" class="card-img-top" alt="{{ $row->title }}">
-                        </div>
-                        <div class="card-body">
-                            <h3 class="knowledge-title">
-                                {{ $row->title }}
-                            </h3>
-                            <div class="overview">
-                                {{$row->description}}
-                            </div>
-                            <div class="box-user">
-                                <div class="avatar-user">
-                                    <img src="{{asset('assets/images/products/avatar.svg')}}" alt="">
+            @endif
+            <div class="row news-list">
+                @foreach ($data["news_coupon"] as $newsItem)
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 news-item">
+                        <div class="item-product item-product card-product">
+                            <div class="box-image">
+                                <a rel="sponsored" title="{{ $newsItem['title']['rendered'] }}" href="{{ $newsItem['link'] }}" class="">
+                                    <img src="{{ !empty($newsItem['_embedded']['wp:featuredmedia'][0]['source_url']) ? $newsItem['_embedded']['wp:featuredmedia'][0]['source_url'] : '' }}" title="" style="object-fit: cover" class="card-img-top">
+                                </a>
+                                <div class="time">
+                                    <span class="date">{{ date("d", strtotime($newsItem["date"])) }}</span> <br>
+                                    <span class="month">Th{{ date("m", strtotime($newsItem["date"])) }}</span>
                                 </div>
-                                <div class="view"><i class="fa-regular fa-eye"></i><span>{{$row->total_views}}</span></div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title product-title">
+                                    <a class="text-decoration-none" href="{{ $newsItem['link'] }}">
+                                        {{ $newsItem["title"]["rendered"] }}
+                                    </a>
+                                </h3>
+                                <p class="card-text note  line-clamp-2">
+                                    {{ html_entity_decode(strip_tags($newsItem["excerpt"]["rendered"])) }}
+                                </p>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
         </section>
-        {{-- <section class="box-product knowledge">
-            <div class="product-header">
-                <h2>Kiến thức</h2>
-                <a href="#" class="read-more-desktop">Xem thêm <img src="images/icons/arrow.svg" alt=""></a>
-            </div>
-            <div class="owl-carousel owl-theme owl-knowledge knowledge_desktop">
-                <a href="#" class="card item-knowledge">
-                    <div class="box-image">
-                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
-                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
-                        <div class="box-user">
-                            <div class="avatar-user">
-                                <img src="images/products/avatar.svg" alt="">
-                            </div>
-                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="card item-knowledge">
-                    <div class="box-image">
-                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
-                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
-                        <div class="box-user">
-                            <div class="avatar-user">
-                                <img src="images/products/avatar.svg" alt="">
-                            </div>
-                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="card item-knowledge">
-                    <div class="box-image">
-                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
-                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
-                        <div class="box-user">
-                            <div class="avatar-user">
-                                <img src="images/products/avatar.svg" alt="">
-                            </div>
-                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="card item-knowledge">
-                    <div class="box-image">
-                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
-                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
-                        <div class="box-user">
-                            <div class="avatar-user">
-                                <img src="images/products/avatar.svg" alt="">
-                            </div>
-                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="card item-knowledge">
-                    <div class="box-image">
-                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
-                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
-                        <div class="box-user">
-                            <div class="avatar-user">
-                                <img src="images/products/avatar.svg" alt="">
-                            </div>
-                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="card item-knowledge">
-                    <div class="box-image">
-                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
-                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
-                        <div class="box-user">
-                            <div class="avatar-user">
-                                <img src="images/products/avatar.svg" alt="">
-                            </div>
-                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="card item-knowledge">
-                    <div class="box-image">
-                        <img src="images/products/Rectangle.svg" class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="knowledge-title">Có nên mua máy giặt LG 9kg cửa ngang?</h5>
-                        <div class="overview">lorem ipsum dolor sit amet consectetuer adipiscing elit  lorem ipsum dolor sit a...</div>
-                        <div class="box-user">
-                            <div class="avatar-user">
-                                <img src="images/products/avatar.svg" alt="">
-                            </div>
-                            <div class="view"><i class="fa-regular fa-eye"></i><span>300</span></div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </section> --}}
     </div>
 </main>
 @endsection

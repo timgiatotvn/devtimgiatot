@@ -4,6 +4,8 @@ namespace Modules\Clients\Http\Controllers;
 
 use App\Helpers\Helpers;
 use App\Model\Category;
+use App\Model\CategoryWp;
+use App\Model\Widget;
 use App\Service\Clients\AdvertisementService;
 use App\Service\Clients\ClientCategoryService;
 use App\Service\Clients\ClientPostService;
@@ -40,11 +42,46 @@ class HomeController extends Controller
         View::share('data_common', ['logo' => $this->clientAdvService->findByLogo(), 'setting' => $this->setting, 'category_list' => $this->clientCategoryService->getListMenu(['multi' => 1])]);
     }
 
+    public function index()
+    {
+        try {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('GET', 'https://timgiatot.vn/blog/wp-json/wp/v2/posts?_embed&categories=49');
+            $data["news_coupon"] = json_decode($response->getBody()->getContents(), true);
+            //dd($data["news_coupon"]);
+            $response = $client->request('GET', 'https://timgiatot.vn/blog/wp-json/wp/v2/posts?_embed');
+            $data["news_most_search"] = array_slice(json_decode($response->getBody()->getContents(), true), 0, 8);
+            //dd($data["news_most_search"]);
+            $cate_tim_gia_tot = Category::where('slug', 'tim-gia-tot')->first();
+            $data['ads_home'] = \DB::table('advertisements')
+                                   ->select('id', 'title', 'thumbnail', 'url', 'type')
+                                   ->where('type', 'slideshow')
+                                   ->where('status', 1)
+                                   ->inRandomOrder()
+                                   ->first();
+            $data['category_products'] = Category::where('parent_id', $cate_tim_gia_tot->id)
+                                                 ->where('type', 'product')
+                                                 ->with(['category' => function ($query) {
+                                                    $query->with('category');
+                                                 }])
+                                                 ->oldest('sort')
+                                                 ->get();
+            $data["widget"] = Widget::latest()->get()->keyBy("name");
+            $data["categories"] = CategoryWp::oldest("position")->get()->toArray();
+            // dd($data["categories"]);
+            return view('clients::home.index', [
+                "data" => $data
+            ]);
+        } catch (\Throwable $th) {
+            abort('500');
+        }
+    }
+
     /**
      * Page Home
      * @method GET
      */
-    public function index()
+    public function indexOld()
     {
         try {
             $data['setting'] = $this->setting;

@@ -60,6 +60,12 @@
                         <li class="nav-item">
                             <a class="nav-link {{ Request::routeIs('admin.config.payment')? 'active' : '' }}" href="{{ route('admin.config.payment') }}">Thanh toán</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('widget.index')? 'active' : '' }}" href="{{ route('widget.index') }}">Widget</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('category_wp.index')? 'active' : '' }}" href="{{ route('category_wp.index') }}">Danh mục WP</a>
+                        </li>
                     </ul>
                 </div>
             </li>

@@ -252,7 +252,6 @@ class CrawlService
                     }
                 } catch (\Throwable $th) {
                 }
-                
             }
         }
         if (!empty($html->find('.blog-category-item')) && count($html->find('.blog-category-item')) > 0) {

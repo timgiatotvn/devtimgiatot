@@ -50,7 +50,8 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/library_crawl.php"
+            "app/Helpers/library_crawl.php",
+            "app/Helpers/function.php"
         ]
     },
     "autoload-dev": {

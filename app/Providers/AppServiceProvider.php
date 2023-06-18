@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Model\Category;
 use App\Model\EmailSetting;
+use App\Model\Widget;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Support\Facades\View;
@@ -55,7 +56,8 @@ class AppServiceProvider extends ServiceProvider
                                                  ->get();
             View::share('data_share', [
                 'category_products' => $category_products,
-                'cate_kien_thuc' => $cate_kien_thuc
+                'cate_kien_thuc' => $cate_kien_thuc,
+                'widget_footer' => Widget::where("name", "footer")->first()
             ]);
         } catch(\Exception $e) {
         }
