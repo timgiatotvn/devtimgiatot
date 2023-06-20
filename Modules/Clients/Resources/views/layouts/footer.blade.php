@@ -11,7 +11,8 @@
                             {!! $footer['first_block']['title'] !!}
                         @endif
                     </h2>
-                    <p class="item-info"><img src="{{asset('assets/images/icons/location_footer.svg')}}" alt="">
+                    {!! !empty($footer['first_block']['content']) ? $footer['first_block']['content'] : "" !!}
+                    {{-- <p class="item-info"><img src="{{asset('assets/images/icons/location_footer.svg')}}" alt="">
                         <span>
                             {!! !empty($footer['first_block']['address']) ? $footer['first_block']['address'] : "" !!}
                         </span>
@@ -33,7 +34,7 @@
                     </p>
                     <div class="note">
                         {!! !empty($footer['first_block']['description']) ? $footer['first_block']['description'] : "" !!}
-                    </div>
+                    </div> --}}
                     <div><img src="" alt=""></div>
                 </div>
             </div>
@@ -43,7 +44,7 @@
                         <h2>{!! !empty($footer['center_block']['title']) ? $footer['center_block']['title'] : "" !!}</h2>
                         <div class="btn-sub-footer"><i class="fa-solid fa-chevron-right dropdown"></i></div>
                     </div>
-                    @if (!empty($footer['center_block']['link_item']))
+                    {{-- @if (!empty($footer['center_block']['link_item']))
                         <ul class="nav-footer nav-footer-mobile">
                             @foreach ($footer['center_block']['link_item'] as $linkItem)
                                 <li>
@@ -53,11 +54,12 @@
                                 </li>
                             @endforeach
                         </ul>
-                    @endif
+                    @endif --}}
+                    {!! !empty($footer['center_block']['content']) ? $footer['center_block']['content'] : "" !!}
                 </div>
                 <div class="column-footer column-footer-desktop">
                     <h2>{!! !empty($footer['center_block']['title']) ? $footer['center_block']['title'] : "" !!}</h2>
-                    @if (!empty($footer['center_block']['link_item']))
+                    {{-- @if (!empty($footer['center_block']['link_item']))
                         <ul>
                             @foreach ($footer['center_block']['link_item'] as $linkItem)
                                 <li>
@@ -67,7 +69,8 @@
                                 </li>
                             @endforeach
                         </ul>
-                    @endif
+                    @endif --}}
+                    {!! !empty($footer['center_block']['content']) ? $footer['center_block']['content'] : "" !!}
                 </div>
                 <div class="column-footer column-footer-mobile">
                     <div class="footer-header">
@@ -77,7 +80,7 @@
                     @if(!empty($footer['center_block']['social']))
                     <ul class="connect-social nav-footer-mobile">
                         @foreach ($footer['center_block']['social'] as $item)
-                            <li><a href="#"><img src="{{asset('assets/images/icons/$item')}}" alt=""></a></li>
+                            <li><a href="{{ !empty($item['link']) ? $item['link'] : "" }}"><img src="{{asset('assets/images/icons')}}/{{ !empty($item['name']) ? $item['name'] : '' }}" alt=""></a></li>
                         @endforeach
                     </ul>
                     @endif
@@ -87,7 +90,7 @@
                     @if(!empty($footer['center_block']['social']))
                     <ul class="connect-social">
                         @foreach ($footer['center_block']['social'] as $item)
-                            <li><a href="#"><img src="{{asset('assets/images/icons')}}/{{$item}}" alt=""></a></li>
+                            <li><a href="{{ !empty($item['link']) ? $item['link'] : "" }}"><img src="{{asset('assets/images/icons')}}/{{ !empty($item['name']) ? $item['name'] : '' }}" alt=""></a></li>
                         @endforeach
                     </ul>
                     @endif
@@ -105,7 +108,7 @@
                         <h2>{!! !empty($footer['last_block']['title']) ? $footer['last_block']['title'] : "" !!}</h2>
                         <div class="btn-sub-footer"><i class="fa-solid fa-chevron-right dropdown"></i></div>
                     </div>
-                    <ul class="nav-footer-mobile">
+                    {{-- <ul class="nav-footer-mobile">
                         @foreach($footer['last_block']['link_item'] as $linkItem)
                             <li>
                                 <a href="{{ explode("||", $linkItem)[1] }}">
@@ -113,11 +116,12 @@
                                 </a>
                             </li>
                         @endforeach
-                    </ul>
+                    </ul> --}}
+                    {!! !empty($footer['last_block']['content']) ? $footer['last_block']['content'] : "" !!}
                 </div>
                 <div class="column-footer column-footer-desktop">
                     <h2>{!! !empty($footer['last_block']['title']) ? $footer['last_block']['title'] : "" !!}</h2>
-                    <ul>
+                    {{-- <ul>
                         @foreach($footer['last_block']['link_item'] as $linkItem)
                             <li>
                                 <a href="{{ explode("||", $linkItem)[1] }}">
@@ -125,7 +129,8 @@
                                 </a>
                             </li>
                         @endforeach
-                    </ul>
+                    </ul> --}}
+                    {!! !empty($footer['last_block']['content']) ? $footer['last_block']['content'] : "" !!}
                 </div>
                 {{-- <div class="column-footer">
                     <h2>Tải ứng dụng</h2>
@@ -139,5 +144,5 @@
     </div>
 </footer>
 <div class="footer-bottom">
-    © Copyright 2019 - 2022. Website đang trong quá trình chạy thử nghiệm và trong quá trình đăng ký sàn thương mại điện tử từ Bộ Công Thương
+    {!! !empty($footer['copyright']) ? $footer['copyright'] : "" !!}
 </div>

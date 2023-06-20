@@ -8,7 +8,7 @@
                 <div class="col-lg-3">
                     <div class="card sidebar-category">
                         <div class="card-header">
-                            <img src="./assets/images/icons/menu.svg" alt=""><span>Danh mục sản phẩm</span>
+                            <img src="./assets/images/icons/menu.svg" alt=""><span>Danh mục</span>
                         </div>
                         {!! showCategories($data['categories']) !!}
                         {{-- <ul class="list-group list-group-flush list-category">

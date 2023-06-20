@@ -989,8 +989,14 @@ p {
 .news-list .news-item .product-title a {
   color: #0D54BE;
 }
+.footer a {
+  text-decoration: none;
+  color: #212529;
+}
 .news-list .news-item .box-image img {
   border-radius: 8px;
+  height: auto !important;
+  box-shadow: 0 2px 5px 1px rgba(64,60,67,.56);
 }
 @media screen and (max-width: 992px) {
   .footer-item-center {
@@ -1942,7 +1948,7 @@ display: -webkit-box;
   padding: 48px 0;
 }
 .wrapper .footer .column-footer h2 {
-  font-weight: 500;
+  font-weight: 700;
   font-size: 16px !important;
   line-height: 24px;
   letter-spacing: 0.5px;

@@ -5,7 +5,7 @@
     @endphp
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <h4>
                     Block đầu
                 </h4>
@@ -13,7 +13,12 @@
                     <label for="">Tiêu đề</label>
                     <input value="{{ !empty($content['first_block']['title']) ? $content['first_block']['title'] : old('block[first_block][title]')}}" type="text" placeholder="CÔNG TY CP CÔNG NGHỆ VÀ TRUYỀN THÔNG WEB89 VIỆT NAM" name="block[first_block][title]" required class="form-control">
                 </div>
-                <div class="form-group">
+                <div class="fomr-group">
+                    <label for="">Nội dung</label>
+                    <textarea class="tinymce" class="form-control" name="block[first_block][content]">{{ !empty($content['first_block']['content']) ? $content['first_block']['content'] : old('block[first_block][content]')}}</textarea>
+                </div>
+                
+                {{-- <div class="form-group">
                     <label for="">Đường dẫn</label>
                     <input type="text" value="{{ !empty($content['first_block']['address']) ? $content['first_block']['address'] : old('block[first_block][address]')}}" name="block[first_block][address]" required placeholder="Tầng 12, Tòa nhà Licogi 13, Số 164 Khuất Duy Tiến, P. Nhân Chính, Q. Thanh Xuân, Hà Nội." class="form-control">
                 </div>
@@ -32,9 +37,9 @@
                 <div class="form-group">
                     <label for="">Website</label>
                     <textarea class="form-control" required name="block[first_block][description]" id="" cols="30" rows="10" placeholder="Lưu ý: Timgiatot.vn là ứng dụng so sánh giá online, cung cấp thông tin giá cả từ nhiều nguồn, nhà cung cấp, nhà bán hàng khác nhau để đưa ra giá tốt nhất. Quý khách tham khảo sản phẩm và liên hệ trực tiếp với nhà cung cấp để có thể có giá tốt hơn. Bằng khả năng sẵn có cùng sự nỗ lực không ngừng, chúng tôi đã tổng hợp hơn 50 triệu sản phẩm, giúp bạn có thể so sánh giá, tìm giá rẻ nhất trước khi mua. Chúng tôi không bán hàng.">{{ !empty($content['first_block']['description']) ? $content['first_block']['description'] : old('block[first_block][description]')}}</textarea>
-                </div>
+                </div> --}}
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-12" style="margin-top: 20px">
                 <h4>
                     Block giữa
                 </h4>
@@ -42,7 +47,11 @@
                     <label for="">Tiêu đề 1</label>
                     <input type="text" value="{{ !empty($content['center_block']['title']) ? $content['center_block']['title'] : old('block[center_block][title]')}}" required placeholder="VỀ CHÚNG TÔI" name="block[center_block][title]" class="form-control">
                 </div>
-                <div class="form-group">
+                <div class="fomr-group">
+                    <label for="">Nội dung</label>
+                    <textarea class="tinymce" class="form-control" name="block[center_block][content]">{{ !empty($content['center_block']['content']) ? $content['center_block']['content'] : old('block[center_block][content]')}}</textarea>
+                </div>
+                {{-- <div class="form-group">
                     <label for="">Đường dẫn 1</label>
                     <input type="text" required value="{{ !empty($content['center_block']['link_item']) ? $content['center_block']['link_item'][0] : old('block[center_block][link_item][0]')}}" name="block[center_block][link_item][]" placeholder="Định dạng: Giới thiệu||https://timgiatot.vn/gioi-thieu" class="form-control">
                 </div>
@@ -57,27 +66,34 @@
                 <div class="form-group">
                     <label for="">Đường dẫn 4</label>
                     <input type="text" required value="{{ !empty($content['center_block']['link_item']) ? $content['center_block']['link_item'][3] : old('block[center_block][link_item][3]')}}" name="block[center_block][link_item][]" name="block[center_block][link_item][]" placeholder="Định dạng: Giới thiệu||https://timgiatot.vn/gioi-thieu" class="form-control">
-                </div>
+                </div> --}}
                 <hr>
                 <div class="form-group">
                     <label for="">Tiêu đề 2</label>
                     <input type="text" value="{{ !empty($content['center_block']['title_2']) ? $content['center_block']['title_2'] : old('block[center_block][title_2]')}}" required name="block[center_block][title_2]" class="form-control" placeholder="Kết nối với chúng tôi">
                     <br>
                     <label for="">
-                        <input @if(!empty($content['center_block']['social'] && in_array('twitter.png', $content['center_block']['social']))){{ 'checked' }}@endif name="block[center_block][social][]" value="twitter.png" type="checkbox"> Twitter
+                        <input @if(!empty($content['center_block']['social']['twitter']['name']) && $content['center_block']['social']['twitter']['name'] == 'twitter.png'){{ 'checked' }}@endif name="block[center_block][social][twitter][name]" value="twitter.png" type="checkbox"> Twitter
+                        <input name="block[center_block][social][twitter][link]" value="{{ !empty($content['center_block']['social']['twitter']['link']) ? $content['center_block']['social']['twitter']['link'] : '' }}" type="text" placeholder="Đường dẫn...">
                     </label>
+                    <br>
                     <label for="">
-                        <input @if(!empty($content['center_block']['social'] && in_array('facebook.png', $content['center_block']['social']))){{ 'checked' }}@endif name="block[center_block][social][]" value="facebook.png" type="checkbox"> Facebook
+                        <input @if(!empty($content['center_block']['social']['facebook']['name']) && $content['center_block']['social']['facebook']['name'] == 'facebook.png'){{ 'checked' }}@endif name="block[center_block][social][facebook][name]" value="facebook.png" type="checkbox"> facebook
+                        <input name="block[center_block][social][facebook][link]" value="{{ !empty($content['center_block']['social']['facebook']['link']) ? $content['center_block']['social']['facebook']['link'] : '' }}" type="text" placeholder="Đường dẫn...">
                     </label>
+                    <br>
                     <label for="">
-                        <input @if(!empty($content['center_block']['social'] && in_array('youtube.png', $content['center_block']['social']))){{ 'checked' }}@endif name="block[center_block][social][]" value="youtube.png" type="checkbox"> Youtube
+                        <input @if(!empty($content['center_block']['social']['youtube']['name']) && $content['center_block']['social']['youtube']['name'] == 'youtube.png'){{ 'checked' }}@endif name="block[center_block][social][youtube][name]" value="youtube.png" type="checkbox"> youtube
+                        <input name="block[center_block][social][youtube][link]" value="{{ !empty($content['center_block']['social']['youtube']['link']) ? $content['center_block']['social']['youtube']['link'] : '' }}" type="text" placeholder="Đường dẫn...">
                     </label>
+                    <br>
                     <label for="">
-                        <input @if(!empty($content['center_block']['social'] && in_array('zalo.svg', $content['center_block']['social']))){{ 'checked' }}@endif name="block[center_block][social][]" value="zalo.svg" type="checkbox"> Zalo
+                        <input @if(!empty($content['center_block']['social']['zalo']['name']) && $content['center_block']['social']['zalo']['name'] == 'zalo.svg'){{ 'checked' }}@endif name="block[center_block][social][zalo][name]" value="zalo.svg" type="checkbox"> zalo
+                        <input name="block[center_block][social][zalo][link]" value="{{ !empty($content['center_block']['social']['zalo']['link']) ? $content['center_block']['social']['zalo']['link'] : '' }}" type="text" placeholder="Đường dẫn...">
                     </label>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <h4>
                     Block cuối
                 </h4>
@@ -85,7 +101,11 @@
                     <label for="">Tiêu đề</label>
                     <input type="text" value="{{ !empty($content['last_block']['title']) ? $content['last_block']['title'] : old('block[last_block][title]')}}" required placeholder="HỖ TRỢ KHÁCH HÀNG" name="block[last_block][title]" class="form-control">
                 </div>
-                <div class="form-group">
+                <div class="fomr-group">
+                    <label for="">Nội dung</label>
+                    <textarea class="tinymce" class="form-control" name="block[last_block][content]">{{ !empty($content['last_block']['content']) ? $content['last_block']['content'] : old('block[last_block][content]')}}</textarea>
+                </div>
+                {{-- <div class="form-group">
                     <label for="">Đường dẫn 1</label>
                     <input type="text" value="{{ !empty($content['last_block']['link_item'][0]) ? $content['last_block']['link_item'][0] : old('block[last_block][link_item][0]')}}" required name="block[last_block][link_item][]" placeholder="Định dạng: Quy Định Truy Cập Website||https://timgiatot.vn/gioi-thieu" class="form-control">
                 </div>
@@ -100,9 +120,9 @@
                 <div class="form-group">
                     <label for="">Đường dẫn 4</label>
                     <input type="text" value="{{ !empty($content['last_block']['link_item'][3]) ? $content['last_block']['link_item'][3] : old('block[last_block][link_item][3]')}}" required name="block[last_block][link_item][]" placeholder="Định dạng: Phần mềm - Ứng dụng||https://timgiatot.vn/gioi-thieu" class="form-control">
-                </div>
+                </div> --}}
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="margin-top: 20px">
                 <div class="form-group">
                     <label for="">Copyright</label>
                     <textarea class="form-control" name="block[copyright]" id="" placeholder="© Copyright 2019 - 2022. Website đang trong quá trình chạy thử nghiệm và trong quá trình đăng ký sàn thương mại điện tử từ Bộ Công Thương" cols="30" rows="10">{{ !empty($content['copyright']) ? $content['copyright'] : '' }}</textarea>
