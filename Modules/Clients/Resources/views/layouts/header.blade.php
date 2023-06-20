@@ -17,7 +17,7 @@
         </div>
     </div> --}}
     <div class="menu-layout" id="clickMenuLayout"></div>
-    <section class="header-top">
+    {{-- <section class="header-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="menu-primary">
        <div class="container">
         <div class="row">
@@ -68,9 +68,10 @@
                         <li><a href="/">Trang chủ</a></li>
                         <li>
                             <div class="nav-item">
-                                <a href="#">Danh mục sản phẩm</a><div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
+                                <a href="#">Danh mục</a><div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
                             </div>
-                            <ul class="sub-menu-primary">
+                            {!! showCategoryMobile($data_share['categories']) !!}
+                            {{-- <ul class="sub-menu-primary">
                                 @foreach ($data_share['category_products'] as $cate_items)
                                     @if ($cate_items->category->count() > 0)
                                         <li>
@@ -104,9 +105,9 @@
                                         <li><a href="{{route('client.category.index', ['slug' => $cate_items->slug])}}">{{$cate_items->title}}</a></li>
                                     @endif
                                 @endforeach
-                            </ul>
+                            </ul> --}}
                         </li>
-                        <li><a href="/gioi-thieu-ve-chung-toi.html">Giới thiệu</a></li>
+                        {{-- <li><a href="/gioi-thieu-ve-chung-toi.html">Giới thiệu</a></li>
                         <li>
                             <div class="nav-item">
                                 <a href="/kien-thuc">Kiến thức</a><div class="sub-btn"><i class="fa-solid fa-chevron-right dropdown"></i></div>
@@ -123,7 +124,7 @@
                         </li>
                         <li><a href="/tin-tuc">Tin tức</a></li>
                         <li><a href="/doi-tac">Đối tác</a></li>
-                        <li><a href="/lien-he">Liên hệ</a></li>
+                        <li><a href="/lien-he">Liên hệ</a></li> --}}
                     </ul>
                     <hr>
                     <div class="info">

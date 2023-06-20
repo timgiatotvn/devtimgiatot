@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Model\Category;
+use App\Model\CategoryWp;
 use App\Model\EmailSetting;
 use App\Model\Widget;
 use Illuminate\Support\ServiceProvider;
@@ -57,7 +58,8 @@ class AppServiceProvider extends ServiceProvider
             View::share('data_share', [
                 'category_products' => $category_products,
                 'cate_kien_thuc' => $cate_kien_thuc,
-                'widget_footer' => Widget::where("name", "footer")->first()
+                'widget_footer' => Widget::where("name", "footer")->first(),
+                'categories' => CategoryWp::oldest("position")->get()
             ]);
         } catch(\Exception $e) {
         }
