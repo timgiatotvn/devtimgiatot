@@ -55,10 +55,13 @@ class WidgetController extends Controller
     public function storeImageCouponPartner($inputs, $widget)
     {
         if (is_null($widget->content)) {
-            $content = [$inputs["image"]];
+            $content = [['image' => $inputs["image"], "url" => $inputs["url"]]];
         } else {
             $content = json_decode($widget->content, true);
-            $content[] = $inputs["image"];
+            $content[] = [
+                "image" => $inputs["image"],
+                "url" => $inputs["url"]
+            ];
         }
         $widget->update([
             "content" => json_encode($content)

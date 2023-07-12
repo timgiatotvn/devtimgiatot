@@ -17,6 +17,11 @@
                     <img id="holder" style="margin-top:15px;max-height:100px;">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" placeholder="Nhập url" name="url" class="form-control">
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <button class="btn btn-success">Thêm mới</button>
@@ -32,6 +37,7 @@
             <tr>
                 <th>STT</th>
                 <th>Ảnh</th>
+                <th>Url</th>
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -43,10 +49,15 @@
                             {{ $key + 1 }}
                         </td>
                         <td>
-                            <img src="{{ $item }}" alt="">
+                            <img src="{{ !empty($item['image']) ? $item['image'] : '' }}" alt="">
                         </td>
                         <td>
-                            <a class="btn btn-danger" href="">Xóa</a>
+                            <a href="">
+                                {{ !empty($item['url']) ? $item['url'] : '' }}
+                            </a>
+                        </td>
+                        <td>
+                            <a onclick="return confirm('Bạn có muốn xóa?')" class="btn btn-danger" href="{{ route('widget.delete', ['name' => $widget->name, 'id' => $key]) }}">Xóa</a>
                         </td>
                     </tr>
                 @endforeach
