@@ -52,7 +52,7 @@
                             <img src="{{ !empty($item['image']) ? $item['image'] : '' }}" alt="">
                         </td>
                         <td>
-                            <a href="">
+                            <a href="{{ !empty($item['url']) ? $item['url'] : '' }}" target="_blank">
                                 {{ !empty($item['url']) ? $item['url'] : '' }}
                             </a>
                         </td>

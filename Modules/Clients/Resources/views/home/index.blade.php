@@ -72,7 +72,9 @@
                     @foreach (json_decode($data["widget"]["image_most_search"]->content, true) as $key => $imageItem)
                         <div class="{{$key == 0 ? 'col-lg-6 mb-4' : 'd-none d-sm-none d-md-block col-lg-6 mb-4'}}">
                             <div class="box-image-ads">
-                                <img src="{{ $imageItem }}" alt="">
+                                <a href="{{ !empty($imageItem['url']) ? $imageItem['url'] : '' }}" target="_blank">
+                                    <img src="{{ !empty($imageItem['image'] ) ? $imageItem['image'] : ''}}" alt="">
+                                </a>
                             </div>
                         </div>
                     @endforeach
