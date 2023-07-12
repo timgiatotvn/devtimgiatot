@@ -48,7 +48,7 @@
                             {{ $key + 1 }}
                         </td>
                         <td>
-                            <img src="{{ $item }}" alt="">
+                            <img src="{{ !empty($item['image']) ? $item['image'] : '' }}" alt="">
                         </td>
                         <td>
                             <a href="{{ !empty($item['url']) ? $item['url'] : '' }}" target="_blank">

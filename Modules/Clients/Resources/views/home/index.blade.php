@@ -102,7 +102,7 @@
                             <div class="card-body">
                                 <h3 class="card-title product-title">
                                     <a class="text-decoration-none" href="{{ $newsItem['link'] }}">
-                                        {{ $newsItem["title"]["rendered"] }}
+                                        {{ html_entity_decode($newsItem["title"]["rendered"]) }}
                                     </a>
                                 </h3>
                                 <p class="card-text note  line-clamp-2">
@@ -156,7 +156,7 @@
                             <div class="card-body">
                                 <h3 class="card-title product-title">
                                     <a class="text-decoration-none" href="{{ $newsItem['link'] }}">
-                                        {{ $newsItem["title"]["rendered"] }}
+                                        {{ html_entity_decode($newsItem["title"]["rendered"]) }}
                                     </a>
                                 </h3>
                                 <p class="card-text note  line-clamp-2">
