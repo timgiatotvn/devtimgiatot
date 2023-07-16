@@ -14,7 +14,7 @@
                             </p>
                         </div>
                     </div>
-                    <a href="https://shopee.vn/" class="item-link">{{ $item["action"] }}</a>
+                    <a href="{{ !empty($item['url']) ? $item['url'] : '' }}" target="_blank" class="item-link">{{ $item["action"] }}</a>
                     <div class="date-sale"></div>
                     <div class="number-date">{{ $item["date"] }}</div>
                 </div>

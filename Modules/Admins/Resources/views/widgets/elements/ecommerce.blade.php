@@ -3,19 +3,23 @@
     <div class="card-body">
         <div class="form-group">
             <label for="">Tiêu đề</label>
-            <input type="text" placeholder="Shopee" name="title" class="form-control">
+            <input type="text" required placeholder="Shopee" name="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Url</label>
+            <input type="text" required name="url" class="form-control">
         </div>
         <div class="form-group">
             <label for="">Mô tả</label>
-            <input type="text" placeholder="Freeship toàn quốc" name="description" class="form-control">
+            <input type="text" required placeholder="Freeship toàn quốc" name="description" class="form-control">
         </div>
         <div class="form-group">
             <label for="">Hành động</label>
-            <input type="text" placeholder="Mua sắm ngay" name="action" class="form-control">
+            <input type="text" required placeholder="Mua sắm ngay" name="action" class="form-control">
         </div>
         <div class="form-group">
             <label for="">Ngày</label>
-            <input type="text" placeholder="11.11" name="date" class="form-control">
+            <input type="text" required placeholder="11.11" name="date" class="form-control">
         </div>
         <div class="form-group">
             <button class="btn btn-success">Thêm mới</button>
@@ -30,6 +34,7 @@
         <thead>
             <tr>
                 <th>STT</th>
+                <th>Url</th>
                 <th>Nội dung</th>
                 <th>Hành động</th>
             </tr>
@@ -49,6 +54,10 @@
                             <div class="form-group">
                                 <label for="">Tiêu đề</label>
                                 <input type="text" name="title" value="{{ $item['title'] }}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Url</label>
+                                <input type="text" name="url" value="{{ !empty($item['url']) ? $item['url'] : '' }}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="">Mô tả</label>

@@ -104,6 +104,7 @@ class WidgetController extends Controller
     {
         $content = json_decode($widget->content, true);
         $content[$inputs["id"]] = [
+            "url" => $inputs["url"],
             "title" => $inputs["title"],
             "description" => $inputs["description"],
             "action" => $inputs["action"],
@@ -132,6 +133,7 @@ class WidgetController extends Controller
             $widget->update([
                 "content" => json_encode([
                     [
+                        "url" => $inputs["url"],
                         "title" => $inputs["title"],
                         "description" => $inputs["description"],
                         "action" => $inputs["action"],
@@ -142,6 +144,7 @@ class WidgetController extends Controller
         } else {
             $content = json_decode($widget->content, true);
             $content[] = [
+                "url" => $inputs["url"],
                 "title" => $inputs["title"],
                 "description" => $inputs["description"],
                 "action" => $inputs["action"],
