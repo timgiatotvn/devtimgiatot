@@ -59,6 +59,8 @@ class HomeController extends Controller
                                    ->where('status', 1)
                                    ->inRandomOrder()
                                    ->first();
+            $data["news_review"] = $client->request('GET', 'https://timgiatot.vn/blog/wp-json/wp/v2/posts?_embed&categories=69');
+            $data["news_review"] = array_slice(json_decode($data["news_review"]->getBody()->getContents(), true), 0, 8);
             $data['category_products'] = Category::where('parent_id', $cate_tim_gia_tot->id)
                                                  ->where('type', 'product')
                                                  ->with(['category' => function ($query) {

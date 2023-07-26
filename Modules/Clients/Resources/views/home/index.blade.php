@@ -78,16 +78,58 @@
                             </div>
                         </div>
                     @endforeach
-    {{--                 
-                    <div class="d-none d-sm-none d-md-block col-lg-6 mb-4">
-                        <div class="box-image-ads">
-                            <img src="{{asset('assets/images/products/image_ads.jpg')}}" alt="">
-                        </div>
-                    </div> --}}
                 </div>
             @endif
             <div class="row news-list">
                 @foreach ($data["news_most_search"] as $newsItem)
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 news-item">
+                        <div class="item-product item-product card-product">
+                            <div class="box-image">
+                                <a rel="sponsored" title="{{ $newsItem['title']['rendered'] }}" href="{{ $newsItem['link'] }}" class="">
+                                    <img src="{{ !empty($newsItem['_embedded']['wp:featuredmedia'][0]['source_url']) ? $newsItem['_embedded']['wp:featuredmedia'][0]['source_url'] : '' }}" title="" style="object-fit: cover" class="card-img-top">
+                                </a>
+                                <div class="time">
+                                    <span class="date">{{ date("d", strtotime($newsItem["date"])) }}</span> <br>
+                                    <span class="month">Th{{ date("m", strtotime($newsItem["date"])) }}</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title product-title">
+                                    <a class="text-decoration-none" href="{{ $newsItem['link'] }}">
+                                        {{ html_entity_decode($newsItem["title"]["rendered"]) }}
+                                    </a>
+                                </h3>
+                                <p class="card-text note  line-clamp-2">
+                                    {{ html_entity_decode(strip_tags($newsItem["excerpt"]["rendered"])) }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+        <section class="box-product">
+            <div class="product-header">
+                <h2>
+                    Review thương hiệu
+                </h2>
+                <a href="https://timgiatot.vn/blog/review-thuong-hieu">Xem thêm <img src="{{asset('assets/images/icons/arrow.svg')}}" alt=""></a>
+            </div>
+            @if (!empty($data["widget"]["image_most_search"]) && $data["widget"]["image_most_search"]->content != "")
+                <div class="row">
+                    @foreach (json_decode($data["widget"]["image_most_search"]->content, true) as $key => $imageItem)
+                        <div class="{{$key == 0 ? 'col-lg-6 mb-4' : 'd-none d-sm-none d-md-block col-lg-6 mb-4'}}">
+                            <div class="box-image-ads">
+                                <a href="{{ !empty($imageItem['url']) ? $imageItem['url'] : '' }}" target="_blank">
+                                    <img src="{{ !empty($imageItem['image'] ) ? $imageItem['image'] : ''}}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            <div class="row news-list">
+                @foreach ($data["news_review"] as $newsItem)
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 news-item">
                         <div class="item-product item-product card-product">
                             <div class="box-image">
