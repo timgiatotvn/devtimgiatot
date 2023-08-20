@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" style="position: sticky; top: 0px; z-index: 22">
     {{-- <div class="download-app">
         <div class="box-app">
             <button onclick="closeDiv('download-app')" class="close-download"><img src="{{asset('assets/images/icons/close-m.svg')}}" alt=""></button>
